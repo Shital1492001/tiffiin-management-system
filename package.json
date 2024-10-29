@@ -36,14 +36,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.5.2"
-<<<<<<< HEAD
   },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.10.",
   "main": "index.js",
   "author": "",
   "license": "ISC"
 }
-=======
-  }
-}
->>>>>>> 555c9390e079fcf412e8c156e300967caa0a7ed3
