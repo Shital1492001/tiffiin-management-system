@@ -1,0 +1,35 @@
+.footer-grid {
+    background-color:  	#20263e;  /*#f1f1f1 */
+    /* padding: 20px; */
+    text-align: center;
+    color: white;
+  }
+  
+
+  .info {
+  display: flex;
+  flex-direction: column; /* Stacks the items vertically */
+  margin: 10px 0; /* Optional margin for spacing */
+}
+
+.info h3 {
+  margin-bottom: 5px; /* Space below the heading */
+}
+
+.info div {
+  margin: 2px 0; /* Space between the email and phone */
+}
+
+
+.social-media-links {
+  display: flex;
+  justify-content: center; /* Center the icons */
+  gap: 15px; /* Space between icons */
+}
+
+.social-media-links a {
+  color: inherit; /* Inherit color from parent */
+  text-decoration: none; /* Remove underline */
+}
+
+  
