@@ -1,0 +1,161 @@
+<div class="form">
+    <form [formGroup]="adminForm" class="form-container" (submit)="CollectData()">
+        <h2 id="admin">Register</h2>
+        <div>
+            <mat-form-field  appearance="fill">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" type="text" />
+                <mat-error>
+                @if(username?.touched || username?.dirty)
+                {
+                        @if(username?.hasError('required'))
+                        {
+                            <span class="error">Username is required</span>
+                        }
+                        @if(username?.hasError('pattern'))
+                        {
+                            <span class="error">Enter Valid Username</span>
+                        }
+                }
+              </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email" />
+                <mat-error>
+                @if(email?.touched || email?.dirty)
+                {
+                    @if(email?.hasError("required"))
+                    {
+                        <span class="error">Email is required</span>
+                    }
+                    @if(email?.hasError("email"))
+                    {
+                        <span class="error">Enter a valid Email</span>
+                    }
+                }
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Contact Number</mat-label>
+                <input matInput formControlName="contact_number" type="number" />
+                <mat-error>
+                @if(contact_number?.touched || contact_number?.dirty)
+                {
+                    @if(contact_number?.hasError("required"))
+                    {
+                        <span class="error">Contact Number is required</span>
+                    }
+                    @if(contact_number?.hasError("pattern"))
+                    {
+                        <span class="error">Please Enter Valid Number</span>
+                    }
+                    @if(contact_number?.hasError("exactLength"))
+                    {
+                        <span class="error">Contact Number must be exactly {{ contact_number?.errors?.['exactLength']?.requiredLength }} digits long. 
+                        Current length: {{ contact_number?.errors?.['exactLength']?.actualLength }} digits.</span>
+                    }
+                }
+                </mat-error>
+        </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Address</mat-label>
+                <input matInput formControlName="address" type="text" />
+                <mat-error>
+                @if(address?.touched || address?.dirty)
+                {
+                    @if(address?.hasError("required"))
+                    {
+                        <span class="error">Address is required</span>
+                    }
+                }
+                </mat-error>
+        </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Organization</mat-label>
+                <mat-select formControlName="organization_id">
+                    @for(organization of organizations; track organization)
+                    {
+                        <mat-option [value]="organization._id">{{ organization.org_name }}</mat-option>
+                    }
+                </mat-select>
+                <mat-error>
+                @if(organization_id?.touched || organization_id?.dirty)
+                {
+                    @if(organization_id?.hasError("required"))
+                    {
+                        <span class="error">organization is required</span>
+                    }
+                }
+                </mat-error>
+        </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password" />
+                <mat-error>
+                @if(password?.touched || password?.dirty)
+                {
+                    @if(password?.hasError("required"))
+                    {
+                        <span class="error">Password is required</span>
+                    }
+                    @if(password?.hasError("minlength"))
+                    {
+                        <span class="error">Password must have Atleast 6 Characters....</span>
+                    }
+                    @if(password?.hasError("pattern"))
+                    {
+                        <span class="error">Enter Valid Password</span>
+                    }
+                }
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput formControlName="confirmPassword" type="password" />
+            </mat-form-field>
+                <div class="error" *ngIf="confirmPassword?.touched">
+                    <span *ngIf='adminForm.hasError("match")'>Passwords do not match</span>
+                </div>
+                <!-- <mat-error>
+                    @if(confirmPassword?.touched || confirmPassword?.dirty) {
+                        @if('adminForm.hasError("match")') { 
+                            <span class="error">Passwords do not match</span>
+                        }
+                        @if(confirmPassword?.hasError("required")) {
+                            <span class="error">Confirm Password is required</span>
+                        }
+                    }
+                </mat-error> -->
+            
+        </div>
+        <div class="button-row">
+            <button mat-raised-button type="submit">SUBMIT</button>
+            <button mat-raised-button type="reset">RESET</button>
+        </div>
+        <p>Already have an account?<a routerLink="/login">Login</a></p>
+    </form>
+</div>
+
+
+<button type="reset" mat-raised-button (click)="show()">RESET</button>
+
+
