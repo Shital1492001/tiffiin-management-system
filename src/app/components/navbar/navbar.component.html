@@ -1,5 +1,12 @@
 <mat-toolbar class="navbar transparent-toolbar">
-    <div class="title"><b>Tiffin Management System</b></div>
+    <div class="logo-container">
+        <img 
+            src="https://cdni.iconscout.com/illustration/premium/thumb/indian-dabbawala-with-multi-tiffin-as-service-illustration-download-in-svg-png-gif-file-formats--food-colorful-pack-people-illustrations-2210011.png?f=webp" 
+            alt="Tiffin Logo" 
+            class="logo" 
+        />
+        <div class="title"><b>Tiffin Management System</b></div>
+    </div>
     <button mat-icon-button (click)="toggleMenu()" class="menu-button">
         <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
     </button>

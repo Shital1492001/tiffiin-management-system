@@ -29,7 +29,7 @@ export class FooterComponent {
     if (width < 600) {
       this.cols = 1;  
     } else if (width < 960) {
-      this.cols = 2;  
+      this.cols = 3;  
     } else {
       this.cols = 3;  
     }
