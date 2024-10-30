@@ -27,11 +27,11 @@ export class FooterComponent {
 
   updateGridColumns(width: number) {
     if (width < 600) {
-      this.cols = 1;  // Extra small screens
+      this.cols = 1;  
     } else if (width < 960) {
-      this.cols = 2;  // Small screens
+      this.cols = 2;  
     } else {
-      this.cols = 3;  // Medium and large screens
+      this.cols = 3;  
     }
   }
 }
