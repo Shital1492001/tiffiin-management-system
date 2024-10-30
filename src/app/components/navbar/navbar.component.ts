@@ -19,9 +19,9 @@ export class NavbarComponent {
   isMenuOpen = false;
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-  }
+}
 
-  menuItemClicked() {
+menuItemClicked() {
     this.isMenuOpen = false; 
-  }
+}
 }
