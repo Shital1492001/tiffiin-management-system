@@ -5,9 +5,11 @@
     </button>
     <div class="nav-items" [class.open]="isMenuOpen">
         <a mat-button routerLink="/list" (click)="menuItemClicked()">Home</a>
+
     <a mat-button routerLink="/dashboard" (click)="menuItemClicked()">Dashboard</a>
     <a mat-button routerLink="/services" (click)="menuItemClicked()" > Services</a>
     <a mat-raised-button routerLink="/login" (click)="menuItemClicked()" >Login</a>
     <a mat-button routerLink="/register"(click)="menuItemClicked()">Register</a>
+
     </div>
 </mat-toolbar>
