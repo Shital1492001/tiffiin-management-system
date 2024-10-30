@@ -1,0 +1,34 @@
+.footer-grid {
+    background-color:  	#20263e;  
+    text-align: center;
+    color: white;
+  }
+  
+
+  .info {
+  display: flex;
+  flex-direction: column; 
+  margin: 10px 0; 
+}
+
+.info h3 {
+  margin-bottom: 5px; 
+}
+
+.info div {
+  margin: 2px 0; 
+}
+
+
+.social-media-links {
+  display: flex;
+  justify-content: center; 
+  gap: 15px; 
+}
+
+.social-media-links a {
+  color: inherit; 
+  text-decoration: none; 
+}
+
+  
