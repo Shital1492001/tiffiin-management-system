@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <mat-card>
+      <form [formGroup]="loginForm" (submit)="sendLoginData()">
+        <div class="login">
+          <p>SuperAdmin Login</p>
+          <div>
+            <mat-form-field>
+              <mat-label appearance="outlined">Email Id</mat-label>
+              <input
+                appearance="outlined"
+                matInput
+                formControlName="email"
+                placeholder="Ex. pat@example.com"
+              />
+              <mat-error *ngIf="email?.errors?.['email']&&email?.touched">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="email?.errors?.['required']&& email?.touched">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field>
+              <mat-label appearance="outlined">Password</mat-label>
+              <input
+                appearance="outlined"
+                matInput
+                type="password"
+                formControlName="password"
+              />
+              <mat-error
+                *ngIf="password?.errors?.['required']&& password?.touched"
+              >
+                password is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="password?.touched">
+                {{ passwordValidity }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="butn">
+            <button mat-raised-button type="submit" (click)="loginAdmin()">
+              Login
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </body>
+</html>
