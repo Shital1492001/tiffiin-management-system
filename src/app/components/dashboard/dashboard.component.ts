@@ -37,22 +37,4 @@ export class DashboardComponent {
       
     );
   }
-
-
-
-  organizationss = [
-    {
-      org_name: 'Pet Care Co.',
-      org_type: 'Animal Shelter',
-      description: 'A shelter dedicated to rescuing and rehabilitating abandoned animals.',
-      org_logo: 'path/to/pet-care-logo.jpg'
-    },
-    {
-      org_name: 'Tech Innovators',
-      org_type: 'Technology Firm',
-      description: 'An organization focused on pioneering tech solutions for modern challenges.',
-      org_logo: 'path/to/tech-innovators-logo.jpg'
-    },
-    // Additional organization objects...
-  ];
 }

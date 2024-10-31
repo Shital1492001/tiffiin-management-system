@@ -1,14 +1,14 @@
 <mat-toolbar class="navbar transparent-toolbar">
     <div class="title"><b>Tiffin Management System</b></div>
     <button mat-icon-button (click)="toggleMenu()" class="menu-button">
-        <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+        <mat-icon>{{ isMenuOpen ? "close" : "menu" }}</mat-icon>
     </button>
     <div class="nav-items" [class.open]="isMenuOpen">
         <a mat-button routerLink="/list" (click)="menuItemClicked()"><mat-icon fontIcon="home"></mat-icon>Home</a>
 
-    <a mat-button routerLink="/dashboard" (click)="menuItemClicked()"><mat-icon fontIcon="dashboard"></mat-icon>Dashboard</a>
-    <a mat-button routerLink="/login" (click)="menuItemClicked()" >Login</a>
-    <a mat-button routerLink="/register"(click)="menuItemClicked()">Register</a>
-
+        <a mat-button routerLink="/dashboard" (click)="menuItemClicked()"><mat-icon
+                fontIcon="dashboard"></mat-icon>Dashboard</a>
+        <a mat-button routerLink="/login" (click)="menuItemClicked()">Login</a>
+        <a mat-button routerLink="/register" (click)="menuItemClicked()">Register</a>
     </div>
 </mat-toolbar>
