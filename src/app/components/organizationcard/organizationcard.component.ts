@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-organizationcard',
   standalone: true,
-  imports: [MatCardModule, MatDividerModule, CommonModule,MatDividerModule],
+  imports: [MatCardModule, MatDividerModule, CommonModule, MatDividerModule],
   templateUrl: './organizationcard.component.html',
   styleUrl: './organizationcard.component.css',
 })
@@ -15,4 +15,3 @@ export class OrganizationcardComponent {
   @Input()
   organization!: Organization;
 }
-

@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [OrganizationcardComponent, CommonModule],
   templateUrl: './superadmin.component.html',
-  styleUrl: './superadmin.component.css'
+  styleUrl: './superadmin.component.css',
 })
 export class SuperadminComponent {
   organization: Organization = {

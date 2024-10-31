@@ -8,9 +8,8 @@ describe('SuperAdminLoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SuperAdminLoginComponent]
-    })
-    .compileComponents();
+      imports: [SuperAdminLoginComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SuperAdminLoginComponent);
     component = fixture.componentInstance;

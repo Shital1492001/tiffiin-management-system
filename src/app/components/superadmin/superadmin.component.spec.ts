@@ -8,9 +8,8 @@ describe('SuperadminComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SuperadminComponent]
-    })
-    .compileComponents();
+      imports: [SuperadminComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SuperadminComponent);
     component = fixture.componentInstance;

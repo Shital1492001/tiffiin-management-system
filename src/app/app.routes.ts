@@ -3,12 +3,15 @@ import { SuperAdminLoginComponent } from './components/super-admin-login/super-a
 import { SuperadminComponent } from './components/superadmin/superadmin.component';
 
 export const routes: Routes = [
-    {
-        path:"",
-        component:SuperAdminLoginComponent
-     },
-     {
-         path:"superAdminDashboard/:id",
-         component:SuperadminComponent
-     }
+  {
+    path: '',
+    // component: SuperAdminLoginComponent,
+    loadComponent:()=>import("./components/super-admin-login/super-admin-login.component").then(m=>m.SuperAdminLoginComponent)
+   
+  },
+  {
+    path: 'superAdminDashboard/:id',
+    // component: SuperadminComponent,
+    loadComponent:()=>import("./components/superadmin/superadmin.component").then(m=>m.SuperadminComponent)
+  },
 ];
