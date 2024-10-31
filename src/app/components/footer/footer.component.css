@@ -1,8 +1,9 @@
 .footer-grid {
-  background-color:  	#20263e;  
-
+    background-color:  	#0d0d0e;  
     text-align: center;
     color: white;
+    position:sticky;
+    /* bottom: 0px; */
   }
   
 
