@@ -1,39 +1,3 @@
-/*.customer-card {
-    max-width: 100%;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-  
-    .mat-card-header {
-      display: flex;
-      align-items: center;
-  
-      .card-avatar img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-      }
-    }
-  
-    .mat-card-title,
-    .mat-card-subtitle {
-      text-align: left;
-    }
-  }
-  
-  @media (min-width: 768px) {
-    .customer-card {
-      max-width: 45%;
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .customer-card {
-      max-width: 30%;
-    }
-  }
-  */
-
 .cards {
   padding: 10px;
 }

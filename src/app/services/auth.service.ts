@@ -1,15 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Login, Token } from "../models/userlogin";
+import { Login, Token } from '../models/userlogin';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
- baseUrl="http://localhost:5000/api/auth"
-  constructor(private http:HttpClient) { }
-  authenticateLogin(loginCredentials: Login):Observable<Token> {
-    const data = this.http.post<Token>(this.baseUrl+"/login",loginCredentials)    
+  constructor(private http: HttpClient) {}
+  authenticateLogin(loginCredentials: Login): Observable<Token> {
+    console.log(environment.apiEndpointOrganization);
+    console.log(environment.apiEndpointauth + '/login');
+    const data = this.http.post<Token>(
+      environment.apiEndpointauth + '/login',
+      loginCredentials
+    );
     return data;
+  }
+  isAuthenticated(): boolean {
+    const setToken = sessionStorage.getItem('token');
+    if (setToken) {
+      return true;
+      /*this.route.navigate([
+        '/superAdminDashboard/',
+        this.accessToken._id,
+      ]);*/
+    }
+    return false;
   }
 }

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Organization } from '../../models/organizations';
 import { OrganizationService } from '../../services/organization.service';
-import { OrganizationcardComponent } from '../organizationcard/organizationcard.component';
+import { OrganizationCardComponent } from '../organizationcard/organizationcard.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-superadmin',
   standalone: true,
-  imports: [OrganizationcardComponent, CommonModule],
+  imports: [OrganizationCardComponent, CommonModule],
   templateUrl: './superadmin.component.html',
   styleUrl: './superadmin.component.css',
 })
@@ -28,6 +28,7 @@ export class SuperadminComponent {
     isActive: false,
   };
   organizationsArray: Organization[] = [];
+
   constructor(private organizationService: OrganizationService) {}
   ngOnInit(): void {
     this.getAllOrganizations();
@@ -38,7 +39,8 @@ export class SuperadminComponent {
       this.organizationService.getAllOrganizationsApi();
     organizationObservable.subscribe({
       next: (orgData) => {
-        this.organizationsArray = orgData;
+        console.log(orgData)
+        this.organizationsArray = orgData.data;
       },
       error: (err) => {
         console.log(err);

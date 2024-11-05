@@ -13,3 +13,8 @@ export interface Organization {
   org_updated_at: Date;
   isActive: boolean;
 }
+
+export interface allOrganization{
+  statuscode:number,
+  data:Organization[]
+}

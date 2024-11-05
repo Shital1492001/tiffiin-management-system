@@ -1,16 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Organization } from '../models/organizations';
+import { allOrganization, Organization } from '../models/organizations';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrganizationService {
-  baseUrlOrg="http://localhost:5000/api/organizations" 
+  baseUrlOrg=environment.apiEndpointOrganization
   constructor(private http:HttpClient) { }
-  getAllOrganizationsApi():Observable<Organization[]>{
+  getAllOrganizationsApi():Observable<allOrganization>{
     // here extract data array and return 
-    return this.http.get<Organization[]>(this.baseUrlOrg+'/getall')
+    const observableData =this.http.get<allOrganization>(this.baseUrlOrg+'/getall')
+    return observableData;
   }
 }

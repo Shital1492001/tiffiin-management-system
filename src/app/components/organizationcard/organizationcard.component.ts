@@ -5,13 +5,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-organizationcard',
+  selector: 'app-organization-card',
   standalone: true,
   imports: [MatCardModule, MatDividerModule, CommonModule, MatDividerModule],
   templateUrl: './organizationcard.component.html',
   styleUrl: './organizationcard.component.css',
 })
-export class OrganizationcardComponent {
+export class OrganizationCardComponent {
   @Input()
   organization!: Organization;
 }

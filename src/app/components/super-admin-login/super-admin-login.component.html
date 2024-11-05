@@ -7,7 +7,7 @@
   </head>
   <body>
     <mat-card>
-      <form [formGroup]="loginForm" (submit)="sendLoginData()">
+      <form [formGroup]="loginForm" (submit)="loginAdmin()">
         <div class="login">
           <p>SuperAdmin Login</p>
           <div>
@@ -19,7 +19,7 @@
                 formControlName="email"
                 placeholder="Ex. pat@example.com"
               />
-              <mat-error *ngIf="email?.errors?.['email']&&email?.touched">
+              <mat-error *ngIf="isEmailValid">
                 Please enter a valid email address
               </mat-error>
               <mat-error *ngIf="email?.errors?.['required']&& email?.touched">
@@ -36,14 +36,32 @@
                 type="password"
                 formControlName="password"
               />
-              <mat-error
+              <!--<mat-error
                 *ngIf="password?.errors?.['required']&& password?.touched"
               >
                 password is <strong>required</strong>
+              </mat-error>-->
+              <mat-error *ngIf="mandatory">
+                password is <strong>required</strong>
               </mat-error>
-              <mat-error *ngIf="password?.touched">
+              <mat-error *ngIf="noNumber">
+                at least one number <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="noSpecialChars">
+                at least one special character <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="noLowerCase">
+                at least one lowercase character <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="noUpperCase">
+                at least one upperCase character <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="minLength">
+                minimum 8 characters are required<strong>required</strong>
+              </mat-error>
+              <!-- <mat-error *ngIf="password?.touched">
                 {{ passwordValidity }}
-              </mat-error>
+              </mat-error>-->
             </mat-form-field>
           </div>
           <div class="butn">
