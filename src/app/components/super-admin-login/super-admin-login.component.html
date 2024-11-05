@@ -36,11 +36,6 @@
                 type="password"
                 formControlName="password"
               />
-              <!--<mat-error
-                *ngIf="password?.errors?.['required']&& password?.touched"
-              >
-                password is <strong>required</strong>
-              </mat-error>-->
               <mat-error *ngIf="mandatory">
                 password is <strong>required</strong>
               </mat-error>
@@ -59,9 +54,6 @@
               <mat-error *ngIf="minLength">
                 minimum 8 characters are required<strong>required</strong>
               </mat-error>
-              <!-- <mat-error *ngIf="password?.touched">
-                {{ passwordValidity }}
-              </mat-error>-->
             </mat-form-field>
           </div>
           <div class="butn">

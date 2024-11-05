@@ -12,28 +12,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './superadmin.component.css',
 })
 export class SuperadminComponent {
-  organization: Organization = {
-    org_name: '',
-    org_location: [
-      {
-        loc: 'Head Office',
-        address: '123 Main St, City, Country',
-        loc_contact: 1234567890,
-        loc_email: 'contact@example.com',
-        admin_id: 'admin123',
-      },
-    ],
-    org_created_at: new Date(),
-    org_updated_at: new Date(),
-    isActive: false,
-  };
   organizationsArray: Organization[] = [];
-
   constructor(private organizationService: OrganizationService) {}
   ngOnInit(): void {
     this.getAllOrganizations();
   }
-
   getAllOrganizations() {
     const organizationObservable =
       this.organizationService.getAllOrganizationsApi();
