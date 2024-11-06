@@ -39,6 +39,9 @@
               <mat-error *ngIf="mandatory">
                 password is <strong>required</strong>
               </mat-error>
+              <mat-error *ngIf="minLength">
+                minimum 8 characters are <strong>required</strong>
+              </mat-error>
               <mat-error *ngIf="noNumber">
                 at least one number <strong>required</strong>
               </mat-error>
@@ -50,9 +53,6 @@
               </mat-error>
               <mat-error *ngIf="noUpperCase">
                 at least one upperCase character <strong>required</strong>
-              </mat-error>
-              <mat-error *ngIf="minLength">
-                minimum 8 characters are required<strong>required</strong>
               </mat-error>
             </mat-form-field>
           </div>

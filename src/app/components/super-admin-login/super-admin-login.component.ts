@@ -63,11 +63,15 @@ export class SuperAdminLoginComponent {
   get minLength() {
     return this.password?.errors?.['minlength'] && this.password?.touched;
   }
-  get mandatory(): boolean {
+  get mandatory() {
     return this.password?.errors?.['required'] && this.password?.touched;
   }
   get noNumber(): boolean {
-    return this.password?.errors?.['noNumber'] && this.password?.touched;
+    return (
+      this.password?.errors?.['noNumber'] &&
+      this.password?.touched &&
+      this.password?.dirty
+    );
   }
   get noSpecialChars(): boolean {
     return this.password?.errors?.['noSpecialChars'] && this.password?.touched;
@@ -78,6 +82,7 @@ export class SuperAdminLoginComponent {
   get noUpperCase(): boolean {
     return this.password?.errors?.['noUpperCase'] && this.password?.touched;
   }
+
   loginAdmin() {
     const login = {
       email: this.loginForm.controls.email.value,
