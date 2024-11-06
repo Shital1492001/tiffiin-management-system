@@ -1,0 +1,25 @@
+<mat-toolbar class="navbar transparent-toolbar">
+  <div class="logo-container">
+    <img
+      src="https://cdni.iconscout.com/illustration/premium/thumb/indian-dabbawala-with-multi-tiffin-as-service-illustration-download-in-svg-png-gif-file-formats--food-colorful-pack-people-illustrations-2210011.png?f=webp"
+      alt="Tiffin Logo"
+      class="logo"
+    />
+    <div class="title"><b>Tiffin Services</b></div>
+  </div>
+  <button mat-icon-button (click)="toggleMenu()" class="menu-button">
+    <mat-icon>{{ isMenuOpen ? "close" : "menu" }}</mat-icon>
+  </button>
+  <div class="nav-items" [class.open]="isMenuOpen">
+    <a mat-button routerLink="/getapprovedretailers" (click)="menuItemClicked()"
+      >Home</a
+    >
+    <a mat-button routerLink="/" (click)="menuItemClicked()">Dashboard</a>
+    <a mat-button routerLink="/services" (click)="menuItemClicked()">
+      Services</a
+    >
+    <a mat-raised-button routerLink="/login" (click)="menuItemClicked()"
+      >Login</a
+    >
+  </div>
+</mat-toolbar>
