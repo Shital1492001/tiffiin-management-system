@@ -1,0 +1,19 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { allAdminStatusResponses } from '../models/admin';
+import { environment } from '../../environments/environment';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class SuperadminService {
+  constructor(private http: HttpClient) {}
+  getPendingRequests(): Observable<allAdminStatusResponses> {
+    const response = this.http.get<allAdminStatusResponses>(
+      environment.apiEndpointSuperAdmin + '/pendingAdminApproval'
+    );
+    console.log(response);
+    return response;
+  }
+}
