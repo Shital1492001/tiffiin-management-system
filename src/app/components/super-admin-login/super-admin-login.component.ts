@@ -32,13 +32,6 @@ import { CustomPasswordValidators } from '../../customValidators/custom-password
 })
 export class SuperAdminLoginComponent {
   errorMessage: string = '';
-  accessToken: Token = {
-    token: '',
-    message: '',
-    statuscode: 0,
-    success: false,
-    _id: '',
-  };
   passwordValidity: string = '';
   StrongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
   constructor(private authService: AuthService, private route: Router) {}
@@ -95,11 +88,8 @@ export class SuperAdminLoginComponent {
       console.log('tokenObservable', tokenObservable);
       tokenObservable.subscribe({
         next: (data) => {
-          console.log('token', data);
-          this.accessToken = data;
-          console.log(this.accessToken);
-          sessionStorage.setItem('token', this.accessToken.token);
-          this.route.navigate(['/superAdminDashboard/', this.accessToken._id]);
+          sessionStorage.setItem('token', data.token);
+          this.route.navigate(['/superAdminDashboard/', data._id]);
         },
         error: (error) => {
           console.log('error', error);
