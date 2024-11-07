@@ -1,4 +1,4 @@
-<mat-sidenav-container class="example-container">
+<!-- <mat-sidenav-container class="example-container" [style.width]="250">
   <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
     <mat-nav-list>
       <div class="logo-container">
@@ -13,7 +13,9 @@
       </div>
       <li *ngFor="let item of menus">
         <a mat-list-item [routerLink]="item?.redirectURL">
-          <mat-icon *ngIf="item?.icon">{{ item?.icon }}</mat-icon>
+          <mat-icon *ngIf="item?.icon" matListItemIcon>{{
+            item?.icon
+          }}</mat-icon>
           <span *ngIf="isExpanded">{{ item?.displayName }}</span>
         </a>
       </li>
@@ -23,7 +25,6 @@
   <mat-sidenav-content
     style="background-color: rgb(221, 219, 219); color: black"
   >
-    <!-- margin-left: 0px !important; -->
     <mat-toolbar color="primary">
       <button
         mat-mini-fab
@@ -44,7 +45,7 @@
       <h2>Welcome to the App!</h2>
     </div>
   </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
 
 <!-- <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
@@ -117,3 +118,48 @@
     </mat-nav-list>
   </mat-drawer>
 </mat-drawer-container> -->
+
+<mat-toolbar
+  class="mat-elevation-z3"
+  style="background-color: rgb(27, 109, 109)"
+  ><button mat-icon-button (click)="collapsed.set(!collapsed())">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Tiffin Services</span>
+  <span class="example-spacer"></span>
+  <button style="border-radius: 10px">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav
+    opened
+    mode="side"
+    [style.width]="sidenavWidth()"
+    style="border-radius: 0px; background-color: rgb(27, 109, 109)"
+  >
+    <mat-nav-list>
+      <a
+        mat-list-item
+        *ngFor="let item of menus()"
+        [routerLink]="item?.redirectURL"
+        routerLinkActive
+        #rla="routerLinkActive"
+        [activated]="rla.isActive"
+      >
+        <mat-icon style="color: white" matListItemIcon>{{
+          item.icon
+        }}</mat-icon>
+        <span style="color: white" matListItemTitle>{{ item.label }}</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content
+    class="content"
+    [style.margin-left]="sidenavWidth()"
+    style="color: black"
+  >
+    <h2>Welcome to the App!</h2>
+  </mat-sidenav-content>
+</mat-sidenav-container>
