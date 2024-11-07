@@ -1,0 +1,106 @@
+<div class="form">
+  <form [formGroup]="organizationForm" class="form-container"  (ngSubmit)="onSubmit()">
+    <h2 id="heading">Add Organization</h2>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Organization Name</mat-label>
+        <input matInput id="org_name" formControlName="org_name" />
+        <mat-error>
+          @if(organizationForm.get('org_name')?.touched && organizationForm.get('org_name')?.invalid)
+          {
+            @if(organizationForm.get('org_name')?.hasError('required'))
+            {
+              <span class="error">Organization Name is required</span>
+            }
+          }
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <mat-checkbox id="isActive" formControlName="isActive">Is Active</mat-checkbox>
+    <div formArrayName="org_location">
+      <div *ngFor="let loc of locations.controls; let i = index" [formGroupName]="i">
+        <h3>Location {{ i + 1 }}</h3>
+        <mat-form-field appearance="fill">
+          <mat-label>Location</mat-label>
+          <input matInput id="loc" formControlName="loc" />
+          <mat-error>
+          @if(loc.get('loc')?.touched && loc.get('loc')?.invalid)
+          {
+            @if(loc.get('loc')?.hasError('required'))
+            {
+              <span class="error">Location is required</span>
+            }
+          } 
+          </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <input matInput id="address" formControlName="address" />
+          <mat-error>
+          @if(loc.get('address')?.touched && loc.get('address')?.invalid)
+          {
+            @if(loc.get('address')?.hasError('required'))
+            {
+              <span class="error">Address is required</span>
+            }
+          } 
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Contact Number</mat-label>
+          <input matInput id="loc_contact" formControlName="loc_contact" type="number" />
+          <mat-error>
+            @if(loc.get('loc_contact')?.touched && loc.get('loc_contact')?.invalid)
+            {
+              @if(loc.get('loc_contact')?.hasError('required'))
+              {
+                <span class="error">Contact Number is required</span>
+              }
+              @if(loc.get('loc_contact')?.hasError('pattern'))
+              {
+                <span class="error">Invalid contact number</span>
+              }
+            } 
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput id="loc_email" formControlName="loc_email" type="email" />
+          <mat-error>
+            @if(loc.get('loc_email')?.touched && loc.get('loc_email')?.invalid)
+            {
+              @if(loc.get('loc_email')?.hasError('required'))
+              {
+                <span class="error">Email is required</span>
+              }
+              @if(loc.get('loc_email')?.hasError('email'))
+              {
+                <span class="error">Invalid email</span>
+              }
+            } 
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Admin ID</mat-label>
+          <input matInput id="admin_id" formControlName="admin_id" />
+          <mat-error *ngIf="loc.get('admin_id')?.touched && loc.get('admin_id')?.invalid">
+            @if(loc.get('admin_id')?.touched && loc.get('admin_id')?.invalid)
+            {
+              @if(loc.get('admin_id')?.hasError('required'))
+              {
+                <span class="error">Admin ID is required</span>
+              }
+            } 
+          </mat-error>
+        </mat-form-field>
+        <button mat-stroked-button color="warn" (click)="removeLocation(i)">Remove Location</button>
+      </div>
+      <button mat-raised-button color="primary" type="button" (click)="addLocation()">Add Location</button>
+    </div>
+    <button mat-raised-button color="accent" type="submit">Submit</button>
+</form>
+</div>
