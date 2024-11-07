@@ -8,7 +8,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   standalone: true,
   imports: [RouterOutlet, FooterComponent, NavbarComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'Tiffin_Management_System';
