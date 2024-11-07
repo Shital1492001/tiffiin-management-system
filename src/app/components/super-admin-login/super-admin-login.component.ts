@@ -78,32 +78,6 @@ export class SuperAdminLoginComponent {
   get noUpperCase(): boolean {
     return this.password?.errors?.['noUpperCase'] && this.password?.touched;
   }
-
-  /*
-  get emailErrorMessage(): string {
-    return this.compulsory
-      ? 'Email is required'
-      : this.isEmailValid
-      ? ' Please enter a valid email address'
-      : '';
-  }
-
-  get passwordErrorMessage(): string {
-    return this.mandatory
-      ? ' password is required'
-      : this.noNumber
-      ? 'at least one number required'
-      : this.noSpecialChars
-      ? ' at least one special character required'
-      : this.noLowerCase
-      ? 'at least one lowercase character required'
-      : this.noUpperCase
-      ? 'at least one upperCase character required'
-      : this.minLength
-      ? 'minimum 8 characters are required'
-      : '';
-  }
-*/
   get emailErrorMessage(): string {
     switch (true) {
       case this.compulsory:
