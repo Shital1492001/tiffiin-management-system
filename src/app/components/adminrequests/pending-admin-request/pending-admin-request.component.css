@@ -1,0 +1,58 @@
+/* Container for the entire page */
+div {
+  padding: 24px;
+  background-color: #f9f9f9; /* Light background color */
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+/* Styling for mat-tab-group */
+mat-tab-group {
+  background-color: #ffffff; /* White background for the tab group */
+  border-radius: 8px; /* Round the corners of the tab group */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow around tab group */
+  margin-bottom: 16px; /* Space between tab group and content */
+}
+
+/* Tab label styles */
+.mat-tab-label {
+  color: #3f51b5; /* Primary color for tabs */
+  font-weight: 600; /* Bold text */
+  font-size: 14px; /* Standard font size */
+  padding: 12px 16px; /* Comfortable padding for the tab labels */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.mat-tab-label.mat-tab-label-active {
+  color: #ff5722; /* Highlight color for active tab */
+  font-weight: bold; /* Make the active tab label bold */
+}
+
+/* Tab content styling */
+mat-tab-body {
+  padding: 16px;
+  background-color: #ffffff; /* White background for tab content */
+  border-radius: 8px; /* Rounded corners for tab content */
+}
+
+/* Optional: Style for each app-status-table */
+app-status-table {
+  margin-top: 16px; /* Space between the table and tab content */
+}
+
+/* Hover effect for tab labels */
+.mat-tab-label:hover {
+  color: #ff5722; /* Change color when hovering over tab */
+}
+
+/* Styling for responsiveness on smaller screens */
+@media (max-width: 768px) {
+  mat-tab-group {
+    padding: 8px; /* Reduced padding on mobile */
+  }
+
+  .mat-tab-label {
+    font-size: 12px; /* Smaller text on mobile */
+    padding: 8px 12px; /* Reduced padding on mobile */
+  }
+}

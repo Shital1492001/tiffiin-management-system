@@ -99,7 +99,7 @@ export class SuperAdminLoginComponent {
           // this.accessToken = data;
           // console.log(this.accessToken);
           sessionStorage.setItem('token', data.token);
-          this.route.navigate(['/superAdminDashboard/', data._id]);
+          this.route.navigate(['/superAdminDashboard/']);
         },
         error: (error) => {
           console.log('error', error);

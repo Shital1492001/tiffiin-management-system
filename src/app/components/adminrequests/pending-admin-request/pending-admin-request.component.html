@@ -1,5 +1,19 @@
 <div>
-  <app-status-table
-    [pendingAdminsArray]="pendingAdminsArray"
-  ></app-status-table>
+  <mat-tab-group>
+    <mat-tab label="pending Admin Requests">
+      <app-status-table
+        [pendingAdminsArray]="pendingAdminsArray"
+      ></app-status-table>
+    </mat-tab>
+    <mat-tab label="rejected Admin Requests">
+      <app-status-table
+        [rejectedAdminsArray]="rejectedAdminsArray"
+      ></app-status-table>
+    </mat-tab>
+    <mat-tab label="Approved Admin Requests">
+      <app-status-table
+        [approvedAdminsArray]="approvedAdminsArray"
+      ></app-status-table>
+    </mat-tab>
+  </mat-tab-group>
 </div>

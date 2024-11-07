@@ -16,4 +16,19 @@ export class SuperadminService {
     console.log(response);
     return response;
   }
+
+  getRejectedRequests(): Observable<allAdminStatusResponses> {
+    const response = this.http.get<allAdminStatusResponses>(
+      environment.apiEndpointSuperAdmin + '/rejectedAdminApproval'
+    );
+    console.log(response);
+    return response;
+  }
+  getApprovedRequests(): Observable<allAdminStatusResponses> {
+    const response = this.http.get<allAdminStatusResponses>(
+      environment.apiEndpointSuperAdmin + '/approvedAdminApproval'
+    );
+    console.log(response);
+    return response;
+  }
 }

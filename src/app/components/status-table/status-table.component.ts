@@ -24,6 +24,10 @@ export class StatusTableComponent implements AfterViewInit {
   paginator!: MatPaginator;
   @Input()
   pendingAdminsArray: admin[] = [];
+  @Input()
+  rejectedAdminsArray: admin[] = [];
+  @Input()
+  approvedAdminsArray: admin[] = [];
   // why ngOnInit-datasource cannot be initiallized outside method or constructor
   // ngOnInit(): void {
   //   this.dataSource = new MatTableDataSource<admin>(this.pendingAdminsArray);
@@ -35,6 +39,16 @@ export class StatusTableComponent implements AfterViewInit {
     if (changes['pendingAdminsArray']) {
       this.dataSource = this.dataSource = new MatTableDataSource<admin>(
         this.pendingAdminsArray
+      );
+    }
+    if (changes['rejectedAdminsArray']) {
+      this.dataSource = this.dataSource = new MatTableDataSource<admin>(
+        this.rejectedAdminsArray
+      );
+    }
+    if (changes['approvedAdminsArray']) {
+      this.dataSource = this.dataSource = new MatTableDataSource<admin>(
+        this.approvedAdminsArray
       );
     }
   }
