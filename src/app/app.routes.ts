@@ -7,13 +7,14 @@ export const routes: Routes = [
   {
     path: '',
     component: SuperAdminLoginComponent,
-    // loadComponent:()=>import("./components/super-admin-login/super-admin-login.component").then(m=>m.SuperAdminLoginComponent)
-   
   },
   {
     path: 'superAdminDashboard/:id',
     // component: SuperadminComponent,
-    loadComponent:()=>import("./components/superadmin/superadmin.component").then(m=>m.SuperadminComponent),
-    canActivate:[authGuard]
+    loadComponent: () =>
+      import('./components/superadmin/superadmin.component').then(
+        (m) => m.SuperadminComponent
+      ),
+    canActivate: [authGuard],
   },
 ];
