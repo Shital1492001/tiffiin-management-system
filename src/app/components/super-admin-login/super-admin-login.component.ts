@@ -31,21 +31,24 @@ import { CustomPasswordValidators } from '../../customValidators/custom-password
   styleUrl: './super-admin-login.component.css',
 })
 export class SuperAdminLoginComponent {
-  errorMessage: string = '';
+  invalidCredential: string = '';
   passwordValidity: string = '';
-  StrongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  strongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
   constructor(private authService: AuthService, private route: Router) {}
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern(this.StrongPasswordRegx),
-      Validators.minLength(2),
+      Validators.pattern(this.strongPasswordRegx),
+      Validators.minLength(8),
       CustomPasswordValidators.logPatternError(),
     ]),
   });
   get email() {
     return this.loginForm.get('email');
+  }
+  get compulsory() {
+    return this.email?.errors?.['required'] && this.email?.touched;
   }
   get password() {
     return this.loginForm.get('password');
@@ -76,6 +79,30 @@ export class SuperAdminLoginComponent {
     return this.password?.errors?.['noUpperCase'] && this.password?.touched;
   }
 
+  get emailErrorMessage(): string {
+    return this.compulsory
+      ? 'Email is required'
+      : this.isEmailValid
+      ? ' Please enter a valid email address'
+      : '';
+  }
+
+  get passwordErrorMessage(): string {
+    return this.mandatory
+      ? ' password is required'
+      : this.noNumber
+      ? 'at least one number required'
+      : this.noSpecialChars
+      ? ' at least one special character required'
+      : this.noLowerCase
+      ? 'at least one lowercase character required'
+      : this.noUpperCase
+      ? 'at least one upperCase character required'
+      : this.minLength
+      ? 'minimum 8 characters are required'
+      : '';
+  }
+
   loginAdmin() {
     const login = {
       email: this.loginForm.controls.email.value,
@@ -93,6 +120,7 @@ export class SuperAdminLoginComponent {
         },
         error: (error) => {
           console.log('error', error);
+          this.invalidCredential = 'Invalid Credentials';
         },
       });
     }

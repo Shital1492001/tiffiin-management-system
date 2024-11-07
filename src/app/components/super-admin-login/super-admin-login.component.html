@@ -1,68 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <mat-card>
-      <form [formGroup]="loginForm" (submit)="loginAdmin()">
-        <div class="login">
-          <p>SuperAdmin Login</p>
-          <div>
-            <mat-form-field>
-              <mat-label appearance="outlined">Email Id</mat-label>
-              <input
-                appearance="outlined"
-                matInput
-                formControlName="email"
-                placeholder="Ex. pat@example.com"
-              />
-              <mat-error *ngIf="isEmailValid">
-                Please enter a valid email address
-              </mat-error>
-              <mat-error *ngIf="email?.errors?.['required']&& email?.touched">
-                Email is <strong>required</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field>
-              <mat-label appearance="outlined">Password</mat-label>
-              <input
-                appearance="outlined"
-                matInput
-                type="password"
-                formControlName="password"
-              />
-              <mat-error *ngIf="mandatory">
-                password is <strong>required</strong>
-              </mat-error>
-              <mat-error *ngIf="minLength">
-                minimum 8 characters are <strong>required</strong>
-              </mat-error>
-              <mat-error *ngIf="noNumber">
-                at least one number <strong>required</strong>
-              </mat-error>
-              <mat-error *ngIf="noSpecialChars">
-                at least one special character <strong>required</strong>
-              </mat-error>
-              <mat-error *ngIf="noLowerCase">
-                at least one lowercase character <strong>required</strong>
-              </mat-error>
-              <mat-error *ngIf="noUpperCase">
-                at least one upperCase character <strong>required</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="butn">
-            <button mat-raised-button type="submit" (click)="loginAdmin()">
-              Login
-            </button>
-          </div>
+<div class="login-page">
+  <mat-card>
+    <form [formGroup]="loginForm" (submit)="loginAdmin()">
+      <div class="login">
+        <mat-card-header>SuperAdmin Login</mat-card-header>
+        <div>
+          <mat-form-field>
+            <mat-label appearance="outlined">Email Id</mat-label>
+            <input
+              appearance="outlined"
+              matInput
+              formControlName="email"
+              placeholder="Ex. pat@example.com"
+            />
+            <mat-error>{{ emailErrorMessage }} </mat-error>
+          </mat-form-field>
         </div>
-      </form>
-    </mat-card>
-  </body>
-</html>
+        <div>
+          <mat-form-field>
+            <mat-label appearance="outlined">Password</mat-label>
+            <input
+              appearance="outlined"
+              matInput
+              type="password"
+              formControlName="password"
+            />
+            <mat-error>{{ passwordErrorMessage }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="button">
+          <button mat-raised-button type="submit" (click)="loginAdmin()">
+            Login
+          </button>
+        </div>
+        <mat-error>{{ invalidCredential }}</mat-error>
+      </div>
+    </form>
+  </mat-card>
+</div>
