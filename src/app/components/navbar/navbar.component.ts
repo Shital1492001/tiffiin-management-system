@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule } from '@angular/router';
+import { RouterModule, } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,19 +12,41 @@ import { RouterModule } from '@angular/router';
   imports: [
     MatToolbarModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    MatSidenavModule,
+    CommonModule,
+    MatListModule,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent  implements OnInit{
 
   isMenuOpen = false;
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-}
+  menus:{displayName:string, redirectURL: string}[]=[];
 
-menuItemClicked() {
-    this.isMenuOpen = false; 
-}
+  ngOnInit(): void {
+
+    this.menus.push({
+      displayName: 'Approved Organizations',
+      redirectURL: '/approvedOrganizations'
+    })
+    this.menus.push({
+      displayName: 'Pending Organizations',
+      redirectURL: '/pendingOrganizations'
+    })
+    this.menus.push({
+      displayName: 'Rejected Organizations',
+      redirectURL: '/rejectedOrganizations'
+    })
+    this.menus.push({
+      displayName: 'Add Organization',
+      redirectURL: '/addnewOrganization'
+    })
+    this.menus.push({
+      displayName: 'Logout',
+      redirectURL: '/logout'
+    })
+  }
+
 }

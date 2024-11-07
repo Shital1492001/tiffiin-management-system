@@ -1,25 +1,36 @@
-<mat-toolbar class="navbar transparent-toolbar">
-  <div class="logo-container">
-    <img
-      src="https://cdni.iconscout.com/illustration/premium/thumb/indian-dabbawala-with-multi-tiffin-as-service-illustration-download-in-svg-png-gif-file-formats--food-colorful-pack-people-illustrations-2210011.png?f=webp"
-      alt="Tiffin Logo"
-      class="logo"
-    />
-    <div class="title"><b>Tiffin Services</b></div>
-  </div>
-  <button mat-icon-button (click)="toggleMenu()" class="menu-button">
-    <mat-icon>{{ isMenuOpen ? "close" : "menu" }}</mat-icon>
-  </button>
-  <div class="nav-items" [class.open]="isMenuOpen">
-    <a mat-button routerLink="/getapprovedretailers" (click)="menuItemClicked()"
-      >Home</a
-    >
-    <a mat-button routerLink="/" (click)="menuItemClicked()">Dashboard</a>
-    <a mat-button routerLink="/services" (click)="menuItemClicked()">
-      Services</a
-    >
-    <a mat-raised-button routerLink="/login" (click)="menuItemClicked()"
-      >Login</a
-    >
-  </div>
-</mat-toolbar>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
+    <mat-nav-list>
+      <div class="logo-container">
+        <img
+          src="https://cdni.iconscout.com/illustration/premium/thumb/indian-dabbawala-with-multi-tiffin-as-service-illustration-download-in-svg-png-gif-file-formats--food-colorful-pack-people-illustrations-2210011.png?f=webp"
+          alt="Tiffin Logo"
+          class="logo"
+        />
+        <div class="title" style="color: white"><b>Tiffin Services</b></div>
+      </div>
+      <li *ngFor="let item of menus">
+        <a mat-list-item [routerLink]="item?.redirectURL">{{
+          item?.displayName
+        }}</a>
+      </li>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content style="background-color: white; color: black">
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>My Application</span>
+      <span class="example-spacer"></span>
+      <button type="button" style="height: 40px; padding: 5px" mat-button>
+        Login
+      </button>
+    </mat-toolbar>
+
+    <div class="content">
+      <h1>Welcome to the App!</h1>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
