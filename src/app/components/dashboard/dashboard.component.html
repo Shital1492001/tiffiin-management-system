@@ -1,0 +1,41 @@
+<div class="organization-card-container">
+  @for(organization of organizations; track organization)
+{
+  <mat-card class="organization-card" appearance="outlined">
+    <mat-card-header>
+      
+      <mat-card-title>{{ organization.org_name }}</mat-card-title>
+    </mat-card-header>
+    
+    <mat-divider></mat-divider>
+    
+    <mat-card-content>
+      <h4>Locations:</h4>
+      <ul>
+        @for(location of organization.org_location; track location)
+          {
+        <li>
+          
+          <strong>Location Name:</strong> {{ location.loc }}<br>
+          <strong>Address:</strong> {{ location.address }}<br>
+          <strong>Contact:</strong> {{ location.loc_contact }}<br>
+          <strong>Email:</strong> {{ location.loc_email }}<br>
+          <mat-divider></mat-divider>
+          
+        </li>
+      }
+      </ul>
+      <p class="status" [ngClass]="{'active-status': organization.isActive, 'inactive-status': !organization.isActive}">
+        Status: {{ organization.isActive ? 'Active' : 'Inactive' }}
+      </p>
+    </mat-card-content>
+    
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Update</button>
+      <button mat-raised-button color="warn">Delete</button>
+    </mat-card-actions>
+  </mat-card>
+}
+</div>
+
+

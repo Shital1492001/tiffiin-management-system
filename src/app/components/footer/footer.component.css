@@ -1,0 +1,38 @@
+.footer-grid {
+    background-color:  	#0d0d0e;  
+    text-align: center;
+    color: white;
+    position:sticky;
+    /* bottom: 0px; */
+  }
+  
+
+  .info {
+  display: flex;
+  flex-direction: column; 
+  margin: 10px 0; 
+}
+
+.info h3 {
+  margin-bottom: 5px; 
+}
+
+.info div {
+  margin: 2px 0; 
+
+}
+
+
+.social-media-links {
+  display: flex;
+  justify-content: center; 
+  gap: 15px; 
+}
+
+.social-media-links a {
+  color: inherit; 
+  text-decoration: none; 
+
+}
+
+  
