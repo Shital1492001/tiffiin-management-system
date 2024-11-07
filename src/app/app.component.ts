@@ -7,7 +7,7 @@ import { AddorganizationComponent } from './components/addorganization/addorgani
   standalone: true,
   imports: [RouterOutlet,AddorganizationComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'Tiffin_Management_System';

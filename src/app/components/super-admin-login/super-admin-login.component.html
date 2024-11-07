@@ -1,0 +1,39 @@
+<div class="login-page">
+  <mat-card>
+    <form [formGroup]="loginForm" (submit)="loginAdmin()">
+      <div class="login">
+        <mat-card-header>SuperAdmin Login</mat-card-header>
+        <div>
+          <mat-form-field>
+            <mat-label appearance="outlined">Email Id</mat-label>
+            <input
+              appearance="outlined"
+              matInput
+              formControlName="email"
+              placeholder="Ex. pat@example.com"
+            />
+            <mat-error>{{ emailErrorMessage }} </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label appearance="outlined">Password</mat-label>
+            <input
+              appearance="outlined"
+              matInput
+              type="password"
+              formControlName="password"
+            />
+            <mat-error>{{ passwordErrorMessage }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="button">
+          <button mat-raised-button type="submit" (click)="loginAdmin()">
+            Login
+          </button>
+        </div>
+        <mat-error>{{ invalidCredential }}</mat-error>
+      </div>
+    </form>
+  </mat-card>
+</div>
