@@ -20,10 +20,6 @@ export class AuthService {
     const setToken = sessionStorage.getItem('token');
     if (setToken) {
       return true;
-      /*this.route.navigate([
-        '/superAdminDashboard/',
-        this.accessToken._id,
-      ]);*/
     }
     return false;
   }

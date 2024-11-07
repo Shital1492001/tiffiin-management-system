@@ -32,7 +32,7 @@ import { CustomPasswordValidators } from '../../customValidators/custom-password
 })
 export class SuperAdminLoginComponent {
   invalidCredential: string = '';
-  passwordValidity: string = '';
+  // passwordValidity: string = '';
   strongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
   constructor(private authService: AuthService, private route: Router) {}
   loginForm = new FormGroup({
@@ -78,29 +78,34 @@ export class SuperAdminLoginComponent {
   get noUpperCase(): boolean {
     return this.password?.errors?.['noUpperCase'] && this.password?.touched;
   }
-
   get emailErrorMessage(): string {
-    return this.compulsory
-      ? 'Email is required'
-      : this.isEmailValid
-      ? ' Please enter a valid email address'
-      : '';
+    switch (true) {
+      case this.compulsory:
+        return 'Email is required';
+      case this.isEmailValid:
+        return 'Please enter a valid email address';
+      default:
+        return '';
+    }
   }
 
   get passwordErrorMessage(): string {
-    return this.mandatory
-      ? ' password is required'
-      : this.noNumber
-      ? 'at least one number required'
-      : this.noSpecialChars
-      ? ' at least one special character required'
-      : this.noLowerCase
-      ? 'at least one lowercase character required'
-      : this.noUpperCase
-      ? 'at least one upperCase character required'
-      : this.minLength
-      ? 'minimum 8 characters are required'
-      : '';
+    switch (true) {
+      case this.mandatory:
+        return 'password is required';
+      case this.noNumber:
+        return 'at least one number required';
+      case this.noSpecialChars:
+        return ' at least one special character required';
+      case this.noLowerCase:
+        return 'at least one lowercase character required';
+      case this.noUpperCase:
+        return 'at least one upperCase character required';
+      case this.minLength:
+        return 'minimum 8 characters are required';
+      default:
+        return '';
+    }
   }
 
   loginAdmin() {
