@@ -17,7 +17,7 @@ import { RouterModule, } from '@angular/router';
     MatSidenavModule,
     CommonModule,
     MatListModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
@@ -25,30 +25,48 @@ import { RouterModule, } from '@angular/router';
 export class NavbarComponent  implements OnInit{
 
   isMenuOpen = false;
-  menus:{displayName:string, redirectURL: string}[]=[];
+  // menus:{displayName:string, redirectURL: string}[]=[];
+ icons=["home","login"]
+  menus=[{
+      displayName: `Dashboard` ,
+      redirectURL: '/',
+      icon: 'home'
+  }]
 
   ngOnInit(): void {
 
     this.menus.push({
-      displayName: 'Approved Organizations',
-      redirectURL: '/approvedOrganizations'
+      displayName: 'Status',
+      redirectURL: '/status',
+      icon: 'check_circle'
     })
-    this.menus.push({
-      displayName: 'Pending Organizations',
-      redirectURL: '/pendingOrganizations'
-    })
-    this.menus.push({
-      displayName: 'Rejected Organizations',
-      redirectURL: '/rejectedOrganizations'
-    })
+    // this.menus.push({
+    //   displayName: 'Approved Organizations',
+    //   redirectURL: '/approvedOrganizations'
+    // })
+    // this.menus.push({
+    //   displayName: 'Pending Organizations',
+    //   redirectURL: '/pendingOrganizations'
+    // })
+    // this.menus.push({
+    //   displayName: 'Rejected Organizations',
+    //   redirectURL: '/rejectedOrganizations'
+    // })
     this.menus.push({
       displayName: 'Add Organization',
-      redirectURL: '/addnewOrganization'
+      redirectURL: '/addnewOrganization',
+      icon: 'add_circle_outline'
+
     })
     this.menus.push({
       displayName: 'Logout',
-      redirectURL: '/logout'
+      redirectURL: '/logout',
+      icon: 'exit_to_app'
+
     })
   }
+  isExpanded=true;
+
+
 
 }
