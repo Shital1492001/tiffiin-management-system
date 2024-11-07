@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Organization } from '../models/organization';
+import { environment } from '../../environments/environment.development';
 
 export interface AllOrganizations {
   data: Organization[];
@@ -19,7 +20,7 @@ export interface AdminRegister {
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5000/api';
+  private apiUrl = environment.apiEndpointauth;
 
   constructor(private http: HttpClient) {}
 
@@ -49,7 +50,7 @@ export class AuthService {
   // getall organizations details from the backend
   getAllOrganizations(): Observable<AllOrganizations> {
     const obs = this.http.get<AllOrganizations>(
-      `${this.apiUrl}/organizations/getall`
+      `${this.apiUrl}/superadmin/organizations/getallOrganization`
     );
     // console.log("getAllOrganizations...",obs)
     return obs;

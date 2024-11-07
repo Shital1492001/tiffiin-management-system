@@ -22,7 +22,6 @@
 #admin {
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
   font-size: 1.5em;
   font-weight: bold;
 }
@@ -36,10 +35,6 @@ input,
 .mat-form-field .mat-label {
   color: black;
 }
-
-/* textarea {
-  color: black; 
-} */
 
 .mat-select-value {
   color: black;
