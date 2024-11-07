@@ -6,14 +6,31 @@ body {
 }
 .login-page {
   display: flex;
+  /* width: 600px; */
   align-items: center;
   justify-content: center;
 }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(0deg, #e5a2b2, #ff9c79, #ec7d9c);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 .button {
   margin-top: 8px;
   justify-content: center;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+a {
+  color: rgb(139, 0, 116);
 }
