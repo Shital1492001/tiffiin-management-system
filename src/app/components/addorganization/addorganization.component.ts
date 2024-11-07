@@ -80,9 +80,10 @@ export class AddorganizationComponent {
   onSubmit(): void {
     if (this.organizationForm.valid) {
       const formData = this.organizationForm.value;
-
+      console.log(formData);
       this.organizationService.addOrganizations(formData).subscribe({
         next: (responseData) => {
+          console.log(responseData)
           if (responseData.statuscode === 201) {
             console.log('Organization added successfully', responseData);
             this.toastr.success('Organization added successfully!', 'Success');

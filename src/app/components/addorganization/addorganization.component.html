@@ -16,7 +16,11 @@
         </mat-error>
       </mat-form-field>
     </div>
-    <mat-checkbox id="isActive" formControlName="isActive">Is Active</mat-checkbox>
+    <div>
+    <mat-label>Is Active
+      <input type="checkbox" id="isActive" formControlName="isActive">
+    </mat-label>
+    </div>
     <div formArrayName="org_location">
       <div *ngFor="let loc of locations.controls; let i = index" [formGroupName]="i">
         <h3>Location {{ i + 1 }}</h3>
@@ -97,10 +101,12 @@
             } 
           </mat-error>
         </mat-form-field>
-        <button mat-stroked-button color="warn" (click)="removeLocation(i)">Remove Location</button>
+        <button mat-raised-button (click)="removeLocation(i)">Remove Location</button>
       </div>
-      <button mat-raised-button color="primary" type="button" (click)="addLocation()">Add Location</button>
+      <button mat-raised-button type="button" (click)="addLocation()">Add Location</button>
     </div>
-    <button mat-raised-button color="accent" type="submit">Submit</button>
+    <div>
+      <button mat-raised-button type="submit">Submit</button>
+    </div> 
 </form>
 </div>
