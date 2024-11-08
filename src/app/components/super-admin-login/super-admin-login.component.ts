@@ -120,16 +120,8 @@ export class SuperAdminLoginComponent {
       console.log('tokenObservable', tokenObservable);
       tokenObservable.subscribe({
         next: (data) => {
-<<<<<<< HEAD
-          console.log('token', data);
-          // this.accessToken = data;
-          // console.log(this.accessToken);
           sessionStorage.setItem('token', data.token);
-          this.route.navigate(['/superAdminDashboard/']);
-=======
-          sessionStorage.setItem('token', data.token);
-          this.route.navigate(['/superAdminDashboard/', data._id]);
->>>>>>> 0f01fb37be7369be67263bb700e638c777c46d2a
+          this.route.navigate(['/superAdminDashboard']);
         },
         error: (error) => {
           console.log('error', error);

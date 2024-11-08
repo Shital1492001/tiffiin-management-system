@@ -23,7 +23,7 @@ export class StatusTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @Input()
-  pendingAdminsArray: admin[] = [];
+  adminsArray: admin[] = [];
   @Input()
   rejectedAdminsArray: admin[] = [];
   @Input()
@@ -36,11 +36,12 @@ export class StatusTableComponent implements AfterViewInit {
   // why ngOnChanges --- bcz ngOnInit willrun only one time after component is initialized
   // and first time pendingAdminsArray is empty so data did not render on the
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['pendingAdminsArray']) {
+    if (changes['adminsArray']) {
       this.dataSource = this.dataSource = new MatTableDataSource<admin>(
-        this.pendingAdminsArray
+        this.adminsArray
       );
     }
+    /*
     if (changes['rejectedAdminsArray']) {
       this.dataSource = this.dataSource = new MatTableDataSource<admin>(
         this.rejectedAdminsArray
@@ -50,7 +51,7 @@ export class StatusTableComponent implements AfterViewInit {
       this.dataSource = this.dataSource = new MatTableDataSource<admin>(
         this.approvedAdminsArray
       );
-    }
+    }*/
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

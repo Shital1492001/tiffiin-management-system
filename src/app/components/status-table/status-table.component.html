@@ -1,34 +1,33 @@
 <div>
-  <table mat-table [dataSource]="dataSource">
+  <table class="" mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="_id">
       <th mat-header-cell *matHeaderCellDef>UID</th>
       <td mat-cell *matCellDef="let element">{{ element._id }}</td>
     </ng-container>
-
     <ng-container matColumnDef="username">
       <th mat-header-cell *matHeaderCellDef>Name</th>
       <td mat-cell *matCellDef="let element">{{ element.username }}</td>
     </ng-container>
 
     <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef>Weight</th>
+      <th mat-header-cell *matHeaderCellDef>Email</th>
       <td mat-cell *matCellDef="let element">{{ element.email }}</td>
     </ng-container>
 
     <ng-container matColumnDef="contact_number">
-      <th mat-header-cell *matHeaderCellDef>Symbol</th>
+      <th mat-header-cell *matHeaderCellDef>Contact details</th>
       <td mat-cell *matCellDef="let element">{{ element.contact_number }}</td>
     </ng-container>
 
     <ng-container matColumnDef="organization_name">
-      <th mat-header-cell *matHeaderCellDef>Symbol</th>
+      <th mat-header-cell *matHeaderCellDef>organization</th>
       <td mat-cell *matCellDef="let element">
         {{ element.organization_name }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="approval_status">
-      <th mat-header-cell *matHeaderCellDef>Symbol</th>
+      <th mat-header-cell *matHeaderCellDef>Status</th>
       <td mat-cell *matCellDef="let element">
         {{ element.role_specific_details.approval_status }}
       </td>

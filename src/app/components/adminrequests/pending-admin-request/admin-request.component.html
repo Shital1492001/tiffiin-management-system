@@ -1,0 +1,13 @@
+<div>
+  <mat-button-toggle-group
+    name="adminStatus"
+    aria-label="Admin Status"
+    (change)="onStatusChange($event)"
+  >
+    <mat-button-toggle value="pending">Pending</mat-button-toggle>
+    <mat-button-toggle value="approved">Approved</mat-button-toggle>
+    <mat-button-toggle value="rejected">Rejected</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <app-status-table [adminsArray]="adminsArray"></app-status-table>
+</div>
