@@ -11,7 +11,7 @@ body {
   justify-content: center;
 }
 body {
-  margin: 0;
+  height: 100%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background: linear-gradient(0deg, #e5a2b2, #ff9c79, #ec7d9c);
   background-size: cover;
@@ -23,14 +23,6 @@ body {
   justify-content: center;
 }
 
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
 a {
   color: rgb(139, 0, 116);
 }
