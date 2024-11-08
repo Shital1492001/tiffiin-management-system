@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { SuperAdminLoginComponent } from './components/super-admin-login/super-admin-login.component';
 import { authGuard } from './guards/authguard.guard';
+import { SuperadminDashboardComponent } from './components/superadmin-dashboard/superadmin-dashboard.component';
 
 export const routes: Routes = [
   {
@@ -14,5 +15,9 @@ export const routes: Routes = [
         (m) => m.SuperadminComponent
       ),
     canActivate: [authGuard],
+  },
+  {
+    path: 'home',
+    component: SuperadminDashboardComponent,
   },
 ];

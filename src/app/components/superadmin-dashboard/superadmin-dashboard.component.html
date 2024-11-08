@@ -1,0 +1,26 @@
+<div class="dashboard">
+  <div class="box1">Pending requests</div>
+  <div class="box2">Approved Requests</div>
+  <div class="box3">Rejected Requests</div>
+</div>
+
+<div class="dashboard">
+  <div class="box">
+    <h3>Total Orders for the Year</h3>
+    <p>{{ getTotalOrders() }}</p>
+  </div>
+
+  <div class="box">
+    <h3>Monthly Tiffin Orders</h3>
+    <table>
+      <tr>
+        <th>Month</th>
+        <th>Orders</th>
+      </tr>
+      <tr *ngFor="let order of monthlyOrders">
+        <td>{{ order.month }}</td>
+        <td>{{ order.orders }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
