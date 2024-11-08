@@ -21,8 +21,6 @@ body {
   margin-top: 8px;
   justify-content: center;
 }
-
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 a {
   color: rgb(139, 0, 116);
 }
