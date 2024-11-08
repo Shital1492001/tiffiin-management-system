@@ -5,9 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule, } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { Menus } from '../../models/menus';
-
 
 @Component({
   selector: 'app-navbar',
@@ -22,47 +21,40 @@ import { Menus } from '../../models/menus';
     MatButtonModule,
   ],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
 })
-export class NavbarComponent{
-
-  menus: Menus[] =[
+export class NavbarComponent {
+  menus: Menus[] = [
     {
-           label: `Dashboard` ,
-           redirectURL: '/',
-           icon: 'home'
-      },
+      label: `Dashboard`,
+      redirectURL: '/',
+      icon: 'home',
+    },
     {
       label: 'Status',
       redirectURL: '/status',
-      icon: 'check_circle'
-
+      icon: 'check_circle',
     },
     {
       label: 'Add Organization',
       redirectURL: '/addnewOrganization',
-      icon: 'add_circle_outline'
-
+      icon: 'add_circle_outline',
     },
     {
       label: 'Logout',
       redirectURL: '/logout',
-      icon: 'exit_to_app'
+      icon: 'exit_to_app',
+    },
+  ];
 
-    }
-  ]
+  collapsed: boolean = false;
 
-  collapsed: boolean=false;
-
-  collapsedState(){    
-    this.collapsed=!this.collapsed;
+  collapsedState() {
+    this.collapsed = !this.collapsed;
     console.log(this.collapsed);
-    
   }
-  
 
   sidenavWidth() {
-    return this.collapsed ? '50px' : '250px';  
+    return this.collapsed ? '50px' : '250px';
   }
-
 }
