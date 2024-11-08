@@ -32,7 +32,7 @@ export class NavbarComponent {
     },
     {
       label: 'Status',
-      redirectURL: '/status',
+      redirectURL: '/statusDataTable',
       icon: 'check_circle',
     },
     {

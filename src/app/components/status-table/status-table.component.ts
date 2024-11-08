@@ -41,17 +41,6 @@ export class StatusTableComponent implements AfterViewInit {
         this.adminsArray
       );
     }
-    /*
-    if (changes['rejectedAdminsArray']) {
-      this.dataSource = this.dataSource = new MatTableDataSource<admin>(
-        this.rejectedAdminsArray
-      );
-    }
-    if (changes['approvedAdminsArray']) {
-      this.dataSource = this.dataSource = new MatTableDataSource<admin>(
-        this.approvedAdminsArray
-      );
-    }*/
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

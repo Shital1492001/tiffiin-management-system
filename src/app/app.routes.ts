@@ -15,4 +15,13 @@ export const routes: Routes = [
       ),
     canActivate: [authGuard],
   },
+
+  {
+    path: 'statusDataTable',
+    loadComponent: () =>
+      import(
+        './components/adminrequests/pending-admin-request/admin-request.component'
+      ).then((m) => m.AdminRequestComponent),
+    canActivate: [authGuard],
+  },
 ];
