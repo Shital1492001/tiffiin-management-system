@@ -31,28 +31,24 @@ import { CustomPasswordValidators } from '../../customValidators/custom-password
   styleUrl: './super-admin-login.component.css',
 })
 export class SuperAdminLoginComponent {
-  errorMessage: string = '';
-  accessToken: Token = {
-    token: '',
-    message: '',
-    statuscode: 0,
-    success: false,
-    _id: '',
-  };
-  passwordValidity: string = '';
-  StrongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  invalidCredential: string = '';
+  // passwordValidity: string = '';
+  strongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
   constructor(private authService: AuthService, private route: Router) {}
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern(this.StrongPasswordRegx),
-      Validators.minLength(2),
+      Validators.pattern(this.strongPasswordRegx),
+      Validators.minLength(8),
       CustomPasswordValidators.logPatternError(),
     ]),
   });
   get email() {
     return this.loginForm.get('email');
+  }
+  get compulsory() {
+    return this.email?.errors?.['required'] && this.email?.touched;
   }
   get password() {
     return this.loginForm.get('password');
@@ -82,6 +78,35 @@ export class SuperAdminLoginComponent {
   get noUpperCase(): boolean {
     return this.password?.errors?.['noUpperCase'] && this.password?.touched;
   }
+  get emailErrorMessage(): string {
+    switch (true) {
+      case this.compulsory:
+        return 'Email is required';
+      case this.isEmailValid:
+        return 'Please enter a valid email address';
+      default:
+        return '';
+    }
+  }
+
+  get passwordErrorMessage(): string {
+    switch (true) {
+      case this.mandatory:
+        return 'password is required';
+      case this.noNumber:
+        return 'at least one number required';
+      case this.noSpecialChars:
+        return ' at least one special character required';
+      case this.noLowerCase:
+        return 'at least one lowercase character required';
+      case this.noUpperCase:
+        return 'at least one upperCase character required';
+      case this.minLength:
+        return 'minimum 8 characters are required';
+      default:
+        return '';
+    }
+  }
 
   loginAdmin() {
     const login = {
@@ -95,14 +120,12 @@ export class SuperAdminLoginComponent {
       console.log('tokenObservable', tokenObservable);
       tokenObservable.subscribe({
         next: (data) => {
-          console.log('token', data);
-          this.accessToken = data;
-          console.log(this.accessToken);
-          sessionStorage.setItem('token', this.accessToken.token);
-          this.route.navigate(['/superAdminDashboard/', this.accessToken._id]);
+          sessionStorage.setItem('token', data.token);
+          this.route.navigate(['/superAdminDashboard/', data._id]);
         },
         error: (error) => {
           console.log('error', error);
+          this.invalidCredential = 'Invalid Credentials';
         },
       });
     }

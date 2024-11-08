@@ -6,7 +6,6 @@ body {
 }
 .login-page {
   display: flex;
-  /* width: 600px; */
   align-items: center;
   justify-content: center;
 }
@@ -22,7 +21,7 @@ body {
   margin-top: 8px;
   justify-content: center;
 }
-
 a {
   color: rgb(139, 0, 116);
 }
+
