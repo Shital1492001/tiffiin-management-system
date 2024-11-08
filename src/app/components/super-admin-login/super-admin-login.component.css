@@ -36,9 +36,6 @@ mat-card-header {
   margin-bottom: 40px;
 }
 mat-error {
-  color: rgb(194, 56, 125);
+  color: red;
   font-weight: 600;
-}
-.input-icon {
-  display: flex;
 }
