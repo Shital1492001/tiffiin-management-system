@@ -11,7 +11,7 @@ mat-sidenav-container{
   height: 100vh;
 }
 
-.example-spacer {
+.space-between {
   flex: 1 1 auto;
 } 
 
