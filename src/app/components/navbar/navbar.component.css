@@ -9,10 +9,19 @@ mat-toolbar{
 
 mat-sidenav-container{
   height: 100vh;
-  background-color: white;
 }
 
 .example-spacer {
   flex: 1 1 auto;
 } 
+
+.mat-button{
+  border-radius: 10px;
+  background-color: white;
+}
+
+.mat-sidenav{
+  border-radius: 0px;
+  transition: width 0.3s ease
+}
 

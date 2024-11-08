@@ -6,12 +6,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, } from '@angular/router';
+import { Menus } from '../../models/menus';
 
-export type menus={
-  icon: string;
-  label:string;
-  redirectURL:string
-}
 
 @Component({
   selector: 'app-navbar',
@@ -30,7 +26,7 @@ export type menus={
 })
 export class NavbarComponent{
 
-  menus=signal<menus[]>([
+  menus: Menus[] =[
     {
            label: `Dashboard` ,
            redirectURL: '/',
@@ -54,12 +50,19 @@ export class NavbarComponent{
       icon: 'exit_to_app'
 
     }
-  ])
+  ]
 
-  collapsed=signal(false)
+  collapsed: boolean=false;
+
+  collapsedState(){    
+    this.collapsed=!this.collapsed;
+    console.log(this.collapsed);
+    
+  }
   
-  sidenavWidth=computed(()=>this.collapsed() ? '65px' : '250px')
 
-
+  sidenavWidth() {
+    return this.collapsed ? '50px' : '250px';  
+  }
 
 }
