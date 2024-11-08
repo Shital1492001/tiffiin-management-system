@@ -48,35 +48,71 @@ export class SuperAdminLoginComponent {
     return this.loginForm.get('email');
   }
   get compulsory() {
-    return this.email?.errors?.['required'] && this.email?.touched;
+    return (
+      this.email?.errors?.['required'] &&
+      this.password?.touched &&
+      this.password?.dirty &&
+      this.password?.invalid
+    );
   }
   get password() {
     return this.loginForm.get('password');
   }
   get isEmailValid() {
-    return this.email?.errors?.['email'] && this.email?.touched;
+    return (
+      this.email?.errors?.['email'] &&
+      this.password?.touched &&
+      this.password?.dirty &&
+      this.password?.invalid
+    );
   }
   get minLength() {
-    return this.password?.errors?.['minlength'] && this.password?.touched;
+    return (
+      this.password?.errors?.['minlength'] &&
+      this.password?.touched &&
+      this.password?.dirty &&
+      this.password?.invalid
+    );
   }
   get mandatory() {
-    return this.password?.errors?.['required'] && this.password?.touched;
+    return (
+      this.password?.errors?.['required'] &&
+      this.password?.touched &&
+      this.password?.dirty &&
+      this.password?.invalid
+    );
   }
   get noNumber(): boolean {
     return (
       this.password?.errors?.['noNumber'] &&
       this.password?.touched &&
-      this.password?.dirty
+      this.password?.dirty &&
+      this.password?.invalid
     );
   }
   get noSpecialChars(): boolean {
-    return this.password?.errors?.['noSpecialChars'] && this.password?.touched;
+    return (
+      this.password?.errors?.['noSpecialChars'] &&
+      this.password?.touched &&
+      this.password?.dirty &&
+      this.password?.invalid
+    );
   }
   get noLowerCase(): boolean {
-    return this.password?.errors?.['noLowerCase'] && this.password?.touched;
+    return (
+      this.password?.errors?.['noLowerCase'] &&
+      this.password?.touched &&
+      this.password?.dirty &&
+      this.password?.invalid
+    );
   }
   get noUpperCase(): boolean {
-    return this.password?.errors?.['noUpperCase'] && this.password?.touched;
+    return (
+      this.password?.errors?.['noUpperCase'] &&
+      this.password?.touched &&
+      this.password?.dirty &&
+      this.password?.invalid
+    );
   }
   get emailErrorMessage(): string {
     switch (true) {

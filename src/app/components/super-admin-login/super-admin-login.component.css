@@ -36,9 +36,13 @@ mat-card-header {
   margin-bottom: 40px;
 }
 mat-error {
-  color: red;
   font-weight: 600;
 }
 .input-icon {
   display: flex;
+}
+.link {
+  color: #3f51b5; /* Primary color */
+  text-decoration: underline;
+  cursor: pointer;
 }
