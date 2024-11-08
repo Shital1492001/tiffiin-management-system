@@ -1,134 +1,15 @@
-<!-- <mat-sidenav-container class="example-container" [style.width]="250">
-  <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
-    <mat-nav-list>
-      <div class="logo-container">
-        <img
-          src="https://cdni.iconscout.com/illustration/premium/thumb/indian-dabbawala-with-multi-tiffin-as-service-illustration-download-in-svg-png-gif-file-formats--food-colorful-pack-people-illustrations-2210011.png?f=webp"
-          alt="Tiffin Logo"
-          class="logo"
-        />
-        <div class="title" style="color: white" *ngIf="isExpanded">
-          <b>Tiffin Services</b>
-        </div>
-      </div>
-      <li *ngFor="let item of menus">
-        <a mat-list-item [routerLink]="item?.redirectURL">
-          <mat-icon *ngIf="item?.icon" matListItemIcon>{{
-            item?.icon
-          }}</mat-icon>
-          <span *ngIf="isExpanded">{{ item?.displayName }}</span>
-        </a>
-      </li>
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content
-    style="background-color: rgb(221, 219, 219); color: black"
-  >
-    <mat-toolbar color="primary">
-      <button
-        mat-mini-fab
-        (click)="isExpanded = !isExpanded"
-        color="warn"
-        style="margin: 10px"
-      >
-        <mat-icon aria-label="Menu">menu</mat-icon>
-      </button>
-      <span>My Application</span>
-      <span class="example-spacer"></span>
-      <button style="border-radius: 10px">
-        <mat-icon>account_circle</mat-icon>
-      </button>
-    </mat-toolbar>
-
-    <div class="content">
-      <h2>Welcome to the App!</h2>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
-
-<!-- <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button> -->
-
-<!-- <mat-sidenav-container class="example-container">
-  <mat-sidenav-content
-    style="background-color: rgb(221, 219, 219); color: black"
-  >
-    <mat-toolbar color="primary">
-      <button
-        mat-mini-fab
-        (click)="isExpanded = !isExpanded"
-        color="warn"
-        style="margin: 10px"
-      >
-        <mat-icon aria-label="Menu">menu</mat-icon>
-      </button>
-      <span>My Application</span>
-      <span class="example-spacer"></span>
-      <button style="border-radius: 10px">
-        <mat-icon>account_circle</mat-icon>
-      </button>
-    </mat-toolbar>
-
-    <div class="content">
-      <h2>Welcome to the App!</h2>
-    </div>
-  </mat-sidenav-content>
-  <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
-    <mat-nav-list>
-      <div class="logo-container">
-        <img
-          src="https://cdni.iconscout.com/illustration/premium/thumb/indian-dabbawala-with-multi-tiffin-as-service-illustration-download-in-svg-png-gif-file-formats--food-colorful-pack-people-illustrations-2210011.png?f=webp"
-          alt="Tiffin Logo"
-          class="logo"
-        />
-        <div class="title" style="color: white"><b>Tiffin Services</b></div>
-      </div>
-      <li *ngFor="let item of menus">
-        <a mat-list-item [routerLink]="item?.redirectURL">
-          <mat-icon *ngIf="item?.icon">{{ item?.icon }}</mat-icon>
-          <h6 *ngIf="!isExpanded"></h6>
-          {{ item?.displayName }}
-        </a>
-      </li>
-    </mat-nav-list>
-  </mat-sidenav>
-</mat-sidenav-container> -->
-
-<!-- <mat-drawer-container class="example-container mat-typography">
-  <mat-drawer #drawer mode="side" disableClose="true" opened="true">
-    <button
-      mat-mini-fab
-      (click)="isExpanded = !isExpanded"
-      color="warn"
-      style="margin: 10px"
-    >
-      <mat-icon aria-label="Menu">menu</mat-icon>
-    </button>
-
-    <mat-nav-list>
-      <li *ngFor="let item of menus">
-        <a mat-list-item [routerLink]="item?.redirectURL">
-          <mat-icon *ngIf="item?.icon">{{ item?.icon }}</mat-icon>
-          <h6 *ngIf="!isExpanded"></h6>
-          {{ item?.displayName }}
-        </a>
-      </li>
-    </mat-nav-list>
-  </mat-drawer>
-</mat-drawer-container> -->
-
-<mat-toolbar
-  class="mat-elevation-z3"
-  style="background-color: rgb(27, 109, 109)"
+<mat-toolbar class="mat-elevation-z3"
   ><button mat-icon-button (click)="collapsed.set(!collapsed())">
-    <mat-icon>menu</mat-icon>
+    <mat-icon style="background-color: white">menu</mat-icon>
   </button>
   <span>Tiffin Services</span>
   <span class="example-spacer"></span>
-  <button style="border-radius: 10px">
-    <mat-icon>account_circle</mat-icon>
+  <button
+    mat-raised-button
+    style="border-radius: 10px; background-color: white; color: black"
+    routerLink="/login"
+  >
+    Login
   </button>
 </mat-toolbar>
 
@@ -137,21 +18,18 @@
     opened
     mode="side"
     [style.width]="sidenavWidth()"
-    style="border-radius: 0px; background-color: rgb(27, 109, 109)"
+    style="border-radius: 0px; transition: width 0.3s ease"
   >
     <mat-nav-list>
       <a
         mat-list-item
         *ngFor="let item of menus()"
         [routerLink]="item?.redirectURL"
-        routerLinkActive
-        #rla="routerLinkActive"
-        [activated]="rla.isActive"
       >
-        <mat-icon style="color: white" matListItemIcon>{{
+        <mat-icon style="color: black" matListItemIcon>{{
           item.icon
         }}</mat-icon>
-        <span style="color: white" matListItemTitle>{{ item.label }}</span>
+        <span style="color: black" matListItemTitle>{{ item.label }}</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -159,7 +37,6 @@
     class="content"
     [style.margin-left]="sidenavWidth()"
     style="color: black"
-  >
-    <h2>Welcome to the App!</h2>
+    ><router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

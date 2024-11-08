@@ -29,15 +29,6 @@ export type menus={
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent{
-  // isMenuOpen = false;
-  // menus:{displayName:string, redirectURL: string}[]=[];
-  // menus=[{
-  //     label: `Dashboard` ,
-  //     redirectURL: '/',
-  //     icon: 'home'
-  // }]
-
-
 
   menus=signal<menus[]>([
     {
@@ -64,39 +55,6 @@ export class NavbarComponent{
 
     }
   ])
-
-  //ngOnInit(): void {
-
-    // this.menus.push({
-    //   label: 'Status',
-    //   redirectURL: '/status',
-    //   icon: 'check_circle'
-    // })
-    // this.menus.push({
-    //   displayName: 'Approved Organizations',
-    //   redirectURL: '/approvedOrganizations'
-    // })
-    // this.menus.push({
-    //   displayName: 'Pending Organizations',
-    //   redirectURL: '/pendingOrganizations'
-    // })
-    // this.menus.push({
-    //   displayName: 'Rejected Organizations',
-    //   redirectURL: '/rejectedOrganizations'
-    // })
-    // this.menus.push({
-    //   label: 'Add Organization',
-    //   redirectURL: '/addnewOrganization',
-    //   icon: 'add_circle_outline'
-
-    // })
-    // this.menus.push({
-    //   label: 'Logout',
-    //   redirectURL: '/logout',
-    //   icon: 'exit_to_app'
-
-    // })
-  //}
 
   collapsed=signal(false)
   
