@@ -3,31 +3,45 @@ import { ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { admin } from '../../models/admin';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSort } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButton } from '@angular/material/button';
 @Component({
   selector: 'app-status-table',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule],
+  imports: [
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatSort,
+    MatFormFieldModule,
+  ],
   templateUrl: './status-table.component.html',
   styleUrl: './status-table.component.css',
 })
 export class StatusTableComponent implements AfterViewInit {
+  applyFilter(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
   displayedColumns: string[] = [
-    '_id',
     'username',
     'email',
     'contact_number',
     'organization_name',
     'approval_status',
+    'actions',
   ];
   dataSource!: MatTableDataSource<admin>;
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   @Input()
   adminsArray: admin[] = [];
-  @Input()
-  rejectedAdminsArray: admin[] = [];
-  @Input()
-  approvedAdminsArray: admin[] = [];
+  // @Input()
+  // rejectedAdminsArray: admin[] = [];
+  // @Input()
+  // approvedAdminsArray: admin[] = [];
   // why ngOnInit-datasource cannot be initiallized outside method or constructor
   // ngOnInit(): void {
   //   this.dataSource = new MatTableDataSource<admin>(this.pendingAdminsArray);
@@ -37,12 +51,11 @@ export class StatusTableComponent implements AfterViewInit {
   // and first time pendingAdminsArray is empty so data did not render on the
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['adminsArray']) {
-      this.dataSource = this.dataSource = new MatTableDataSource<admin>(
-        this.adminsArray
-      );
+      this.dataSource = new MatTableDataSource<admin>(this.adminsArray);
     }
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 }
