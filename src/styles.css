@@ -4,14 +4,34 @@ html,
 body {
   height: 100%;
 }
+<<<<<<< HEAD
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background: linear-gradient(45deg, #fda0b6, #f09a7b, #d65a7d);
+=======
+.login-page {
+  display: flex;
+  /* width: 600px; */
+  align-items: center;
+  justify-content: center;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(0deg, #e5a2b2, #ff9c79, #ec7d9c);
+>>>>>>> 0f01fb37be7369be67263bb700e638c777c46d2a
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
 }
+<<<<<<< HEAD
+=======
+.button {
+  margin-top: 8px;
+  justify-content: center;
+}
+>>>>>>> 0f01fb37be7369be67263bb700e638c777c46d2a
 
 html,
 body {
@@ -21,7 +41,12 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+<<<<<<< HEAD
 
 table {
   width: 600px;
+=======
+a {
+  color: rgb(139, 0, 116);
+>>>>>>> 0f01fb37be7369be67263bb700e638c777c46d2a
 }
