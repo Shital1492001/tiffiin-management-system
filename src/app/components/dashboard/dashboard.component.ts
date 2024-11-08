@@ -9,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  pendingCount: number = 0;
+  approvedCount: number = 0;
+  rejectedCount: number = 0;
 }
