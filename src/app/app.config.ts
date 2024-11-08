@@ -9,17 +9,5 @@ import { provideToastr } from 'ngx-toastr';
 import { authInterceptor } from './interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideHttpClient(),
-    provideHttpClient(withInterceptors([authInterceptor])),
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    provideAnimationsAsync(),
-    provideToastr({
-      closeButton: true,
-      timeOut: 1000,
-      positionClass: 'toast-center-center',
-      preventDuplicates: true,
-    }),
-  ],
+  providers: [provideHttpClient(),provideHttpClient(withInterceptors([authInterceptor])), provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimationsAsync(),]
 };
