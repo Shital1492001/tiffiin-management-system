@@ -24,3 +24,46 @@ body {
 a {
   color: rgb(139, 0, 116);
 }
+
+.mat-mdc-form-field{
+  --mdc-outlined-text-field-label-text-size: 0.75rem;
+  --mat-form-field-container-text-size: 0.9rem;
+  --mat-form-field-container-text-outline-line-height: 0.5rem; 
+
+  --mdc-outlined-text-field-focus-outline-color:black;
+  --mdc-outlined-text-field-focus-label-text-color:black;
+
+ }
+
+/* change input height */
+ .mdc-text-field--outlined{
+  height: 35px !important;
+ }
+
+/* change input label position */
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+    top:calc(var(--mat-form-field-container-height)/3.5) !important;
+    margin-bottom: 25px !important;
+  }
+
+  /* change active label above position */
+.mdc-text-field--outlined.mdc-notched-outline--upgraded
+  .mat-mdc-floating-label--float-above,
+.mdc-text-field--outlined
+  .mdc-notched-outline--upgraded
+  .mdc-floating-label--float-above {
+  transform: translateY(-24px) scale(0.75) !important;
+  font-size: 16px !important;
+}
+ /* change label or placeholder position */
+ .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+  .mdc-text-field__input {
+    position: relative;
+    top: -8px !important
+  }
+
+  /* change error message color and position */
+  .mat-mdc-form-field-error{
+    padding: 0 10px !;
+    color: red;
+  }
