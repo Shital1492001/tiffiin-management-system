@@ -4,6 +4,8 @@ import { admin } from '../../../models/admin';
 import { StatusTableComponent } from '../../status-table/status-table.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-admin-request',
   standalone: true,
@@ -16,7 +18,10 @@ export class AdminRequestComponent {
   rejectedAdminsArray: admin[] = [];
   approvedAdminsArray: admin[] = [];
 
-  constructor(private superAdminService: SuperadminService) {}
+  constructor(
+    private superAdminService: SuperadminService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.getAdminRequestsByStatus('pending');
   }
@@ -34,10 +39,39 @@ export class AdminRequestComponent {
     });
   }
 
+  updateStatusAprroved(id: string) {
+    const approvedObservable = this.superAdminService.approveAdminById(id);
+    approvedObservable.subscribe({
+      next: (obj) => {
+        console.log(obj);
+        window.alert(`Admin with id ${id} is approved successfully`);
+        this.router.navigate(['statusDataTable']);
+      },
+      error: (err) => {
+        console.log(err);
+        window.alert('something went wrong while updating status...');
+      },
+    });
+  }
+
+  updateStatusRejected(id: string) {
+    const approvedObservable = this.superAdminService.rejectAdminById(id);
+    approvedObservable.subscribe({
+      next: (obj) => {
+        console.log(obj);
+        window.alert(`are you sure you want reject admin with ${id}`);
+        this.router.navigate(['statusDataTable']);
+      },
+      error: (err) => {
+        console.log(err);
+        window.alert('something went wrong while updating status...');
+      },
+    });
+  }
+
   onStatusChange(event: any): void {
     const selectedStatus = event.value;
     console.log(selectedStatus);
-
     this.getAdminRequestsByStatus(selectedStatus);
   }
 }

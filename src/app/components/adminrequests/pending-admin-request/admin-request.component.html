@@ -9,5 +9,9 @@
     <mat-button-toggle value="rejected">Rejected</mat-button-toggle>
   </mat-button-toggle-group>
 
-  <app-status-table [adminsArray]="adminsArray"></app-status-table>
+  <app-status-table
+    [adminsArray]="adminsArray"
+    (emitterApprove)="updateStatusAprroved($event)"
+    (emitterApprove)="updateStatusRejected($event)"
+  ></app-status-table>
 </div>

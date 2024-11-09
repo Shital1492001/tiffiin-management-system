@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, Input, SimpleChanges } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -30,7 +37,7 @@ export class StatusTableComponent implements AfterViewInit {
     'contact_number',
     'organization_name',
     'approval_status',
-    'actions',
+    '_id',
   ];
   dataSource!: MatTableDataSource<admin>;
   @ViewChild(MatPaginator)
@@ -38,6 +45,10 @@ export class StatusTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @Input()
   adminsArray: admin[] = [];
+  @Output()
+  emitterApprove = new EventEmitter<string>();
+  @Output()
+  emitterReject = new EventEmitter<string>();
   // @Input()
   // rejectedAdminsArray: admin[] = [];
   // @Input()
