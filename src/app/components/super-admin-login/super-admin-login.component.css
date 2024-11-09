@@ -11,7 +11,6 @@ div {
   justify-content: center;
   color: rgb(19, 20, 20);
 }
-
 .card {
   display: flex;
   background-color: white;
@@ -20,7 +19,6 @@ div {
   justify-content: center;
   align-items: center;
 }
-
 mat-form-field {
   margin-bottom: 15px;
   width: 350px;
