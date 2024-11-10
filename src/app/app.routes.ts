@@ -17,7 +17,15 @@ export const routes: Routes = [
       ),
     children: [
       {
-        path: 'superAdminDashboard',
+        path: 'home',
+        loadComponent: () =>
+          import('./components/superadmin-dashboard/superadmin-dashboard.component').then(
+            (m) => m.SuperadminDashboardComponent
+          ),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'view-all-organizations',
         loadComponent: () =>
           import('./components/superadmin/superadmin.component').then(
             (m) => m.SuperadminComponent
