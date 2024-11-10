@@ -27,7 +27,7 @@ export class NavbarComponent {
   menus: Menus[] = [
     {
       label: `Dashboard`,
-      redirectURL: '/',
+      redirectURL: '/superAdminDashboard',
       icon: 'home',
     },
     {

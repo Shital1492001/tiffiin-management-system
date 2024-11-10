@@ -7,6 +7,7 @@ export interface Location {
   }
   
   export interface Organization {
+    _id:string;
     org_name: string;
     org_location: Location[];
     org_created_at: Date;
@@ -15,6 +16,13 @@ export interface Location {
   }
   
   export interface allOrganization{
+    message:string,
     statuscode:number,
     data:Organization[]
   }
+  export interface allOrganizations{
+    message:string,
+    statuscode:number,
+    data:Organization
+  }
+  
