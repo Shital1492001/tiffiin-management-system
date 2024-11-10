@@ -20,6 +20,7 @@ export const routes: Routes = [
   {
     path: 'home',
     component: SuperadminDashboardComponent,
+    canActivate: [authGuard],
   },
   {
     path: '**',

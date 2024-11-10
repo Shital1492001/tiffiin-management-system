@@ -4,22 +4,7 @@ import { of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class TiffinOrdersService {
-  ordersData = [
-    { month: 'January', orders: 120 },
-    { month: 'February', orders: 135 },
-    { month: 'March', orders: 150 },
-    { month: 'April', orders: 145 },
-    { month: 'May', orders: 160 },
-    { month: 'June', orders: 180 },
-    { month: 'July', orders: 200 },
-    { month: 'August', orders: 215 },
-    { month: 'September', orders: 220 },
-    { month: 'October', orders: 250 },
-    { month: 'November', orders: 240 },
-    { month: 'December', orders: 230 },
-  ];
-
+export class SuperadminDashboardService {
   adminsData = [
     { month: 'January', approved: 5, rejected: 2, pending: 3 },
     { month: 'February', approved: 6, rejected: 1, pending: 2 },
@@ -42,10 +27,6 @@ export class TiffinOrdersService {
   };
 
   constructor() {}
-
-  getTiffinOrders() {
-    return of(this.ordersData);
-  }
 
   getAdminsData() {
     return of(this.adminsData);

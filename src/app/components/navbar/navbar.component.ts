@@ -61,6 +61,7 @@ export class NavbarComponent {
   }
 
   logout() {
+    sessionStorage.removeItem('token');
     window.alert('Logged out successfully...');
     this.router.navigate(['/']);
   }
