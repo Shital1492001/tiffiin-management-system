@@ -1,11 +1,16 @@
 mat-toolbar {
   position: relative;
   z-index: 5;
+  background-color: #e43e38;
 }
 
 .content {
   padding: 24px;
-  background-color: rgb(197, 195, 195);
+  /* background-color: rgb(255, 255, 255); */
+  background-color: rgb(240, 238, 238);
+
+  overflow-y: auto;
+  height: calc(100vh-56px);
 }
 
 mat-sidenav-container {
@@ -24,4 +29,23 @@ mat-sidenav-container {
 .mat-sidenav {
   border-radius: 0px;
   transition: width 0.3s ease;
+  /* background-color: #e43e38; */
+  color: white;
+}
+
+/* .label {
+  color: white;
+} */
+
+.tiffin-title {
+  font-family: Futura, Avenir, sans-serif;
+  font-weight: bold;
+}
+
+.tiffin-title-black {
+  color: black;
+}
+
+.tiffin-title-white {
+  color: white;
 }

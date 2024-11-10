@@ -1,4 +1,4 @@
-.dashboard {
+/* .dashboard {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
@@ -10,7 +10,7 @@
   width: 200px;
   height: 200px;
   background-color: crimson;
-  border-radius: 10px;
+  border-radius: 16px;
   text-align: center;
   font-size: 20px;
   padding: 10px;
@@ -64,4 +64,160 @@ table td {
 
 table th {
   background-color: #f7f7f7;
+} */
+
+/* :host {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.box1,
+.box2,
+.box3 {
+  width: 200px;
+  height: 200px;
+  border-radius: 16px;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.box1 {
+  background-color: #ffffcc;
+}
+
+.box2 {
+  background-color: #b9feb9;
+}
+.box3 {
+  background-color: #ffffcc;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+} */
+
+.container {
+  margin-top: 30px;
+  /* padding: 20px; */
+}
+
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.card h4 {
+  font-size: 1.5rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.card p {
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(167, 13, 13);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col-md-4 {
+  flex: 1;
+  margin: 0 15px;
+}
+
+.col-md-4:last-child {
+  margin-right: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: center;
+}
+
+table th {
+  background-color: #f4f4f4;
+  color: #555;
+  font-weight: bold;
+}
+
+table td {
+  background-color: #fff;
+  color: #333;
+}
+
+table tr:nth-child(even) td {
+  background-color: #f9f9f9;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 960px;
+    margin: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .col-md-4 {
+    margin-bottom: 20px;
+  }
+
+  .table {
+    font-size: 0.9rem;
+  }
+
+  .card h4 {
+    font-size: 1.2rem;
+  }
+
+  .card p {
+    font-size: 1.5rem;
+  }
 }
