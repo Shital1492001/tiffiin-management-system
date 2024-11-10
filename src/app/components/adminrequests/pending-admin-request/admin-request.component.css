@@ -1,10 +1,26 @@
 body {
   background: #999;
 }
-.control-bar {
+.control-section {
   display: flex;
   justify-content: space-between;
 }
+.search {
+  width: 500px !important;
+}
 .toggle-buttons {
-  margin-bottom: 24px;
+  margin-top: 8px;
+}
+.custom-toggle-group {
+  border: none;
+}
+.custom-toggle-group .mat-button-toggle-appearance-standard {
+  border: none;
+}
+.custom-toggle-group .mat-button-toggle-appearance-standard:hover {
+  background-color: #f0f0f0;
+}
+.custom-toggle-group .mat-button-toggle-checked {
+  background-color: #f0f0f0 !important; /* Grey background for the selected button */
+  color: #333 !important; /* Change text color if needed */
 }

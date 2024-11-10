@@ -30,7 +30,6 @@
         <mat-icon class="approved" (click)="emitterApprove.emit(element._id)"
           >check_circle</mat-icon
         >
-
         <mat-icon class="rejected" (click)="emitterReject.emit(element._id)"
           >cancel</mat-icon
         >
@@ -46,6 +45,7 @@
 
   <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"
+    (page)="onPageChange($event)"
     showFirstLastButtons
     aria-label="Select page of periodic elements"
   >

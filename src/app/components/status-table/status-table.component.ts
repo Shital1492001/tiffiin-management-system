@@ -49,6 +49,7 @@ export class StatusTableComponent implements AfterViewInit {
   emitterApprove = new EventEmitter<string>();
   @Output()
   emitterReject = new EventEmitter<string>();
+  @Output() pageChange = new EventEmitter<{ page: number; limit: number }>();
   // @Input()
   // rejectedAdminsArray: admin[] = [];
   // @Input()
@@ -60,13 +61,23 @@ export class StatusTableComponent implements AfterViewInit {
   // }
   // why ngOnChanges --- bcz ngOnInit willrun only one time after component is initialized
   // and first time pendingAdminsArray is empty so data did not render on the
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalItems: number = 0;
+  totalPages: number = 0;
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['adminsArray']) {
       this.dataSource = new MatTableDataSource<admin>(this.adminsArray);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+  onPageChange(event: any): void {
+    const { pageIndex, pageSize } = event;
+    this.pageChange.emit({ page: pageIndex + 1, limit: pageSize });
   }
 }

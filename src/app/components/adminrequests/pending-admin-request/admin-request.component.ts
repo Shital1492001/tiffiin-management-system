@@ -27,16 +27,22 @@ export class AdminRequestComponent {
   adminsArray: admin[] = [];
   rejectedAdminsArray: admin[] = [];
   approvedAdminsArray: admin[] = [];
-
+  currentPage: number = 1;
+  limit: number = 5;
+  status: string = 'pending';
   constructor(
     private superAdminService: SuperadminService,
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.getAdminRequestsByStatus('pending');
+    this.getAdminRequestsByStatus('pending', this.currentPage, this.limit);
   }
 
-  getAdminRequestsByStatus(status: string): void {
+  getAdminRequestsByStatus(
+    status: string,
+    currentPage: number,
+    limit: number
+  ): void {
     console.log('Fetching admin requests for status:', status);
     this.superAdminService.getRequestsByStatus(status).subscribe({
       next: (adminData) => {
@@ -78,10 +84,13 @@ export class AdminRequestComponent {
       },
     });
   }
-
   onStatusChange(event: any): void {
-    const selectedStatus = event.value;
-    console.log(selectedStatus);
-    this.getAdminRequestsByStatus(selectedStatus);
+    this.status = event.value;
+    this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
+  }
+  onTablePageChange(event: { page: number; limit: number }) {
+    this.currentPage = event.page;
+    this.limit = event.limit;
+    this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
   }
 }
