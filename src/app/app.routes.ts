@@ -13,29 +13,31 @@ export const routes: Routes = [
       import('./components/navbar/navbar.component').then(
         (m) => m.NavbarComponent
       ),
-  },
-  {
-    path: 'superAdminDashboard',
-    loadComponent: () =>
-      import('./components/superadmin/superadmin.component').then(
-        (m) => m.SuperadminComponent
-      ),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'add-organization',
-    loadComponent: () =>
-      import('./components/add-organization/add-organization.component').then(
-        (m) => m.AddOrganizationComponent
-      ),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'update-organization/:id',
-    loadComponent: () =>
-      import('./components/add-organization/add-organization.component').then(
-        (m) => m.AddOrganizationComponent
-      ),
-    canActivate: [authGuard],
+    children: [
+      {
+        path: 'superAdminDashboard',
+        loadComponent: () =>
+          import('./components/superadmin/superadmin.component').then(
+            (m) => m.SuperadminComponent
+          ),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'add-organization',
+        loadComponent: () =>
+          import(
+            './components/add-organization/add-organization.component'
+          ).then((m) => m.AddOrganizationComponent),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'update-organization/:id',
+        loadComponent: () =>
+          import(
+            './components/add-organization/add-organization.component'
+          ).then((m) => m.AddOrganizationComponent),
+        canActivate: [authGuard],
+      },
+    ],
   },
 ];
