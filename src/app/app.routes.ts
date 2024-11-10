@@ -8,7 +8,7 @@ export const routes: Routes = [
     component: SuperAdminLoginComponent,
   },
   {
-    path: 'superAdminDashboard/:id',
+    path: 'superAdminDashboard',
     loadComponent: () =>
       import('./components/superadmin/superadmin.component').then(
         (m) => m.SuperadminComponent
