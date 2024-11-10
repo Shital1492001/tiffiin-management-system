@@ -11,3 +11,89 @@ body {
   margin-top: 8px;
   justify-content: center;
 }
+<<<<<<< HEAD
+=======
+a {
+  color: rgb(139, 0, 116);
+}
+
+.mat-mdc-form-field{
+  --mdc-outlined-text-field-label-text-size: 0.75rem;
+  --mat-form-field-container-text-size: 0.9rem;
+  --mat-form-field-container-text-outline-line-height: 0.5rem; 
+
+  --mdc-outlined-text-field-focus-outline-color:black;
+  --mdc-outlined-text-field-focus-label-text-color:black;
+
+ }
+
+/* change input height */
+ .mdc-text-field--outlined{
+  height: 35px !important;
+ }
+
+/* change input label position */
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+    top:calc(var(--mat-form-field-container-height)/3.5) !important;
+    margin-bottom: 25px !important;
+  }
+
+  /* change active label above position */
+.mdc-text-field--outlined.mdc-notched-outline--upgraded
+  .mat-mdc-floating-label--float-above,
+.mdc-text-field--outlined
+  .mdc-notched-outline--upgraded
+  .mdc-floating-label--float-above {
+  transform: translateY(-24px) scale(0.75) !important;
+  font-size: 16px !important;
+}
+ /* change label or placeholder position */
+ .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+  .mdc-text-field__input {
+    position: relative;
+    top: -8px !important
+  }
+
+  /* change error message color and position */
+  .mat-mdc-form-field-error{
+    padding: 0 10px !;
+    color: red;
+  }
+
+  
+  .mat-mdc-card{
+    /* change card title font family  */
+    --mat-card-title-text-font:Roboto, sans-serif;
+    /* change card title line-height */
+    --mat-card-title-text-line-height:1.5rem;
+    /* change card title font-size */
+    --mat-card-title-text-size:1.375rem;
+    /* change card title letter spacing */
+    --mat-card-title-text-tracking:0.5px;
+    /* change card title font-weight */
+    --mat-card-title-text-weight:600;
+
+    /* change card subtitle text color  */
+    --mat-card-subtitle-text-color:gray;
+    /* change card subtitle font family  */
+    --mat-card-subtitle-text-font:Roboto, sans-serif;
+    /* change card subtitle line-height */
+    --mat-card-subtitle-text-line-height:1.5rem;
+    /* change card subtitle font-size */
+    --mat-card-subtitle-text-size:1rem;
+    /* change card subtitle letter spacing */
+    --mat-card-subtitle-text-tracking:0.009px;
+    /* change card subtitle font-weight */
+    --mat-card-subtitle-text-weight:400;                               
+  }
+
+  .mat-mdc-card-content{
+    display: flex;
+    padding: 0 10px !important;
+  }
+
+  .mat-mdc-card-title{
+    color:brown;
+  }
+  
+>>>>>>> b2fdbc86c6aba7233fb067de78af3f2052779994

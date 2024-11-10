@@ -3,6 +3,7 @@
   <app-organization-card
     class="basis"
     [organization]="organization"
+    (deleteEventEmitter)="deleteOrganization($event)"
   ></app-organization-card>
   }
 </div>

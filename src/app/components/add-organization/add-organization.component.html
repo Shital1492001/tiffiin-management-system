@@ -1,0 +1,127 @@
+<form
+  [formGroup]="organizationForm"
+  (ngSubmit)="onSubmit()"
+  class="form-container"
+>
+  <h3 class="form-heading">Add Organization</h3>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Organization Name</mat-label>
+    <input formControlName="org_name" matInput />
+    <mat-error>
+      @if(organizationForm.get('org_name')?.touched &&
+      organizationForm.get('org_name')?.invalid &&
+      organizationForm.get('org_name')?.dirty) {
+      @if(organizationForm.get('org_name')?.hasError('required')) {
+      <span>Organization Name is required</span>
+      } }
+    </mat-error>
+  </mat-form-field>
+
+  <div formArrayName="org_location">
+    <div
+      *ngFor="let loc of locations.controls; let i = index"
+      [formGroupName]="i"
+    >
+        <mat-expansion-panel
+          (opened)="setCollapsedValue(i, false)"
+          (closed)="setCollapsedValue(i, true)"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{
+              loc.get("loc")?.value || "Location"
+            }}</mat-panel-title>
+            <mat-panel-description>{{
+              loc.get("loc_email")?.value
+            }}</mat-panel-description>
+            <mat-panel-description>{{
+              loc.get("loc_contact")?.value
+            }}</mat-panel-description>
+            <button mat-icon-button color="warn" (click)="removeLocation(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-expansion-panel-header>
+          <div>
+            <table class="location-table">
+              <tr>
+                <td>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Branch Name</mat-label>
+                    <input matInput formControlName="loc" />
+                    <mat-error>
+                      @if(loc.get('loc')?.touched && loc.get('loc')?.invalid &&
+                      loc.get('loc')?.dirty) {
+                      @if(loc.get('loc')?.hasError('required')) {
+                      <span>Location is required</span>
+                      } }
+                    </mat-error>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Contact Number</mat-label>
+                    <input matInput formControlName="loc_contact" />
+                    <mat-error>
+                      @if(loc.get('loc_contact')?.touched &&
+                      loc.get('loc_contact')?.invalid &&
+                      loc.get('loc_contact')?.dirty) {
+                      @if(loc.get('loc_contact')?.hasError('required')) {
+                      <span>Contact Number is required</span>
+                      } @if(loc.get('loc_contact')?.hasError('pattern')) {
+                      <span>Invalid contact number</span>
+                      } }
+                    </mat-error>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="loc_email" type="email" />
+                    <mat-error>
+                      @if(loc.get('loc_email')?.touched &&
+                      loc.get('loc_email')?.invalid &&
+                      loc.get('loc_email')?.dirty) {
+                      @if(loc.get('loc_email')?.hasError('required')) {
+                      <span>Email is required</span>
+                      } @if(loc.get('loc_email')?.hasError('email')) {
+                      <span>Invalid email</span>
+                      } }
+                    </mat-error>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr class="row-spacing">
+                <td colspan="3">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Address</mat-label>
+                    <input matInput formControlName="address">
+                    <mat-error>
+                      @if(loc.get('address')?.touched &&
+                      loc.get('address')?.invalid && loc.get('address')?.dirty)
+                      { @if(loc.get('address')?.hasError('required')) {
+                      <span>Address is required</span>
+                      } }
+                    </mat-error>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </mat-expansion-panel>
+    </div>
+  </div>
+
+  <mat-card-footer class="footer-buttons">
+    <button
+      mat-raised-button
+      type="button"
+      (click)="addLocation()"
+      class="add-location-button"
+    >
+      Add Location <mat-icon>add</mat-icon>
+    </button>
+    <button mat-raised-button type="submit" class="submit-button">
+      Submit
+    </button>
+  </mat-card-footer>
+</form>

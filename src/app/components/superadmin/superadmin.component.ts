@@ -30,4 +30,19 @@ export class SuperadminComponent {
       },
     });
   }
+
+  deleteOrganization(organizationId: string) {
+    console.log("Deleting organization with ID:", organizationId);
+    this.organizationService.deleteOrganizations(organizationId).subscribe({
+      next: (responseData) => {
+        this.organizationsArray = this.organizationsArray.filter(
+          (org) => org._id !== organizationId
+        );
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }
+
