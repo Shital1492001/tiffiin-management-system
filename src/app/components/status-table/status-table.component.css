@@ -1,0 +1,20 @@
+.table-wrapper {
+  background: white;
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+div {
+  width: 100%;
+}
+
+td {
+  border-bottom: 1px solid rgba(128, 116, 116, 0.1);
+}
+.approved {
+  color: green;
+}
+.rejected {
+  color: #e43e38;
+}
