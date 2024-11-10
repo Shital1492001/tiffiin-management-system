@@ -1,0 +1,81 @@
+// @use "~@angular/material/_index.scss" as mat;
+// @use "@angular/material/core" as core;
+// @include mat.core();
+
+// $custom-primary-palette: mat.define-palette(
+//   (
+//     50: #ffebee,
+//     100: #ffcdd2,
+//     200: #ef9a9a,
+//     300: #e57373,
+//     400: #ef5350,
+//     500: #e43e38,
+//     600: #e53935,
+//     700: #d32f2f,
+//     800: #c62828,
+//     900: #b71c1c,
+//     A100: #ff8a80,
+//     A200: #ff5252,
+//     A400: #ff1744,
+//     A700: #d50000,
+//     contrast: (
+//       50: black,
+//       100: black,
+//       200: black,
+//       300: white,
+//       400: white,
+//       500: white,
+//       600: white,
+//       700: white,
+//       800: white,
+//       900: white,
+//       A100: black,
+//       A200: white,
+//       A400: white,
+//       A700: white,
+//     ),
+//   )
+// );
+
+// // Step 2: Define a custom theme
+// $custom-theme: mat.define-light-theme(
+//   (
+//     color: (
+//       primary: $custom-primary-palette,
+//       accent: mat.define-palette(mat.$blue-grey-palette),
+//       warn: mat.define-palette(mat.$red-palette),
+//     ),
+//     typography: mat.define-typography-config(),
+//   )
+// );
+
+// // Step 3: Include Angular Material core styles and apply the theme
+// @include core.all-component-typographies;
+// @include mat.all-component-themes($custom-theme);
+
+// body {
+//   background-color: #ffffff !important;
+//   color: mat.get-color-from-palette($primary-palette, 900);
+// }
+
+// .mat-card,
+// .mat-form-field,
+// .mat-button-toggle-group,
+// .mat-button-toggle {
+//   background-color: #ffffff !important;
+// }
+
+// .mat-raised-button,
+// .mat-flat-button {
+//   color: mat.get-color-from-palette($primary-palette, 500);
+//   background-color: #ffffff;
+// }
+
+// .mat-form-field-appearance-outline .mat-form-field-outline,
+// .mat-form-field-label {
+//   color: mat.get-color-from-palette($primary-palette, 500) !important;
+// }
+
+// .mat-input-element {
+//   color: mat.get-color-from-palette($primary-palette, 900) !important;
+// }
