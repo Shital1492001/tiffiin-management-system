@@ -37,7 +37,7 @@ export class NavbarComponent {
     },
     {
       label: 'Add Organization',
-      redirectURL: '/add-organization',
+      redirectURL: '/navbar/add-organization',
       icon: 'add_circle_outline',
     },
     {
