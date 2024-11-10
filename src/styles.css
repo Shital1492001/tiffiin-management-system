@@ -9,22 +9,25 @@
 html,
 body {
   height: 100%;
+  width: 100%;
 }
-
 body {
   height: 100%;
+  margin: 0px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  /* background: linear-gradient(0deg, #e5a2b2, #ff9c79, #ec7d9c); */
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
 }
 .button {
   margin-top: 8px;
   justify-content: center;
 }
-a {
-  color: rgb(139, 0, 116);
+table {
+  width: 100%;
+}
+.hover-row {
+  transition: background-color 0.3s ease;
+}
+.hover-row:hover {
+  background-color: #f0f0f0;
 }
 
 .mat-mdc-form-field {

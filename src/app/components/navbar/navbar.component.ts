@@ -27,18 +27,23 @@ export class NavbarComponent {
   menus: Menus[] = [
     {
       label: `Dashboard`,
-      redirectURL: '/home',
-      icon: 'home',
+      redirectURL: '/navbar/home',
+      icon: 'dashboard',
     },
     {
       label: 'Admin Status',
-      redirectURL: '/navbar/status',
+      redirectURL: '/navbar/statusDataTable',
       icon: 'check_circle',
     },
     {
       label: 'Add Organization',
       redirectURL: '/navbar/add-organization',
       icon: 'add_circle_outline',
+    },
+    {
+      label: 'View Organization',
+      redirectURL: '/navbar/view-all-organizations',
+      icon: 'visibility',
     },
     {
       label: 'Logout',

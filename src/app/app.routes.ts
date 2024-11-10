@@ -17,7 +17,23 @@ export const routes: Routes = [
       ),
     children: [
       {
-        path: 'superAdminDashboard',
+        path: 'home',
+        loadComponent: () =>
+          import(
+            './components/superadmin-dashboard/superadmin-dashboard.component'
+          ).then((m) => m.SuperadminDashboardComponent),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'statusDataTable',
+        loadComponent: () =>
+          import(
+            './components/adminrequests/pending-admin-request/admin-request.component'
+          ).then((m) => m.AdminRequestComponent),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'view-all-organizations',
         loadComponent: () =>
           import('./components/superadmin/superadmin.component').then(
             (m) => m.SuperadminComponent
@@ -39,6 +55,10 @@ export const routes: Routes = [
             './components/add-organization/add-organization.component'
           ).then((m) => m.AddOrganizationComponent),
         canActivate: [authGuard],
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent,
       },
     ],
   },
