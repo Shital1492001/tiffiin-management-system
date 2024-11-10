@@ -18,3 +18,7 @@ td {
 .rejected {
   color: #e43e38;
 }
+.table-body,
+.paginator-section {
+  background-color: #ffffff;
+}
