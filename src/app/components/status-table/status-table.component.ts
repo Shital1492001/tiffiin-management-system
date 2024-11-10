@@ -50,17 +50,6 @@ export class StatusTableComponent implements AfterViewInit {
   @Output()
   emitterReject = new EventEmitter<string>();
   @Output() pageChange = new EventEmitter<{ page: number; limit: number }>();
-  // @Input()
-  // rejectedAdminsArray: admin[] = [];
-  // @Input()
-  // approvedAdminsArray: admin[] = [];
-  // why ngOnInit-datasource cannot be initiallized outside method or constructor
-  // ngOnInit(): void {
-  //   this.dataSource = new MatTableDataSource<admin>(this.pendingAdminsArray);
-  //   console.log('in ngOnInit of status-table', this.pendingAdminsArray);
-  // }
-  // why ngOnChanges --- bcz ngOnInit willrun only one time after component is initialized
-  // and first time pendingAdminsArray is empty so data did not render on the
   currentPage: number = 1;
   pageSize: number = 10;
   totalItems: number = 0;
