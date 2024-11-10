@@ -31,8 +31,8 @@ export class NavbarComponent {
       icon: 'dashboard',
     },
     {
-      label: 'Status',
-      redirectURL: '/status',
+      label: 'Admin Status',
+      redirectURL: '/navbar/status',
       icon: 'check_circle',
     },
     {
