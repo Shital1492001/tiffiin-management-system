@@ -27,12 +27,12 @@ export class NavbarComponent {
   menus: Menus[] = [
     {
       label: `Dashboard`,
-      redirectURL: '/superAdminDashboard',
+      redirectURL: '/navbar/superAdminDashboard',
       icon: 'home',
     },
     {
-      label: 'Status',
-      redirectURL: '/status',
+      label: 'Admin Status',
+      redirectURL: '/navbar/status',
       icon: 'check_circle',
     },
     {
