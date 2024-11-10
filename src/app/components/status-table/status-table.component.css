@@ -1,6 +1,9 @@
-.table-body {
+.table-wrapper {
   background: white;
   width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
 }
 div {
   width: 100%;
@@ -9,4 +12,13 @@ div {
 tr[_ngcontent-ng-c3721044131]:hover {
   background-color: #f0f0f0;
   cursor: pointer;
+}
+td {
+  border-bottom: 1px solid rgba(128, 116, 116, 0.1);
+}
+.approved {
+  color: green;
+}
+.rejected {
+  color: #e43e38;
 }

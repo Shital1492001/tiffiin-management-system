@@ -5,11 +5,21 @@ import { StatusTableComponent } from '../../status-table/status-table.component'
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { Router } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-admin-request',
   standalone: true,
-  imports: [StatusTableComponent, MatTabsModule, MatButtonToggleModule],
+  imports: [
+    StatusTableComponent,
+    MatTabsModule,
+    MatButtonToggleModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+  ],
   templateUrl: './admin-request.component.html',
   styleUrl: './admin-request.component.css',
 })

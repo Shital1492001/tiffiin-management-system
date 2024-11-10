@@ -1,17 +1,25 @@
 <div>
-  <mat-button-toggle-group
-    name="adminStatus"
-    aria-label="Admin Status"
-    (change)="onStatusChange($event)"
-  >
-    <mat-button-toggle value="pending">Pending</mat-button-toggle>
-    <mat-button-toggle value="approved">Approved</mat-button-toggle>
-    <mat-button-toggle value="rejected">Rejected</mat-button-toggle>
-  </mat-button-toggle-group>
+  <div class="control-bar">
+    <mat-form-field appearance="outline">
+      <mat-label>Search Admins</mat-label>
+      <input matInput placeholder="Search by name or email" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <mat-button-toggle-group
+      class="toggle-buttons"
+      name="adminStatus"
+      aria-label="Admin Status"
+      (change)="onStatusChange($event)"
+    >
+      <mat-button-toggle value="pending">Pending</mat-button-toggle>
+      <mat-button-toggle value="approved">Approved</mat-button-toggle>
+      <mat-button-toggle value="rejected">Rejected</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
 
   <app-status-table
     [adminsArray]="adminsArray"
     (emitterApprove)="updateStatusAprroved($event)"
-    (emitterApprove)="updateStatusRejected($event)"
+    (emitterReject)="updateStatusRejected($event)"
   ></app-status-table>
 </div>

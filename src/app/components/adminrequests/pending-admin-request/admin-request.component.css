@@ -1,3 +1,10 @@
 body {
-  background: rgb(255, 222, 227);
+  background: #999;
+}
+.control-bar {
+  display: flex;
+  justify-content: space-between;
+}
+.toggle-buttons {
+  margin-bottom: 24px;
 }
