@@ -22,7 +22,7 @@ export class SuperadminComponent {
       this.organizationService.getAllOrganizationsApi();
     organizationObservable.subscribe({
       next: (orgData) => {
-        console.log(orgData)
+        console.log(orgData);
         this.organizationsArray = orgData.data;
       },
       error: (err) => {

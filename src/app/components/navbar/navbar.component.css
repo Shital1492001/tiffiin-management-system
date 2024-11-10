@@ -1,9 +1,9 @@
-.mat-toolbar {
-  /* position: relative; */
-  z-index: 5;
-  background-color: #E43E38;
-  width: auto;
-  color: white;
+mat-toolbar {
+  background-color: #e43e38;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .mat-icon{
@@ -12,11 +12,12 @@
 .content {
   padding: 24px;
   background-color: #f8f9fa;
+  height: calc(100vh-56px);
 }
 
 .mat-sidenav-container {
   height: 100vh;
-  
+  padding-top: 64px;
 }
 
 .space-between {
@@ -28,9 +29,26 @@
   background-color: white;
 }
 
+.mat-icon {
+  color: white;
+}
+
 .mat-sidenav {
   border-radius: 0px;
   transition: width 0.3s ease;
+  margin-top: 64px;
   background-color: white;
-  margin-left: 0;
+}
+
+.tiffin-title {
+  font-family: Futura, Avenir, sans-serif;
+  font-weight: bold;
+}
+
+.tiffin-title-black {
+  color: black;
+}
+
+.tiffin-title-white {
+  color: white;
 }

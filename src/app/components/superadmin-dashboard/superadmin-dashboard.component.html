@@ -1,0 +1,54 @@
+<h2 style="display: flex">Welcome, Super-Admin</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <h4>Total Approved Admins</h4>
+        <p>{{ totalAdmins.approved }}</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <h4>Total Rejected Admins</h4>
+        <p>{{ totalAdmins.rejected }}</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <h4>Total Pending Admins</h4>
+        <p>{{ totalAdmins.pending }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th *ngFor="let admin of monthlyAdmins">{{ admin.month }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Approved</td>
+              <td *ngFor="let admin of monthlyAdmins">{{ admin.approved }}</td>
+            </tr>
+            <tr>
+              <td>Rejected</td>
+              <td *ngFor="let admin of monthlyAdmins">{{ admin.rejected }}</td>
+            </tr>
+            <tr>
+              <td>Pending</td>
+              <td *ngFor="let admin of monthlyAdmins">{{ admin.pending }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

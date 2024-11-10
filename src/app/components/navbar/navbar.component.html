@@ -2,7 +2,11 @@
   ><button mat-icon-button (click)="collapsedState()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>Tiffin Services</span>
+  <span class="tiffin-title">
+    <span class="tiffin-title-black">Tiffin</span>
+    <span class="tiffin-title-white">Services</span>
+  </span>
+
   <span class="space-between"></span>
   <button class="mat-button" mat-raised-button routerLink="/superadmin-login">
     Login
@@ -20,7 +24,8 @@
       <a
         mat-list-item
         *ngFor="let item of menus"
-        [routerLink]="item?.redirectURL"
+        [routerLink]="item.label !== 'Logout' ? item.redirectURL : null"
+        (click)="item.label === 'Logout' ? logout() : null"
       >
         <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
         <span matListItemTitle>{{ item.label }}</span>
