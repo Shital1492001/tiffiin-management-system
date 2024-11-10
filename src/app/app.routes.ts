@@ -48,6 +48,10 @@ export const routes: Routes = [
           ).then((m) => m.AddOrganizationComponent),
         canActivate: [authGuard],
       },
+      {
+        path: '**',
+        component: PageNotFoundComponent,
+      }
     ],
   },
 
