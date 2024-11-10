@@ -11,6 +11,18 @@ div {
   justify-content: center;
   color: rgb(19, 20, 20);
 }
+/* change icons position*/
+.mat-icon.mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color {
+  position: relative;
+  top: -10px !important ;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+  margin-left: 0;
+  margin-top: 1em;
+  background-color: #e43e38;
+  color: white;
+}
 .card {
   display: flex;
   background-color: white;
