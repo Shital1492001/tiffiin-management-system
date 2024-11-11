@@ -19,9 +19,9 @@ export const routes: Routes = [
       {
         path: 'home',
         loadComponent: () =>
-          import('./components/superadmin-dashboard/superadmin-dashboard.component').then(
-            (m) => m.SuperadminDashboardComponent
-          ),
+          import(
+            './components/superadmin-dashboard/superadmin-dashboard.component'
+          ).then((m) => m.SuperadminDashboardComponent),
         canActivate: [authGuard],
       },
       {
@@ -59,8 +59,7 @@ export const routes: Routes = [
       {
         path: '**',
         component: PageNotFoundComponent,
-      }
+      },
     ],
   },
-
 ];

@@ -11,7 +11,7 @@ div {
   justify-content: center;
   color: rgb(19, 20, 20);
 }
-/* change icons position*/
+
 .mat-icon.mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color {
   position: relative;
   top: -10px !important ;
