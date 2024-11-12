@@ -7,9 +7,9 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Organization Name</mat-label>
-    <input formControlName="org_name" matInput [readonly]="viewMode"/>
+    <input formControlName="org_name" matInput [readonly]="viewMode" />
     <mat-error>
-     {{errorMessageOrgName}}
+      {{ errorMessageOrgName }}
     </mat-error>
   </mat-form-field>
 
@@ -18,72 +18,86 @@
       *ngFor="let loc of locations.controls; let i = index"
       [formGroupName]="i"
     >
-        <mat-expansion-panel
-          [expanded]="i === 0 || !loc.get('collapsed')?.value"
-          (opened)="setCollapsedValue(i, false)"
-          (closed)="setCollapsedValue(i, true)"
-        >
-          <mat-expansion-panel-header>
-            <mat-panel-title>{{
-              loc.get("loc")?.value || "Location"
-            }}</mat-panel-title>
-            <mat-panel-description>{{
-              loc.get("loc_email")?.value
-            }}</mat-panel-description>
-            <mat-panel-description>{{
-              loc.get("loc_contact")?.value
-            }}</mat-panel-description>
-            @if(locations.length > 1 && !viewMode){
-            <button mat-icon-button color="warn" (click)="removeLocation(i)">
-              <mat-icon>delete</mat-icon>
-            </button>
+      <mat-expansion-panel
+        [expanded]="i === 0 || !loc.get('collapsed')?.value"
+        (opened)="setCollapsedValue(i, false)"
+        (closed)="setCollapsedValue(i, true)"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{
+            loc.get("loc")?.value || "Location"
+          }}</mat-panel-title>
+          <mat-panel-description>{{
+            loc.get("loc_email")?.value
+          }}</mat-panel-description>
+          <mat-panel-description>{{
+            loc.get("loc_contact")?.value
+          }}</mat-panel-description>
+          @if(locations.length > 1 && !viewMode){
+          <button mat-icon-button color="warn" (click)="removeLocation(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
           }
-          </mat-expansion-panel-header>
-          <div>
-            <table class="location-table">
-              <tr>
-                <td>
-                  <mat-form-field appearance="outline">
-                    <mat-label>Branch Name</mat-label>
-                    <input matInput formControlName="loc" [readonly]="viewMode"/>
-                    <mat-error>
-                      {{errorMessageLoc(i)}}
-                    </mat-error>
-                  </mat-form-field>
-                </td>
-                <td>
-                  <mat-form-field appearance="outline">
-                    <mat-label>Contact Number</mat-label>
-                    <input matInput formControlName="loc_contact" [readonly]="viewMode" type="number"/>
-                    <mat-error>
-                      {{errorMessageContact(i)}}
-                    </mat-error>
-                  </mat-form-field>
-                </td>
-                <td>
-                  <mat-form-field appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input matInput formControlName="loc_email" type="email" [readonly]="viewMode"/>
-                    <mat-error>
-                      {{errorMessageEmail(i)}}
-                    </mat-error>
-                  </mat-form-field>
-                </td>
-              </tr>
-              <tr class="row-spacing">
-                <td colspan="3">
-                  <mat-form-field appearance="outline" class="full-width">
-                    <mat-label>Address</mat-label>
-                    <input matInput formControlName="address" [readonly]="viewMode">
-                    <mat-error>
-                      {{errorMessageAddress(i)}}
-                    </mat-error>
-                  </mat-form-field>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </mat-expansion-panel>
+        </mat-expansion-panel-header>
+        <div>
+          <table class="location-table">
+            <tr>
+              <td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Branch Name</mat-label>
+                  <input matInput formControlName="loc" [readonly]="viewMode" />
+                  <mat-error>
+                    {{ errorMessageLoc(i) }}
+                  </mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Contact Number</mat-label>
+                  <input
+                    matInput
+                    formControlName="loc_contact"
+                    [readonly]="viewMode"
+                    type="number"
+                  />
+                  <mat-error>
+                    {{ errorMessageContact(i) }}
+                  </mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input
+                    matInput
+                    formControlName="loc_email"
+                    type="email"
+                    [readonly]="viewMode"
+                  />
+                  <mat-error>
+                    {{ errorMessageEmail(i) }}
+                  </mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr class="row-spacing">
+              <td colspan="3">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Address</mat-label>
+                  <input
+                    matInput
+                    formControlName="address"
+                    [readonly]="viewMode"
+                  />
+                  <mat-error>
+                    {{ errorMessageAddress(i) }}
+                  </mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </mat-expansion-panel>
     </div>
   </div>
 
@@ -101,5 +115,5 @@
       Submit
     </button>
   </mat-card-footer>
-}
+  }
 </form>
