@@ -27,7 +27,7 @@ export class NavbarComponent {
   menus: Menus[] = [
     {
       label: `Dashboard`,
-      redirectURL: '/superAdminDashboard',
+      redirectURL: '/',
       icon: 'home',
     },
     {
@@ -39,6 +39,11 @@ export class NavbarComponent {
       label: 'Add Organization',
       redirectURL: '/add-organization',
       icon: 'add_circle_outline',
+    },
+    {
+      label: 'View Organization',
+      redirectURL: '/superAdminDashboard',
+      icon: 'visibility',
     },
     {
       label: 'Logout',

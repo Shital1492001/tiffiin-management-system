@@ -9,6 +9,7 @@ export interface Location {
   export interface Organization {
     _id:string;
     org_name: string;
+    org_image_url:string;
     org_location: Location[];
     org_created_at: Date;
     org_updated_at: Date;
@@ -18,7 +19,12 @@ export interface Location {
   export interface allOrganization{
     message:string,
     statuscode:number,
-    data:Organization[]
+    data:Organization[],
+    pagination:{
+      currentPage:number,
+      totalItems:number,
+      totalPages:number
+    }
   }
   export interface allOrganizations{
     message:string,

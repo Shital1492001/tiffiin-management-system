@@ -3,18 +3,13 @@
   (ngSubmit)="onSubmit()"
   class="form-container"
 >
-  <h3 class="form-heading">Add Organization</h3>
+  <h3 class="form-heading">Manage Organization</h3>
 
   <mat-form-field appearance="outline">
     <mat-label>Organization Name</mat-label>
-    <input formControlName="org_name" matInput />
+    <input formControlName="org_name" matInput [readonly]="viewMode"/>
     <mat-error>
-      @if(organizationForm.get('org_name')?.touched &&
-      organizationForm.get('org_name')?.invalid &&
-      organizationForm.get('org_name')?.dirty) {
-      @if(organizationForm.get('org_name')?.hasError('required')) {
-      <span>Organization Name is required</span>
-      } }
+     {{errorMessageOrgName}}
     </mat-error>
   </mat-form-field>
 
@@ -24,6 +19,7 @@
       [formGroupName]="i"
     >
         <mat-expansion-panel
+          [expanded]="i === 0 || !loc.get('collapsed')?.value"
           (opened)="setCollapsedValue(i, false)"
           (closed)="setCollapsedValue(i, true)"
         >
@@ -37,9 +33,11 @@
             <mat-panel-description>{{
               loc.get("loc_contact")?.value
             }}</mat-panel-description>
+            @if(locations.length > 1 && !viewMode){
             <button mat-icon-button color="warn" (click)="removeLocation(i)">
               <mat-icon>delete</mat-icon>
             </button>
+          }
           </mat-expansion-panel-header>
           <div>
             <table class="location-table">
@@ -47,45 +45,27 @@
                 <td>
                   <mat-form-field appearance="outline">
                     <mat-label>Branch Name</mat-label>
-                    <input matInput formControlName="loc" />
+                    <input matInput formControlName="loc" [readonly]="viewMode"/>
                     <mat-error>
-                      @if(loc.get('loc')?.touched && loc.get('loc')?.invalid &&
-                      loc.get('loc')?.dirty) {
-                      @if(loc.get('loc')?.hasError('required')) {
-                      <span>Location is required</span>
-                      } }
+                      {{errorMessageLoc(i)}}
                     </mat-error>
                   </mat-form-field>
                 </td>
                 <td>
                   <mat-form-field appearance="outline">
                     <mat-label>Contact Number</mat-label>
-                    <input matInput formControlName="loc_contact" />
+                    <input matInput formControlName="loc_contact" [readonly]="viewMode" type="number"/>
                     <mat-error>
-                      @if(loc.get('loc_contact')?.touched &&
-                      loc.get('loc_contact')?.invalid &&
-                      loc.get('loc_contact')?.dirty) {
-                      @if(loc.get('loc_contact')?.hasError('required')) {
-                      <span>Contact Number is required</span>
-                      } @if(loc.get('loc_contact')?.hasError('pattern')) {
-                      <span>Invalid contact number</span>
-                      } }
+                      {{errorMessageContact(i)}}
                     </mat-error>
                   </mat-form-field>
                 </td>
                 <td>
                   <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput formControlName="loc_email" type="email" />
+                    <input matInput formControlName="loc_email" type="email" [readonly]="viewMode"/>
                     <mat-error>
-                      @if(loc.get('loc_email')?.touched &&
-                      loc.get('loc_email')?.invalid &&
-                      loc.get('loc_email')?.dirty) {
-                      @if(loc.get('loc_email')?.hasError('required')) {
-                      <span>Email is required</span>
-                      } @if(loc.get('loc_email')?.hasError('email')) {
-                      <span>Invalid email</span>
-                      } }
+                      {{errorMessageEmail(i)}}
                     </mat-error>
                   </mat-form-field>
                 </td>
@@ -94,13 +74,9 @@
                 <td colspan="3">
                   <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Address</mat-label>
-                    <input matInput formControlName="address">
+                    <input matInput formControlName="address" [readonly]="viewMode">
                     <mat-error>
-                      @if(loc.get('address')?.touched &&
-                      loc.get('address')?.invalid && loc.get('address')?.dirty)
-                      { @if(loc.get('address')?.hasError('required')) {
-                      <span>Address is required</span>
-                      } }
+                      {{errorMessageAddress(i)}}
                     </mat-error>
                   </mat-form-field>
                 </td>
@@ -111,6 +87,7 @@
     </div>
   </div>
 
+  @if(!viewMode){
   <mat-card-footer class="footer-buttons">
     <button
       mat-raised-button
@@ -124,4 +101,5 @@
       Submit
     </button>
   </mat-card-footer>
+}
 </form>

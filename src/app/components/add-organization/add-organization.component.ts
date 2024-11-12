@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -44,6 +45,7 @@ export class AddOrganizationComponent {
   organizationForm: FormGroup;
   collapsedStates: boolean[] = [];
   isUpdateMode: boolean = false;
+  viewMode: boolean = false;
   organizationId: string = '';
 
   constructor(
@@ -61,15 +63,22 @@ export class AddOrganizationComponent {
 
   ngOnInit(): void {
     this.organizationId = this.route.snapshot.paramMap.get('id') || '';
-    if (this.organizationId) {
+    if (this.route.snapshot.routeConfig?.path?.startsWith('view-organization') && this.route.snapshot.paramMap.has('id')) {
+      this.viewMode = true; 
+      this.viewMode = !!this.organizationId;
+      this.loadOrganizationData();
+    } else if (this.organizationId) {
       this.isUpdateMode = true;
+      this.isUpdateMode = !!this.organizationId;
       this.loadOrganizationData();
     }
-
+    
+    if (!this.viewMode) {
     this.organizationForm = this.fb.group({
       org_name: ['', Validators.required],
       org_location: this.fb.array([this.createLocationFormGroup()]),
     });
+  }
   }
 
   loadOrganizationData(): void {
@@ -84,11 +93,27 @@ export class AddOrganizationComponent {
             if (responseData.data) {
               console.log(responseData.data.org_name);
               const organization = responseData.data.org_name;
-              const location = responseData.data.org_location;
+              const locations = responseData.data.org_location;
               this.organizationForm.patchValue({
-                org_name: organization,
-                org_location: location,
+                org_name: organization
               });
+              const locationsFormArray = this.organizationForm.get('org_location') as FormArray;
+              locationsFormArray.clear(); 
+            locations.forEach((location) => {
+              locationsFormArray.push(this.fb.group({
+                loc: [location.loc, Validators.required],
+                address: [location.address, Validators.required],
+                loc_contact: [location.loc_contact, [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+                loc_email: [location.loc_email, [Validators.required, Validators.email]],
+                // collapsed: [this.isUpdateMode],
+              }));
+            });
+              if (this.viewMode) {
+                this.organizationForm.patchValue({
+                org_name: organization,
+                // org_location: location,
+                });
+              }
             } else {
               console.error('Organization not found.');
               this.snackbar.showError('Organization not found!');
@@ -118,7 +143,7 @@ export class AddOrganizationComponent {
         [Validators.required, Validators.pattern(/^[0-9]{10}$/)],
       ],
       loc_email: ['', [Validators.required, Validators.email]],
-      collapsed: [false],
+      collapsed: [this.isUpdateMode],
     });
   }
 
@@ -149,12 +174,137 @@ export class AddOrganizationComponent {
     this.locations.removeAt(index);
   }
 
+  get org_name() {
+    return this.organizationForm.get('org_name');
+  }
+
+  get errorMessageOrgName(): string {
+    const control = this.org_name;
+    if (!control) return '';
+    switch (true) {
+      case control.hasError('required') && control.dirty && control.touched && control.invalid:
+        return 'Organization name is required!';
+      default:
+        return '';
+    }
+  }
+
+  loc_email(index:number) {
+    return this.locations.controls[index]?.get('loc_email');
+  }
+
+  get errorMessageEmail(): (index: number) => string {
+    return (index: number): string =>{
+    const control = this.loc_email(index);
+    if (!control) return '';
+    if(control.dirty && control.touched){
+      switch (true) {
+        case control.hasError('required'):
+          return 'Email is required...!';
+        case control.hasError('email'):
+          return 'Please enter a valid email address!';
+        default:
+          return '';
+      }
+    }
+    else{
+      return '';
+    }
+  }
+  }
+
+  loc(index:number) {
+    return this.locations.controls[index]?.get('loc');
+  }
+
+  get errorMessageLoc(): (index: number) => string {
+    return (index: number): string =>{
+    const control = this.loc(index);
+    if (!control) return '';
+    if(control.dirty && control.touched){
+      switch (true) {
+        case control.hasError('required'):
+          return 'Branch Name is required...!';
+        default:
+          return '';
+      }
+    }
+    else{
+      return '';
+    }
+  }
+}
+
+  address(index:number) {
+    return this.locations.controls[index]?.get('address');
+  }
+
+  get errorMessageAddress(): (index: number) => string {
+    return (index: number): string =>{
+    const control = this.address(index);
+    console.log(control)
+    if (!control) return '';
+    if(control.dirty && control.touched){
+      switch (true) {
+        case control.hasError('required'):
+          return 'Address is required...!';
+        default:
+          return '';
+      }
+    }
+    else{
+      return '';
+    }
+  }
+}
+
+  loc_contact(index:number) {
+    return this.locations.controls[index]?.get('loc_contact');
+  }
+
+  get errorMessageContact(): (index: number) => string {
+    return (index: number): string =>{
+    const control = this.loc_contact(index);
+    console.log(control)
+    if (!control) return '';
+    if(control.dirty && control.touched){
+      switch (true) {
+        case control.hasError('required'):
+          return 'Contact Number is required...!';
+        case control.hasError('pattern'):
+          return 'Contact number must be exactly 10 digits!';
+        default:
+          return '';
+      }
+    }
+    else{
+      return '';
+    }
+  }
+}
+
   onSubmit(): void {
     if (this.isUpdateMode) {
+      const formData = { ...this.organizationForm.value };
+      formData.org_location = formData.org_location.map((location: any) => {
+        const { collapsed, ...rest } = location;
+        return rest;
+      });
       this.organizationService
-        .updateOrganization(this.organizationId, this.organizationForm.value)
-        .subscribe(() => {
-          this.router.navigate(['/superAdminDashboard']);
+        .updateOrganization(this.organizationId, formData)
+        .subscribe({
+          next: (responseData) => {
+            console.log(responseData);
+            if (responseData.statuscode === 200) {
+              console.log('Organization updated successfully', responseData);
+              this.snackbar.showSuccess('Organization updated successfully!');
+              this.router.navigate(['/superAdminDashboard']);
+            }
+          },
+          error: (error) => {
+            this.snackbar.showError('Error updated organization!');
+            console.log('Error updated organization...', error);
+          },
         });
     } else {
       if (this.organizationForm.valid) {
@@ -179,9 +329,21 @@ export class AddOrganizationComponent {
           },
         });
       } else {
-        this.organizationForm.markAllAsTouched();
+        this.markAllControlsAsDirtyAndTouched(this.organizationForm);
         this.snackbar.showError('Please fill in all required fields!');
       }
     }
+  }
+  
+  private markAllControlsAsDirtyAndTouched(formGroup: FormGroup | FormArray): void {
+    Object.keys(formGroup.controls).forEach((field) => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsDirty();
+        control.markAsTouched();
+      } else if (control instanceof FormGroup || control instanceof FormArray) {
+        this.markAllControlsAsDirtyAndTouched(control);
+      }
+    });
   }
 }
