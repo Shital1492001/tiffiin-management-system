@@ -1,49 +1,25 @@
 <div class="cards">
-  <mat-card appearance="outlined" class="org-card">
+  <mat-card class="org-card">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{ organization.org_name }}</mat-card-title>
-      <mat-card-subtitle
-        >Date Of Registration:{{
-          organization.org_created_at | date
-        }}</mat-card-subtitle
-      >
+      <mat-card-subtitle>{{ organization.org_created_at }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p>
         <strong>Status:</strong>
-        <span [ngClass]="organization.isActive ? 'status-active' : 'status-inactive'">
-          {{ organization.isActive ? "Active" : "Inactive" }}</span>
+        {{ organization.isActive ? "Active" : "Inactive" }}
       </p>
       <mat-divider></mat-divider>
-      <h6>Locations:</h6>
-      <div>
-        @for(location of organization.org_location; track location){
-        <p><strong>Branch:</strong>{{ location.loc }}
+      <h3>Locations</h3>
+      <div *ngFor="let location of organization.org_location">
+        <h6>{{ location.loc }}</h6>
         <p><strong>Address:</strong> {{ location.address }}</p>
         <p><strong>Email:</strong> {{ location.loc_email }}</p>
         <mat-divider></mat-divider>
-        }
       </div>
     </mat-card-content>
     <mat-card-footer>
-      <div class="button-container">
-        <a
-          mat-raised-button
-          type="submit"
-          class="edit-button"
-          [routerLink]="['/navbar/update-organization', organization._id]"
-          >Update<mat-icon>edit</mat-icon></a
-        >
-        <button
-          mat-raised-button
-          type="delete"
-          class="delete"
-          (click)="openDialog('0ms', '0ms')"
-        >
-          Delete<mat-icon>delete</mat-icon>
-        </button>
-      </div>
+      <p><strong>Last Updated:</strong> {{ organization.org_updated_at }}</p>
     </mat-card-footer>
   </mat-card>
 </div>
