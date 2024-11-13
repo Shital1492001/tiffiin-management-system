@@ -169,6 +169,8 @@ export class SuperAdminLoginComponent {
           console.log('UserType', this.authService.getUserType());
           this.getUserType();
           // for SuperAadmin - roleId=
+          console.log('roleId', this.userRoleId);
+
           if (this.userRoleId) {
           }
           this.route.navigate(['/superAdminDashboard']);
