@@ -5,14 +5,28 @@ import { authGuard } from './guards/authguard.guard';
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
     component: SuperAdminLoginComponent,
   },
   {
-    path: 'superAdminDashboard/:id',
+    path: 'navbar',
     loadComponent: () =>
-      import('./components/superadmin/superadmin.component').then(
-        (m) => m.SuperadminComponent
+      import('./components/navbar/navbar.component').then(
+        (m) => m.NavbarComponent
       ),
-    canActivate: [authGuard],
+    children: [
+      {
+        path: 'view-all-organizations',
+        loadComponent: () =>
+          import('./components/superadmin/superadmin.component').then(
+            (m) => m.SuperadminComponent
+          ),
+        canActivate: [authGuard],
+      },
+    ],
   },
 ];
