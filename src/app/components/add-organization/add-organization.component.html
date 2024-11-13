@@ -1,107 +1,106 @@
-<form
-  [formGroup]="organizationForm"
-  (ngSubmit)="onSubmit()"
-  class="form-container"
->
-  <h3 class="form-heading">Manage Organization</h3>
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <form [formGroup]="organizationForm" (ngSubmit)="onSubmit()">
+      <h3 class="form-heading">Manage Organization</h3>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Organization Name</mat-label>
-    <input formControlName="orgName" matInput [readonly]="viewMode" />
-    <mat-error>
-      {{ errorMessageOrgName }}
-    </mat-error>
-  </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Organization Name</mat-label>
+        <input formControlName="orgName" matInput [readonly]="viewMode" />
+        <mat-error>
+          {{ errorMessageOrgName }}
+        </mat-error>
+      </mat-form-field>
 
-  <div formArrayName="orgLocation">
-    <div
-      *ngFor="let loc of locations.controls; let i = index"
-      [formGroupName]="i"
-    >
-      <mat-expansion-panel
-        [expanded]="i === 0 || !loc.get('collapsed')?.value"
-        (opened)="setCollapsedValue(i, false)"
-        (closed)="setCollapsedValue(i, true)"
-      >
-        <mat-expansion-panel-header>
-          <mat-panel-title>{{
-            loc.get("loc")?.value || "Location"
-          }}</mat-panel-title>
-          <mat-panel-description>{{
-            loc.get("email")?.value
-          }}</mat-panel-description>
-          <mat-panel-description>{{
-            loc.get("contactNumber")?.value
-          }}</mat-panel-description>
-          @if(locations.length > 1 && !viewMode){
-          <button mat-icon-button color="warn" (click)="removeLocation(i)">
-            <mat-icon>delete</mat-icon>
-          </button>
-          }
-        </mat-expansion-panel-header>
-        <div class="form-field">
-                <mat-form-field appearance="outline" class="flex-item">
-                  <mat-label>Branch Name</mat-label>
-                  <input matInput formControlName="branchName" [readonly]="viewMode" />
-                  <mat-error>
-                    {{ errorMessageLoc(i) }}
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="flex-item">
-                  <mat-label>Contact Number</mat-label>
-                  <input
-                    matInput
-                    formControlName="contactNumber"
-                    [readonly]="viewMode"
-                    type="number"
-                  />
-                  <mat-error>
-                    {{ errorMessageContact(i) }}
-                  </mat-error>
-                </mat-form-field>
-              
-                <mat-form-field appearance="outline" class="flex-item">
-                  <mat-label>Email</mat-label>
-                  <input
-                    matInput
-                    formControlName="email"
-                    type="email"
-                    [readonly]="viewMode"
-                  />
-                  <mat-error>
-                    {{ errorMessageEmail(i) }}
-                  </mat-error>
-                </mat-form-field>
-              </div>
-                <mat-form-field appearance="outline" class="full-width">
-                  <mat-label>Address</mat-label>
-                  <input
-                    matInput
-                    formControlName="address"
-                    [readonly]="viewMode"
-                  />
-                  <mat-error>
-                    {{ errorMessageAddress(i) }}
-                  </mat-error>
-                </mat-form-field>
-       
-      </mat-expansion-panel>
-    </div>
-  </div>
+      <div formArrayName="orgLocation">
+        <div
+          *ngFor="let loc of locations.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <mat-expansion-panel
+            [expanded]="i === 0 || !loc.get('collapsed')?.value"
+            (opened)="setCollapsedValue(i, false)"
+            (closed)="setCollapsedValue(i, true)"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{
+                loc.get("loc")?.value || "Location"
+              }}</mat-panel-title>
+              <mat-panel-description>{{
+                loc.get("email")?.value
+              }}</mat-panel-description>
+              <mat-panel-description>{{
+                loc.get("contactNumber")?.value
+              }}</mat-panel-description>
+              @if(locations.length > 1 && !viewMode){
+              <button mat-icon-button color="warn" (click)="removeLocation(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+              }
+            </mat-expansion-panel-header>
+            <div class="form-field">
+              <mat-form-field appearance="outline" class="flex-item">
+                <mat-label>Branch Name</mat-label>
+                <input
+                  matInput
+                  formControlName="branchName"
+                  [readonly]="viewMode"
+                />
+                <mat-error>
+                  {{ errorMessageLoc(i) }}
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="flex-item">
+                <mat-label>Contact Number</mat-label>
+                <input
+                  matInput
+                  formControlName="contactNumber"
+                  [readonly]="viewMode"
+                  type="number"
+                />
+                <mat-error>
+                  {{ errorMessageContact(i) }}
+                </mat-error>
+              </mat-form-field>
 
-  @if(!viewMode){
-  <mat-card-footer class="footer-buttons">
-    <button
-      mat-raised-button
-      type="button"
-      (click)="addLocation()"
-      class="add-location-button"
-    >
-      Add Location <mat-icon>add</mat-icon>
-    </button>
-    <button mat-raised-button type="submit" class="submit-button">
-      Submit
-    </button>
-  </mat-card-footer>
-  }
-</form>
+              <mat-form-field appearance="outline" class="flex-item">
+                <mat-label>Email</mat-label>
+                <input
+                  matInput
+                  formControlName="email"
+                  type="email"
+                  [readonly]="viewMode"
+                />
+                <mat-error>
+                  {{ errorMessageEmail(i) }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Address</mat-label>
+              <input matInput formControlName="address" [readonly]="viewMode" />
+              <mat-error>
+                {{ errorMessageAddress(i) }}
+              </mat-error>
+            </mat-form-field>
+          </mat-expansion-panel>
+        </div>
+      </div>
+
+      @if(!viewMode){
+      <mat-card-footer class="footer-buttons">
+        <button
+          mat-raised-button
+          type="button"
+          (click)="addLocation()"
+          class="add-location-button"
+        >
+          Add Location <mat-icon>add</mat-icon>
+        </button>
+        <button mat-raised-button type="submit" class="submit-button">
+          Submit
+        </button>
+      </mat-card-footer>
+      }
+    </form>
+  </mat-card-content>
+</mat-card>
