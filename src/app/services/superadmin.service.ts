@@ -31,10 +31,21 @@ export class SuperadminService {
     console.log(response);
     return response;
   }
-  getRequestsByStatus(status: string): Observable<allAdminStatusResponses> {
+  getRequestsByStatus(
+    status: string,
+    currentPage: number,
+    limit: number
+  ): Observable<allAdminStatusResponses> {
     console.log('inside getRequestsByStatus');
     // http://localhost:5000/api/superadmin/getalladminrequest?status=rejected
-    const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest?status=${status}`;
+    let params = {
+      page: currentPage,
+      limit: limit,
+    };
+
+    // const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest}`+{ queryParams: params }};
+    const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest?status=${status}&page=${currentPage}&limit=${limit}`;
+
     console.log('apiUrl', apiUrl);
     return this.http.get<allAdminStatusResponses>(apiUrl);
   }

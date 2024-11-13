@@ -30,6 +30,7 @@ export class AdminRequestComponent {
   currentPage: number = 1;
   limit: number = 5;
   status: string = 'pending';
+  totalLengthOfItems: number = 0;
   constructor(
     private superAdminService: SuperadminService,
     private router: Router
@@ -44,15 +45,18 @@ export class AdminRequestComponent {
     limit: number
   ): void {
     console.log('Fetching admin requests for status:', status);
-    this.superAdminService.getRequestsByStatus(status).subscribe({
-      next: (adminData) => {
-        this.adminsArray = adminData.data;
-        console.log('Fetched Admin Requests:', this.adminsArray);
-      },
-      error: (err) => {
-        console.error('Error fetching admin requests:', err);
-      },
-    });
+    this.superAdminService
+      .getRequestsByStatus(status, currentPage, limit)
+      .subscribe({
+        next: (adminData) => {
+          this.adminsArray = adminData.data;
+          console.log('Fetched Admin Requests:', this.adminsArray);
+          this.totalLengthOfItems=adminData.
+        },
+        error: (err) => {
+          console.error('Error fetching admin requests:', err);
+        },
+      });
   }
 
   updateStatusAprroved(id: string) {
@@ -91,6 +95,7 @@ export class AdminRequestComponent {
   onTablePageChange(event: { page: number; limit: number }) {
     this.currentPage = event.page;
     this.limit = event.limit;
+
     this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
   }
 }
