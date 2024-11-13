@@ -7,6 +7,11 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
     component: SuperAdminLoginComponent,
   },
   {
