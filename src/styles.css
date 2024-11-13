@@ -115,3 +115,19 @@ a {
   .full-width {
     width: 100%;
   }
+
+  .card{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 2em;
+    flex-basis: 25%;
+    background-color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .mat-card {
+    background-color: #a34e4e;  /* Light gray background */
+    color: #333;  /* Dark text color */
+    padding: 16px;  /* Standard padding */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);  /* Subtle shadow effect */
+    border-radius: 8px;  /* Rounded corners */
+  }

@@ -277,6 +277,7 @@ export class AddOrganizationComponent {
   onSubmit(): void {
     if (this.isUpdateMode) {
       const formData = { ...this.organizationForm.value };
+      formData.org_name = formData.orgName;
       formData.orgLocation = formData.orgLocation.map((location: any) => {
         const { collapsed, ...rest } = location;
         return rest;
@@ -300,6 +301,7 @@ export class AddOrganizationComponent {
     } else {
       if (this.organizationForm.valid) {
         const formData = { ...this.organizationForm.value };
+        formData.org_name = formData.orgName;
         formData.orgLocation = formData.orgLocation.map((location: any) => {
           const { collapsed, ...rest } = location;
           return rest;
