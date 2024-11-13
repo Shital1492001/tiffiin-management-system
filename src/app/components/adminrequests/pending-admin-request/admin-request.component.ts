@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SuperadminService } from '../../../services/superadmin.service';
-import { admin } from '../../../models/admin';
+import { Admin } from '../../../models/admin';
 import { StatusTableComponent } from '../../status-table/status-table.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -24,9 +24,9 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './admin-request.component.css',
 })
 export class AdminRequestComponent {
-  adminsArray: admin[] = [];
-  rejectedAdminsArray: admin[] = [];
-  approvedAdminsArray: admin[] = [];
+  adminsArray: Admin[] = [];
+  rejectedAdminsArray: Admin[] = [];
+  approvedAdminsArray: Admin[] = [];
   currentPage: number = 1;
   limit: number = 5;
   status: string = 'pending';

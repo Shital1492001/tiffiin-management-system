@@ -9,7 +9,7 @@ import {
 import { ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { admin } from '../../models/admin';
+import { Admin } from '../../models/admin';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSort } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -39,12 +39,12 @@ export class StatusTableComponent implements AfterViewInit {
     'approval_status',
     '_id',
   ];
-  dataSource!: MatTableDataSource<admin>;
+  dataSource!: MatTableDataSource<Admin>;
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @Input()
-  adminsArray: admin[] = [];
+  adminsArray: Admin[] = [];
   @Output()
   emitterApprove = new EventEmitter<string>();
   @Output()
@@ -55,8 +55,8 @@ export class StatusTableComponent implements AfterViewInit {
   totalItems: number = 0;
   totalPages: number = 0;
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['adminsArray']) {
-      this.dataSource = new MatTableDataSource<admin>(this.adminsArray);
+    if (changes['AdminsArray']) {
+      this.dataSource = new MatTableDataSource<Admin>(this.adminsArray);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }

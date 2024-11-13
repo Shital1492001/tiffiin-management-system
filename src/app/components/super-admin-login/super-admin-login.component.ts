@@ -9,6 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { switchMap } from 'rxjs';
 import { Login, Token } from '../../models/userlogin';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -144,7 +145,7 @@ export class SuperAdminLoginComponent {
     }
   }
   userRoleId: string = '';
-  getUserType() {
+  getRoleId() {
     this.authService.getUserType().subscribe({
       next: (role) => {
         this.userRoleId = role.data.role_id;
@@ -152,34 +153,34 @@ export class SuperAdminLoginComponent {
       error: () => {},
     });
   }
-
   loginAdmin() {
     const login = {
       email: this.loginForm.controls.email.value,
       password: this.loginForm.controls.password.value,
     };
-    console.log('outside if loginAdmin');
-    console.log('loginCred-', login);
     if (login.password && login.email) {
       const tokenObservable = this.authService.authenticateLogin(login);
-      console.log('tokenObservable', tokenObservable);
-      tokenObservable.subscribe({
-        next: (data) => {
-          sessionStorage.setItem('token', data.token);
-          console.log('UserType', this.authService.getUserType());
-          this.getUserType();
-          // for SuperAadmin - roleId=
-          console.log('roleId', this.userRoleId);
-
-          if (this.userRoleId) {
-          }
-          this.route.navigate(['/superAdminDashboard']);
-        },
-        error: (error) => {
-          console.log('error', error);
-          this.invalidCredential = 'Invalid Credentials';
-        },
-      });
+      tokenObservable
+        .pipe(
+          switchMap((data) => {
+            sessionStorage.setItem('token', data.token);
+            return this.authService.getUserType();
+          })
+        )
+        .subscribe({
+          next: (role) => {
+            this.userRoleId = role.data.role_id;
+            console.log('RoleId:', this.userRoleId);
+            if (this.userRoleId === '67276c8186b969fac0d57362') {
+              console.log('Navigating to /navbar/home');
+              this.route.navigate(['/navbar/home']);
+            }
+          },
+          error: (error) => {
+            console.error('Login error:', error);
+            this.invalidCredential = 'Invalid Credentials';
+          },
+        });
     }
   }
 }
