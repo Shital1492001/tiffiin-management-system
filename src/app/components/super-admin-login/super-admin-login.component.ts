@@ -143,6 +143,15 @@ export class SuperAdminLoginComponent {
         return '';
     }
   }
+  userRoleId: string = '';
+  getUserType() {
+    this.authService.getUserType().subscribe({
+      next: (role) => {
+        this.userRoleId = role.data.role_id;
+      },
+      error: () => {},
+    });
+  }
 
   loginAdmin() {
     const login = {
@@ -157,7 +166,14 @@ export class SuperAdminLoginComponent {
       tokenObservable.subscribe({
         next: (data) => {
           sessionStorage.setItem('token', data.token);
-          this.route.navigate(['/navbar/home']);
+          console.log('UserType', this.authService.getUserType());
+          this.getUserType();
+          // for SuperAadmin - roleId=
+          console.log('roleId', this.userRoleId);
+
+          if (this.userRoleId) {
+          }
+          this.route.navigate(['/superAdminDashboard']);
         },
         error: (error) => {
           console.log('error', error);
