@@ -3,33 +3,66 @@ import { SuperadminDashboardService } from '../../services/superadmin-dashboard.
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { admin } from '../../models/admin';
+import { InfoChartsComponent } from '../info-charts/info-charts.component';
 
 @Component({
   selector: 'app-superadmin-dashboard',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatCardModule],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatCardModule,
+    NgApexchartsModule,
+    InfoChartsComponent,
+  ],
   templateUrl: './superadmin-dashboard.component.html',
   styleUrls: ['./superadmin-dashboard.component.css'],
 })
 export class SuperadminDashboardComponent implements OnInit {
-  totalAdmins: any = { approved: 0, rejected: 0, pending: 0 };
-  tableData: any[] = [
-    { category: 'Approved' },
-    { category: 'Rejected' },
-    { category: 'Pending' },
-  ];
+  approvedAdmins: admin[] = [];
+  pendingAdmins: admin[] = [];
+  rejectedAdmins: admin[] = [];
+  role = 'superadmin';
 
-  displayedColumns: string[] = ['category'];
+  totalPendingAdminsCount = 0;
+  totalApprovedAdminsCount = 0;
+  totalRejectedAdminsCount = 0;
 
   constructor(private superadminService: SuperadminDashboardService) {}
 
   ngOnInit(): void {
-    this.getAllAdmins();
+    this.getAllPendingadmins();
+    this.getAllApprovedAdmins();
+    this.getAllRejectedAdmins();
   }
 
-  getAllAdmins() {
-    this.superadminService.getTotalAdmins().subscribe((data) => {
-      this.totalAdmins = data;
+  getAllPendingadmins() {
+    this.superadminService.getPendingRequests().subscribe({
+      next: (response) => {
+        this.pendingAdmins = response.data;
+        console.log('length', this.pendingAdmins);
+        this.totalPendingAdminsCount = this.pendingAdmins.length;
+      },
+    });
+  }
+
+  getAllApprovedAdmins() {
+    this.superadminService.getApprovedRequests().subscribe({
+      next: (response) => {
+        this.approvedAdmins = response.data;
+        this.totalApprovedAdminsCount = this.approvedAdmins.length;
+      },
+    });
+  }
+
+  getAllRejectedAdmins() {
+    this.superadminService.getRejectedRequests().subscribe({
+      next: (response) => {
+        this.rejectedAdmins = response.data;
+        this.totalRejectedAdminsCount = this.rejectedAdmins.length;
+      },
     });
   }
 }

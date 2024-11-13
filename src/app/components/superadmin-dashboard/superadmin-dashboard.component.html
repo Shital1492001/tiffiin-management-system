@@ -1,32 +1,8 @@
 <h2>Welcome, Super-Admin</h2>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <mat-card class="mat-elevation-z3">
-        <mat-card-title class="title">Total Approved Admins</mat-card-title>
-        <mat-card-content>
-          <p class="content">{{ totalAdmins.approved }}</p>
-        </mat-card-content>
-      </mat-card>
-    </div>
-
-    <div class="col-md-4">
-      <mat-card class="mat-elevation-z3">
-        <mat-card-title class="title">Total Rejected Admins</mat-card-title>
-        <mat-card-content>
-          <p class="content">{{ totalAdmins.rejected }}</p>
-        </mat-card-content>
-      </mat-card>
-    </div>
-
-    <div class="col-md-4">
-      <mat-card class="mat-elevation-z3">
-        <mat-card-title class="title">Total Pending Admins</mat-card-title>
-        <mat-card-content>
-          <p class="content">{{ totalAdmins.pending }}</p>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-</div>
+<app-info-charts
+  [role]="role"
+  [pendingAdmins]="totalPendingAdminsCount"
+  [approvedAdmins]="totalApprovedAdminsCount"
+  [rejectedAdmins]="totalRejectedAdminsCount"
+></app-info-charts>
