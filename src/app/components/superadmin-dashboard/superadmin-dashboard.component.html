@@ -1,54 +1,56 @@
 <h2>Welcome, Super-Admin</h2>
+
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <div class="card">
-        <h4>Total Approved Admins</h4>
-        <p>{{ totalAdmins.approved }}</p>
-      </div>
+      <mat-card class="mat-elevation-z3" style="text-align: center">
+        <mat-card-title class="title">Total Approved Admins</mat-card-title>
+        <mat-card-content>
+          <p class="content">{{ totalAdmins.approved }}</p>
+        </mat-card-content>
+      </mat-card>
     </div>
 
     <div class="col-md-4">
-      <div class="card">
-        <h4>Total Rejected Admins</h4>
-        <p>{{ totalAdmins.rejected }}</p>
-      </div>
+      <mat-card class="mat-elevation-z3" style="text-align: center">
+        <mat-card-title class="title">Total Rejected Admins</mat-card-title>
+        <mat-card-content>
+          <p class="content">{{ totalAdmins.rejected }}</p>
+        </mat-card-content>
+      </mat-card>
     </div>
 
     <div class="col-md-4">
-      <div class="card">
-        <h4>Total Pending Admins</h4>
-        <p>{{ totalAdmins.pending }}</p>
-      </div>
+      <mat-card class="mat-elevation-z3" style="text-align: center">
+        <mat-card-title class="title">Total Pending Admins</mat-card-title>
+        <mat-card-content>
+          <p class="content">{{ totalAdmins.pending }}</p>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 
-  <div class="row mt-4">
-    <div class="col-md-12">
-      <div class="table-container">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th *ngFor="let admin of monthlyAdmins">{{ admin.month }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Approved</td>
-              <td *ngFor="let admin of monthlyAdmins">{{ admin.approved }}</td>
-            </tr>
-            <tr>
-              <td>Rejected</td>
-              <td *ngFor="let admin of monthlyAdmins">{{ admin.rejected }}</td>
-            </tr>
-            <tr>
-              <td>Pending</td>
-              <td *ngFor="let admin of monthlyAdmins">{{ admin.pending }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+  <table
+    class="table"
+    mat-table
+    [dataSource]="tableData"
+    class="mat-elevation-z8"
+  >
+    <ng-container matColumnDef="category">
+      <th class="heading" mat-header-cell *matHeaderCellDef>Category</th>
+      <td class="table-data" mat-cell *matCellDef="let element">
+        {{ element.category }}
+      </td>
+    </ng-container>
+
+    <ng-container *ngFor="let month of months" [matColumnDef]="month">
+      <th class="heading" mat-header-cell *matHeaderCellDef>{{ month }}</th>
+      <td class="table-data" mat-cell *matCellDef="let element">
+        {{ element[month] || 0 }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </div>

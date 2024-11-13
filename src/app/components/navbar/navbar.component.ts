@@ -28,7 +28,7 @@ export class NavbarComponent {
     {
       label: `Dashboard`,
       redirectURL: '/home',
-      icon: 'home',
+      icon: 'dashboard',
     },
     {
       label: 'Status',
