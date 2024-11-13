@@ -21,3 +21,8 @@ export interface allAdminStatusResponses {
   statuscode: number;
   data: admin[];
 }
+
+export interface UserByToken {
+  statuscode: number;
+  data: admin;
+}

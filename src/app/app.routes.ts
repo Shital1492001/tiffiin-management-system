@@ -40,22 +40,22 @@ export const routes: Routes = [
           ),
         canActivate: [authGuard],
       },
-      {
-        path: 'add-organization',
-        loadComponent: () =>
-          import(
-            './components/add-organization/add-organization.component'
-          ).then((m) => m.AddOrganizationComponent),
-        canActivate: [authGuard],
-      },
-      {
-        path: 'update-organization/:id',
-        loadComponent: () =>
-          import(
-            './components/add-organization/add-organization.component'
-          ).then((m) => m.AddOrganizationComponent),
-        canActivate: [authGuard],
-      },
+      // {
+      //   path: 'add-organization',
+      //   loadComponent: () =>
+      //     import(
+      //       './components/add-organization/add-organization.component'
+      //     ).then((m) => m.AddOrganizationComponent),
+      //   canActivate: [authGuard],
+      // },
+      // {
+      //   path: 'update-organization/:id',
+      //   loadComponent: () =>
+      //     import(
+      //       './components/add-organization/add-organization.component'
+      //     ).then((m) => m.AddOrganizationComponent),
+      //   canActivate: [authGuard],
+      // },
       {
         path: '**',
         component: PageNotFoundComponent,
