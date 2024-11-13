@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { admin } from '../../models/admin';
+import { Admin } from '../../models/admin';
 import { InfoChartsComponent } from '../info-charts/info-charts.component';
 
 @Component({
@@ -21,9 +21,9 @@ import { InfoChartsComponent } from '../info-charts/info-charts.component';
   styleUrls: ['./superadmin-dashboard.component.css'],
 })
 export class SuperadminDashboardComponent implements OnInit {
-  approvedAdmins: admin[] = [];
-  pendingAdmins: admin[] = [];
-  rejectedAdmins: admin[] = [];
+  approvedAdmins: Admin[] = [];
+  pendingAdmins: Admin[] = [];
+  rejectedAdmins: Admin[] = [];
   role = 'superadmin';
 
   totalPendingAdminsCount = 0;
