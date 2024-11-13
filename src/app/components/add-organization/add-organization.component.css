@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-mat-expansion-panel{
+.mat-expansion-panel{
   background-color: white;
   margin-bottom: 16px;
 }
