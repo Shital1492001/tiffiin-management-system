@@ -29,28 +29,4 @@
       </mat-card>
     </div>
   </div>
-
-  <table
-    class="table"
-    mat-table
-    [dataSource]="tableData"
-    class="mat-elevation-z8"
-  >
-    <ng-container matColumnDef="category">
-      <th class="heading" mat-header-cell *matHeaderCellDef>Category</th>
-      <td class="table-data" mat-cell *matCellDef="let element">
-        {{ element.category }}
-      </td>
-    </ng-container>
-
-    <ng-container *ngFor="let month of months" [matColumnDef]="month">
-      <th class="heading" mat-header-cell *matHeaderCellDef>{{ month }}</th>
-      <td class="table-data" mat-cell *matCellDef="let element">
-        {{ element[month] || 0 }}
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
 </div>
