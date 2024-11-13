@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Login, Token } from '../models/userlogin';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { AllResponses, UserByToken } from '../models/admin';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,6 +15,12 @@ export class AuthService {
     console.log(environment.apiEndpointauth + '/login');
     const data = this.http.post<Token>(this.baseUrlLogin, loginCredentials);
     return data;
+  }
+
+  getUserType(): Observable<UserByToken> {
+    const baseUrlUserType = environment.apiEndpointauth + '/getuserbytoken';
+    const userType = this.http.post<UserByToken>(baseUrlUserType, {});
+    return userType;
   }
   isAuthenticated(): boolean {
     const setToken = sessionStorage.getItem('token');

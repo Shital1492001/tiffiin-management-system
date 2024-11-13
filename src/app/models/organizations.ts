@@ -14,7 +14,7 @@ export interface Organization {
   isActive: boolean;
 }
 
-export interface allOrganization{
-  statuscode:number,
-  data:Organization[]
+export interface AllOrganization {
+  statuscode: number;
+  data: Organization[];
 }
