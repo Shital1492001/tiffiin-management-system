@@ -138,28 +138,21 @@ export class AddOrganizationComponent {
   }
 
   addLocation(): void {
-    this.locations.controls.forEach((loc) => {
-      (loc as FormGroup).get('collapsed')?.setValue(true);
-    });
     this.locations.push(this.createLocationFormGroup());
-    const newLocation = this.locations.at(this.locations.length - 1);
-    newLocation.get('collapsed')?.setValue(false);
+    this.collapsedStates.push(false); 
   }
 
-  toggleLocation(index: number) {
-    const location = this.locations.at(index);
-    const currentCollapsedState = location.get('collapsed')!.value;
-    location.get('collapsed')!.setValue(!currentCollapsedState);
+  toggleLocation(index: number): void {
+    this.collapsedStates[index] = !this.collapsedStates[index];
   }
   setCollapsedValue(index: number, collapsed: boolean): void {
     this.collapsedStates[index] = collapsed;
   }
 
   getCollapsedValue(locationIndex: number): boolean {
-    const location = this.locations.at(locationIndex);
-    return location.get('collapsed') ? location.get('collapsed')!.value : false;
+    return this.collapsedStates[locationIndex];
   }
-
+  
   removeLocation(index: number): void {
     this.locations.removeAt(index);
   }
@@ -235,7 +228,6 @@ export class AddOrganizationComponent {
   get errorMessageAddress(): (index: number) => string {
     return (index: number): string => {
       const control = this.address(index);
-      console.log(control);
       if (!control) return '';
       if (control.dirty && control.touched) {
         switch (true) {
@@ -257,7 +249,6 @@ export class AddOrganizationComponent {
   get errorMessageContact(): (index: number) => string {
     return (index: number): string => {
       const control = this.contactNumber(index);
-      console.log(control);
       if (!control) return '';
       if (control.dirty && control.touched) {
         switch (true) {
@@ -278,15 +269,11 @@ export class AddOrganizationComponent {
     if (this.isUpdateMode) {
       const formData = { ...this.organizationForm.value };
       formData.org_name = formData.orgName;
-      formData.orgLocation = formData.orgLocation.map((location: any) => {
-        const { collapsed, ...rest } = location;
-        return rest;
-      });
+      formData.orgLocation = [...formData.orgLocation];
       this.organizationService
         .updateOrganization(this.organizationId, formData)
         .subscribe({
           next: (responseData) => {
-            console.log(responseData);
             if (responseData.statuscode === 200) {
               console.log('Organization updated successfully', responseData);
               this.snackbar.showSuccess('Organization updated successfully!');
@@ -302,14 +289,9 @@ export class AddOrganizationComponent {
       if (this.organizationForm.valid) {
         const formData = { ...this.organizationForm.value };
         formData.org_name = formData.orgName;
-        formData.orgLocation = formData.orgLocation.map((location: any) => {
-          const { collapsed, ...rest } = location;
-          return rest;
-        });
-        console.log(formData);
+        formData.orgLocation = [...formData.orgLocation];
         this.organizationService.addOrganizations(formData).subscribe({
           next: (responseData) => {
-            console.log(responseData);
             if (responseData.statuscode === 201) {
               console.log('Organization added successfully', responseData);
               this.snackbar.showSuccess('Organization added successfully!');
