@@ -32,11 +32,6 @@ mat-expansion-panel{
 }
 
 @media (max-width: 740px) {
-  .form-container {
-    padding: 1em;
-    margin-top: 2em;
-    margin-left: 0;
-  }
 
   .form-heading {
     font-size: 1.5em;
