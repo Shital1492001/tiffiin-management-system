@@ -20,6 +20,7 @@ import { OrganizationService } from '../../services/organization.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { markAllControlsAsDirtyAndTouched } from '../../utils';
 
 @Component({
   selector: 'app-add-organization',
@@ -56,105 +57,83 @@ export class AddOrganizationComponent {
     private router: Router
   ) {
     this.organizationForm = this.fb.group({
-      org_name: ['', Validators.required],
-      org_location: this.fb.array([this.createLocationFormGroup()]),
+      orgName: ['', Validators.required],
+      orgLocation: this.fb.array([this.createLocationFormGroup()]),
     });
   }
 
   ngOnInit(): void {
     this.organizationId = this.route.snapshot.paramMap.get('id') || '';
-    if (
-      this.route.snapshot.routeConfig?.path?.startsWith('view-organization') &&
-      this.route.snapshot.paramMap.has('id')
-    ) {
-      this.viewMode = true;
-      this.viewMode = !!this.organizationId;
-      this.loadOrganizationData();
-    } else if (this.organizationId) {
-      this.isUpdateMode = true;
-      this.isUpdateMode = !!this.organizationId;
-      this.loadOrganizationData();
-    }
-
-    if (!this.viewMode) {
-      this.organizationForm = this.fb.group({
-        org_name: ['', Validators.required],
-        org_location: this.fb.array([this.createLocationFormGroup()]),
-      });
+    const routePath = this.route.snapshot.routeConfig?.path || '';
+    this.viewMode = routePath.startsWith('view-organization') && !!this.organizationId;
+    this.isUpdateMode = !this.viewMode && !!this.organizationId;
+    if (this.viewMode || this.isUpdateMode) {
+      this.loadOrganizationData(this.organizationId);
+    } else {
+      this.organizationForm;
     }
   }
 
-  loadOrganizationData(): void {
-    if (this.organizationId) {
-      this.organizationService
-        .getOrganizationById(this.organizationId)
-        .subscribe({
-          next: (responseData) => {
-            console.log('by id', responseData);
-            const orgName = responseData.data.org_name;
-            console.log(orgName);
-            if (responseData.data) {
-              console.log(responseData.data.org_name);
-              const organization = responseData.data.org_name;
-              const locations = responseData.data.org_location;
-              this.organizationForm.patchValue({
-                org_name: organization,
-              });
-              const locationsFormArray = this.organizationForm.get(
-                'org_location'
-              ) as FormArray;
-              locationsFormArray.clear();
-              locations.forEach((location) => {
-                locationsFormArray.push(
-                  this.fb.group({
-                    loc: [location.loc, Validators.required],
-                    address: [location.address, Validators.required],
-                    loc_contact: [
-                      location.loc_contact,
-                      [Validators.required, Validators.pattern(/^[0-9]{10}$/)],
-                    ],
-                    loc_email: [
-                      location.loc_email,
-                      [Validators.required, Validators.email],
-                    ],
-                  })
-                );
-              });
-              if (this.viewMode) {
-                this.organizationForm.patchValue({
-                  org_name: organization,
-                });
-              }
-            } else {
-              console.error('Organization not found.');
-              this.snackbar.showError('Organization not found!');
-            }
-          },
-          error: (err) => {
-            console.error('Error fetching organization:', err);
-            this.snackbar.showError('Error loading organization data!');
-          },
-        });
-    } else {
+  loadOrganizationData(organizationId: string): void {
+    if (!organizationId) {
       console.error('No organization ID found in the route.');
       this.snackbar.showError('No organization ID found in the route.');
+      return;
     }
+    this.organizationService.getOrganizationById(organizationId).subscribe({
+      next: (responseData) => {
+        const organization = responseData.data;
+        if (!organization) {
+          console.error('Organization not found.');
+          this.snackbar.showError('Organization not found!');
+          return;
+        }
+
+        const { org_name, org_location } = organization;
+        this.organizationForm = this.fb.group({
+          orgName: [org_name, Validators.required],
+          orgLocation: this.fb.array(
+            org_location.map((location) =>
+              this.fb.group({
+                branchName: [location.loc, Validators.required],
+                address: [location.address, Validators.required],
+                contactNumber: [
+                  location.loc_contact,
+                  [Validators.required, Validators.pattern(/^[0-9]{10}$/)],
+                ],
+                email: [
+                  location.loc_email,
+                  [Validators.required, Validators.email],
+                ],
+              })
+            )
+          ),
+        });
+
+        if (this.viewMode) {
+          this.organizationForm.value();
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching organization:', err);
+        this.snackbar.showError('Error loading organization data!');
+      },
+    });
   }
 
   get locations(): FormArray {
-    return this.organizationForm.get('org_location') as FormArray;
+    return this.organizationForm.get('orgLocation') as FormArray;
   }
 
   createLocationFormGroup(): FormGroup {
     return this.fb.group({
-      loc: ['', Validators.required],
+      branchName: ['', Validators.required],
       address: ['', Validators.required],
-      loc_contact: [
+      contactNumber: [
         '',
         [Validators.required, Validators.pattern(/^[0-9]{10}$/)],
       ],
-      loc_email: ['', [Validators.required, Validators.email]],
-      collapsed: [this.isUpdateMode],
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -185,31 +164,33 @@ export class AddOrganizationComponent {
     this.locations.removeAt(index);
   }
 
-  get org_name() {
-    return this.organizationForm.get('org_name');
+  get orgName() {
+    return this.organizationForm.get('orgName');
   }
 
   get errorMessageOrgName(): string {
-    const control = this.org_name;
+    const control = this.orgName;
     if (!control) return '';
+    if (control.dirty && control.touched) {
     switch (true) {
-      case control.hasError('required') &&
-        control.dirty &&
-        control.touched &&
-        control.invalid:
+      case control.hasError('required'):
         return 'Organization name is required!';
       default:
         return '';
     }
   }
+  else{
+    return '';
+  }
+}
 
-  loc_email(index: number) {
-    return this.locations.controls[index]?.get('loc_email');
+  email(index: number) {
+    return this.locations.controls[index]?.get('email');
   }
 
   get errorMessageEmail(): (index: number) => string {
     return (index: number): string => {
-      const control = this.loc_email(index);
+      const control = this.email(index);
       if (!control) return '';
       if (control.dirty && control.touched) {
         switch (true) {
@@ -226,13 +207,13 @@ export class AddOrganizationComponent {
     };
   }
 
-  loc(index: number) {
-    return this.locations.controls[index]?.get('loc');
+  branchName(index: number) {
+    return this.locations.controls[index]?.get('branchName');
   }
 
   get errorMessageLoc(): (index: number) => string {
     return (index: number): string => {
-      const control = this.loc(index);
+      const control = this.branchName(index);
       if (!control) return '';
       if (control.dirty && control.touched) {
         switch (true) {
@@ -269,13 +250,13 @@ export class AddOrganizationComponent {
     };
   }
 
-  loc_contact(index: number) {
-    return this.locations.controls[index]?.get('loc_contact');
+  contactNumber(index: number) {
+    return this.locations.controls[index]?.get('contactNumber');
   }
 
   get errorMessageContact(): (index: number) => string {
     return (index: number): string => {
-      const control = this.loc_contact(index);
+      const control = this.contactNumber(index);
       console.log(control);
       if (!control) return '';
       if (control.dirty && control.touched) {
@@ -296,7 +277,7 @@ export class AddOrganizationComponent {
   onSubmit(): void {
     if (this.isUpdateMode) {
       const formData = { ...this.organizationForm.value };
-      formData.org_location = formData.org_location.map((location: any) => {
+      formData.orgLocation = formData.orgLocation.map((location: any) => {
         const { collapsed, ...rest } = location;
         return rest;
       });
@@ -319,7 +300,7 @@ export class AddOrganizationComponent {
     } else {
       if (this.organizationForm.valid) {
         const formData = { ...this.organizationForm.value };
-        formData.org_location = formData.org_location.map((location: any) => {
+        formData.orgLocation = formData.orgLocation.map((location: any) => {
           const { collapsed, ...rest } = location;
           return rest;
         });
@@ -339,23 +320,9 @@ export class AddOrganizationComponent {
           },
         });
       } else {
-        this.markAllControlsAsDirtyAndTouched(this.organizationForm);
+        markAllControlsAsDirtyAndTouched(this.organizationForm);
         this.snackbar.showError('Please fill in all required fields!');
       }
     }
-  }
-
-  private markAllControlsAsDirtyAndTouched(
-    formGroup: FormGroup | FormArray
-  ): void {
-    Object.keys(formGroup.controls).forEach((field) => {
-      const control = formGroup.get(field);
-      if (control instanceof FormControl) {
-        control.markAsDirty();
-        control.markAsTouched();
-      } else if (control instanceof FormGroup || control instanceof FormArray) {
-        this.markAllControlsAsDirtyAndTouched(control);
-      }
-    });
   }
 }

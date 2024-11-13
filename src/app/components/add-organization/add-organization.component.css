@@ -17,12 +17,6 @@
   text-align: center;
 }
 
-.location-table {
-  width: 100%;
-}
-.location-table td {
-  padding-right: 1em; 
-}
 .mat-expansion-panel{
   background-color: white;
   margin-bottom: 16px;
@@ -32,6 +26,7 @@
   justify-content: flex-end;
   gap: 1em;
 }
+
 
 .add-location-button{
   margin-left: 0;
@@ -57,22 +52,6 @@
     font-size: 1.5em;
   }
 
-  .location-table {
-    display: block;
-  }
-
-  .location-table tr {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1em;
-  }
-
-  .location-table td {
-    display: block;
-    width: 100%;
-    padding: 0.5em 0;
-  }
-
   .footer-buttons {
     flex-direction: column;
     align-items: stretch;
@@ -84,4 +63,9 @@
     margin-left: 0;
     margin-top: 0.5em;
   }
+}
+
+.location mat-form-field + mat-form-field {
+  display: flex;
+  margin-left: 8px;
 }

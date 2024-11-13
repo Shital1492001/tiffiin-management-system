@@ -103,3 +103,15 @@ a {
   }
   
   
+  .form-field{
+    display: flex;
+    align-items: flex-start;
+    gap:1rem
+  }
+  .flex-item {
+    flex: 1 1 30%;
+    min-width: 200px;
+  }
+  .full-width {
+    width: 100%;
+  }

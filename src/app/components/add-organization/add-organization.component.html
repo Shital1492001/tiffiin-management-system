@@ -7,13 +7,13 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Organization Name</mat-label>
-    <input formControlName="org_name" matInput [readonly]="viewMode" />
+    <input formControlName="orgName" matInput [readonly]="viewMode" />
     <mat-error>
       {{ errorMessageOrgName }}
     </mat-error>
   </mat-form-field>
 
-  <div formArrayName="org_location">
+  <div formArrayName="orgLocation">
     <div
       *ngFor="let loc of locations.controls; let i = index"
       [formGroupName]="i"
@@ -28,10 +28,10 @@
             loc.get("loc")?.value || "Location"
           }}</mat-panel-title>
           <mat-panel-description>{{
-            loc.get("loc_email")?.value
+            loc.get("email")?.value
           }}</mat-panel-description>
           <mat-panel-description>{{
-            loc.get("loc_contact")?.value
+            loc.get("contactNumber")?.value
           }}</mat-panel-description>
           @if(locations.length > 1 && !viewMode){
           <button mat-icon-button color="warn" (click)="removeLocation(i)">
@@ -39,24 +39,19 @@
           </button>
           }
         </mat-expansion-panel-header>
-        <div>
-          <table class="location-table">
-            <tr>
-              <td>
-                <mat-form-field appearance="outline">
+        <div class="form-field">
+                <mat-form-field appearance="outline" class="flex-item">
                   <mat-label>Branch Name</mat-label>
-                  <input matInput formControlName="loc" [readonly]="viewMode" />
+                  <input matInput formControlName="branchName" [readonly]="viewMode" />
                   <mat-error>
                     {{ errorMessageLoc(i) }}
                   </mat-error>
                 </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="flex-item">
                   <mat-label>Contact Number</mat-label>
                   <input
                     matInput
-                    formControlName="loc_contact"
+                    formControlName="contactNumber"
                     [readonly]="viewMode"
                     type="number"
                   />
@@ -64,13 +59,12 @@
                     {{ errorMessageContact(i) }}
                   </mat-error>
                 </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field appearance="outline">
+              
+                <mat-form-field appearance="outline" class="flex-item">
                   <mat-label>Email</mat-label>
                   <input
                     matInput
-                    formControlName="loc_email"
+                    formControlName="email"
                     type="email"
                     [readonly]="viewMode"
                   />
@@ -78,10 +72,7 @@
                     {{ errorMessageEmail(i) }}
                   </mat-error>
                 </mat-form-field>
-              </td>
-            </tr>
-            <tr class="row-spacing">
-              <td colspan="3">
+              </div>
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Address</mat-label>
                   <input
@@ -93,10 +84,7 @@
                     {{ errorMessageAddress(i) }}
                   </mat-error>
                 </mat-form-field>
-              </td>
-            </tr>
-          </table>
-        </div>
+       
       </mat-expansion-panel>
     </div>
   </div>
