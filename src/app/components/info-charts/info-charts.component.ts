@@ -20,7 +20,6 @@ export class InfoChartsComponent {
     series: [],
     chart: {
       type: 'donut',
-
       width: '375',
     },
     labels: ['Pending', 'Approved', 'Rejected'],
