@@ -4,8 +4,8 @@ import { RejectedAdminViewComponent } from '../rejected-admin-view/rejected-admi
 import { PendingAdminViewComponent } from '../pending-admin-view/pending-admin-view.component';
 import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { InfoChartsComponent } from '../../info-charts/info-charts.component';
-import { RetailerResponse } from '../../../models/retailer';
 import { AdminApprovalRightsService } from '../../../services/admin-approval-rights.service';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @Component({
   selector: 'app-admin-view',
@@ -17,6 +17,7 @@ import { AdminApprovalRightsService } from '../../../services/admin-approval-rig
     NgSwitchCase,
     NgSwitchDefault,
     InfoChartsComponent,
+    NgApexchartsModule,
   ],
   templateUrl: './admin-view.component.html',
   styleUrl: './admin-view.component.css',
