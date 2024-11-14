@@ -143,16 +143,6 @@ export class SuperAdminLoginComponent {
         return '';
     }
   }
-  userRoleId: string = '';
-  getUserType() {
-    this.authService.getUserType().subscribe({
-      next: (role) => {
-        this.userRoleId = role.data.role_id;
-      },
-      error: () => {},
-    });
-  }
-
   loginAdmin() {
     const login = {
       email: this.loginForm.controls.email.value,
@@ -166,14 +156,12 @@ export class SuperAdminLoginComponent {
       tokenObservable.subscribe({
         next: (data) => {
           sessionStorage.setItem('token', data.token);
-          console.log('UserType', this.authService.getUserType());
-          this.getUserType();
-          // for SuperAadmin - roleId=
-          console.log('roleId', this.userRoleId);
-
-          if (this.userRoleId) {
+          this.authService.setRole(data.role_id);
+          if (this.authService.isSuperAdmin()) {
+            this.route.navigate(['/navbar/super-admin']);
+          } else {
+            this.route.navigate(['/navbar/admin']);
           }
-          this.route.navigate(['/superAdminDashboard']);
         },
         error: (error) => {
           console.log('error', error);
