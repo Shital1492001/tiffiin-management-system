@@ -12,9 +12,12 @@ import { ChartOptions } from '../../models/chart-options';
 })
 export class InfoChartsComponent {
   @Input() role!: string;
-  @Input() pendingAdmins!: number;
-  @Input() approvedAdmins!: number;
-  @Input() rejectedAdmins!: number;
+  @Input() pending!: number;
+  @Input() approved!: number;
+  @Input() rejected!: number;
+  // @Input() pedningRetailers!: number;
+  // @Input() approvedRetailers!: number;
+  // @Input() rejectedRetailers!: number;
 
   public chartOptions: Partial<ChartOptions> = {
     series: [],
@@ -36,9 +39,9 @@ export class InfoChartsComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     this.chartOptions.series = [
-      this.pendingAdmins || 0,
-      this.approvedAdmins || 0,
-      this.rejectedAdmins || 0,
+      this.pending || 0,
+      this.approved || 0,
+      this.rejected || 0,
     ];
   }
 }
