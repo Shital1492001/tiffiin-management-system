@@ -42,14 +42,14 @@ export class AuthService {
     console.log('this.roleSubject.getValue()', this.roleSubject.getValue());
     return this.roleSubject.getValue() === Roles.ADMIN;
   }
-  /*
+
   getUserTypeByToken(): Observable<UserByToken> {
     const baseUrlUserType = environment.apiEndpointauth + '/getuserbytoken';
     const userData = this.http.post<UserByToken>(baseUrlUserType, {});
     return userData;
   }
 
- 
+  /*
   isSuperAdmin(): Observable<boolean> {
     return this.getUserTypeByToken().pipe(
       map((userData: { data: { role_id: string } }) => {

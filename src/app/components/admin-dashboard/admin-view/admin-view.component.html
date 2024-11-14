@@ -1,1 +1,10 @@
-<h2>Welcome to Admin Dashboard</h2>
+<div *ngIf="userStatus">
+  <ng-container [ngSwitch]="userStatus">
+    <app-pending-admin-view *ngSwitchCase="'pending'"></app-pending-admin-view>
+    <app-rejected-admin-view
+      *ngSwitchCase="'rejected'"
+    ></app-rejected-admin-view>
+    <div *ngSwitchCase="'approved'"></div>
+    <div *ngSwitchDefault>Unknown status</div>
+  </ng-container>
+</div>
