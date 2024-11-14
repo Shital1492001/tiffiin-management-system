@@ -34,7 +34,7 @@ export const routes: Routes = [
           import(
             './components/superadmin-dashboard/superadmin-dashboard.component'
           ).then((m) => m.SuperadminDashboardComponent),
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'statusDataTable',
@@ -42,7 +42,7 @@ export const routes: Routes = [
           import(
             './components/adminrequests/pending-admin-request/admin-request.component'
           ).then((m) => m.AdminRequestComponent),
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'view-all-organizations',
@@ -50,7 +50,7 @@ export const routes: Routes = [
           import('./components/superadmin/superadmin.component').then(
             (m) => m.SuperadminComponent
           ),
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'add-organization',
@@ -58,7 +58,7 @@ export const routes: Routes = [
           import(
             './components/add-organization/add-organization.component'
           ).then((m) => m.AddOrganizationComponent),
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'update-organization/:id',
@@ -66,7 +66,7 @@ export const routes: Routes = [
           import(
             './components/add-organization/add-organization.component'
           ).then((m) => m.AddOrganizationComponent),
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: '**',

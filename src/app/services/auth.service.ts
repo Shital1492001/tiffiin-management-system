@@ -26,8 +26,8 @@ export class AuthService {
   public role_id$ = this.roleSubject.asObservable();
 
   setRole(role_id: string): void {
-    sessionStorage.setItem('role_id', role_id); // Save role to sessionStorage
-    this.roleSubject.next(role_id); // Update the BehaviorSubject with the new role
+    sessionStorage.setItem('role_id', role_id);
+    this.roleSubject.next(role_id);
   }
   getRole(): string | null {
     return sessionStorage.getItem('role_id');

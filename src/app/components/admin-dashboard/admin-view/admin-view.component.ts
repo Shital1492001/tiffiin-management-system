@@ -3,6 +3,9 @@ import { AuthService } from '../../../services/auth.service';
 import { RejectedAdminViewComponent } from '../rejected-admin-view/rejected-admin-view.component';
 import { PendingAdminViewComponent } from '../pending-admin-view/pending-admin-view.component';
 import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { InfoChartsComponent } from '../../info-charts/info-charts.component';
+import { RetailerResponse } from '../../../models/retailer';
+import { AdminApprovalRightsService } from '../../../services/admin-approval-rights.service';
 
 @Component({
   selector: 'app-admin-view',
@@ -13,12 +16,21 @@ import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
     NgSwitch,
     NgSwitchCase,
     NgSwitchDefault,
+    InfoChartsComponent,
   ],
   templateUrl: './admin-view.component.html',
   styleUrl: './admin-view.component.css',
 })
 export class AdminViewComponent {
-  constructor(private authService: AuthService) {}
+  totalPendingRetailerCount = 45;
+  totalApprovedRetailerCount = 55;
+  totalRejectedRetailerCount = 22;
+  role = 'admin';
+  constructor(
+    private authService: AuthService,
+    private adminRightsServices: AdminApprovalRightsService
+  ) {}
+
   userStatus: string | null = null;
   getUserByToken() {
     const userByToken = this.authService.getUserTypeByToken();
@@ -32,5 +44,31 @@ export class AdminViewComponent {
 
   ngOnInit(): void {
     this.getUserByToken();
+    this.getAllApprovedRetailers();
+    this.getAllPendingRetailers();
+    this.getAllRejectedRetailers();
+  }
+  getAllPendingRetailers() {
+    this.adminRightsServices.getPendingRequests().subscribe({
+      next: (response) => {
+        this.totalPendingRetailerCount = response.data.length;
+      },
+    });
+  }
+
+  getAllApprovedRetailers() {
+    this.adminRightsServices.getApprovedRequests().subscribe({
+      next: (response) => {
+        this.totalApprovedRetailerCount = response.data.length;
+      },
+    });
+  }
+
+  getAllRejectedRetailers() {
+    this.adminRightsServices.getRejectedRequests().subscribe({
+      next: (response) => {
+        this.totalRejectedRetailerCount = response.data.length;
+      },
+    });
   }
 }
