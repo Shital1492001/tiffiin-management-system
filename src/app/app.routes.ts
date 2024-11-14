@@ -8,7 +8,11 @@ export const routes: Routes = [
     component: SuperAdminLoginComponent,
   },
   {
-    path: 'superAdminDashboard/:id',
+    path: 'superadmin-login',
+    component: SuperAdminLoginComponent,
+  },
+  {
+    path: 'superAdminDashboard',
     loadComponent: () =>
       import('./components/superadmin/superadmin.component').then(
         (m) => m.SuperadminComponent
@@ -17,6 +21,22 @@ export const routes: Routes = [
   },
   {
     path: 'add-organization',
+    loadComponent: () =>
+      import('./components/add-organization/add-organization.component').then(
+        (m) => m.AddOrganizationComponent
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'update-organization/:id',
+    loadComponent: () =>
+      import('./components/add-organization/add-organization.component').then(
+        (m) => m.AddOrganizationComponent
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'view-organization/:id',
     loadComponent: () =>
       import('./components/add-organization/add-organization.component').then(
         (m) => m.AddOrganizationComponent

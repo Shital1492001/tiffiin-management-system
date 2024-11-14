@@ -1,15 +1,22 @@
-mat-toolbar {
-  position: relative;
+.mat-toolbar {
+  /* position: relative; */
   z-index: 5;
+  background-color: #E43E38;
+  width: auto;
+  color: white;
 }
 
+.mat-icon{
+  color: white;
+}
 .content {
   padding: 24px;
   background-color: #f8f9fa;
 }
 
-mat-sidenav-container {
+.mat-sidenav-container {
   height: 100vh;
+  
 }
 
 .space-between {
@@ -24,4 +31,6 @@ mat-sidenav-container {
 .mat-sidenav {
   border-radius: 0px;
   transition: width 0.3s ease;
+  background-color: white;
+  margin-left: 0;
 }

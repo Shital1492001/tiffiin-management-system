@@ -1,69 +1,55 @@
-.cards {
-  padding: 10px;
-}
-
 .org-card {
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff0f6;
-  flex-basis: 25%;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; 
+}
+.mat-card-title{
+  font-weight: 900;
+}
+.image {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZMog9dB4vSQs1MwDKStNYo_lHZmKEwal1bg&s');
+  background-size: cover;
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
 }
 
-mat-card-header {
-  background-color: #e91e63;
-  color: white;
-  padding: 16px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-
-mat-card-title {
-  font-size: 1.5rem;
+.status-active {
+  color: green; 
   font-weight: bold;
 }
 
-mat-card-subtitle {
-  color: #f8bbd0;
-  font-size: 0.875rem;
+.status-inactive {
+  color: red; 
+  font-weight: bold;
 }
-
-mat-card-content {
-  padding: 10px;
-}
-
-mat-divider {
-  margin: 8px 0;
-  background-color: #e91e63;
-}
-
-h3,
-h4 {
-  color: #880e4f;
-}
-
-p {
-  font-size: 0.95rem;
-  margin: 4px 0;
-}
-
-mat-card-footer {
-  background-color: #fce4ec;
-  padding: 10px;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  text-align: right;
-}
-
-p strong {
-  color: #880e4f;
-}
-
-h6 {
-  margin-top: 8px;
-  font-weight: 500;
-}
-
-h3 {
+.mat-card-title,
+.mat-card-subtitle {
   font-weight: 600;
-  font-size: 1.25rem;
 }
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+}
+
+.edit-button,
+.delete {
+  margin: 8px;
+  margin-bottom: 8px;
+}
+
+.edit-button{
+  background-color: green;
+  color: white;
+}
+
+.delete{
+  background-color: #E43E38;
+  color: white;
+}
+
+
+

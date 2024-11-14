@@ -41,6 +41,11 @@ export class NavbarComponent {
       icon: 'add_circle_outline',
     },
     {
+      label: 'View Organization',
+      redirectURL: '/superAdminDashboard',
+      icon: 'visibility',
+    },
+    {
       label: 'Logout',
       redirectURL: '/logout',
       icon: 'exit_to_app',
