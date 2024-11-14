@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Admin, allAdminStatusResponses } from '../models/admin';
+import { allAdminStatusResponses } from '../models/admin';
 import { environment } from '../../environments/environment';
 
 @Injectable({
