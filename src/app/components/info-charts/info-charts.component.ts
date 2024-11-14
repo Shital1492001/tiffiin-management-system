@@ -15,9 +15,6 @@ export class InfoChartsComponent {
   @Input() pending!: number;
   @Input() approved!: number;
   @Input() rejected!: number;
-  // @Input() pedningRetailers!: number;
-  // @Input() approvedRetailers!: number;
-  // @Input() rejectedRetailers!: number;
 
   public chartOptions: Partial<ChartOptions> = {
     series: [],
