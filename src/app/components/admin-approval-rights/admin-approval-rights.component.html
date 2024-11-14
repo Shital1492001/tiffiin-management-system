@@ -1,0 +1,54 @@
+<div>
+  <div class="control-section">
+    <div class="serach-bar">
+      <mat-form-field class="search" appearance="outline">
+        <mat-label>Search Admins</mat-label>
+        <input class="input" matInput placeholder="Search by name or email" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="toggle-buttons">
+      <mat-button-toggle-group
+        class="custom-toggle-group"
+        name="adminStatus"
+        aria-label="Admin Status"
+      >
+        <mat-button-toggle value="pending">Pending Admins</mat-button-toggle>
+        <mat-button-toggle value="approved">Approved Admins</mat-button-toggle>
+        <mat-button-toggle value="rejected">Rejected Admins</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+
+  <!-- <h2>Pending Retailers</h2> -->
+  <!-- <div class="cards">
+  <mat-card *ngFor="let retailer of pendingRetailers">
+    <app-retailer-card
+      [retailer]="retailer"
+      [status]="'pending'"
+    ></app-retailer-card>
+  </mat-card>
+</div> -->
+  <!-- <h2>Approved Retailers</h2> -->
+
+  <!-- <app-retailer-card
+    [retailer]="approvedRetailers"
+    [status]="'approved'"
+  ></app-retailer-card> -->
+  <app-retailer-card
+    [retailers]="allRetailers"
+    (emitterApprove)="updateStatusAprroved($event)"
+    (emitterReject)="updateStatusRejected($event)"
+  ></app-retailer-card>
+
+  <!-- 
+<h2>Rejected Retailers</h2> -->
+  <!-- <div class="cards">
+  <mat-card *ngFor="let retailer of rejectedRetailers">
+    <app-retailer-card
+      [retailer]="retailer"
+      [status]="'rejected'"
+    ></app-retailer-card>
+  </mat-card>
+</div> -->
+</div>
