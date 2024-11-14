@@ -1,4 +1,4 @@
-mat-toolbar {
+.navbar {
   background-color: #e43e38;
   position: fixed;
   top: 0;
@@ -15,7 +15,7 @@ mat-toolbar {
   height: calc(100vh-56px);
 }
 
-.mat-sidenav-container {
+.sidenav-container {
   height: 100vh;
   padding-top: 64px;
 }

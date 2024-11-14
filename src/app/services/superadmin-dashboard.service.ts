@@ -1,38 +1,35 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { AllAdminStatusResponses } from '../models/admin';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SuperadminDashboardService {
-  adminsData = [
-    { month: 'January', approved: 5, rejected: 2, pending: 3 },
-    { month: 'February', approved: 6, rejected: 1, pending: 2 },
-    { month: 'March', approved: 7, rejected: 3, pending: 4 },
-    { month: 'April', approved: 8, rejected: 2, pending: 5 },
-    { month: 'May', approved: 10, rejected: 1, pending: 7 },
-    { month: 'June', approved: 12, rejected: 3, pending: 8 },
-    { month: 'July', approved: 15, rejected: 4, pending: 10 },
-    { month: 'August', approved: 20, rejected: 2, pending: 12 },
-    { month: 'September', approved: 18, rejected: 3, pending: 10 },
-    { month: 'October', approved: 22, rejected: 1, pending: 12 },
-    { month: 'November', approved: 25, rejected: 2, pending: 15 },
-    { month: 'December', approved: 30, rejected: 5, pending: 20 },
-  ];
+  constructor(private http: HttpClient) {}
 
-  totalAdmins = {
-    approved: 180,
-    rejected: 40,
-    pending: 108,
-  };
-
-  constructor() {}
-
-  getAdminsData() {
-    return of(this.adminsData);
+  getPendingRequests(): Observable<AllAdminStatusResponses> {
+    const response = this.http.get<AllAdminStatusResponses>(
+      environment.apiEndpointSuperAdmin + '/pendingAdminApproval'
+    );
+    console.log(response);
+    return response;
   }
 
-  getTotalAdmins() {
-    return of(this.totalAdmins);
+  getRejectedRequests(): Observable<AllAdminStatusResponses> {
+    const response = this.http.get<AllAdminStatusResponses>(
+      environment.apiEndpointSuperAdmin + '/rejectedAdminApproval'
+    );
+    console.log(response);
+    return response;
+  }
+  getApprovedRequests(): Observable<AllAdminStatusResponses> {
+    const response = this.http.get<AllAdminStatusResponses>(
+      environment.apiEndpointSuperAdmin + '/approvedAdminApproval'
+    );
+    console.log(response);
+    return response;
   }
 }
