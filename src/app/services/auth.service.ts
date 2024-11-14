@@ -48,18 +48,6 @@ export class AuthService {
     const userData = this.http.post<UserByToken>(baseUrlUserType, {});
     return userData;
   }
-
-  /*
-  isSuperAdmin(): Observable<boolean> {
-    return this.getUserTypeByToken().pipe(
-      map((userData: { data: { role_id: string } }) => {
-        const superAdminRoleId = userData.data.role_id;
-        console.log('userRoleId:', superAdminRoleId);
-        return superAdminRoleId === Roles.SUPER_ADMIN;
-      })
-    );
-  }
-*/
   isAuthenticated(): boolean {
     const setToken = sessionStorage.getItem('token');
     if (setToken) {
