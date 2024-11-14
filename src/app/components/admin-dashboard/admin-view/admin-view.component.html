@@ -1,10 +1,11 @@
-<div *ngIf="userStatus">
-  <ng-container [ngSwitch]="userStatus">
+<div>
+  <div>{{ userStatus }}</div>
+  <container-element [ngSwitch]="userStatus">
     <app-pending-admin-view *ngSwitchCase="'pending'"></app-pending-admin-view>
     <app-rejected-admin-view
       *ngSwitchCase="'rejected'"
     ></app-rejected-admin-view>
-    <div *ngSwitchCase="'approved'"></div>
+    <div *ngSwitchCase="'approved'">Admin has been approved</div>
     <div *ngSwitchDefault>Unknown status</div>
-  </ng-container>
+  </container-element>
 </div>

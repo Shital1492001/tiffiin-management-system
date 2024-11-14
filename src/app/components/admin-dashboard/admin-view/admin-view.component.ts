@@ -2,18 +2,24 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { RejectedAdminViewComponent } from '../rejected-admin-view/rejected-admin-view.component';
 import { PendingAdminViewComponent } from '../pending-admin-view/pending-admin-view.component';
-import { NgSwitch } from '@angular/common';
+import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 
 @Component({
   selector: 'app-admin-view',
   standalone: true,
-  imports: [RejectedAdminViewComponent, PendingAdminViewComponent, NgSwitch],
+  imports: [
+    RejectedAdminViewComponent,
+    PendingAdminViewComponent,
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
+  ],
   templateUrl: './admin-view.component.html',
   styleUrl: './admin-view.component.css',
 })
 export class AdminViewComponent {
   constructor(private authService: AuthService) {}
-  userStatus: string = '';
+  userStatus: string | null = null;
   getUserByToken() {
     const userByToken = this.authService.getUserTypeByToken();
     userByToken.subscribe({
@@ -23,6 +29,7 @@ export class AdminViewComponent {
       error: () => {},
     });
   }
+
   ngOnInit(): void {
     this.getUserByToken();
   }
