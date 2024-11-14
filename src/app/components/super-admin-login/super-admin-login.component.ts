@@ -143,7 +143,6 @@ export class SuperAdminLoginComponent {
         return '';
     }
   }
-
   loginAdmin() {
     const login = {
       email: this.loginForm.controls.email.value,
@@ -157,7 +156,12 @@ export class SuperAdminLoginComponent {
       tokenObservable.subscribe({
         next: (data) => {
           sessionStorage.setItem('token', data.token);
-          this.route.navigate(['/superAdminDashboard']);
+          this.authService.setRole(data.role_id);
+          if (this.authService.isSuperAdmin()) {
+            this.route.navigate(['/navbar/super-admin']);
+          } else {
+            this.route.navigate(['/navbar/admin']);
+          }
         },
         error: (error) => {
           console.log('error', error);
