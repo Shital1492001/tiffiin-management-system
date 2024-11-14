@@ -51,7 +51,7 @@ export class AdminRequestComponent {
         next: (adminData) => {
           this.adminsArray = adminData.data;
           console.log('Fetched Admin Requests:', this.adminsArray);
-          this.totalLengthOfItems=adminData.
+          this.totalLengthOfItems = adminData.data.length;
         },
         error: (err) => {
           console.error('Error fetching admin requests:', err);
