@@ -1,14 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Login, Token } from '../models/userlogin';
-import { Observable } from 'rxjs';
+import { Login, Roles, Token } from '../models/userlogin';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { UserByToken } from '../models/admin';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const role_id = sessionStorage.getItem('role_id');
+    if (role_id) {
+      this.roleSubject.next(role_id);
+    }
+  }
   baseUrlLogin = environment.apiEndpointauth + '/login';
   authenticateLogin(loginCredentials: Login): Observable<Token> {
     console.log(environment.apiEndpointOrganization);
@@ -17,11 +22,44 @@ export class AuthService {
     return data;
   }
 
-  getUserType(): Observable<UserByToken> {
-    const baseUrlUserType = environment.apiEndpointauth + '/getuserbytoken';
-    const userType = this.http.post<UserByToken>(baseUrlUserType, {});
-    return userType;
+  private roleSubject = new BehaviorSubject<string | null>(null);
+  public role_id$ = this.roleSubject.asObservable();
+
+  setRole(role_id: string): void {
+    sessionStorage.setItem('role_id', role_id); // Save role to sessionStorage
+    this.roleSubject.next(role_id); // Update the BehaviorSubject with the new role
   }
+  getRole(): string | null {
+    return sessionStorage.getItem('role_id');
+  }
+
+  isSuperAdmin(): boolean {
+    console.log('this.roleSubject.getValue()', this.roleSubject.getValue());
+
+    return this.roleSubject.getValue() === Roles.SUPER_ADMIN;
+  }
+  isAdmin(): boolean {
+    console.log('this.roleSubject.getValue()', this.roleSubject.getValue());
+    return this.roleSubject.getValue() === Roles.ADMIN;
+  }
+  /*
+  getUserTypeByToken(): Observable<UserByToken> {
+    const baseUrlUserType = environment.apiEndpointauth + '/getuserbytoken';
+    const userData = this.http.post<UserByToken>(baseUrlUserType, {});
+    return userData;
+  }
+
+ 
+  isSuperAdmin(): Observable<boolean> {
+    return this.getUserTypeByToken().pipe(
+      map((userData: { data: { role_id: string } }) => {
+        const superAdminRoleId = userData.data.role_id;
+        console.log('userRoleId:', superAdminRoleId);
+        return superAdminRoleId === Roles.SUPER_ADMIN;
+      })
+    );
+  }
+*/
   isAuthenticated(): boolean {
     const setToken = sessionStorage.getItem('token');
     if (setToken) {

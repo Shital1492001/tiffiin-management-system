@@ -17,7 +17,14 @@ export const routes: Routes = [
       ),
     children: [
       {
-        path: 'home',
+        path: 'admin',
+        loadComponent: () =>
+          import(
+            './components/admin-dashboard/admin-view/admin-view.component'
+          ).then((m) => m.AdminViewComponent),
+      },
+      {
+        path: 'super-admin',
         loadComponent: () =>
           import(
             './components/superadmin-dashboard/superadmin-dashboard.component'
