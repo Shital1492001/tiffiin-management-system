@@ -10,7 +10,6 @@ import { environment } from '../../environments/environment';
 export class OrganizationService {
   baseUrlOrg = environment.apiEndpointOrganization + '/getallOrganization';
   addOrgUrl = environment.apiEndpointOrganization + '/addOrganization';
-  addOrgUrl = environment.apiEndpointOrganization + '/addOrganization';
   deleteOrgUrl = environment.apiEndpointOrganization + '/deleteOrganization';
   getOrgByIdUrl = environment.apiEndpointOrganization + '/getOrganization';
   updateOrgUrl = environment.apiEndpointOrganization + '/updateOrganization'
@@ -19,6 +18,12 @@ export class OrganizationService {
     const params = new HttpParams()
       .set('page', page.toString())  
       .set('limit', limit.toString());
+    const observableData = this.http.get<allOrganization>(this.baseUrlOrg,{params});
+    return observableData;
+  }
+  getAllOrganizationApi(flag:boolean): Observable<allOrganization> {
+    const params = new HttpParams()
+      .set('status', flag.toString())
     const observableData = this.http.get<allOrganization>(this.baseUrlOrg,{params});
     return observableData;
   }
@@ -40,10 +45,6 @@ export class OrganizationService {
 
   updateOrganization(id: string, formData: Organization): Observable<allOrganization> {
     const observableData = this.http.put<allOrganization>(`${this.updateOrgUrl}/${id}`, formData);
-    return observableData;
-  }
-  addOrganizations(formData:Organization): Observable<allOrganization>{
-    const observableData = this.http.post<allOrganization>(this.addOrgUrl,formData);
     return observableData;
   }
 }
