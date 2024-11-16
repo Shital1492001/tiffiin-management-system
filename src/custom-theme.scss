@@ -22,8 +22,8 @@ html {
 :root {
   @include mat.toolbar-overrides(
     (
-      container-background-color: orange,
-      container-text-color: red,
+      container-background-color: #E43E48,
+      container-text-color: white,
     )
   );
   @include mat.sidenav-overrides(
@@ -45,18 +45,19 @@ html {
   );
   @include mat.card-overrides(
     (
-      subtitle-text-color: orange,
+      subtitle-text-color: gray,
       container-color: white,
     )
   );
   @include mat.snack-bar-overrides(
     (
-      container-color: orange,
+      container-color: gray,
       supporting-text-color: red,
     )
   );
   @include mat.select-overrides((
-    panel-background-color: orange,
-    enabled-trigger-text-color: red,
+    panel-background-color: white,
+    enabled-trigger-text-color: black,
   ));
 }
+

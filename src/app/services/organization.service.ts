@@ -21,6 +21,12 @@ export class OrganizationService {
     const observableData = this.http.get<allOrganization>(this.baseUrlOrg,{params});
     return observableData;
   }
+  getAllOrganizationApi(flag:boolean): Observable<allOrganization> {
+    const params = new HttpParams()
+      .set('status', flag.toString());
+    const observableData = this.http.get<allOrganization>(this.baseUrlOrg,{params});
+    return observableData;
+  }
   addOrganizations(formData:Organization): Observable<allOrganization>{
     const observableData = this.http.post<allOrganization>(this.addOrgUrl,formData);
     return observableData;

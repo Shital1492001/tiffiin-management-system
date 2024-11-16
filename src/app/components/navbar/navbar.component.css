@@ -1,5 +1,5 @@
-mat-toolbar {
-  background-color: #e43e38;
+.custom-toolbar {
+  /* background-color: #e43e38; */
   position: fixed;
   top: 0;
   width: 100%;

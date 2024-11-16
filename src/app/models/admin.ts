@@ -1,9 +1,10 @@
 interface roleDetails {
     organization_id: string;
+    organization_Name:string;
     approval_status: string;
   }
   
-  export interface admin {
+  export interface Admin {
     username: string;
     password: string;
     email: string;
@@ -16,7 +17,7 @@ interface roleDetails {
   
   export interface allAdminStatusResponses {
     statuscode: number;
-    data: admin[];
+    data: Admin[];
   }
 
   export interface AdminRegister {

@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { SuperAdminLoginComponent } from './components/super-admin-login/super-admin-login.component';
 import { authGuard } from './guards/authguard.guard';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AdminRegistrationComponent } from './components/admin-registration/admin-registration.component';
 
 export const routes: Routes = [
   {
@@ -8,39 +10,68 @@ export const routes: Routes = [
     component: SuperAdminLoginComponent,
   },
   {
-    path: 'superadmin-login',
-    component: SuperAdminLoginComponent,
+    path: 'admin-signup',
+    component: AdminRegistrationComponent,
   },
   {
-    path: 'superAdminDashboard',
+    path: 'navbar',
     loadComponent: () =>
-      import('./components/superadmin/superadmin.component').then(
-        (m) => m.SuperadminComponent
+      import('./components/navbar/navbar.component').then(
+        (m) => m.NavbarComponent
       ),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'add-organization',
-    loadComponent: () =>
-      import('./components/add-organization/add-organization.component').then(
-        (m) => m.AddOrganizationComponent
-      ),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'update-organization/:id',
-    loadComponent: () =>
-      import('./components/add-organization/add-organization.component').then(
-        (m) => m.AddOrganizationComponent
-      ),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'view-organization/:id',
-    loadComponent: () =>
-      import('./components/add-organization/add-organization.component').then(
-        (m) => m.AddOrganizationComponent
-      ),
-    canActivate: [authGuard],
+    children: [
+      {
+        path: 'home',
+        loadComponent: () =>
+          import(
+            './components/superadmin-dashboard/superadmin-dashboard.component'
+          ).then((m) => m.SuperadminDashboardComponent),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'statusDataTable',
+        loadComponent: () =>
+          import(
+            './components/adminrequests/pending-admin-request/admin-request.component'
+          ).then((m) => m.AdminRequestComponent),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'view-all-organizations',
+        loadComponent: () =>
+          import('./components/superadmin/superadmin.component').then(
+            (m) => m.SuperadminComponent
+          ),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'add-organization',
+        loadComponent: () =>
+          import(
+            './components/add-organization/add-organization.component'
+          ).then((m) => m.AddOrganizationComponent),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'update-organization/:id',
+        loadComponent: () =>
+          import(
+            './components/add-organization/add-organization.component'
+          ).then((m) => m.AddOrganizationComponent),
+        canActivate: [authGuard],
+      },
+      {
+        path: 'view-organization/:id',
+        loadComponent: () =>
+          import('./components/add-organization/add-organization.component').then(
+            (m) => m.AddOrganizationComponent
+          ),
+        canActivate: [authGuard],
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent,
+      },
+    ],
   },
 ];
