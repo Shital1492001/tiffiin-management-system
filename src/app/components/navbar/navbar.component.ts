@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, OnInit, signal, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -54,7 +54,7 @@ export class NavbarComponent {
 
   collapsed: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   collapsedState() {
     this.collapsed = !this.collapsed;
