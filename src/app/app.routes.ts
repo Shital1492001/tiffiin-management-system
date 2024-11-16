@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
 import { SuperAdminLoginComponent } from './components/super-admin-login/super-admin-login.component';
-import { authGuard } from './guards/authguard.guard';
+import { AuthGuard } from './guards/authguard';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { AdminRegistrationComponent } from './components/admin-registration/admin-registration.component';
 import { AdminRegistrationComponent } from './components/admin-registration/admin-registration.component';
 
 export const routes: Routes = [
@@ -75,17 +74,18 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'view-organization/:id',
+        loadComponent: () =>
+          import('./components/add-organization/add-organization.component').then(
+            (m) => m.AddOrganizationComponent
+          ),
+        canActivate: [AuthGuard],
+      },
+      {
         path: '**',
         component: PageNotFoundComponent,
       },
     ],
   },
-  {
-    path: 'view-organization/:id',
-    loadComponent: () =>
-      import('./components/add-organization/add-organization.component').then(
-        (m) => m.AddOrganizationComponent
-      ),
-    canActivate: [AuthGuard],
-  },
+  
 ];
