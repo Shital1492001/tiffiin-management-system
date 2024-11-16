@@ -46,7 +46,7 @@ export class StatusTableComponent implements AfterViewInit {
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @Input()
-  adminsArray: admin[] = [];
+  adminsArray: Admin[] = [];
   @Input() totalItems: number = 0;
   @Input() totalPages: number = 0;
   @Output()
@@ -59,12 +59,12 @@ export class StatusTableComponent implements AfterViewInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.paginator) {
       console.log('inside if paginator');
-      this.dataSource = new MatTableDataSource<admin>(this.adminsArray);
+      this.dataSource = new MatTableDataSource<Admin>(this.adminsArray);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
     if (changes['totalItems'] && this.paginator) {
-      this.dataSource = new MatTableDataSource<admin>(this.adminsArray);
+      this.dataSource = new MatTableDataSource<Admin>(this.adminsArray);
       this.dataSource.paginator = this.paginator;
       console.log('totalItems', this.totalItems);
     }

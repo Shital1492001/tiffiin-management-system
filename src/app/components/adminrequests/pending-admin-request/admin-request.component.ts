@@ -30,10 +30,10 @@ import { SnackbarService } from '../../../services/snackbar.service';
   styleUrl: './admin-request.component.css',
 })
 export class AdminRequestComponent {
-  adminsArray: admin[] = [];
-  allAdminsArray: admin[] = [];
-  rejectedAdminsArray: admin[] = [];
-  approvedAdminsArray: admin[] = [];
+  adminsArray: Admin[] = [];
+  allAdminsArray: Admin[] = [];
+  rejectedAdminsArray: Admin[] = [];
+  approvedAdminsArray: Admin[] = [];
   currentPage: number = 1;
   limit: number = 100;
   status: string = 'pending';
