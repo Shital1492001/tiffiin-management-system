@@ -17,16 +17,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class SuperadminComponent implements OnInit {
   organizationsArray: Organization[] = [];
+  constructor(private organizationService: OrganizationService) { }
   paginatedOrganizations: Organization[] = [];
   pageSize = 4; 
   currentPage = 0;
-  totalItems = 0; 
-  totalPages = 0; 
-
-  constructor(private organizationService: OrganizationService) {}
-
+  totalItems = 0;
+  totalPages = 0;
   ngOnInit(): void {
-    this.getAllOrganizations(this.currentPage + 1, this.pageSize); 
+    this.getAllOrganizations(this.currentPage + 1, this.pageSize);
   }
 
   getAllOrganizations(page: number, limit: number): void {
@@ -50,12 +48,12 @@ export class SuperadminComponent implements OnInit {
     this.paginatedOrganizations = this.organizationsArray.slice(startIndex, endIndex);
   }
 
-  
+
   onPageChange(event: PageEvent): void {
     console.log('Page change event:', event);
-    this.pageSize = event.pageSize;  
-    this.currentPage = event.pageIndex;  
-    this.getAllOrganizations(this.currentPage + 1, this.pageSize); 
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.getAllOrganizations(this.currentPage + 1, this.pageSize);
   }
 
   deleteOrganization(organizationId: string): void {
@@ -65,7 +63,7 @@ export class SuperadminComponent implements OnInit {
         this.organizationsArray = this.organizationsArray.filter(
           (org) => org._id !== organizationId
         );
-        this.updatePaginatedOrganizations(); 
+        this.updatePaginatedOrganizations();
       },
       error: (err) => {
         console.log(err);

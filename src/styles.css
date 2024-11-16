@@ -26,12 +26,11 @@ a {
   --mat-form-field-container-text-size: 0.9rem;
   --mat-form-field-container-text-outline-line-height: 0.5rem; 
 
-  --mdc-outlined-text-field-focus-outline-color:black;
-  --mdc-outlined-text-field-focus-label-text-color:black;
+  --mdc-outlined-text-field-focus-outline-color: black;
+  --mdc-outlined-text-field-focus-label-text-color: black;
 
-  --mat-form-field-leading-icon-color:brown;
-
- }
+  --mat-form-field-leading-icon-color: rgb(10, 10, 10);
+}
 
 /* change input height */
  .mdc-text-field--outlined{
@@ -63,41 +62,45 @@ a {
     position: relative;
     top: -10px !important ;
 }
+.mat-mdc-form-field .mat-mdc-select-arrow {
+  position: relative;
+  top: -10px !important ;
+}
 .mat-mdc-select .mat-mdc-select-value-text {
   position: relative;
   top: -5px !important ;
   font-size: 16px !important;
 }
-  /* change error message color and position */
-  .mat-mdc-form-field-error{
-    padding: 0 10px !;
-    color: red;
-  }
+/* change error message color and position */
+.mat-mdc-form-field-error {
+  padding: 0 10px !;
+  color: red;
+}
 
-  .form-field{
-    display: flex;
-    align-items: flex-start;
-    gap:1rem
-  }
-  .flex-item {
-    flex: 1 1 30%;
-    min-width: 200px;
-    margin-top: 10px;
-  }
-  .full-width {
-    width: 100%;
-  }
+.form-field {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.flex-item {
+  flex: 1 1 30%;
+  min-width: 200px;
+  margin-top: 10px;
+}
+.full-width {
+  width: 100%;
+}
 
-  mat-card.card {
-    background-color: white; 
-    border-radius: 16px; 
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
-    padding: 16px;
-    margin-bottom: 16px; 
-  }
-  
-  mat-card.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    background-color: #f9f9f9;
-  }
+mat-card.card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+mat-card.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9;
+}

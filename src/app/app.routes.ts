@@ -3,6 +3,7 @@ import { SuperAdminLoginComponent } from './components/super-admin-login/super-a
 import { authGuard } from './guards/authguard.guard';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AdminRegistrationComponent } from './components/admin-registration/admin-registration.component';
+import { AdminRegistrationComponent } from './components/admin-registration/admin-registration.component';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,14 @@ export const routes: Routes = [
   },
   {
     path: 'login',
+    component: SuperAdminLoginComponent,
+  },
+  {
+    path: 'admin-signup',
+    component: AdminRegistrationComponent,
+  },
+  {
+    path: 'superadmin-login',
     component: SuperAdminLoginComponent,
   },
   {
@@ -31,7 +40,7 @@ export const routes: Routes = [
           import(
             './components/superadmin-dashboard/superadmin-dashboard.component'
           ).then((m) => m.SuperadminDashboardComponent),
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'statusDataTable',
@@ -39,7 +48,7 @@ export const routes: Routes = [
           import(
             './components/adminrequests/pending-admin-request/admin-request.component'
           ).then((m) => m.AdminRequestComponent),
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'view-all-organizations',
@@ -47,7 +56,7 @@ export const routes: Routes = [
           import('./components/superadmin/superadmin.component').then(
             (m) => m.SuperadminComponent
           ),
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'add-organization',
@@ -55,7 +64,7 @@ export const routes: Routes = [
           import(
             './components/add-organization/add-organization.component'
           ).then((m) => m.AddOrganizationComponent),
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'update-organization/:id',
@@ -63,20 +72,20 @@ export const routes: Routes = [
           import(
             './components/add-organization/add-organization.component'
           ).then((m) => m.AddOrganizationComponent),
-        canActivate: [authGuard],
-      },
-      {
-        path: 'view-organization/:id',
-        loadComponent: () =>
-          import('./components/add-organization/add-organization.component').then(
-            (m) => m.AddOrganizationComponent
-          ),
-        canActivate: [authGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: '**',
         component: PageNotFoundComponent,
       },
     ],
+  },
+  {
+    path: 'view-organization/:id',
+    loadComponent: () =>
+      import('./components/add-organization/add-organization.component').then(
+        (m) => m.AddOrganizationComponent
+      ),
+    canActivate: [AuthGuard],
   },
 ];
