@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SuperadminComponent {
   organizationsArray: Organization[] = [];
-  constructor(private organizationService: OrganizationService) {}
+  constructor(private organizationService: OrganizationService) { }
   ngOnInit(): void {
     this.getAllOrganizations();
   }
