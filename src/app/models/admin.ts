@@ -1,6 +1,6 @@
 interface RoleDetails {
   organization_id: string;
-  organization_name: string;
+  org_location: string;
   approval_status: string;
 }
 

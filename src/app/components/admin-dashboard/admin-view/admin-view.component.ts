@@ -37,6 +37,7 @@ export class AdminViewComponent {
     const userByToken = this.authService.getUserTypeByToken();
     userByToken.subscribe({
       next: (userData) => {
+        console.log("userdata",userData)
         this.userStatus = userData.data.role_specific_details.approval_status;
       },
       error: () => { },

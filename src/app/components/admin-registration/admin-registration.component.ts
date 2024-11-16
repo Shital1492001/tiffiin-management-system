@@ -306,12 +306,19 @@ export class AdminRegistrationComponent {
   CollectData() {
     console.log(this.adminForm.value);
     if (this.adminForm.valid) {
-      console.log(this.adminForm.value);
       const { confirmPassword, ...formData } = this.adminForm.value;
-      formData.username = formData.userName;
-      formData.contact_number = formData.contactNumber;
-      formData.role_specific_details = formData.roleSpecificDetails;
-      formData.role_id = formData.roleId;
+      formData.username= formData.userName,
+      formData.password= formData.password,
+      formData.email=formData.email,
+      formData.contact_number= formData.contactNumber,
+      formData.address= formData.address,
+      formData.role_id= formData.roleId,
+      formData.role_specific_details= {
+        organization_id: formData.roleSpecificDetails.organizationId,
+        org_location: formData.roleSpecificDetails.orgLocation,
+        approval_status:formData.roleSpecificDetails.approvalStatus
+      }
+    console.log("Mapped Payload for Backend:", formData);
       this.authService.register(formData).subscribe({
         next: (responseData) => {
           if (responseData.statuscode === 201) {
