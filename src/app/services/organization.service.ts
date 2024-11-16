@@ -13,22 +13,22 @@ export class OrganizationService {
   deleteOrgUrl = environment.apiEndpointOrganization + '/deleteOrganization';
   getOrgByIdUrl = environment.apiEndpointOrganization + '/getOrganization';
   updateOrgUrl = environment.apiEndpointOrganization + '/updateOrganization'
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   getAllOrganizationsApi(page: number, limit: number): Observable<allOrganization> {
     const params = new HttpParams()
-      .set('page', page.toString())  
+      .set('page', page.toString())
       .set('limit', limit.toString());
-    const observableData = this.http.get<allOrganization>(this.baseUrlOrg,{params});
+    const observableData = this.http.get<allOrganization>(this.baseUrlOrg, { params });
     return observableData;
   }
-  getAllOrganizationApi(flag:boolean): Observable<allOrganization> {
+  getAllOrganizationApi(flag: boolean): Observable<allOrganization> {
     const params = new HttpParams()
       .set('status', flag.toString())
-    const observableData = this.http.get<allOrganization>(this.baseUrlOrg,{params});
+    const observableData = this.http.get<allOrganization>(this.baseUrlOrg, { params });
     return observableData;
   }
-  addOrganizations(formData:Organization): Observable<allOrganization>{
-    const observableData = this.http.post<allOrganization>(this.addOrgUrl,formData);
+  addOrganizations(formData: Organization): Observable<allOrganization> {
+    const observableData = this.http.post<allOrganization>(this.addOrgUrl, formData);
     return observableData;
   }
 
@@ -37,7 +37,7 @@ export class OrganizationService {
     const observableData = this.http.delete<allOrganization>(`${this.deleteOrgUrl}/${id}`);
     return observableData;
   }
-  
+
   getOrganizationById(id: string): Observable<allOrganizations> {
     const observableData = this.http.get<allOrganizations>(`${this.getOrgByIdUrl}/${id}`);
     return observableData;

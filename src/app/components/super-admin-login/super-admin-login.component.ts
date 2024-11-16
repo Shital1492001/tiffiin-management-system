@@ -41,7 +41,7 @@ export class SuperAdminLoginComponent {
     private authService: AuthService,
     private route: Router,
     private snackbar: SnackbarService
-  ) {}
+  ) { }
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -150,7 +150,6 @@ export class SuperAdminLoginComponent {
         return '';
     }
   }
-
   loginAdmin() {
     const login = {
       email: this.loginForm.controls.email.value,
@@ -164,7 +163,12 @@ export class SuperAdminLoginComponent {
       tokenObservable.subscribe({
         next: (data) => {
           sessionStorage.setItem('token', data.token);
-          this.route.navigate(['/navbar/home']);
+          this.authService.setRole(data.role_id);
+          if (this.authService.isSuperAdmin()) {
+            this.route.navigate(['/navbar/super-admin']);
+          } else {
+            this.route.navigate(['/navbar/admin']);
+          }
         },
         error: (error) => {
           console.log('error', error);
