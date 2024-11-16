@@ -20,9 +20,6 @@ export class SuperadminComponent implements OnInit {
   currentPage = 0;
   totalItems = 0;
   totalPages = 0;
-
-  constructor(private organizationService: OrganizationService) { }
-
   ngOnInit(): void {
     this.getAllOrganizations(this.currentPage + 1, this.pageSize);
   }

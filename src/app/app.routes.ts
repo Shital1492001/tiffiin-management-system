@@ -82,6 +82,6 @@ export const routes: Routes = [
       import('./components/add-organization/add-organization.component').then(
         (m) => m.AddOrganizationComponent
       ),
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
   },
 ];
