@@ -170,7 +170,7 @@ export class AddOrganizationComponent {
             if (responseData.statuscode === 201) {
               console.log('Organization added successfully', responseData);
               this.snackbar.showSuccess('Organization added successfully!');
-              this.router.navigate(['/superAdminDashboard']);
+              this.router.navigate(['/navbar/view-all-organizations']);
             }
           },
           error: (error) => {
