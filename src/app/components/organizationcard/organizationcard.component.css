@@ -1,6 +1,5 @@
 .org-card {
   background-color: white;
-  border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer; 
@@ -8,16 +7,12 @@
 .mat-card-title{
   font-weight: 900;
 }
-.example-header-image {
+.image {
   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZMog9dB4vSQs1MwDKStNYo_lHZmKEwal1bg&s');
   background-size: cover;
   height: 100px;
   width: 100px;
   border-radius: 50px;
-}
-.org-card:hover {
-  transform: scale(1.02); 
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }
 
 .status-active {
@@ -56,13 +51,5 @@
   color: white;
 }
 
-/* .edit-button:hover{
-  background-color: green;
-  color: white;
-}
 
-.delete:hover{
-  background-color: #E43E38;
-  color: white;
-} */
 

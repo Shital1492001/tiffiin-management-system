@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { allOrganization, allOrganizations, Organization } from '../models/organizations';
 import { Observable } from 'rxjs';
@@ -14,9 +14,17 @@ export class OrganizationService {
   getOrgByIdUrl = environment.apiEndpointOrganization + '/getOrganization';
   updateOrgUrl = environment.apiEndpointOrganization + '/updateOrganization'
   constructor(private http: HttpClient) {}
-  getAllOrganizationsApi(): Observable<allOrganization> {
-    // here extract data array and return
-    const observableData = this.http.get<allOrganization>(this.baseUrlOrg);
+  getAllOrganizationsApi(page: number, limit: number): Observable<allOrganization> {
+    const params = new HttpParams()
+      .set('page', page.toString())  
+      .set('limit', limit.toString());
+    const observableData = this.http.get<allOrganization>(this.baseUrlOrg,{params});
+    return observableData;
+  }
+  getAllOrganizationApi(flag:boolean): Observable<allOrganization> {
+    const params = new HttpParams()
+      .set('status', flag.toString())
+    const observableData = this.http.get<allOrganization>(this.baseUrlOrg,{params});
     return observableData;
   }
   addOrganizations(formData:Organization): Observable<allOrganization>{

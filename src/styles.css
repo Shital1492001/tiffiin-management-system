@@ -15,6 +15,7 @@ body {
   height: 100%;
   margin: 0px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0px;
 }
 .button {
   margin-top: 8px;
@@ -37,6 +38,8 @@ table {
 
   --mdc-outlined-text-field-focus-outline-color: black;
   --mdc-outlined-text-field-focus-label-text-color: black;
+
+  --mat-form-field-leading-icon-color: rgb(10, 10, 10);
 }
 
 /* change input height */
@@ -65,44 +68,45 @@ table {
   position: relative;
   top: -8px !important;
 }
-
+.mat-mdc-form-field .mat-mdc-select-arrow {
+  position: relative;
+  top: -10px !important ;
+}
+.mat-mdc-select .mat-mdc-select-value-text {
+  position: relative;
+  top: -5px !important ;
+  font-size: 16px !important;
+}
 /* change error message color and position */
 .mat-mdc-form-field-error {
   padding: 0 10px !;
   color: red;
 }
 
-.mat-mdc-card {
-  /* change card title font family  */
-  --mat-card-title-text-font: Roboto, sans-serif;
-  /* change card title line-height */
-  --mat-card-title-text-line-height: 1.5rem;
-  /* change card title font-size */
-  --mat-card-title-text-size: 1.375rem;
-  /* change card title letter spacing */
-  --mat-card-title-text-tracking: 0.5px;
-  /* change card title font-weight */
-  --mat-card-title-text-weight: 600;
-
-  /* change card subtitle text color  */
-  --mat-card-subtitle-text-color: gray;
-  /* change card subtitle font family  */
-  --mat-card-subtitle-text-font: Roboto, sans-serif;
-  /* change card subtitle line-height */
-  --mat-card-subtitle-text-line-height: 1.5rem;
-  /* change card subtitle font-size */
-  --mat-card-subtitle-text-size: 1rem;
-  /* change card subtitle letter spacing */
-  --mat-card-subtitle-text-tracking: 0.009px;
-  /* change card subtitle font-weight */
-  --mat-card-subtitle-text-weight: 400;
-}
-
-.mat-mdc-card-content {
+.form-field {
   display: flex;
-  padding: 0 10px !important;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.flex-item {
+  flex: 1 1 30%;
+  min-width: 200px;
+  margin-top: 10px;
+}
+.full-width {
+  width: 100%;
 }
 
-.mat-mdc-card-title {
-  color: brown;
+mat-card.card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+mat-card.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9;
 }

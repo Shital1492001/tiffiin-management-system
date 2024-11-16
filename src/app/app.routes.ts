@@ -3,6 +3,7 @@ import { SuperAdminLoginComponent } from './components/super-admin-login/super-a
 import { AuthGuard } from './guards/authguard.guard';
 import { SuperadminDashboardComponent } from './components/superadmin-dashboard/superadmin-dashboard.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AdminRegistrationComponent } from './components/admin-registration/admin-registration.component';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,14 @@ export const routes: Routes = [
   {
     path: 'login',
     component: SuperAdminLoginComponent,
+  },
+  {
+    path: 'superadmin-login',
+    component: SuperAdminLoginComponent,
+  },
+  {
+    path: 'admin-signup',
+    component: AdminRegistrationComponent,
   },
   {
     path: 'navbar',
@@ -66,5 +75,13 @@ export const routes: Routes = [
         component: PageNotFoundComponent,
       },
     ],
+  },
+  {
+    path: 'view-organization/:id',
+    loadComponent: () =>
+      import('./components/add-organization/add-organization.component').then(
+        (m) => m.AddOrganizationComponent
+      ),
+    canActivate: [authGuard],
   },
 ];
