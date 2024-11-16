@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
 import { SuperAdminLoginComponent } from './components/super-admin-login/super-admin-login.component';
-import { AuthGuard } from './guards/authguard';
+import { AuthGuard } from './guards/authguard.guard';
+import { SuperadminDashboardComponent } from './components/superadmin-dashboard/superadmin-dashboard.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AdminRegistrationComponent } from './components/admin-registration/admin-registration.component';
+import { AdminDashboardComponent } from './components/admin-approval-rights/admin-approval-rights.component';
 
 export const routes: Routes = [
   {
@@ -12,15 +14,20 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: SuperAdminLoginComponent,
+    redirectTo: 'login',
+    pathMatch: 'full',
   },
   {
     path: 'admin-signup',
     component: AdminRegistrationComponent,
   },
   {
-    path: 'superadmin-login',
+    path: 'login',
     component: SuperAdminLoginComponent,
+  },
+  {
+    path: 'status',
+    component: AdminDashboardComponent,
   },
   {
     path: 'admin-signup',
@@ -82,10 +89,23 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'admin',
+        loadComponent: () =>
+          import('./components/admin-dashboard/admin-view/admin-view.component'
+          ).then((m) => m.AdminViewComponent),
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'status',
+        loadComponent: () =>
+          import('./components/admin-approval-rights/admin-approval-rights.component'
+          ).then((m) => m.AdminDashboardComponent),
+        canActivate: [AuthGuard],
+      },
+      {
         path: '**',
         component: PageNotFoundComponent,
       },
     ],
   },
-  
 ];

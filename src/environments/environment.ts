@@ -6,4 +6,5 @@ export const environment = {
 
   apiEndpointOrganization: 'http://localhost:5000/api/superadmin/organizations',
 
+  apiEndpointAdmin: 'http://localhost:5000/api/admin',
 };
