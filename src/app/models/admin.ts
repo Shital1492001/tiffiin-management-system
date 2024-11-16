@@ -15,9 +15,15 @@ interface roleDetails {
     _id: string;
   }
   
-  export interface allAdminStatusResponses {
+  export interface Pagination {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+}
+export interface allAdminStatusResponses {
     statuscode: number;
     data: Admin[];
+  pagination: Pagination;
   }
 
   export interface AdminRegister {

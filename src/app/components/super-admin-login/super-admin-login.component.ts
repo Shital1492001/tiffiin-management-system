@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { CustomPasswordValidators } from '../../customValidators/custom-password-validators';
+import { markAllControlsAsDirtyAndTouched } from '../../../utils';
+import { SnackbarService } from '../../services/snackbar.service';
 @Component({
   selector: 'app-super-admin-login',
   standalone: true,
@@ -162,9 +164,11 @@ export class SuperAdminLoginComponent {
         },
         error: (error) => {
           console.log('error', error);
-          this.invalidCredential = 'Invalid Credentials';
+          this.snackbar.showError('invalid credentials');
         },
       });
+    } else {
+      markAllControlsAsDirtyAndTouched(this.loginForm);
     }
   }
 }

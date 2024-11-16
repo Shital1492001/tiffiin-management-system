@@ -32,8 +32,15 @@
               <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
                 <div>
-                  <mat-icon>lock</mat-icon>
-                  <input matInput type="password" formControlName="password" />
+                  <div>
+                    <mat-icon>lock</mat-icon>
+                  </div>
+                  <input
+                    class="input"
+                    matInput
+                    type="password"
+                    formControlName="password"
+                  />
                 </div>
                 <mat-error>{{ passwordErrorMessage }}</mat-error>
               </mat-form-field>
