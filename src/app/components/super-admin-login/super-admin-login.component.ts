@@ -165,7 +165,7 @@ export class SuperAdminLoginComponent {
           sessionStorage.setItem('token', data.token);
           this.authService.setRole(data.role_id);
           if (this.authService.isSuperAdmin()) {
-            this.route.navigate(['/navbar/super-admin']);
+            this.route.navigate(['/navbar/home']);
           } else {
             this.route.navigate(['/navbar/admin']);
           }

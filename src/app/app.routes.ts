@@ -83,6 +83,20 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'admin',
+        loadComponent: () =>
+          import('./components/admin-dashboard/admin-view/admin-view.component'
+          ).then((m) => m.AdminViewComponent),
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'status',
+        loadComponent: () =>
+          import('./components/admin-approval-rights/admin-approval-rights.component'
+          ).then((m) => m.AdminDashboardComponent),
+        canActivate: [AuthGuard],
+      },
+      {
         path: '**',
         component: PageNotFoundComponent,
       },

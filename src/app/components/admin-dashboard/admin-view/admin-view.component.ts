@@ -30,7 +30,7 @@ export class AdminViewComponent {
   constructor(
     private authService: AuthService,
     private adminRightsServices: AdminApprovalRightsService
-  ) {}
+  ) { }
 
   userStatus: string | null = null;
   getUserByToken() {
@@ -39,7 +39,7 @@ export class AdminViewComponent {
       next: (userData) => {
         this.userStatus = userData.data.role_specific_details.approval_status;
       },
-      error: () => {},
+      error: () => { },
     });
   }
 
