@@ -12,43 +12,21 @@
         class="custom-toggle-group"
         name="adminStatus"
         aria-label="Admin Status"
+        (change)="onStatusChange($event)"
       >
-        <mat-button-toggle value="pending">Pending Admins</mat-button-toggle>
-        <mat-button-toggle value="approved">Approved Admins</mat-button-toggle>
-        <mat-button-toggle value="rejected">Rejected Admins</mat-button-toggle>
+        <mat-button-toggle value="pending">Pending Retailers</mat-button-toggle>
+        <mat-button-toggle value="approved"
+          >Approved Retailers</mat-button-toggle
+        >
+        <mat-button-toggle value="rejected"
+          >Rejected Retailers</mat-button-toggle
+        >
       </mat-button-toggle-group>
     </div>
   </div>
-
-  <!-- <h2>Pending Retailers</h2> -->
-  <!-- <div class="cards">
-  <mat-card *ngFor="let retailer of pendingRetailers">
-    <app-retailer-card
-      [retailer]="retailer"
-      [status]="'pending'"
-    ></app-retailer-card>
-  </mat-card>
-</div> -->
-  <!-- <h2>Approved Retailers</h2> -->
-
-  <!-- <app-retailer-card
-    [retailer]="approvedRetailers"
-    [status]="'approved'"
-  ></app-retailer-card> -->
-  <app-retailer-card
+  <app-retailer-status-table
     [retailers]="allRetailers"
     (emitterApprove)="updateStatusAprroved($event)"
     (emitterReject)="updateStatusRejected($event)"
-  ></app-retailer-card>
-
-  <!-- 
-<h2>Rejected Retailers</h2> -->
-  <!-- <div class="cards">
-  <mat-card *ngFor="let retailer of rejectedRetailers">
-    <app-retailer-card
-      [retailer]="retailer"
-      [status]="'rejected'"
-    ></app-retailer-card>
-  </mat-card>
-</div> -->
+  ></app-retailer-status-table>
 </div>

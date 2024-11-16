@@ -1,11 +1,10 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
 import { AdminApprovalRightsService } from '../../services/admin-approval-rights.service';
-import { Admin } from '../../models/admin';
+import { Retailer } from '../../models/retailer';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import { RetailerCardComponent } from '../retailer-card/retailer-card.component';
+import { RetailerStatusTableComponent } from '../retailer-status-table/retailer-status-table.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -24,7 +23,7 @@ import { ActionDialogComponent } from '../action-dialog/action-dialog.component'
     CommonModule,
     MatCardModule,
     MatDividerModule,
-    RetailerCardComponent,
+    RetailerStatusTableComponent,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
@@ -32,10 +31,13 @@ import { ActionDialogComponent } from '../action-dialog/action-dialog.component'
   ],
 })
 export class AdminDashboardComponent implements OnInit {
-  approvedRetailers: Admin[] = [];
-  pendingRetailers: Admin[] = [];
-  rejectedRetailers: Admin[] = [];
-  allRetailers: Admin[] = [];
+  approvedRetailers: Retailer[] = [];
+  pendingRetailers: Retailer[] = [];
+  rejectedRetailers: Retailer[] = [];
+  allRetailers: Retailer[] = [];
+  status: string = 'approved';
+
+  selectedOption: string | null = null;
   constructor(
     private adminService: AdminApprovalRightsService,
     private router: Router,
@@ -49,7 +51,7 @@ export class AdminDashboardComponent implements OnInit {
     // this.getAllApprovedRetailers();
     // this.loadPendingRequests();
     // this.getAllRejectedRetailers();
-    this.getAllRetailers('pending');
+    this.getAllRetailers('approved');
   }
 
   loadPendingRequests(): void {
@@ -99,7 +101,7 @@ export class AdminDashboardComponent implements OnInit {
     forkJoin([approved, rejected, pending]).subscribe(
       ([approved, rejected, pending]) => {
         this.allRetailers = [
-          ...approved.data.map((retailer: Admin) => ({
+          ...approved.data.map((retailer: Retailer) => ({
             ...retailer,
             role_specific_details: {
               ...retailer.role_specific_details,
@@ -107,7 +109,7 @@ export class AdminDashboardComponent implements OnInit {
                 ?.approval_status || [{ approval_status: 'approved' }],
             },
           })),
-          ...rejected.data.map((retailer: Admin) => ({
+          ...rejected.data.map((retailer: Retailer) => ({
             ...retailer,
             role_specific_details: {
               ...retailer.role_specific_details,
@@ -115,7 +117,7 @@ export class AdminDashboardComponent implements OnInit {
                 ?.approval_status || [{ approval_status: 'rejected' }],
             },
           })),
-          ...pending.data.map((retailer: Admin) => ({
+          ...pending.data.map((retailer: Retailer) => ({
             ...retailer,
             role_specific_details: {
               ...retailer.role_specific_details,
@@ -135,7 +137,7 @@ export class AdminDashboardComponent implements OnInit {
     this.adminService.getRequestsByStatus(status).subscribe({
       next: (adminData) => {
         this.allRetailers = adminData.data;
-        console.log('Fetched Admin Requests:', this.allRetailers);
+        console.log('Fetched Retailer Requests:', this.allRetailers);
       },
       error: (err) => {
         console.error('Error fetching admin requests:', err);
@@ -156,7 +158,6 @@ export class AdminDashboardComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
-        window.alert('something went wrong while updating status...');
       },
     });
   }
@@ -174,6 +175,11 @@ export class AdminDashboardComponent implements OnInit {
         this.router.navigate(['status']);
       },
     });
+  }
+
+  onStatusChange(event: any): void {
+    this.status = event.value;
+    this.getAllRetailers(this.status);
   }
 
   openDialog(title: string, message: string) {

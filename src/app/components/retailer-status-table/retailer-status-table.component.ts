@@ -11,11 +11,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Admin } from '../../models/admin';
+import { Retailer } from '../../models/retailer';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-retailer-card',
+  selector: 'app-retailer-status-table',
   standalone: true,
   imports: [
     MatCardModule,
@@ -25,12 +25,11 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatTableModule,
     MatPaginatorModule,
   ],
-  templateUrl: './retailer-card.component.html',
-  styleUrl: './retailer-card.component.css',
+  templateUrl: './retailer-status-table.component.html',
+  styleUrl: './retailer-status-table.component.css',
 })
-export class RetailerCardComponent {
-  @Input() retailers: Admin[] = [];
-  @Input() status: string = '';
+export class RetailerStatusTableComponent {
+  @Input() retailers: Retailer[] = [];
   @Output()
   emitterApprove = new EventEmitter<string>();
 
@@ -48,11 +47,10 @@ export class RetailerCardComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  dataSource = new MatTableDataSource<Admin>();
+  dataSource = new MatTableDataSource<Retailer>();
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    //console.log('status', this.status);
     console.log('retailers.....', this.retailers);
     if (changes['retailers'] && changes['retailers'].currentValue) {
       console.log('Updating table data in child component');
