@@ -1,9 +1,17 @@
 <div class="displayCard">
-  @for (organization of organizationsArray; track organization.org_name ) {
-  <app-organization-card
-    class="basis"
-    [organization]="organization"
-    (deleteEventEmitter)="deleteOrganization($event)"
-  ></app-organization-card>
-  }
+  @for (organization of organizationsArray; track organization.org_name ){
+    <app-organization-card
+      class="basis"
+      [organization]="organization"
+      (deleteEventEmitter)="deleteOrganization(organization._id)"
+    ></app-organization-card>
+}
 </div>
+
+<mat-paginator 
+  [length]="totalItems" 
+  [pageSize]="pageSize" 
+  [pageSizeOptions]="[3, 6, 9,12]" 
+  (page)="onPageChange($event)"  
+  aria-label="Select page">
+</mat-paginator>

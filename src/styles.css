@@ -1,56 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
-
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
 html,
 body {
   height: 100%;
-  width: 100%;
+}
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 body {
   height: 100%;
-  margin: 0px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin:0px;
 }
 .button {
   margin-top: 8px;
   justify-content: center;
 }
-table {
-  width: 100%;
-}
-.hover-row {
-  transition: background-color 0.3s ease;
-}
-.hover-row:hover {
-  background-color: #f0f0f0;
+a {
+  color: rgb(139, 0, 116);
 }
 
-.mat-mdc-form-field {
+.mat-mdc-form-field{
   --mdc-outlined-text-field-label-text-size: 0.75rem;
   --mat-form-field-container-text-size: 0.9rem;
-  --mat-form-field-container-text-outline-line-height: 0.5rem;
+  --mat-form-field-container-text-outline-line-height: 0.5rem; 
 
-  --mdc-outlined-text-field-focus-outline-color: black;
-  --mdc-outlined-text-field-focus-label-text-color: black;
-}
+  --mdc-outlined-text-field-focus-outline-color:black;
+  --mdc-outlined-text-field-focus-label-text-color:black;
+
+  --mat-form-field-leading-icon-color:rgb(216, 51, 51);
+
+ }
 
 /* change input height */
-.mdc-text-field--outlined {
+ .mdc-text-field--outlined{
   height: 35px !important;
-}
+ }
 
 /* change input label position */
 .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
-  top: calc(var(--mat-form-field-container-height) / 3.5) !important;
-  margin-bottom: 25px !important;
-}
+    top:calc(var(--mat-form-field-container-height)/3.5) !important;
+    margin-bottom: 25px !important;
+  }
 
-/* change active label above position */
+  /* change active label above position */
 .mdc-text-field--outlined.mdc-notched-outline--upgraded
   .mat-mdc-floating-label--float-above,
 .mdc-text-field--outlined
@@ -59,50 +53,79 @@ table {
   transform: translateY(-24px) scale(0.75) !important;
   font-size: 16px !important;
 }
-/* change label or placeholder position */
-.mdc-text-field--outlined:not(.mdc-text-field--disabled)
+ /* change label or placeholder position */
+ .mdc-text-field--outlined:not(.mdc-text-field--disabled)
   .mdc-text-field__input {
-  position: relative;
-  top: -8px !important;
-}
+    position: relative;
+    top: -8px !important
+  }
 
-/* change error message color and position */
-.mat-mdc-form-field-error {
-  padding: 0 10px !;
-  color: red;
-}
+  /* change error message color and position */
+  .mat-mdc-form-field-error{
+    padding: 0 10px !;
+    color: red;
+  }
 
-.mat-mdc-card {
-  /* change card title font family  */
-  --mat-card-title-text-font: Roboto, sans-serif;
-  /* change card title line-height */
-  --mat-card-title-text-line-height: 1.5rem;
-  /* change card title font-size */
-  --mat-card-title-text-size: 1.375rem;
-  /* change card title letter spacing */
-  --mat-card-title-text-tracking: 0.5px;
-  /* change card title font-weight */
-  --mat-card-title-text-weight: 600;
+  
+  .mat-mdc-card{
+    /* change card title font family  */
+    --mat-card-title-text-font:Roboto, sans-serif;
+    /* change card title line-height */
+    --mat-card-title-text-line-height:1.5rem;
+    /* change card title font-size */
+    --mat-card-title-text-size:1.375rem;
+    /* change card title letter spacing */
+    --mat-card-title-text-tracking:0.5px;
+    /* change card title font-weight */
+    --mat-card-title-text-weight:600;
 
-  /* change card subtitle text color  */
-  --mat-card-subtitle-text-color: gray;
-  /* change card subtitle font family  */
-  --mat-card-subtitle-text-font: Roboto, sans-serif;
-  /* change card subtitle line-height */
-  --mat-card-subtitle-text-line-height: 1.5rem;
-  /* change card subtitle font-size */
-  --mat-card-subtitle-text-size: 1rem;
-  /* change card subtitle letter spacing */
-  --mat-card-subtitle-text-tracking: 0.009px;
-  /* change card subtitle font-weight */
-  --mat-card-subtitle-text-weight: 400;
-}
+    /* change card subtitle text color  */
+    --mat-card-subtitle-text-color:gray;
+    /* change card subtitle font family  */
+    --mat-card-subtitle-text-font:Roboto, sans-serif;
+    /* change card subtitle line-height */
+    --mat-card-subtitle-text-line-height:1.5rem;
+    /* change card subtitle font-size */
+    --mat-card-subtitle-text-size:1rem;
+    /* change card subtitle letter spacing */
+    --mat-card-subtitle-text-tracking:0.009px;
+    /* change card subtitle font-weight */
+    --mat-card-subtitle-text-weight:400;                               
+  }
 
-.mat-mdc-card-content {
-  display: flex;
-  padding: 0 10px !important;
-}
+  .mat-mdc-card-content{
+    display: flex;
+    padding: 0 10px !important;
+  }
 
-.mat-mdc-card-title {
-  color: brown;
-}
+  .mat-mdc-card-title{
+    color:brown;
+  }
+  
+  
+  .form-field{
+    display: flex;
+    align-items: flex-start;
+    gap:1rem
+  }
+  .flex-item {
+    flex: 1 1 30%;
+    min-width: 200px;
+  }
+  .full-width {
+    width: 100%;
+  }
+
+  mat-card.card {
+    background-color: white; 
+    border-radius: 16px; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    padding: 16px;
+    margin-bottom: 16px; 
+  }
+  
+  mat-card.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9;
+  }

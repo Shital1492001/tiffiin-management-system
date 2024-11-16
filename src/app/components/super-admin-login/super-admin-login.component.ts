@@ -13,7 +13,7 @@ import { Login, Token } from '../../models/userlogin';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CustomPasswordValidators } from '../../customValidators/custom-password-validators';
 @Component({
   selector: 'app-super-admin-login',
@@ -26,6 +26,7 @@ import { CustomPasswordValidators } from '../../customValidators/custom-password
     ReactiveFormsModule,
     MatButtonModule,
     CommonModule,
+    RouterModule
   ],
   templateUrl: './super-admin-login.component.html',
   styleUrl: './super-admin-login.component.css',
@@ -33,13 +34,13 @@ import { CustomPasswordValidators } from '../../customValidators/custom-password
 export class SuperAdminLoginComponent {
   invalidCredential: string = '';
   // passwordValidity: string = '';
-  strongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  // strongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
   constructor(private authService: AuthService, private route: Router) {}
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern(this.strongPasswordRegx),
+      // Validators.pattern(this.strongPasswordRegx),
       Validators.minLength(8),
       CustomPasswordValidators.logPatternError(),
     ]),

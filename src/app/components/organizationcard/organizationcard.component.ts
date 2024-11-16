@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter,Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Organization } from '../../models/organizations';
 import { MatDividerModule } from '@angular/material/divider';
@@ -31,7 +31,7 @@ export class OrganizationCardComponent {
 
   @Output() deleteEventEmitter = new EventEmitter<string>();
 
-  private dialog = inject(MatDialog);
+  constructor(private dialog:MatDialog){}
 
   openDialog(
     enterAnimationDuration: string,
