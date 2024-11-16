@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CustomPasswordValidators } from '../../customValidators/custom-password-validators';
+import { markAllControlsAsDirtyAndTouched } from '../../../utils';
+import { SnackbarService } from '../../services/snackbar.service';
 @Component({
   selector: 'app-super-admin-login',
   standalone: true,
@@ -34,12 +36,16 @@ export class SuperAdminLoginComponent {
   invalidCredential: string = '';
   // passwordValidity: string = '';
   strongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-  constructor(private authService: AuthService, private route: Router) {}
+  constructor(
+    private authService: AuthService,
+    private route: Router,
+    private snackbar: SnackbarService
+  ) {}
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern(this.strongPasswordRegx),
+      // Validators.pattern(this.strongPasswordRegx),
       Validators.minLength(8),
       CustomPasswordValidators.logPatternError(),
     ]),
@@ -161,9 +167,11 @@ export class SuperAdminLoginComponent {
         },
         error: (error) => {
           console.log('error', error);
-          this.invalidCredential = 'Invalid Credentials';
+          this.snackbar.showError('invalid credentials');
         },
       });
+    } else {
+      markAllControlsAsDirtyAndTouched(this.loginForm);
     }
   }
 }

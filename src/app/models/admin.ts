@@ -17,7 +17,13 @@ export interface admin {
   _id: string;
 }
 
+export interface Pagination {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+}
 export interface allAdminStatusResponses {
   statuscode: number;
   data: admin[];
+  pagination: Pagination;
 }

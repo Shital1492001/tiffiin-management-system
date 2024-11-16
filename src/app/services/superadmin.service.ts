@@ -31,10 +31,14 @@ export class SuperadminService {
     console.log(response);
     return response;
   }
-  getRequestsByStatus(status: string): Observable<allAdminStatusResponses> {
+  getRequestsByStatus(
+    status: string,
+    page: number,
+    limit: number
+  ): Observable<allAdminStatusResponses> {
     console.log('inside getRequestsByStatus');
     // http://localhost:5000/api/superadmin/getalladminrequest?status=rejected
-    const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest?status=${status}`;
+    const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest?status=${status}&page=${page}&limit=${limit}`;
     console.log('apiUrl', apiUrl);
     return this.http.get<allAdminStatusResponses>(apiUrl);
   }
@@ -48,5 +52,13 @@ export class SuperadminService {
     const rejectAdminUrl =
       environment.apiEndpointSuperAdmin + '/rejectadmin/' + id;
     return this.http.put<Object>(rejectAdminUrl, {});
+  }
+
+  searchAdmin(
+    querySearch: string,
+    approvalStatus: string
+  ): Observable<allAdminStatusResponses> {
+    const rejectAdminUrl = `${environment.apiEndpointSuperAdmin}/searchAdminApproval?query=${querySearch}&approval_status=${approvalStatus}`;
+    return this.http.get<allAdminStatusResponses>(rejectAdminUrl);
   }
 }

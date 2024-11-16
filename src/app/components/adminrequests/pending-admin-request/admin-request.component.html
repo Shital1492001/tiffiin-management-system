@@ -3,7 +3,14 @@
     <div class="serach-bar">
       <mat-form-field class="search" appearance="outline">
         <mat-label>Search Admins</mat-label>
-        <input class="input" matInput placeholder="Search by name or email" />
+        <input
+          class="input"
+          [(ngModel)]="searchQuery"
+          matInput
+          placeholder="Search by name or email"
+          (keyup)="onSearchInput($event)"
+          #nameNode
+        />
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </div>
@@ -20,11 +27,21 @@
       </mat-button-toggle-group>
     </div>
   </div>
-
   <app-status-table
     [adminsArray]="adminsArray"
     (emitterApprove)="updateStatusAprroved($event)"
     (emitterReject)="updateStatusRejected($event)"
-    (pageChange)="onTablePageChange($event)"
-  ></app-status-table>
+    [totalItems]="totalItems"
+  >
+  </app-status-table>
+  <!-- <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    [length]="totalItems"
+    [pageSize]="totalPages"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  ></mat-paginator> -->
+
+  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"> -->
+  <!-- </mat-paginator> -->
 </div>
