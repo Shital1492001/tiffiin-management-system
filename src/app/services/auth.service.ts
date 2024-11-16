@@ -47,7 +47,7 @@ export class AuthService {
 
   getUserTypeByToken(): Observable<UserByToken> {
     const baseUrlUserType = environment.apiEndpointauth + '/getuserbytoken';
-    const userData = this.http.post<UserByToken>(baseUrlUserType, {});
+    const userData = this.http.get<UserByToken>(baseUrlUserType);
     return userData;
   }
 
