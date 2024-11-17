@@ -1,47 +1,50 @@
-<div>
-  <div class="admin-login">
+<div class="container">
+  <mat-card class="admin-login">
     <div class="image-section">
       <img
         src="https://img.lovepik.com/element/45009/2860.png_300.png"
         alt="login image"
       />
     </div>
-    <div class="card">
+    <div class="form-section">
       <div class="login-section">
-        <mat-card-header>SuperAdmin Login</mat-card-header>
+        <mat-card-header>Tiffin Services</mat-card-header>
         <form [formGroup]="loginForm" (submit)="loginAdmin()">
           <div class="login">
-            <div>
+            <div class="email-input">
               <mat-form-field appearance="outline">
-                <mat-label>Email Id</mat-label>
-                <div>
-                  <div>
-                    <mat-icon>person_outline</mat-icon>
-                  </div>
-                  <input
-                    appearance="outlined"
-                    matInput
-                    formControlName="email"
-                    placeholder="Ex. pat@example.com"
-                  />
-                </div>
+                <mat-label>Email</mat-label>
+                <input
+                  matInput
+                  placeholder="Enter your email"
+                  formControlName="email"
+                  type="email"
+                />
+                <mat-icon matPrefix>email</mat-icon>
                 <mat-error>{{ emailErrorMessage }} </mat-error>
               </mat-form-field>
             </div>
-            <div>
+            <div class="password-input">
               <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <div>
-                  <div>
-                    <mat-icon>lock</mat-icon>
-                  </div>
-                  <input
-                    class="input"
-                    matInput
-                    type="password"
-                    formControlName="password"
-                  />
-                </div>
+                <input
+                  matInput
+                  placeholder="Enter your password"
+                  formControlName="password"
+                  [type]="hide ? 'password' : 'text'"
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Toggle password visibility'"
+                  [attr.aria-pressed]="!hide"
+                >
+                  <mat-icon>{{
+                    hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+                <mat-icon matPrefix>lock</mat-icon>
                 <mat-error>{{ passwordErrorMessage }}</mat-error>
               </mat-form-field>
             </div>
@@ -60,5 +63,5 @@
         </form>
       </div>
     </div>
-  </div>
+  </mat-card>
 </div>
