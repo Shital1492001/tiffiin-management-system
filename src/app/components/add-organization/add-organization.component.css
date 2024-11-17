@@ -1,7 +1,9 @@
 .form-heading {
   text-align: center;
 }
-
+.full-width{
+  margin-top: 10px;
+}
 .mat-expansion-panel{
   background-color: white;
   margin-bottom: 16px;

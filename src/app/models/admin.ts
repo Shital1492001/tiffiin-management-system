@@ -1,6 +1,6 @@
 interface RoleDetails {
   organization_id: string;
-  organization_name: string;
+  org_location: string;
   approval_status: string;
 }
 
@@ -64,3 +64,11 @@ export interface UserByToken {
   statuscode: number;
   data: Admin;
 }
+
+  export interface AdminRegister {
+    // data:Admin[];
+    message: string;
+    statuscode: number;
+    _id: string;
+    token: string;
+  }

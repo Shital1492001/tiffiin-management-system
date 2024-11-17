@@ -17,12 +17,12 @@ div {
   top: -10px !important ;
 }
 
-.mat-mdc-raised-button:not(:disabled) {
+/* .mat-mdc-raised-button:not(:disabled) {
   margin-left: 0;
   margin-top: 1em;
   background-color: #e43e38;
   color: white;
-}
+} */
 .card {
   display: flex;
   background-color: white;
@@ -86,16 +86,4 @@ mat-error {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.mat-icon.mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color {
-  position: relative;
-  top: -10px !important ;
-}
-
-.mat-mdc-raised-button:not(:disabled) {
-  margin-left: 0;
-  margin-top: 1em;
-  background-color: #e43e38;
-  color: white;
 }

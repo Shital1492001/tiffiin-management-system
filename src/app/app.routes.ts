@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { SuperAdminLoginComponent } from './components/super-admin-login/super-admin-login.component';
 import { AuthGuard } from './guards/authguard.guard';
-import { AdminDashboardComponent } from './components/admin-approval-rights/admin-approval-rights.component';
 import { SuperadminDashboardComponent } from './components/superadmin-dashboard/superadmin-dashboard.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AdminRegistrationComponent } from './components/admin-registration/admin-registration.component';
+import { AdminDashboardComponent } from './components/admin-approval-rights/admin-approval-rights.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +18,10 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'admin-signup',
+    component: AdminRegistrationComponent,
+  },
+  {
     path: 'login',
     component: SuperAdminLoginComponent,
   },
@@ -25,12 +29,6 @@ export const routes: Routes = [
     path: 'status',
     component: AdminDashboardComponent,
   },
-
-  {
-    path: 'status',
-    component: AdminDashboardComponent,
-  },
-
   {
     path: 'admin-signup',
     component: AdminRegistrationComponent,
@@ -83,6 +81,14 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'view-organization/:id',
+        loadComponent: () =>
+          import('./components/add-organization/add-organization.component').then(
+            (m) => m.AddOrganizationComponent
+          ),
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'admin',
         loadComponent: () =>
           import('./components/admin-dashboard/admin-view/admin-view.component'
@@ -101,13 +107,5 @@ export const routes: Routes = [
         component: PageNotFoundComponent,
       },
     ],
-  },
-  {
-    path: 'view-organization/:id',
-    loadComponent: () =>
-      import('./components/add-organization/add-organization.component').then(
-        (m) => m.AddOrganizationComponent
-      ),
-    canActivate: [AuthGuard],
   },
 ];

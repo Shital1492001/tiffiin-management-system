@@ -10,7 +10,7 @@
 
   <div class="boxes">
     <div class="mat-card-container">
-      <mat-card class="mat-elevation-z3">
+      <mat-card class="card">
         <mat-card-title class="title">
           {{
             role === "superadmin" ? "Pending Admins" : "Pending Retailers"
@@ -23,7 +23,7 @@
     </div>
 
     <div class="mat-card-container">
-      <mat-card class="mat-elevation-z3">
+      <mat-card class="card">
         <mat-card-title class="title">
           {{
             role === "superadmin" ? "Approved Admins" : "Approved Retailers"
@@ -36,7 +36,7 @@
     </div>
 
     <div class="mat-card-container">
-      <mat-card class="mat-elevation-z3">
+      <mat-card class="card">
         <mat-card-title class="title">{{
           role === "superadmin" ? "Rejected Admins" : "Rejected Retailers"
         }}</mat-card-title>

@@ -32,7 +32,7 @@
                 loc.get("contactNumber")?.value
               }}</mat-panel-description>
               @if(locations.length > 1 && !viewMode){
-              <button mat-icon-button color="warn" (click)="removeLocation(i)">
+              <button mat-icon-button (click)="removeLocation(i)">
                 <mat-icon>delete</mat-icon>
               </button>
               }

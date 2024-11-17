@@ -49,17 +49,13 @@
               <button mat-raised-button type="submit">Login</button>
             </div>
             <mat-error>{{ invalidCredential }}</mat-error>
-            <div>
-              <mat-card-footer
-                ><a routerLink="/signup" class="link">Sign up</a> as Admin
-              </mat-card-footer>
-            </div>
-            <div>
-              <mat-card-footer>
-                Forgot password?
-                <a routerLink="/forgot-password" class="link">Click here</a>
-              </mat-card-footer>
-            </div>
+            <mat-card-footer
+              ><a routerLink="/admin-signup" class="link">Sign up</a> as Admin
+            </mat-card-footer>
+            <mat-card-footer>
+              Forgot password?
+              <a routerLink="/forgot-password" class="link">Click here</a>
+            </mat-card-footer>
           </div>
         </form>
       </div>
