@@ -1,4 +1,5 @@
 export const environment = {
+  production: false,
   development: true,
   apiEndpointauth: 'http://localhost:5000/api/auth',
 

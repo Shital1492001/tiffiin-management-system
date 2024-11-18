@@ -1,10 +1,10 @@
-interface roleDetails {
+interface RoleDetails {
   organization_id: string;
   organization_name: string;
   approval_status: string;
 }
 
-export interface admin {
+export interface Admin {
   username: string;
   password: string;
   email: string;
@@ -13,11 +13,17 @@ export interface admin {
   //   created_at: Date;
   //   updated_at: Date;
   role_id: string;
-  role_specific_details: roleDetails;
+  role_specific_details: RoleDetails;
   _id: string;
 }
 
-export interface allAdminStatusResponses {
+export interface Pagination {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+}
+export interface AllAdminStatusResponses {
   statuscode: number;
-  data: admin[];
+  data: Admin[];
+  pagination: Pagination;
 }

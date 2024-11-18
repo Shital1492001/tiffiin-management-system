@@ -15,6 +15,7 @@
     <ng-container matColumnDef="organization_name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>organization</th>
       <td mat-cell *matCellDef="let element">
+        @if (element.role_specific_details.organization_name){}
         {{ element.role_specific_details.organization_name }}
       </td>
     </ng-container>
@@ -27,10 +28,16 @@
     <ng-container matColumnDef="_id">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon class="approved" (click)="emitterApprove.emit(element._id)"
+        <mat-icon
+          class="approved"
+          (click)="emitterApprove.emit(element._id)"
+          *ngIf="element.role_specific_details.approval_status != 'approved'"
           >check_circle</mat-icon
         >
-        <mat-icon class="rejected" (click)="emitterReject.emit(element._id)"
+        <mat-icon
+          class="rejected"
+          (click)="emitterReject.emit(element._id)"
+          *ngIf="element.role_specific_details.approval_status != 'rejected'"
           >cancel</mat-icon
         >
       </td>
@@ -45,9 +52,29 @@
 
   <mat-paginator
     [pageSizeOptions]="[5, 10, 20]"
+    [length]="totalItems"
     (page)="onPageChange($event)"
+    [pageSize]="5"
     showFirstLastButtons
     aria-label="Select page of periodic elements"
   >
   </mat-paginator>
+  <!-- <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    (page)="onPageChange($event)"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator> -->
+  <!-- <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    [length]="100"
+    (page)="onPageChange($event)"
+    [pageSize]="5"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator> -->
 </div>
