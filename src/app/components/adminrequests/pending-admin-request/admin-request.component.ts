@@ -89,7 +89,7 @@ export class AdminRequestComponent {
       next: (obj) => {
         console.log(obj);
         window.alert(`Admin with id ${id} is approved successfully`);
-        this.router.navigate(['statusDataTable']);
+        this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
       },
       error: (err) => {
         console.log(err);
@@ -104,7 +104,7 @@ export class AdminRequestComponent {
       next: (obj) => {
         console.log(obj);
         window.alert(`are you sure you want reject admin with ${id}`);
-        this.router.navigate(['statusDataTable']);
+        this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
       },
       error: (err) => {
         console.log(err);

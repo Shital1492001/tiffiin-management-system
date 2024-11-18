@@ -44,11 +44,15 @@ export class SuperadminService {
   }
 
   approveAdminById(id: string): Observable<Object> {
+    console.log('inside approveAdminById----id with admin', id);
+
     const approveAdminUrl =
       environment.apiEndpointSuperAdmin + '/approveadmin/' + id;
     return this.http.put<Object>(approveAdminUrl, {});
   }
   rejectAdminById(id: string): Observable<Object> {
+    console.log('inside rejectAdminById----id with admin', id);
+
     const rejectAdminUrl =
       environment.apiEndpointSuperAdmin + '/rejectadmin/' + id;
     return this.http.put<Object>(rejectAdminUrl, {});
