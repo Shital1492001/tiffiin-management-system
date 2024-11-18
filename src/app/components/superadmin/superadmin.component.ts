@@ -4,11 +4,14 @@ import { Organization } from '../../models/organizations';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { OrganizationCardComponent } from '../organizationcard/organizationcard.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-superadmin',
   standalone: true,
-  imports: [OrganizationCardComponent, CommonModule, MatPaginatorModule],
+  imports: [OrganizationCardComponent, CommonModule, MatPaginatorModule,MatCardModule,MatIconModule,MatFormFieldModule],
   templateUrl: './superadmin.component.html',
   styleUrls: ['./superadmin.component.css'],
 })
@@ -16,7 +19,7 @@ export class SuperadminComponent implements OnInit {
   organizationsArray: Organization[] = [];
   constructor(private organizationService: OrganizationService) { }
   paginatedOrganizations: Organization[] = [];
-  pageSize = 3;
+  pageSize = 4; 
   currentPage = 0;
   totalItems = 0;
   totalPages = 0;
@@ -28,10 +31,10 @@ export class SuperadminComponent implements OnInit {
     this.organizationService.getAllOrganizationsApi(page, limit).subscribe({
       next: (orgData) => {
         console.log(orgData);
-        this.organizationsArray = orgData.data;
-        this.totalItems = orgData.pagination.totalItems;
-        this.totalPages = Math.ceil(this.totalItems / this.pageSize);
-        this.updatePaginatedOrganizations();
+        this.organizationsArray = orgData.data; 
+        this.totalItems = orgData.pagination.totalItems; 
+        this.totalPages = Math.ceil(this.totalItems / this.pageSize); 
+        this.updatePaginatedOrganizations(); 
       },
       error: (err) => {
         console.log(err);

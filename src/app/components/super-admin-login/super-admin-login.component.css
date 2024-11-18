@@ -1,4 +1,4 @@
-div {
+.container {
   height: 100%;
   display: flex;
   align-items: center;
@@ -11,39 +11,31 @@ div {
   justify-content: center;
   color: rgb(19, 20, 20);
 }
-
+.mat-mdc-card-header {
+  justify-content: center;
+}
 .mat-icon.mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color {
   position: relative;
   top: -10px !important ;
 }
 
-.mat-mdc-raised-button:not(:disabled) {
-  margin-left: 0;
-  margin-top: 1em;
-  background-color: #e43e38;
-  color: white;
-}
-.card {
+.mat-mdc-card.admin-login {
   display: flex;
+  flex-direction: row;
   background-color: white;
-  width: 400px;
+  width: 800px;
   height: 450px;
+  box-shadow: 0 8px 16px rgba(0.1, 0.1, 0.1, 0.1);
   justify-content: center;
   align-items: center;
 }
-mat-form-field {
+.mat-mdc-form-field {
   margin-bottom: 15px;
   width: 350px;
 }
-mat-label {
-  margin-left: 25px;
-}
-mat-card-header {
+.mat-mdc-card-header {
   font-size: larger;
   margin-bottom: 40px;
-}
-mat-error {
-  font-weight: 600;
 }
 .input-icon {
   display: flex;
@@ -72,30 +64,18 @@ mat-error {
   flex-direction: column;
   justify-content: space-evenly;
 }
-.admin-login {
-  display: flex;
-  border-radius: 5px;
-  box-shadow: 0 8px 16px rgba(0.1, 0.1, 0.1, 0.1);
-  background-color: white;
-  width: 800px;
-  height: 450px;
-  justify-content: center;
-  align-items: center;
-}
+
 .login-page {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.mat-icon.mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color {
-  position: relative;
-  top: -10px !important ;
+.mat-form-field .mat-form-field-flex {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.mat-mdc-raised-button:not(:disabled) {
-  margin-left: 0;
-  margin-top: 1em;
-  background-color: #e43e38;
-  color: white;
+.mat-form-field .mat-form-field-prefix {
+  margin-right: 16px;
 }

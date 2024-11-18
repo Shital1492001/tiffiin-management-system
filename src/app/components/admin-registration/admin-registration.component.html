@@ -63,7 +63,7 @@
           <mat-label>Organization Location</mat-label>
           <mat-select formControlName="orgLocation" (selectionChange)="onLocationChange($event.value)">
             @for(location of locations; track location) {
-            <mat-option [value]="location.loc">{{
+            <mat-option [value]="location.loc" itemSize="totalItems">{{
                 location.loc
             }}</mat-option>
             }

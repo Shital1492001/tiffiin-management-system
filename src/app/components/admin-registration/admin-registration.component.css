@@ -5,7 +5,7 @@
     font-weight: bold;
   }
   .card{
-    /* margin-top: 20%; */
+    margin-top: 7%;
     margin-left: 10%;
     height: 70%;
     width: 80%;
@@ -30,7 +30,7 @@
 
 .scroll-viewport {
   height: 250px;
-  width: 480px;
+  width: 500px;
 }
 
 .scroll-item {

@@ -1,5 +1,5 @@
-.navbar {
-  background-color: #e43e38;
+.custom-toolbar {
+  /* background-color: #e43e38; */
   position: fixed;
   top: 0;
   width: 100%;
@@ -10,6 +10,7 @@
   color: white;
 }
 .content {
+  /* margin-top: 0px; */
   padding: 24px;
   background-color: #f8f9fa;
   height: calc(100vh-56px);
