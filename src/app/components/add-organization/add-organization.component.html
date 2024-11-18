@@ -1,7 +1,7 @@
-<mat-card appearance="outlined">
+<mat-card appearance="outlined" class="card">
   <mat-card-content>
     <form [formGroup]="organizationForm" (ngSubmit)="onSubmit()">
-      <h3 class="form-heading">Manage Organization</h3>
+      <h2 class="form-heading">Manage Organization</h2>
 
       <mat-form-field appearance="outline">
         <mat-label>Organization Name</mat-label>
@@ -23,7 +23,7 @@
           >
             <mat-expansion-panel-header>
               <mat-panel-title>{{
-                loc.get("loc")?.value || "Location"
+                loc.get("branchName")?.value || "Location"
               }}</mat-panel-title>
               <mat-panel-description>{{
                 loc.get("email")?.value
@@ -32,7 +32,7 @@
                 loc.get("contactNumber")?.value
               }}</mat-panel-description>
               @if(locations.length > 1 && !viewMode){
-              <button mat-icon-button (click)="removeLocation(i)">
+              <button mat-icon-button class="icon-button" type="delete" (click)="removeLocation(i)">
                 <mat-icon>delete</mat-icon>
               </button>
               }

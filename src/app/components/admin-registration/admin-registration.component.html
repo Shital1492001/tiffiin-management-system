@@ -48,11 +48,16 @@
         <mat-form-field appearance="outline" class="flex-item">
           <mat-label>Organization</mat-label>
           <mat-select formControlName="organizationId" (selectionChange)="onOrganizationChange($event.value)">
-            <cdk-virtual-scroll-viewport itemSize="totalItems" class="scroll-viewport">
+            <!-- <cdk-virtual-scroll-viewport itemSize="totalItems" class="scroll-viewport">
               <mat-option *cdkVirtualFor="let organization of organizations" [value]="organization._id" class="scroll-item">
                 {{ organization.org_name }}
               </mat-option>
-            </cdk-virtual-scroll-viewport>
+            </cdk-virtual-scroll-viewport> -->
+            @for(organization of organizations; track organization){
+            <mat-option [value]="organization._id">
+              {{ organization.org_name }}
+            </mat-option>
+          }
           </mat-select>
           <mat-icon matPrefix>corporate_fare</mat-icon>
           <mat-error>
