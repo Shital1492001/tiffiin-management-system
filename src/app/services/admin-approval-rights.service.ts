@@ -32,12 +32,28 @@ export class AdminApprovalRightsService {
     return response;
   }
 
-  getRequestsByStatus(status: string): Observable<AllStatusResponses> {
+  getRequestsByStatus(
+    status: string,
+    page: number,
+    limit: number
+  ): Observable<AllStatusResponses> {
     console.log('inside getRequestsByStatus', status);
-    const apiUrl = `${environment.apiEndpointAdmin}/getallRetailers?status=${status}`;
+    const apiUrl = `${environment.apiEndpointAdmin}/getallRetailers?status=${status}&page=${page}&limit=${limit}`;
     console.log('apiUrl', apiUrl);
     return this.http.get<AllStatusResponses>(apiUrl);
   }
+
+  // getRequestsByStatus(
+  //   status: string,
+  //   page: number,
+  //   limit: number
+  // ): Observable<AllAdminStatusResponses> {
+  //   console.log('inside getRequestsByStatus');
+  //   // http://localhost:5000/api/superadmin/getalladminrequest?status=rejected
+  //   const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest?status=${status}&page=${page}&limit=${limit}`;
+  //   console.log('apiUrl', apiUrl);
+  //   return this.http.get<AllAdminStatusResponses>(apiUrl);
+  // }
 
   approveRetailer(id: string): Observable<Object> {
     const approveRetailerUrl =

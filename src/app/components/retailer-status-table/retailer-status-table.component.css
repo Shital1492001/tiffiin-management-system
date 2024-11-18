@@ -20,14 +20,11 @@ div {
 
 .rejected {
   color: red;
-  /* transition: color 0.3s ease, transform 0.3s ease; */
-  transition: opacity 0.3s ease;
 }
 
 .rejected:hover {
   color: red;
   transform: scale(1.2);
-  opacity: 0.8;
   cursor: pointer;
 }
 
