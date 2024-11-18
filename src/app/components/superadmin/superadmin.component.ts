@@ -20,6 +20,7 @@ import { SnackbarService } from '../../services/snackbar.service';
   templateUrl: './superadmin.component.html',
   styleUrls: ['./superadmin.component.css'],
 })
+
 export class SuperadminComponent implements OnInit {
   organizationsArray: Organization[] = [];
   notFoundMessage=""
@@ -49,7 +50,11 @@ export class SuperadminComponent implements OnInit {
   getAllOrganizations(page: number, limit: number): void {
     this.organizationService.getAllOrganizationsApi(page, limit).subscribe({
       next: (orgData) => {
-        console.log(orgData);
+        console.log("data",orgData);
+        this.organizationsArray = orgData.data; 
+        this.totalItems = orgData.pagination.totalItems; 
+        this.totalPages = Math.ceil(this.totalItems / this.pageSize); 
+        this.updatePaginatedOrganizations(); 
         this.organizationsArray = orgData.data; 
         this.totalItems = orgData.pagination.totalItems; 
         this.totalPages = Math.ceil(this.totalItems / this.pageSize); 

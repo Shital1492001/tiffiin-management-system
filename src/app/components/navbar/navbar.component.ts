@@ -92,7 +92,11 @@ export class NavbarComponent {
   }
   collapsed: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService,private snackBar:SnackbarService) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private snackBar: SnackbarService
+  ) {}
 
   collapsedState() {
     this.collapsed = !this.collapsed;
@@ -106,7 +110,7 @@ export class NavbarComponent {
   logout() {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('role_id');
-    this.snackBar.showError('Logged out successfully...')
+    this.snackBar.showError('Logged out successfully...');
     // window.alert('Logged out successfully...');
     this.router.navigate(['/']);
   }

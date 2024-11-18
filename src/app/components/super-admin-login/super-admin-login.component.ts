@@ -28,21 +28,26 @@ import { SnackbarService } from '../../services/snackbar.service';
     ReactiveFormsModule,
     MatButtonModule,
     CommonModule,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './super-admin-login.component.html',
   styleUrl: './super-admin-login.component.css',
 })
 export class SuperAdminLoginComponent {
   invalidCredential: string = '';
-  // passwordValidity: string = '';
-  // strongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
   hide = true;
-  constructor(private authService: AuthService, private route: Router, private snackbar: SnackbarService) { }
+  // passwordValidity: string = '';
+  strongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  constructor(
+    private authService: AuthService,
+    private route: Router,
+    private snackbar: SnackbarService
+  ) {}
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
+      // Validators.pattern(this.strongPasswordRegx),
       // Validators.pattern(this.strongPasswordRegx),
       Validators.minLength(8),
       CustomPasswordValidators.logPatternError(),

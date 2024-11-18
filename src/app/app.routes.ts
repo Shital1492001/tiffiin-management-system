@@ -24,11 +24,16 @@ export const routes: Routes = [
     component: AdminRegistrationComponent,
   },
   {
+    path: 'admin-signup',
+    component: AdminRegistrationComponent,
+  },
+  {
     path: 'navbar',
     loadComponent: () =>
       import('./components/navbar/navbar.component').then(
         (m) => m.NavbarComponent
       ),
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'home',
@@ -36,7 +41,6 @@ export const routes: Routes = [
           import(
             './components/superadmin-dashboard/superadmin-dashboard.component'
           ).then((m) => m.SuperadminDashboardComponent),
-        canActivate: [AuthGuard],
       },
       {
         path: 'statusDataTable',
@@ -44,7 +48,6 @@ export const routes: Routes = [
           import(
             './components/adminrequests/pending-admin-request/admin-request.component'
           ).then((m) => m.AdminRequestComponent),
-        canActivate: [AuthGuard],
       },
       {
         path: 'view-all-organizations',
@@ -52,7 +55,6 @@ export const routes: Routes = [
           import('./components/superadmin/superadmin.component').then(
             (m) => m.SuperadminComponent
           ),
-        canActivate: [AuthGuard],
       },
       {
         path: 'add-organization',
@@ -60,7 +62,6 @@ export const routes: Routes = [
           import(
             './components/add-organization/add-organization.component'
           ).then((m) => m.AddOrganizationComponent),
-        canActivate: [AuthGuard],
       },
       {
         path: 'update-organization/:id',
@@ -68,6 +69,36 @@ export const routes: Routes = [
           import(
             './components/add-organization/add-organization.component'
           ).then((m) => m.AddOrganizationComponent),
+      },
+      {
+        path: 'view-organization/:id',
+        loadComponent: () =>
+          import(
+            './components/add-organization/add-organization.component'
+          ).then((m) => m.AddOrganizationComponent),
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'view-organization/:id',
+        loadComponent: () =>
+          import(
+            './components/add-organization/add-organization.component'
+          ).then((m) => m.AddOrganizationComponent),
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'admin',
+        loadComponent: () =>
+          import(
+            './components/admin-dashboard/admin-view/admin-view.component'
+          ).then((m) => m.AdminViewComponent),
+      },
+      {
+        path: 'status',
+        loadComponent: () =>
+          import(
+            './components/admin-approval-rights/admin-approval-rights.component'
+          ).then((m) => m.AdminDashboardComponent),
         canActivate: [AuthGuard],
       },
       {
@@ -79,23 +110,10 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'admin',
-        loadComponent: () =>
-          import('./components/admin-dashboard/admin-view/admin-view.component'
-          ).then((m) => m.AdminViewComponent),
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'status',
-        loadComponent: () =>
-          import('./components/admin-approval-rights/admin-approval-rights.component'
-          ).then((m) => m.AdminDashboardComponent),
-        canActivate: [AuthGuard],
-      },
-      {
         path: '**',
         component: PageNotFoundComponent,
       },
     ],
   },
+  
 ];
