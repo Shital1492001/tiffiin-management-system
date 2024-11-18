@@ -28,7 +28,7 @@ import { SnackbarService } from '../../services/snackbar.service';
     ReactiveFormsModule,
     MatButtonModule,
     CommonModule,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './super-admin-login.component.html',
   styleUrl: './super-admin-login.component.css',
@@ -41,7 +41,7 @@ export class SuperAdminLoginComponent {
     private authService: AuthService,
     private route: Router,
     private snackbar: SnackbarService
-  ) { }
+  ) {}
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
