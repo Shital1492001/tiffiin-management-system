@@ -1,9 +1,3 @@
-.org-card {
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer; 
-}
 .mat-card-title{
   font-weight: 900;
 }
@@ -14,7 +8,6 @@
   width: 100px;
   border-radius: 50px;
 }
-
 .status-active {
   color: green; 
   font-weight: bold;
@@ -41,7 +34,7 @@
   margin-bottom: 8px;
 }
 
-.edit-button{
+/* .edit-button{
   background-color: green;
   color: white;
 }
@@ -49,7 +42,7 @@
 .delete{
   background-color: #E43E38;
   color: white;
-}
+} */
 
 
 

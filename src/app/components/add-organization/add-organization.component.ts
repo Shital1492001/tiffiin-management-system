@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -48,6 +47,7 @@ export class AddOrganizationComponent {
   isUpdateMode: boolean = false;
   viewMode: boolean = false;
   organizationId: string = '';
+  formTitle: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -67,6 +67,14 @@ export class AddOrganizationComponent {
     const routePath = this.route.snapshot.routeConfig?.path || '';
     this.viewMode = routePath.startsWith('view-organization') && !!this.organizationId;
     this.isUpdateMode = !this.viewMode && !!this.organizationId;
+    
+    if (this.viewMode) {
+      this.formTitle = 'View Organization Details';
+    } else if (this.isUpdateMode) {
+      this.formTitle = 'Update Organization';
+    } else {
+      this.formTitle = 'Add New Organization';
+    }
     if (this.viewMode || this.isUpdateMode) {
       this.loadOrganizationData(this.organizationId);
     } else {
@@ -83,6 +91,7 @@ export class AddOrganizationComponent {
     this.organizationService.getOrganizationById(organizationId).subscribe({
       next: (responseData) => {
         const organization = responseData.data;
+        console.log("load",organization);
         if (!organization) {
           console.error('Organization not found.');
           this.snackbar.showError('Organization not found!');
@@ -140,6 +149,7 @@ export class AddOrganizationComponent {
   addLocation(): void {
     this.locations.push(this.createLocationFormGroup());
     this.collapsedStates.push(false); 
+    this.collapsedStates.push(false); 
   }
 
   toggleLocation(index: number): void {
@@ -152,6 +162,7 @@ export class AddOrganizationComponent {
   getCollapsedValue(locationIndex: number): boolean {
     return this.collapsedStates[locationIndex];
   }
+  
   
   removeLocation(index: number): void {
     this.locations.removeAt(index);
@@ -264,12 +275,16 @@ export class AddOrganizationComponent {
       }
     };
   }
-
   onSubmit(): void {
     if (this.isUpdateMode) {
       const formData = { ...this.organizationForm.value };
       formData.org_name = formData.orgName;
-      formData.orgLocation = [...formData.orgLocation];
+      formData.org_location = formData.orgLocation.map((location: any) => ({
+        loc: location.branchName,
+        address: location.address,
+        loc_contact: location.contactNumber,
+        loc_email: location.email,
+      }));
       this.organizationService
         .updateOrganization(this.organizationId, formData)
         .subscribe({
@@ -277,7 +292,7 @@ export class AddOrganizationComponent {
             if (responseData.statuscode === 200) {
               console.log('Organization updated successfully', responseData);
               this.snackbar.showSuccess('Organization updated successfully!');
-              this.router.navigate(['/superAdminDashboard']);
+              this.router.navigate(['/navbar/view-all-organizations']);
             }
           },
           error: (error) => {
@@ -289,13 +304,19 @@ export class AddOrganizationComponent {
       if (this.organizationForm.valid) {
         const formData = { ...this.organizationForm.value };
         formData.org_name = formData.orgName;
-        formData.orgLocation = [...formData.orgLocation];
+        formData.org_location = formData.orgLocation.map((location: any) => ({
+        loc: location.branchName,
+        address: location.address,
+        loc_contact: location.contactNumber,
+        loc_email: location.email,
+      }));
+        console.log("add",formData)
         this.organizationService.addOrganizations(formData).subscribe({
           next: (responseData) => {
             if (responseData.statuscode === 201) {
               console.log('Organization added successfully', responseData);
               this.snackbar.showSuccess('Organization added successfully!');
-              this.router.navigate(['/superAdminDashboard']);
+              this.router.navigate(['/navbar/view-all-organizations']);
             }
           },
           error: (error) => {
