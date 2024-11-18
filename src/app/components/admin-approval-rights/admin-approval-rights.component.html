@@ -2,8 +2,14 @@
   <div class="control-section">
     <div class="serach-bar">
       <mat-form-field class="search" appearance="outline">
-        <mat-label>Search Admins</mat-label>
-        <input class="input" matInput placeholder="Search by name or email" />
+        <mat-label>Search Retailers</mat-label>
+        <input
+          class="input"
+          [(ngModel)]="searchQuery"
+          matInput
+          placeholder="Search by name or email"
+          (keyup)="onSearchInput($event)"
+        />
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </div>

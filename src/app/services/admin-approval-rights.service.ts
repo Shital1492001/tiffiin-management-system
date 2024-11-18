@@ -50,4 +50,12 @@ export class AdminApprovalRightsService {
       environment.apiEndpointAdmin + '/rejectRetailer/' + id;
     return this.http.put<Object>(approveRetailerUrl, {});
   }
+
+  searchRetailer(
+    querySearch: string,
+    approvalStatus: string
+  ): Observable<AllStatusResponses> {
+    const rejectRetailerUrl = `${environment.apiEndpointAdmin}/searchRetailer?query=${querySearch}&approval_status=${approvalStatus}`;
+    return this.http.get<AllStatusResponses>(rejectRetailerUrl);
+  }
 }
