@@ -69,7 +69,13 @@ export class SuperadminService {
     querySearch: string,
     approvalStatus: string
   ): Observable<AllAdminStatusResponses> {
-    const rejectAdminUrl = `${environment.apiEndpointSuperAdmin}/searchAdminApproval?query=${querySearch}&approval_status=${approvalStatus}`;
-    return this.http.get<AllAdminStatusResponses>(rejectAdminUrl);
+
+    const param = {
+      query: querySearch,
+      approval_status: approvalStatus
+      // const rejectAdminUrl = `${environment.apiEndpointSuperAdmin}/searchAdminApproval?query=${querySearch}&approval_status=${approvalStatus}`;
+    }
+    const rejectAdminUrl = `${environment.apiEndpointSuperAdmin}/searchAdminApproval`
+    return this.http.get<AllAdminStatusResponses>(rejectAdminUrl, { params: param });
   }
 }
