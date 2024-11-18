@@ -12,7 +12,9 @@ export class OrganizationService {
   addOrgUrl = environment.apiEndpointOrganization + '/addOrganization';
   deleteOrgUrl = environment.apiEndpointOrganization + '/deleteOrganization';
   getOrgByIdUrl = environment.apiEndpointOrganization + '/getOrganization';
-  updateOrgUrl = environment.apiEndpointOrganization + '/updateOrganization'
+  updateOrgUrl = environment.apiEndpointOrganization + '/updateOrganization';
+  searchOrgUrl = environment.apiEndpointOrganization + '/searchOrganizations';
+
   constructor(private http: HttpClient) {}
   getAllOrganizationsApi(page: number, limit: number): Observable<allOrganization> {
     const params = new HttpParams()
@@ -39,6 +41,16 @@ export class OrganizationService {
 
   updateOrganization(id: string, formData: Organization): Observable<allOrganization> {
     const observableData = this.http.put<allOrganization>(`${this.updateOrgUrl}/${id}`, formData);
+    return observableData;
+  }
+
+  searchOrganization(orgName: string): Observable<allOrganization> {
+    const encodedQuery = encodeURIComponent(orgName);
+    // const params = new HttpParams().set('query', encodedQuery);
+    const observableData = this.http.get<allOrganization>(
+      `${this.searchOrgUrl}?query=${encodedQuery}`
+    );
+    console.log(observableData);
     return observableData;
   }
 }
