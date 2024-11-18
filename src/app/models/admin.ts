@@ -10,8 +10,6 @@ export interface Admin {
   email: string;
   contact_number: string;
   address: string;
-  //   created_at: Date;
-  //   updated_at: Date;
   role_id: string;
   role_specific_details: RoleDetails;
   _id: string;

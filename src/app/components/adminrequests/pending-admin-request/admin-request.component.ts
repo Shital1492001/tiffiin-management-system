@@ -122,16 +122,13 @@ export class AdminRequestComponent {
     this.currentPage = event.page;
     this.limit = event.limit;
     console.log('inside onTablePageChange');
-
-    this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
-
-    // if (this.currentPage <= this.totalPages) {
-    //   this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
-    // }
+    if (this.currentPage <= this.totalPages) {
+      this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
+    }
   }
   onSearchInput(event: any) {
     const query = event.target.value;
-    this.searchSubject.next(query); // Emit search query with debounce
+    this.searchSubject.next(query);
   }
   searchAdminByMultipleEntity(searchQueryOnKeyUp: string) {
     console.log(
