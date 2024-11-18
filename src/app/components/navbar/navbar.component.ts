@@ -8,6 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule } from '@angular/router';
 import { Menus } from '../../models/menus';
 import { AuthService } from '../../services/auth.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -91,7 +92,7 @@ export class NavbarComponent {
   }
   collapsed: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService,private snackBar:SnackbarService) { }
 
   collapsedState() {
     this.collapsed = !this.collapsed;
@@ -105,7 +106,8 @@ export class NavbarComponent {
   logout() {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('role_id');
-    window.alert('Logged out successfully...');
+    this.snackBar.showError('Logged out successfully...')
+    // window.alert('Logged out successfully...');
     this.router.navigate(['/']);
   }
 }

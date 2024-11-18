@@ -1,5 +1,6 @@
 @use "@angular/material" as mat;
 @include mat.core();
+
 $theme: mat.define-theme(
   (
     color: (
@@ -7,11 +8,11 @@ $theme: mat.define-theme(
       primary: mat.$red-palette,
     ),
     typography: (
-      brand-family: "Comic Sans",
+      brand-family: Roboto "Helvetica Neue" sans-serif,
       bold-weight: 900,
     ),
     density: (
-      scale: -1,
+      scale: 0,
     ),
   )
 );
@@ -22,7 +23,7 @@ html {
 :root {
   @include mat.toolbar-overrides(
     (
-      container-background-color: #E43E48,
+      container-background-color: #E43E38,
       container-text-color: white,
     )
   );
@@ -41,23 +42,41 @@ html {
   @include mat.button-overrides(
     (
       container-color: white,
+      state-layer-color:#E43E38,
+      hover-state-layer-opacity:0.06em,
+      ripple-color:white,
+      // hover-container-text-color:
+      label-text-color:black,
+      // container-shape:10px
     )
   );
   @include mat.card-overrides(
     (
+      title-text-size:30px,
       subtitle-text-color: gray,
       container-color: white,
+      container-shape:20px,
+      container-elevation:0px 4px 6px rgba(0, 0, 0, 0.1),
     )
   );
   @include mat.snack-bar-overrides(
     (
       container-color: gray,
-      supporting-text-color: red,
+      supporting-text-color:white,
     )
   );
   @include mat.select-overrides((
     panel-background-color: white,
     enabled-trigger-text-color: black,
+  ));
+  @include mat.dialog-overrides((
+    container-color: white,
+    subhead-color: black,
+  ));
+  @include mat.expansion-overrides((
+    container-background-color: white,
+    container-text-color: black,
+    header-hover-state-layer-color:#E43E38
   ));
 }
 
