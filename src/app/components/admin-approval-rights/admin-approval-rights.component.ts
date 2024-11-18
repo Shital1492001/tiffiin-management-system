@@ -9,10 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { forkJoin } from 'rxjs';
+import { debounceTime, distinctUntilChanged, forkJoin, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ActionDialogComponent } from '../action-dialog/action-dialog.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -28,6 +29,7 @@ import { ActionDialogComponent } from '../action-dialog/action-dialog.component'
     MatFormFieldModule,
     MatInputModule,
     MatButtonToggleModule,
+    FormsModule,
   ],
 })
 export class AdminDashboardComponent implements OnInit {
@@ -35,14 +37,30 @@ export class AdminDashboardComponent implements OnInit {
   pendingRetailers: Retailer[] = [];
   rejectedRetailers: Retailer[] = [];
   allRetailers: Retailer[] = [];
+  retailers: Retailer[] = [];
+
   status: string = 'approved';
+  searchQuery!: string;
+  retailerStatus!: string;
+
+  searchParam = {
+    query: this.searchQuery,
+    approval_status: this.retailerStatus,
+  };
+  private searchSubject = new Subject<string>();
 
   selectedOption: string | null = null;
   constructor(
     private adminService: AdminApprovalRightsService,
     private router: Router,
     private dialog: MatDialog
-  ) {}
+  ) {
+    this.searchSubject
+      .pipe(debounceTime(1500), distinctUntilChanged())
+      .subscribe((query) => {
+        this.searchAdminByMultipleEntity(query);
+      });
+  }
 
   ngOnInit(): void {
     console.log('in admin rights');
@@ -137,6 +155,8 @@ export class AdminDashboardComponent implements OnInit {
     this.adminService.getRequestsByStatus(status).subscribe({
       next: (adminData) => {
         this.allRetailers = adminData.data;
+        this.retailers = adminData.data;
+
         console.log('Fetched Retailer Requests:', this.allRetailers);
       },
       error: (err) => {
@@ -186,5 +206,39 @@ export class AdminDashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(ActionDialogComponent);
     dialogRef.componentInstance.title = title;
     dialogRef.componentInstance.message = message;
+  }
+
+  onSearchInput(event: any) {
+    const query = event.target.value;
+    this.searchSubject.next(query);
+  }
+  searchAdminByMultipleEntity(searchQueryOnKeyUp: string) {
+    console.log(
+      'searchQuery-',
+      this.searchQuery,
+      'adminStatus-',
+      this.retailerStatus
+    );
+    if (searchQueryOnKeyUp != '') {
+      const searchedObservable = this.adminService.searchRetailer(
+        searchQueryOnKeyUp,
+        this.status
+      );
+      searchedObservable.subscribe({
+        next: (searchRetailer) => {
+          if (searchRetailer.data.length) {
+            console.log(searchRetailer);
+            this.allRetailers = searchRetailer.data;
+          } else {
+            console.log('Not Found');
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    } else {
+      this.allRetailers = this.retailers;
+    }
   }
 }

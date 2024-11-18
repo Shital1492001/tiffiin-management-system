@@ -50,3 +50,9 @@ td {
 .paginator-section {
   background-color: #ffffff;
 }
+
+.mat-row:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
