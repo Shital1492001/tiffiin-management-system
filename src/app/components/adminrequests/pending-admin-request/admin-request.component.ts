@@ -118,14 +118,6 @@ export class AdminRequestComponent {
     this.currentPage = 1;
     this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
   }
-  onTablePageChange(event: { page: number; limit: number }) {
-    this.currentPage = event.page;
-    this.limit = event.limit;
-    console.log('inside onTablePageChange');
-    if (this.currentPage <= this.totalPages) {
-      this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
-    }
-  }
   onSearchInput(event: any) {
     const query = event.target.value;
     this.searchSubject.next(query);
