@@ -35,6 +35,7 @@ import { SnackbarService } from '../../services/snackbar.service';
 })
 export class SuperAdminLoginComponent {
   invalidCredential: string = '';
+  hide = true;
   // passwordValidity: string = '';
   strongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
   constructor(
