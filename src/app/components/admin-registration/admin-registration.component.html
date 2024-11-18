@@ -1,4 +1,4 @@
-<mat-card class="card">
+<mat-card>
     <mat-card-content class="card-content">
       <form [formGroup]="adminForm" (submit)="CollectData()" class="form">
         <h2 id="admin">Signup</h2>
@@ -48,16 +48,16 @@
           <mat-form-field appearance="outline" class="flex-item">
             <mat-label>Organization</mat-label>
             <mat-select formControlName="organizationId" (selectionChange)="onOrganizationChange($event.value)">
-              <cdk-virtual-scroll-viewport itemSize="totalItems" class="scroll-viewport">
+              <!-- <cdk-virtual-scroll-viewport itemSize="totalItems" class="scroll-viewport">
                 <mat-option *cdkVirtualFor="let organization of organizations" [value]="organization._id" class="scroll-item">
                   {{ organization.org_name }}
                 </mat-option>
-              </cdk-virtual-scroll-viewport>
-              <!-- @for(organization of organizations; track organization){
+              </cdk-virtual-scroll-viewport> -->
+              @for(organization of organizations; track organization){
               <mat-option [value]="organization._id">
                 {{ organization.org_name }}
-              </mat-option> -->
-            <!-- } -->
+              </mat-option> 
+            }
             </mat-select>
             <mat-icon matPrefix>corporate_fare</mat-icon>
             <mat-error>
@@ -102,7 +102,7 @@
           <button mat-raised-button type="submit">REGISTER</button>
           <button mat-raised-button type="reset">RESET</button>
         </div>
-        <p>Already have an account?<a routerLink="/">Login</a></p>
+        <p>Already have an account?  <a routerLink="/">Login</a></p>
       </form>
     </mat-card-content>
   </mat-card>

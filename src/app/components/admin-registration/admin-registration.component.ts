@@ -18,9 +18,9 @@ import { Router, RouterModule } from '@angular/router';
 import { OrganizationService } from '../../services/organization.service';
 import { MatIconModule } from '@angular/material/icon';
 import { CustomPasswordValidators } from '../../customValidators/custom-password-validators';
-import { markAllControlsAsDirtyAndTouched } from '../../utils';
+import { markAllControlsAsDirtyAndTouched } from '../../../utils/index';
 import { SnackbarService } from '../../services/snackbar.service';
-import { ADMIN_ROLE_ID } from '../../utils/const';
+import { ADMIN_ROLE_ID } from '../../../utils/const';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({

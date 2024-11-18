@@ -15,19 +15,19 @@ export class SuperadminComponent {
   organizationsArray: Organization[] = [];
   constructor(private organizationService: OrganizationService) {}
   ngOnInit(): void {
-    this.getAllOrganizations();
+    // this.getAllOrganizations();
   }
-  getAllOrganizations() {
-    const organizationObservable =
-      this.organizationService.getAllOrganizationsApi();
-    organizationObservable.subscribe({
-      next: (orgData) => {
-        console.log(orgData)
-        this.organizationsArray = orgData.data;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
+  // getAllOrganizations() {
+  //   const organizationObservable =
+  //     this.organizationService.getAllOrganizationsApi();
+  //   organizationObservable.subscribe({
+  //     next: (orgData) => {
+  //       console.log(orgData)
+  //       this.organizationsArray = orgData.data;
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
 }
