@@ -1,17 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
 html,
 body {
   height: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin:0px;
 }
 .login-page {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-body {
-  height: 100%;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  margin:0px;
 }
 .button {
   margin-top: 8px;
@@ -91,13 +89,19 @@ a {
   width: 100%;
 }
 
+.mat-icon-edit{
+  color:green
+}
+.mat-icon-view{
+  color:blue
+}
+.mat-icon-delet{
+  color:red
+}
 mat-card.card {
-  background-color: white;
-  border-radius: 16px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 16px;
   margin-bottom: 16px;
-}
+} 
 
 mat-card.card:hover {
   transform: translateY(-5px);
