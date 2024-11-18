@@ -1,0 +1,40 @@
+#admin {
+    margin: 0;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  .card{
+    /* margin-top: 20%; */
+    margin-left: 10%;
+    height: 70%;
+    width: 80%;
+  }
+.card-content{
+    text-align: center;
+}
+.flex-item{
+  margin-top: 10px;
+}
+.mat-icon.mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color {
+    position: relative;
+    top: -10px !important ;
+  }
+.button-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap:2rem
+  }
+
+
+.scroll-viewport {
+  height: 250px;
+  width: 480px;
+}
+
+.scroll-item {
+  height: 50px;
+}
+
+

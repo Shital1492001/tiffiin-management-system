@@ -13,7 +13,7 @@ import { Login, Token } from '../../models/userlogin';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CustomPasswordValidators } from '../../customValidators/custom-password-validators';
 @Component({
   selector: 'app-super-admin-login',
@@ -26,6 +26,7 @@ import { CustomPasswordValidators } from '../../customValidators/custom-password
     ReactiveFormsModule,
     MatButtonModule,
     CommonModule,
+    RouterModule
   ],
   templateUrl: './super-admin-login.component.html',
   styleUrl: './super-admin-login.component.css',

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Login, Token } from '../models/userlogin';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Admin,AdminRegister } from '../models/admin';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -22,4 +24,13 @@ export class AuthService {
     }
     return false;
   }
+  baseUrlRegistration = environment.apiEndpointauth + '/register';
+  register(
+    formData:Admin
+  ): Observable<AdminRegister> {
+    
+    // console.log(admin)
+    return this.http.post<AdminRegister>(this.baseUrlRegistration, formData);
+  }
+
 }
