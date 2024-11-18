@@ -32,15 +32,22 @@ export class SuperadminService {
     return response;
   }
   getRequestsByStatus(
-    status: string,
-    page: number,
-    limit: number
+    adminStatus: string,
+    pageNo: number,
+    limitItems: number
   ): Observable<AllAdminStatusResponses> {
     console.log('inside getRequestsByStatus');
     // http://localhost:5000/api/superadmin/getalladminrequest?status=rejected
-    const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest?status=${status}&page=${page}&limit=${limit}`;
+    const param = {
+      status: adminStatus,
+      page: pageNo,
+      limit: limitItems
+    }
+    // const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest?status=${status}&page=${page}&limit=${limit}`;
+
+    const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest`;
     console.log('apiUrl', apiUrl);
-    return this.http.get<AllAdminStatusResponses>(apiUrl);
+    return this.http.get<AllAdminStatusResponses>(apiUrl, { params: param });
   }
 
   approveAdminById(id: string): Observable<Object> {
