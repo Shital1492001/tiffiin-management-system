@@ -1,3 +1,5 @@
+import { Pagination } from "./admin";
+
 interface RoleDetails {
   organization_id: string;
   organization_name: string;
@@ -18,4 +20,5 @@ export interface Retailer {
 export interface AllStatusResponses {
   statuscode: number;
   data: Retailer[];
+  pagination: Pagination
 }

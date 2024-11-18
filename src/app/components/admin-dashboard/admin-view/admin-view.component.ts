@@ -7,6 +7,7 @@ import { InfoChartsComponent } from '../../info-charts/info-charts.component';
 import { AdminApprovalRightsService } from '../../../services/admin-approval-rights.service';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
+
 @Component({
   selector: 'app-admin-view',
   standalone: true,
@@ -23,13 +24,13 @@ import { NgApexchartsModule } from 'ng-apexcharts';
   styleUrl: './admin-view.component.css',
 })
 export class AdminViewComponent {
-  totalPendingRetailerCount = 45;
-  totalApprovedRetailerCount = 55;
-  totalRejectedRetailerCount = 22;
+  totalPendingRetailerCount = 0;
+  totalApprovedRetailerCount = 0;
+  totalRejectedRetailerCount = 0;
   role = 'admin';
   constructor(
     private authService: AuthService,
-    private adminRightsServices: AdminApprovalRightsService
+    private adminApprovalRightsService: AdminApprovalRightsService,
   ) { }
 
   userStatus: string | null = null;
@@ -37,7 +38,7 @@ export class AdminViewComponent {
     const userByToken = this.authService.getUserTypeByToken();
     userByToken.subscribe({
       next: (userData) => {
-        console.log("userdata",userData)
+        console.log("userdata", userData)
         this.userStatus = userData.data.role_specific_details.approval_status;
       },
       error: () => { },
@@ -46,30 +47,34 @@ export class AdminViewComponent {
 
   ngOnInit(): void {
     this.getUserByToken();
-    this.getAllApprovedRetailers();
-    this.getAllPendingRetailers();
-    this.getAllRejectedRetailers();
+    this.getPendingCount();
+    this.getApprovedCount();
+    this.getRejectCount();
   }
-  getAllPendingRetailers() {
-    this.adminRightsServices.getPendingRequests().subscribe({
+  getPendingCount() {
+    this.adminApprovalRightsService.getRequestsByStatus('pending').subscribe({
       next: (response) => {
         this.totalPendingRetailerCount = response.data.length;
+        console.log('totalPendingRetailerCount', this.totalPendingRetailerCount);
+
       },
     });
   }
 
-  getAllApprovedRetailers() {
-    this.adminRightsServices.getApprovedRequests().subscribe({
+  getApprovedCount() {
+    this.adminApprovalRightsService.getRequestsByStatus("approved").subscribe({
       next: (response) => {
         this.totalApprovedRetailerCount = response.data.length;
+        console.log('totalPendingRetailerCount', this.totalPendingRetailerCount);
+
       },
     });
   }
-
-  getAllRejectedRetailers() {
-    this.adminRightsServices.getRejectedRequests().subscribe({
+  getRejectCount() {
+    this.adminApprovalRightsService.getRequestsByStatus("rejected").subscribe({
       next: (response) => {
         this.totalRejectedRetailerCount = response.data.length;
+        console.log('totalPendingRetailerCount', this.totalPendingRetailerCount);
       },
     });
   }
