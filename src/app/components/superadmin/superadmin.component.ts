@@ -50,7 +50,7 @@ export class SuperadminComponent implements OnInit {
   getAllOrganizations(page: number, limit: number): void {
     this.organizationService.getAllOrganizationsApi(page, limit).subscribe({
       next: (orgData) => {
-        console.log(orgData);
+        console.log("data",orgData);
         this.organizationsArray = orgData.data; 
         this.totalItems = orgData.pagination.totalItems; 
         this.totalPages = Math.ceil(this.totalItems / this.pageSize); 
