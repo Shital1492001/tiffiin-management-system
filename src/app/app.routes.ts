@@ -24,6 +24,10 @@ export const routes: Routes = [
     component: AdminRegistrationComponent,
   },
   {
+    path: 'admin-signup',
+    component: AdminRegistrationComponent,
+  },
+  {
     path: 'navbar',
     loadComponent: () =>
       import('./components/navbar/navbar.component').then(
@@ -93,9 +97,18 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'view-organization/:id',
+        loadComponent: () =>
+          import('./components/add-organization/add-organization.component').then(
+            (m) => m.AddOrganizationComponent
+          ),
+        canActivate: [AuthGuard],
+      },
+      {
         path: '**',
         component: PageNotFoundComponent,
       },
     ],
   },
+  
 ];

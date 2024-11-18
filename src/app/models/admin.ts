@@ -34,7 +34,6 @@ export interface AdminRegister {
 }
 interface RoleDetails {
   organization_id: string;
-  organization_name: string;
   approval_status: string;
 }
 

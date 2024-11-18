@@ -44,6 +44,7 @@ export class SuperAdminLoginComponent {
     password: new FormControl('', [
       Validators.required,
       // Validators.pattern(this.strongPasswordRegx),
+      // Validators.pattern(this.strongPasswordRegx),
       Validators.minLength(8),
       CustomPasswordValidators.logPatternError(),
     ]),

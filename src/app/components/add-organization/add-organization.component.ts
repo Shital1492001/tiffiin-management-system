@@ -141,6 +141,7 @@ export class AddOrganizationComponent {
   addLocation(): void {
     this.locations.push(this.createLocationFormGroup());
     this.collapsedStates.push(false); 
+    this.collapsedStates.push(false); 
   }
 
   toggleLocation(index: number): void {
@@ -153,6 +154,7 @@ export class AddOrganizationComponent {
   getCollapsedValue(locationIndex: number): boolean {
     return this.collapsedStates[locationIndex];
   }
+  
   
   removeLocation(index: number): void {
     this.locations.removeAt(index);
@@ -265,6 +267,7 @@ export class AddOrganizationComponent {
       }
     };
   }
+
 
   onSubmit(): void {
     if (this.isUpdateMode) {
