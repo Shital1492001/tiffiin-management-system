@@ -9,28 +9,7 @@ import { environment } from '../../environments/environment';
 })
 export class SuperadminService {
   constructor(private http: HttpClient) { }
-  getPendingRequests(): Observable<AllAdminStatusResponses> {
-    const response = this.http.get<AllAdminStatusResponses>(
-      environment.apiEndpointSuperAdmin + '/pendingAdminApproval'
-    );
-    console.log(response);
-    return response;
-  }
 
-  getRejectedRequests(): Observable<AllAdminStatusResponses> {
-    const response = this.http.get<AllAdminStatusResponses>(
-      environment.apiEndpointSuperAdmin + '/rejectedAdminApproval'
-    );
-    console.log(response);
-    return response;
-  }
-  getApprovedRequests(): Observable<AllAdminStatusResponses> {
-    const response = this.http.get<AllAdminStatusResponses>(
-      environment.apiEndpointSuperAdmin + '/approvedAdminApproval'
-    );
-    console.log(response);
-    return response;
-  }
   getRequestsByStatus(
     adminStatus: string,
     pageNo: number,
@@ -42,7 +21,7 @@ export class SuperadminService {
       page: pageNo,
       limit: limitItems
     }
-    const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest`;
+    const apiUrl = `${environment.apiEndpoint}/superadmin/getalladminrequest`;
     console.log('apiUrl', apiUrl);
     return this.http.get<AllAdminStatusResponses>(apiUrl, { params: param });
   }
@@ -51,14 +30,14 @@ export class SuperadminService {
     console.log('inside approveAdminById----id with admin', id);
 
     const approveAdminUrl =
-      environment.apiEndpointSuperAdmin + '/approveadmin/' + id;
+      environment.apiEndpoint + '/superadmin/approveadmin/' + id;
     return this.http.put<Object>(approveAdminUrl, {});
   }
   rejectAdminById(id: string): Observable<Object> {
     console.log('inside rejectAdminById----id with admin', id);
 
     const rejectAdminUrl =
-      environment.apiEndpointSuperAdmin + '/rejectadmin/' + id;
+      environment.apiEndpoint + '/superadmin/rejectadmin/' + id;
     return this.http.put<Object>(rejectAdminUrl, {});
   }
 
@@ -71,7 +50,7 @@ export class SuperadminService {
       query: querySearch,
       approval_status: approvalStatus
     }
-    const rejectAdminUrl = `${environment.apiEndpointSuperAdmin}/searchAdminApproval`
+    const rejectAdminUrl = `${environment.apiEndpoint}/superadmin/searchAdminApproval`
     return this.http.get<AllAdminStatusResponses>(rejectAdminUrl, { params: param });
   }
 }

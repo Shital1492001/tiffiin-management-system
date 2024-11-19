@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subject } from "rxjs";
-import { SnackbarService } from '../../../services/snackbar.service';
+// import { SnackbarService } from '../../../services/snackbar.service';
 @Component({
   selector: 'app-admin-request',
   standalone: true,
@@ -50,7 +50,7 @@ export class AdminRequestComponent {
   constructor(
     private superAdminService: SuperadminService,
     private router: Router,
-    private snackbar: SnackbarService
+    // private snackbar: SnackbarService
   ) {
     this.searchSubject.pipe(debounceTime(1500), distinctUntilChanged()).subscribe((query) => {
       this.searchAdminByMultipleEntity(query);
@@ -145,7 +145,7 @@ export class AdminRequestComponent {
         },
         error: (err) => {
           console.log(err);
-          this.snackbar.showError(`no admin with ${searchQueryOnKeyUp} found in ${this.status} admins`)
+          // this.snackbar.showError(`no admin with ${searchQueryOnKeyUp} found in ${this.status} admins`)
 
         },
       });
