@@ -1,11 +1,18 @@
 import { Routes } from '@angular/router';
 import { SuperAdminLoginComponent } from './components/super-admin-login/super-admin-login.component';
-import { authGuard } from './guards/authguard.guard';
+import { AuthGuard } from './guards/authguard.guard';
+import { SuperadminDashboardComponent } from './components/superadmin-dashboard/superadmin-dashboard.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AdminDashboardComponent } from './components/admin-approval-rights/admin-approval-rights.component';
 
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
     redirectTo: 'login',
     pathMatch: 'full',
   },
@@ -24,6 +31,15 @@ export const routes: Routes = [
       import('./components/superadmin/superadmin.component').then(
         (m) => m.SuperadminComponent
       ),
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'home',
+    component: SuperadminDashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
   },
 ];

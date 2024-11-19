@@ -27,8 +27,8 @@ export class NavbarComponent {
   menus: Menus[] = [
     {
       label: `Dashboard`,
-      redirectURL: '/admin',
-      icon: 'home',
+      redirectURL: '/home',
+      icon: 'dashboard',
     },
     {
       label: 'Status',
@@ -62,7 +62,7 @@ export class NavbarComponent {
 
   logout() {
     sessionStorage.removeItem('token');
-    window.alert('succesfully logged out...');
+    window.alert('Logged out successfully...');
     this.router.navigate(['/']);
   }
 }
