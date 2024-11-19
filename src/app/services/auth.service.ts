@@ -8,10 +8,9 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
-  baseUrlLogin = environment.apiEndpointauth + '/login';
+  baseUrlLogin = environment.apiEndpoint + '/auth/login';
   authenticateLogin(loginCredentials: Login): Observable<Token> {
-    console.log(environment.apiEndpointOrganization);
-    console.log(environment.apiEndpointauth + '/login');
+    console.log(environment.apiEndpoint + '/login');
     const data = this.http.post<Token>(this.baseUrlLogin, loginCredentials);
     return data;
   }
