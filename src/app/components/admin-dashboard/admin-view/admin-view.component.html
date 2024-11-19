@@ -1,5 +1,5 @@
 <div>
-  <!-- <div>{{ userStatus }}</div> -->
+  <h3>Welcome To Admin Dashboard</h3>
   <container-element [ngSwitch]="userStatus">
     <app-pending-admin-view *ngSwitchCase="'pending'"></app-pending-admin-view>
     <app-rejected-admin-view
