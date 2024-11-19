@@ -158,7 +158,7 @@ export class SuperAdminLoginComponent {
       tokenObservable.subscribe({
         next: (data) => {
           sessionStorage.setItem('token', data.token);
-          this.route.navigate(['/status']);
+          this.route.navigate(['/home']);
         },
         error: (error) => {
           console.log('error', error);
