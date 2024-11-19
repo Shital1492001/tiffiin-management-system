@@ -48,6 +48,6 @@ export const routes: Routes = [
       import(
         './components/adminrequests/pending-admin-request/admin-request.component'
       ).then((m) => m.AdminRequestComponent),
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
   },
 ];
