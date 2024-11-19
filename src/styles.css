@@ -89,15 +89,10 @@ a {
   width: 100%;
 }
 
-.mat-icon-edit{
-  color:green
+.fab-mat-icon{
+  color:#AF1740
 }
-.mat-icon-view{
-  color:blue
-}
-.mat-icon-delet{
-  color:red
-}
+
 mat-card.card {
   padding: 16px;
   margin-bottom: 16px;

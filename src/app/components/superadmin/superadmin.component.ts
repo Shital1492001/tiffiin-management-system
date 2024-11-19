@@ -26,7 +26,7 @@ export class SuperadminComponent implements OnInit {
   notFoundMessage=""
   flag:boolean=false;
   paginatedOrganizations: Organization[] = [];
-  pageSize = 4; 
+  pageSize = 6; 
   currentPage = 0;
   totalItems = 0;
   totalPages = 0;
@@ -94,43 +94,6 @@ export class SuperadminComponent implements OnInit {
       },
     });
   }
-
-  // fetchAllOrganizations() {
-  //   this.organizationService.getAllOrganizationApi(this.flag).subscribe({
-  //     next: (responseData) => {
-  //       console.log('responsedata', responseData);
-  //       this.organizationsArray = responseData.data;
-  //       this.totalItems = responseData.pagination.totalItems;
-  //     },
-  //     error: (e) => console.error('Error fetching slots:', e),
-  //     complete: () => console.info('complete'),
-  //   });
-  // }
-
-
-  // getOrg(orgName: string): void {
-  //   if (orgName.trim() !== "") {
-  //     const obs = this.organizationService.searchOrganization(orgName);
-  //     obs.subscribe({
-  //       next: (data) => {
-  //         console.log(data)
-  //         this.organizationsArray = data.data;
-  //         if (this.organizationsArray && this.organizationsArray.length > 0) {
-  //           this.notFoundMessage = ''; 
-  //         } else {
-  //           this.notFoundMessage = 'No organizations found';
-  //         }
-  //       },
-  //       error: (error) => {
-  //         console.error('API Error:', error);
-  //         this.notFoundMessage = 'No organizations found'; 
-  //       },
-  //     });
-  //   } else {
-  //     this.notFoundMessage = '';
-  //     this.getAllOrganizations(this.currentPage + 1, this.pageSize);
-  //   }
-  // }
   onSearchInput(event:any): void {
     this.searchQuery=event.target.value;
     console.log(this.searchQuery)
