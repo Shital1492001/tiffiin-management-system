@@ -32,4 +32,21 @@ export class SuperadminDashboardService {
     console.log(response);
     return response;
   }
+
+  getRequestsByStatus(
+    adminStatus: string,
+    pageNo: number,
+    limitItems: number
+  ): Observable<AllAdminStatusResponses> {
+    console.log('inside getRequestsByStatus');
+    const param = {
+      status: adminStatus,
+      page: pageNo,
+      limit: limitItems,
+    };
+
+    const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest`;
+    console.log('apiUrl', apiUrl);
+    return this.http.get<AllAdminStatusResponses>(apiUrl, { params: param });
+  }
 }

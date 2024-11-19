@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { Admin } from '../../models/admin';
 import { InfoChartsComponent } from '../info-charts/info-charts.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-superadmin-dashboard',
@@ -21,47 +22,56 @@ import { InfoChartsComponent } from '../info-charts/info-charts.component';
   styleUrls: ['./superadmin-dashboard.component.css'],
 })
 export class SuperadminDashboardComponent implements OnInit {
-  approvedAdmins: Admin[] = [];
-  pendingAdmins: Admin[] = [];
-  rejectedAdmins: Admin[] = [];
+  approvedAdmins = 0;
+  pendingAdmins = 0;
+  rejectedAdmins = 0;
   role = 'superadmin';
 
-  totalPendingAdminsCount = 0;
-  totalApprovedAdminsCount = 0;
-  totalRejectedAdminsCount = 0;
+  constructor(
+    private authService: AuthService,
+    private superadminService: SuperadminDashboardService
+  ) {}
 
-  constructor(private superadminService: SuperadminDashboardService) {}
+  userStatus: string | null = null;
+  getUserByToken() {
+    const userByToken = this.authService.getUserTypeByToken();
+    userByToken.subscribe({
+      next: (userData) => {
+        console.log('userdata', userData);
+        this.userStatus = userData.data.role_specific_details.approval_status;
+      },
+      error: () => {},
+    });
+  }
 
   ngOnInit(): void {
-    this.getAllPendingadmins();
-    this.getAllApprovedAdmins();
-    this.getAllRejectedAdmins();
+    this.getUserByToken();
+    this.getPendingCount();
+    this.getApprovedCount();
+    this.getRejectCount();
   }
-
-  getAllPendingadmins() {
-    this.superadminService.getPendingRequests().subscribe({
+  getPendingCount() {
+    this.superadminService.getRequestsByStatus('pending', 1, 5).subscribe({
       next: (response) => {
-        this.pendingAdmins = response.data;
-        console.log('length', this.pendingAdmins);
-        this.totalPendingAdminsCount = this.pendingAdmins.length;
+        this.pendingAdmins = response.pagination.totalItems;
+        console.log('pendingAdmins', this.pendingAdmins);
       },
     });
   }
 
-  getAllApprovedAdmins() {
-    this.superadminService.getApprovedRequests().subscribe({
+  getApprovedCount() {
+    this.superadminService.getRequestsByStatus('approved', 1, 5).subscribe({
       next: (response) => {
-        this.approvedAdmins = response.data;
-        this.totalApprovedAdminsCount = this.approvedAdmins.length;
+        this.approvedAdmins = response.pagination.totalItems;
+        console.log('approvedAdmins', this.approvedAdmins);
       },
     });
   }
-
-  getAllRejectedAdmins() {
-    this.superadminService.getRejectedRequests().subscribe({
+  getRejectCount() {
+    this.superadminService.getRequestsByStatus('rejected', 1, 5).subscribe({
       next: (response) => {
-        this.rejectedAdmins = response.data;
-        this.totalRejectedAdminsCount = this.rejectedAdmins.length;
+        this.rejectedAdmins = response.pagination.totalItems;
+        console.log('rejectedAdmins', this.rejectedAdmins);
       },
     });
   }
