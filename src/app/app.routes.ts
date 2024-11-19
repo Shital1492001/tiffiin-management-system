@@ -24,9 +24,8 @@ export const routes: Routes = [
     path: 'status',
     component: AdminDashboardComponent,
   },
-
   {
-    path: 'superAdminDashboard/:id',
+    path: 'superAdminDashboard',
     loadComponent: () =>
       import('./components/superadmin/superadmin.component').then(
         (m) => m.SuperadminComponent
@@ -36,6 +35,14 @@ export const routes: Routes = [
   {
     path: 'home',
     component: SuperadminDashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'statusDataTable',
+    loadComponent: () =>
+      import(
+        './components/adminrequests/pending-admin-request/admin-request.component'
+      ).then((m) => m.AdminRequestComponent),
     canActivate: [AuthGuard],
   },
   {

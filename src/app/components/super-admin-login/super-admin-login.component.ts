@@ -32,7 +32,6 @@ import { CustomPasswordValidators } from '../../customValidators/custom-password
 })
 export class SuperAdminLoginComponent {
   invalidCredential: string = '';
-  // passwordValidity: string = '';
   strongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
   hide = true
   constructor(private authService: AuthService, private route: Router) { }
