@@ -10,14 +10,11 @@ html,
 body {
   height: 100%;
 }
-.login-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 body {
   height: 100%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(0deg, #e5a2b2, #ff9c79, #ec7d9c);
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -25,7 +22,4 @@ body {
 .button {
   margin-top: 8px;
   justify-content: center;
-}
-a {
-  color: rgb(139, 0, 116);
 }
