@@ -38,16 +38,15 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: '**',
-    component: PageNotFoundComponent,
-  },
-
-  {
     path: 'statusDataTable',
     loadComponent: () =>
       import(
         './components/adminrequests/pending-admin-request/admin-request.component'
       ).then((m) => m.AdminRequestComponent),
     canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
   },
 ];
