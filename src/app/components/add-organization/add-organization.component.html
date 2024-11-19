@@ -30,7 +30,7 @@
                 loc.get("contactNumber")?.value
               }}</mat-panel-description>
               @if(locations.length > 1 && !viewMode){
-              <button mat-icon-button class="icon-button" type="delete" (click)="removeLocation(i)">
+              <button mat-icon-button type="button" class="icon-button" (click)="removeLocation(i)">
                 <mat-icon>delete</mat-icon>
               </button>
               }
@@ -86,14 +86,14 @@
       @if(!viewMode){
       <mat-card-footer class="footer-buttons">
         <button
-          mat-raised-button
+          mat-stroked-button
           type="button"
           (click)="addLocation()"
-          class="add-location-button"
+          class="mat-mdc-button"
         >
           Add Location <mat-icon>add</mat-icon>
         </button>
-        <button mat-raised-button type="submit" class="submit-button">
+        <button mat-stroked-button type="submit" class="mat-mdc-button">
           Submit
         </button>
       </mat-card-footer>

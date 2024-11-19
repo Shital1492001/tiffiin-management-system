@@ -1,3 +1,15 @@
+.vertical-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  min-width: 200px;
+  margin: 1rem auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.mat-card-title{
+  font-weight: 900;
+}
 .image {
   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZMog9dB4vSQs1MwDKStNYo_lHZmKEwal1bg&s');
   background-size: cover;
@@ -14,24 +26,20 @@
   color: red; 
   font-weight: bold;
 }
-.mat-card-title{
-  font-weight: 600;
-}
+.mat-card-title,
 .mat-card-subtitle {
-  color:gray
+  font-weight: 600;
 }
 
 .button-container {
   display: flex;
   justify-content: space-between;
-  padding-top: 0px;
+  padding-top: 8px;
 }
 
-.edit-button,
-.delete {
-  margin: 8px;
+.mat-mdc-button{
+  margin: 16px;
 }
-
 
 
 

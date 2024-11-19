@@ -12,11 +12,6 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
-  {
-    path: 'login',
     component: SuperAdminLoginComponent,
   },
   {
@@ -39,10 +34,6 @@ export const routes: Routes = [
         './components/adminrequests/pending-admin-request/admin-request.component'
       ).then((m) => m.AdminRequestComponent),
     canActivate: [AuthGuard],
-  },
-  {
-    path: '**',
-    component: PageNotFoundComponent,
   },
   {
     path: 'add-organization',
@@ -68,4 +59,12 @@ export const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'view-all-organizations',
+    loadComponent: () =>
+      import('./components/superadmin/superadmin.component').then(
+        (m) => m.SuperadminComponent
+      ),
+  },
+  
 ];

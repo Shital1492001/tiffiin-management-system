@@ -42,7 +42,7 @@ export class NavbarComponent {
     },
     {
       label: 'View Organization',
-      redirectURL: '/superAdminDashboard',
+      redirectURL: '/view-all-organizations',
       icon: 'visibility',
     },
     {

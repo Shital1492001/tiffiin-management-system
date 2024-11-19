@@ -1,14 +1,15 @@
-<mat-card appearance="outlined" class="card">
+<mat-card appearance="outlined" class="vertical-card">
   <mat-card-header>
     <div mat-card-avatar class="image">
+      <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZMog9dB4vSQs1MwDKStNYo_lHZmKEwal1bg&s" alt=""> -->
     </div>
-    <mat-card-title class="mat-card-title">{{ organization.org_name }}</mat-card-title>
-    <mat-card-subtitle class="mat-card-subtitle"
+    <mat-card-title>{{ organization.org_name }}</mat-card-title>
+    <mat-card-subtitle
       >{{
         organization.org_created_at | date
       }}</mat-card-subtitle
     >
-    <mat-card-subtitle class="mat-card-subtitle"
+    <mat-card-subtitle
       >Locations:
       {{
         organization.org_location.length
@@ -25,26 +26,23 @@
   <mat-card-footer>
     <div class="button-container">
       <a
-        mat-raised-button
-        type="submit"
-        class="edit-button"
-        [routerLink]="['/navbar/update-organization', organization._id]"
+        mat-stroked-button
+        
+        class="mat-mdc-button" [routerLink]="['/update-organization', organization._id]"
         >Update<mat-icon class="mat-icon-edit">edit</mat-icon></a
       >
       <a
-      mat-raised-button
-      type="submit"
-      class="edit-button"
-      [routerLink]="['/navbar/view-organization', organization._id]"
-      >View<mat-icon class="mat-icon-view">visibility</mat-icon></a
+      mat-stroked-button
+      [routerLink]="['/view-organization', organization._id]" class="mat-mdc-button"
+      >View<mat-icon>visibility</mat-icon></a
     >
       <button
-        mat-raised-button
+        mat-stroked-button
         type="delete"
-        class="delete"
+        class="mat-mdc-button"
         (click)="openDialog('0ms', '0ms')"
       >
-        Delete<mat-icon class="mat-icon-view">delete</mat-icon>
+        Delete<mat-icon>delete</mat-icon>
       </button>
     </div>
   </mat-card-footer>

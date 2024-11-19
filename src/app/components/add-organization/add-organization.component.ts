@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -48,7 +49,7 @@ export class AddOrganizationComponent {
   viewMode: boolean = false;
   organizationId: string = '';
   formTitle: string = '';
-
+  
   constructor(
     private fb: FormBuilder,
     private organizationService: OrganizationService,
@@ -293,7 +294,7 @@ export class AddOrganizationComponent {
             if (responseData.statuscode === 200) {
               console.log('Organization updated successfully', responseData);
               this.snackbar.showSuccess('Organization updated successfully!');
-              this.router.navigate(['/navbar/view-all-organizations']);
+              this.router.navigate(['/view-all-organizations']);
             }
           },
           error: (error) => {
@@ -317,7 +318,7 @@ export class AddOrganizationComponent {
             if (responseData.statuscode === 201) {
               console.log('Organization added successfully', responseData);
               this.snackbar.showSuccess('Organization added successfully!');
-              this.router.navigate(['/navbar/view-all-organizations']);
+              this.router.navigate(['/view-all-organizations']);
             }
           },
           error: (error) => {
