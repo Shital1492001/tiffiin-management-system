@@ -72,6 +72,19 @@ export class RetailerStatusTableComponent {
     }
   }
 
+  // ngOnChanges(): void {
+  //   if (this.paginator) {
+  //     console.log('inside if paginator');
+  //     this.dataSource = new MatTableDataSource<Retailer>(this.retailers);
+  //     this.dataSource.paginator = this.paginator;
+  //   }
+  //   if (this.totalItems && this.paginator) {
+  //     this.dataSource = new MatTableDataSource<Retailer>(this.retailers);
+  //     this.dataSource.paginator = this.paginator;
+  //     console.log('totalItems', this.totalItems);
+  //   }
+  // }
+
   ngAfterViewInit(): void {
     if (this.dataSource) {
       console.log('in dataSource ngAfterViewInit');
