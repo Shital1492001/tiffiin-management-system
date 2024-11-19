@@ -89,4 +89,18 @@ export class RetailerStatusTableComponent {
     console.log('emmitting');
     this.pageChange.emit({ page: pageIndex + 1, limit: pageSize });
   }
+
+  get isPendingOrRejected() {
+    return (element: any) =>
+      element.role_specific_details.approval[0]?.approval_status ===
+        'pending' ||
+      element.role_specific_details.approval[0]?.approval_status === 'rejected';
+  }
+
+  get isPendingOrApproved() {
+    return (element: any) =>
+      element.role_specific_details.approval[0]?.approval_status ===
+        'pending' ||
+      element.role_specific_details.approval[0]?.approval_status === 'approved';
+  }
 }

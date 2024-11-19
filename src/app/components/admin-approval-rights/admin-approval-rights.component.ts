@@ -71,11 +71,13 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   getAllRetailers(status: string, currentPage: number, limit: number) {
-    console.log('Fetching admin requests for status:', status);
+    // console.log('Fetching admin requests for status:', status);
     this.adminService
       .getRequestsByStatus(status, currentPage, limit)
       .subscribe({
         next: (adminData) => {
+          //console.log('pagination......', adminData.pagination);
+
           this.allRetailers = adminData.data;
           this.retailers = adminData.data;
 

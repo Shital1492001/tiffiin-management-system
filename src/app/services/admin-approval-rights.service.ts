@@ -11,7 +11,7 @@ export class AdminApprovalRightsService {
   constructor(private http: HttpClient) {}
   getPendingRequests(): Observable<AllStatusResponses> {
     const response = this.http.get<AllStatusResponses>(
-      environment.apiEndpointAdmin + '/pendingRetailers'
+      environment.apiEndpoint + '/admin/pendingRetailers'
     );
 
     console.log('response', response);
@@ -20,14 +20,14 @@ export class AdminApprovalRightsService {
 
   getRejectedRequests(): Observable<AllStatusResponses> {
     const response = this.http.get<AllStatusResponses>(
-      environment.apiEndpointAdmin + '/getrejectedRetailers'
+      environment.apiEndpoint + '/admin/getrejectedRetailers'
     );
     console.log(response);
     return response;
   }
   getApprovedRequests(): Observable<AllStatusResponses> {
     const response = this.http.get<AllStatusResponses>(
-      environment.apiEndpointAdmin + '/getapprovedRetailers'
+      environment.apiEndpoint + '/admin/getapprovedRetailers'
     );
     return response;
   }
@@ -38,32 +38,20 @@ export class AdminApprovalRightsService {
     limit: number
   ): Observable<AllStatusResponses> {
     console.log('inside getRequestsByStatus', status);
-    const apiUrl = `${environment.apiEndpointAdmin}/getallRetailers?status=${status}&page=${page}&limit=${limit}`;
+    const apiUrl = `${environment.apiEndpoint}/admin/getallRetailers?status=${status}&page=${page}&limit=${limit}`;
     console.log('apiUrl', apiUrl);
     return this.http.get<AllStatusResponses>(apiUrl);
   }
 
-  // getRequestsByStatus(
-  //   status: string,
-  //   page: number,
-  //   limit: number
-  // ): Observable<AllAdminStatusResponses> {
-  //   console.log('inside getRequestsByStatus');
-  //   // http://localhost:5000/api/superadmin/getalladminrequest?status=rejected
-  //   const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest?status=${status}&page=${page}&limit=${limit}`;
-  //   console.log('apiUrl', apiUrl);
-  //   return this.http.get<AllAdminStatusResponses>(apiUrl);
-  // }
-
   approveRetailer(id: string): Observable<Object> {
     const approveRetailerUrl =
-      environment.apiEndpointAdmin + '/approveRetailer/' + id;
+      environment.apiEndpoint + '/admin/approveRetailer/' + id;
     return this.http.put<Object>(approveRetailerUrl, {});
   }
 
   rejectRetailer(id: string): Observable<Object> {
     const approveRetailerUrl =
-      environment.apiEndpointAdmin + '/rejectRetailer/' + id;
+      environment.apiEndpoint + '/admin/rejectRetailer/' + id;
     return this.http.put<Object>(approveRetailerUrl, {});
   }
 
@@ -71,7 +59,7 @@ export class AdminApprovalRightsService {
     querySearch: string,
     approvalStatus: string
   ): Observable<AllStatusResponses> {
-    const rejectRetailerUrl = `${environment.apiEndpointAdmin}/searchRetailer?query=${querySearch}&approval_status=${approvalStatus}`;
+    const rejectRetailerUrl = `${environment.apiEndpoint}/admin/searchRetailer?query=${querySearch}&approval_status=${approvalStatus}`;
     return this.http.get<AllStatusResponses>(rejectRetailerUrl);
   }
 }

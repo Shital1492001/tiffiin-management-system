@@ -14,8 +14,14 @@ export interface Retailer {
   role_specific_details: RoleDetails;
   _id: string;
 }
+export interface Pagination {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+}
 
 export interface AllStatusResponses {
   statuscode: number;
   data: Retailer[];
+  pagination: Pagination;
 }
