@@ -34,7 +34,8 @@ export class SuperAdminLoginComponent {
   invalidCredential: string = '';
   // passwordValidity: string = '';
   strongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-  constructor(private authService: AuthService, private route: Router) {}
+  hide = true
+  constructor(private authService: AuthService, private route: Router) { }
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
