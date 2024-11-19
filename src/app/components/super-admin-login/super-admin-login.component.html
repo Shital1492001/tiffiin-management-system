@@ -9,9 +9,9 @@
     <div class="form-section">
       <div class="login-section">
         <mat-card-header>Tiffin Services</mat-card-header>
-        <form [formGroup]="loginForm" (submit)="loginAdmin()">
+        <form [formGroup]="loginForm">
           <div class="login">
-            <div class="email-input">
+            <div>
               <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
                 <input
@@ -24,7 +24,7 @@
                 <mat-error>{{ emailErrorMessage }} </mat-error>
               </mat-form-field>
             </div>
-            <div class="password-input">
+            <div>
               <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
                 <input
@@ -49,15 +49,11 @@
               </mat-form-field>
             </div>
             <div class="button">
-              <button mat-raised-button type="submit">Login</button>
+              <button mat-raised-button (click)="loginAdmin()">Login</button>
             </div>
             <mat-error>{{ invalidCredential }}</mat-error>
             <mat-card-footer
               ><a routerLink="/admin-signup" class="link">Sign up</a> as Admin
-            </mat-card-footer>
-            <mat-card-footer>
-              Forgot password?
-              <a routerLink="/forgot-password" class="link">Click here</a>
             </mat-card-footer>
           </div>
         </form>
