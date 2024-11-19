@@ -56,6 +56,7 @@ export class StatusTableComponent implements AfterViewInit {
   @Output() pageChange = new EventEmitter<{ page: number; limit: number }>();
   currentPage: number = 1;
   pageSize: number = 10;
+  noOrganization: string = "-"
   ngOnChanges(changes: SimpleChanges): void {
     if (this.paginator) {
       console.log('inside if paginator');
