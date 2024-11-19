@@ -11,3 +11,7 @@ body {
   margin-top: 8px;
   justify-content: center;
 }
+.mat-icon.mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color {
+  position: relative;
+  top: 0 !important ;
+}
