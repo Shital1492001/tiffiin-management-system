@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
-  apiEndpointauth: 'http://localhost:5000/api/auth',
+  production: false,
+  apiEndpoint: 'http://localhost:5000/api',
   apiEndpointOrganization: 'http://localhost:5000/api/superadmin/organizations',
 };

@@ -18,7 +18,6 @@ export class OrganizationService {
   getOrgByIdUrl = environment.apiEndpointOrganization + '/getOrganization';
   updateOrgUrl = environment.apiEndpointOrganization + '/updateOrganization';
   searchOrgUrl = environment.apiEndpointOrganization + '/searchOrganizations';
-  baseUrlOrgImage=environment.apiEndpointOrganization + '/upload';
   constructor(private http: HttpClient) {}
   getAllOrganizationsApi(
     page: number,
