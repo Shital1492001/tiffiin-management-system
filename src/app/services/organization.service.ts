@@ -8,8 +8,9 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class OrganizationService {
-  baseUrlOrg = environment.apiEndpointOrganization + '/getallOrganization';
-  constructor(private http: HttpClient) {}
+  baseUrlOrg =
+    environment.apiEndpoint + '/superadmin/organizations/getallOrganization';
+  constructor(private http: HttpClient) { }
   getAllOrganizationsApi(): Observable<AllOrganization> {
     // here extract data array and return
     const observableData = this.http.get<AllOrganization>(this.baseUrlOrg);

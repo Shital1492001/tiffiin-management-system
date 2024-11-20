@@ -14,10 +14,9 @@ export class AuthService {
       this.roleSubject.next(role_id);
     }
   }
-  baseUrlLogin = environment.apiEndpointauth + '/login';
+  baseUrlLogin = environment.apiEndpoint + '/auth/login';
   authenticateLogin(loginCredentials: Login): Observable<Token> {
-    console.log(environment.apiEndpointOrganization);
-    console.log(environment.apiEndpointauth + '/login');
+    console.log(environment.apiEndpoint + '/login');
     const data = this.http.post<Token>(this.baseUrlLogin, loginCredentials);
     return data;
   }
@@ -66,5 +65,11 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  getUserTypeByToken(): Observable<UserByToken> {
+    const baseUrlUserType = environment.apiEndpoint + '/auth/getuserbytoken';
+    const userData = this.http.get<UserByToken>(baseUrlUserType);
+    return userData;
   }
 }

@@ -9,39 +9,13 @@
   </div>
 
   <div class="boxes">
-    <div class="mat-card-container">
-      <mat-card class="mat-elevation-z3">
-        <mat-card-title class="title">
-          {{
-            role === "superadmin" ? "Pending Admins" : "Pending Retailers"
-          }}</mat-card-title
-        >
+    <div class="mat-card-container" *ngFor="let element of cardsArray">
+      <mat-card class="card">
+        <mat-card-header class="title">
+          {{ role === "superadmin" ? element.superAdmin : element.admin }}
+        </mat-card-header>
         <mat-card-content>
-          <p class="content">{{ pending }}</p>
-        </mat-card-content>
-      </mat-card>
-    </div>
-
-    <div class="mat-card-container">
-      <mat-card class="mat-elevation-z3">
-        <mat-card-title class="title">
-          {{
-            role === "superadmin" ? "Approved Admins" : "Approved Retailers"
-          }}</mat-card-title
-        >
-        <mat-card-content>
-          <p class="content">{{ approved }}</p>
-        </mat-card-content>
-      </mat-card>
-    </div>
-
-    <div class="mat-card-container">
-      <mat-card class="mat-elevation-z3">
-        <mat-card-title class="title">{{
-          role === "superadmin" ? "Rejected Admins" : "Rejected Retailers"
-        }}</mat-card-title>
-        <mat-card-content>
-          <p class="content">{{ rejected }}</p>
+          <p class="content">{{ element.count }}</p>
         </mat-card-content>
       </mat-card>
     </div>
