@@ -15,6 +15,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ActionDialogComponent } from '../action-dialog/action-dialog.component';
+import { AdminActionDialogComponent } from '../admin-action-dialog/admin-action-dialog.component';
 @Component({
   selector: 'app-status-table',
   standalone: true,
@@ -30,9 +33,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './status-table.component.css',
 })
 export class StatusTableComponent implements AfterViewInit {
-  applyFilter(arg0: any) {
-    throw new Error('Method not implemented.');
-  }
+
+  constructor(private dialog: MatDialog) { }
   displayedColumns: string[] = [
     'username',
     'email',
@@ -41,7 +43,7 @@ export class StatusTableComponent implements AfterViewInit {
     'approval_status',
     '_id',
   ];
-  dataSource!: MatTableDataSource<Admin>;
+  dataSource: MatTableDataSource<Admin> = new MatTableDataSource<Admin>([]);
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -54,6 +56,8 @@ export class StatusTableComponent implements AfterViewInit {
   @Output()
   emitterReject = new EventEmitter<string>();
   @Output() pageChange = new EventEmitter<{ page: number; limit: number }>();
+  @Input()
+  searchedQueryNotFound!: string
   currentPage: number = 1;
   pageSize: number = 10;
   noOrganization: string = "-"
@@ -77,7 +81,6 @@ export class StatusTableComponent implements AfterViewInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
-
     if (this.paginator) {
       this.paginator.length = this.totalItems;
       console.log('AfterViewInit - Paginator length:', this.paginator.length);
@@ -87,5 +90,94 @@ export class StatusTableComponent implements AfterViewInit {
     const { pageIndex, pageSize } = event;
     console.log('emmitting');
     this.pageChange.emit({ page: pageIndex + 1, limit: pageSize });
+  }
+  /*
+  onApprove(elementId: string): void {
+    const dialogRef = this.dialog.open(ActionDialogComponent, {
+      data: {
+        title: 'Approve Item',
+        message: 'Are you sure you want to approve this item?',
+        showInput: false,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result?.action === 'yes') {
+        console.log(`Rejected item: ${elementId}`);
+        this.emitterApprove.emit(elementId);
+      } else if (result?.action === 'no') {
+        console.log('User chose not to reject.');
+      }
+    });
+  }
+  openRejectDialog(elementId: string): void {
+    const dialogRef = this.dialog.open(ActionDialogComponent, {
+      data: {
+        title: 'Reject Confirmation',
+        message: `Are you sure you want to reject the element with ID: ${elementId}?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.action === 'yes') {
+        console.log(`Rejected item: ${elementId}`);
+        this.emitterReject.emit(elementId);
+      } else if (result?.action === 'no') {
+        console.log('User chose not to reject.');
+      }
+    });
+  }
+    */
+  openDialog(
+    elementId: string,
+    title: string,
+    message: string,
+    includeMessage: boolean,
+    eventEmitter: EventEmitter<any>
+  ): void {
+    console.log("includeMessage", includeMessage);
+    const dialogRef = this.dialog.open(AdminActionDialogComponent, {
+      data: {
+        title,
+        message,
+        includeMessage,
+      },
+      width: '352px',
+      height: '144px'
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result?.action === 'yes') {
+        if (includeMessage) {
+          console.log(
+            `Action: ${title}, Item: ${elementId}, Message: ${result.message}`
+          );
+          eventEmitter.emit({ id: elementId, message: result.message });
+        } else {
+          console.log(`Action: ${title}, Item: ${elementId}`);
+          eventEmitter.emit(elementId);
+        }
+      } else if (result?.action === 'no') {
+        console.log(`User chose not to proceed with ${title}.`);
+      }
+    });
+  }
+  onReject(elementId: string): void {
+    this.openDialog(
+      elementId,
+      'Reject Item',
+      'Are you sure you want to reject this item?',
+      false,
+      this.emitterReject
+    );
+  }
+
+  onApprove(elementId: string): void {
+    this.openDialog(
+      elementId,
+      'Approve Item',
+      'Are you sure you want to approve this item?',
+      false,
+      this.emitterApprove
+    );
   }
 }

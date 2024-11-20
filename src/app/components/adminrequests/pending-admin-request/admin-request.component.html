@@ -2,7 +2,12 @@
   <div class="serach-bar">
     <mat-form-field class="search" appearance="outline">
       <mat-label>Search Admins</mat-label>
-      <input class="input" matInput placeholder="Search by name or email" />
+      <input
+        class="input"
+        matInput
+        placeholder="Search by name or email"
+        (keyup)="onSearchInput($event)"
+      />
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </div>
@@ -25,4 +30,5 @@
   (emitterApprove)="updateStatusAprroved($event)"
   (emitterReject)="updateStatusRejected($event)"
   [totalItems]="totalItems"
+  [searchedQueryNotFound]="searchedQueryNotFound"
 ></app-status-table>
