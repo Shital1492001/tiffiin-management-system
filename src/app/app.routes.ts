@@ -3,7 +3,6 @@ import { SuperAdminLoginComponent } from './components/super-admin-login/super-a
 import { AuthGuard } from './guards/authguard.guard';
 import { SuperadminDashboardComponent } from './components/superadmin-dashboard/superadmin-dashboard.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { AdminDashboardComponent } from './components/admin-approval-rights/admin-approval-rights.component';
 
 export const routes: Routes = [
   {
@@ -13,19 +12,10 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
-  {
-    path: 'login',
     component: SuperAdminLoginComponent,
   },
   {
-    path: 'status',
-    component: AdminDashboardComponent,
-  },
-  {
-    path: 'superAdminDashboard',
+    path: 'superAdminDashboard/:id',
     loadComponent: () =>
       import('./components/superadmin/superadmin.component').then(
         (m) => m.SuperadminComponent
@@ -46,7 +36,35 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: '**',
-    component: PageNotFoundComponent,
+    path: 'add-organization',
+    loadComponent: () =>
+      import('./components/manage-organization/manage-organization.component').then(
+        (m) => m.AddOrganizationComponent
+      ),
+    canActivate: [AuthGuard],
   },
+  {
+    path: 'update-organization/:id',
+    loadComponent: () =>
+      import('./components/manage-organization/manage-organization.component').then(
+        (m) => m.AddOrganizationComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'view-organization/:id',
+    loadComponent: () =>
+      import('./components/manage-organization/manage-organization.component').then(
+        (m) => m.AddOrganizationComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'view-all-organizations',
+    loadComponent: () =>
+      import('./components/superadmin/superadmin.component').then(
+        (m) => m.SuperadminComponent
+      ),
+  },
+  
 ];

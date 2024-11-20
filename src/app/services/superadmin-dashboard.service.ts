@@ -12,7 +12,7 @@ export class SuperadminDashboardService {
 
   getPendingRequests(): Observable<AllAdminStatusResponses> {
     const response = this.http.get<AllAdminStatusResponses>(
-      environment.apiEndpoint + '/superadmin/pendingAdminApproval'
+      environment.apiEndpointauth + '/superadmin/pendingAdminApproval'
     );
     console.log(response);
     return response;
@@ -20,14 +20,14 @@ export class SuperadminDashboardService {
 
   getRejectedRequests(): Observable<AllAdminStatusResponses> {
     const response = this.http.get<AllAdminStatusResponses>(
-      environment.apiEndpoint + '/superadmin/rejectedAdminApproval'
+      environment.apiEndpointauth + '/superadmin/rejectedAdminApproval'
     );
     console.log(response);
     return response;
   }
   getApprovedRequests(): Observable<AllAdminStatusResponses> {
     const response = this.http.get<AllAdminStatusResponses>(
-      environment.apiEndpoint + '/superadmin/approvedAdminApproval'
+      environment.apiEndpointauth + '/superadmin/approvedAdminApproval'
     );
     console.log(response);
     return response;
@@ -45,7 +45,7 @@ export class SuperadminDashboardService {
       limit: limitItems,
     };
 
-    const apiUrl = `${environment.apiEndpoint}/superadmin/getalladminrequest`;
+    const apiUrl = `${environment.apiEndpointauth}/superadmin/getalladminrequest`;
     console.log('apiUrl', apiUrl);
     return this.http.get<AllAdminStatusResponses>(apiUrl, { params: param });
   }
