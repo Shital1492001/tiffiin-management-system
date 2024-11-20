@@ -9,9 +9,9 @@ import { UserByToken } from '../models/admin';
 })
 export class AuthService {
   constructor(private http: HttpClient) {
-    const role_id = sessionStorage.getItem('role_id');
-    if (role_id) {
-      this.roleSubject.next(role_id);
+    const role = sessionStorage.getItem('role');
+    if (role) {
+      this.roleSubject.next(role);
     }
   }
   baseUrlLogin = environment.apiEndpoint + '/auth/login';
@@ -22,14 +22,14 @@ export class AuthService {
   }
 
   private roleSubject = new BehaviorSubject<string | null>(null);
-  public role_id$ = this.roleSubject.asObservable();
+  public role$ = this.roleSubject.asObservable();
 
-  setRole(role_id: string): void {
-    sessionStorage.setItem('role_id', role_id);
-    this.roleSubject.next(role_id);
+  setRole(role: string): void {
+    sessionStorage.setItem('role', role);
+    this.roleSubject.next(role);
   }
   getRole(): string | null {
-    return sessionStorage.getItem('role_id');
+    return sessionStorage.getItem('role');
   }
 
   isSuperAdmin(): boolean {
@@ -43,8 +43,8 @@ export class AuthService {
   }
 
   getUserTypeByToken(): Observable<UserByToken> {
-    const baseUrlUserType = environment.apiEndpointauth + '/getuserbytoken';
-    const userData = this.http.post<UserByToken>(baseUrlUserType, {});
+    const baseUrlUserType = environment.apiEndpoint + '/auth/getuserbytoken';
+    const userData = this.http.get<UserByToken>(baseUrlUserType);
     return userData;
   }
 
@@ -67,9 +67,5 @@ export class AuthService {
     return false;
   }
 
-  getUserTypeByToken(): Observable<UserByToken> {
-    const baseUrlUserType = environment.apiEndpoint + '/auth/getuserbytoken';
-    const userData = this.http.get<UserByToken>(baseUrlUserType);
-    return userData;
-  }
+
 }

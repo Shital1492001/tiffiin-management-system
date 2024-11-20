@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CustomPasswordValidators } from '../../customValidators/custom-password-validators';
+import { JwtHelperService } from '@auth0/angular-jwt'
 @Component({
   selector: 'app-super-admin-login',
   standalone: true,
@@ -144,6 +145,8 @@ export class SuperAdminLoginComponent {
     }
   }
   loginAdmin() {
+    const helper = new JwtHelperService();
+
     const login = {
       email: this.loginForm.controls.email.value,
       password: this.loginForm.controls.password.value,
@@ -156,9 +159,12 @@ export class SuperAdminLoginComponent {
       tokenObservable.subscribe({
         next: (data) => {
           sessionStorage.setItem('token', data.token);
-          this.authService.setRole(data.role_id);
+          const decodedToken = helper.decodeToken(data.token)
+          this.authService.setRole(decodedToken.role);
+          console.log('decodedToken', decodedToken);
+          // this.route.navigate(['/navbar/super-admin']);
           if (this.authService.isSuperAdmin()) {
-            this.route.navigate(['/navbar/super-admin']);
+            this.route.navigate(['/navbar/home']);
           } else {
             this.route.navigate(['/navbar/admin']);
           }

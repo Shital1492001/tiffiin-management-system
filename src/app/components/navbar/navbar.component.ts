@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Component } from '@angular/core';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -46,7 +46,7 @@ export class NavbarComponent {
   superAdminMenus: Menus[] = [
     {
       label: `Dashboard`,
-      redirectURL: '/navbar/super-admin',
+      redirectURL: '/navbar/home',
       icon: 'dashboard',
     },
     {
@@ -84,8 +84,8 @@ export class NavbarComponent {
     console.log('menus', this.menus);
   }
   ngOnInit(): void {
-    this.authService.role_id$.subscribe((role_id) => {
-      if (role_id) {
+    this.authService.role$.subscribe((role) => {
+      if (role) {
         this.setMenusByRole();
       }
     });
