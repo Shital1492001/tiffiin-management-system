@@ -32,4 +32,8 @@ interface RoleDetails {
     _id: string;
     token: string;
   }
+  export interface UserByToken {
+    statuscode: number;
+    data: Admin;
+  }
   
