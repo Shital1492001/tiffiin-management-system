@@ -4,8 +4,8 @@
   <p>Are you sure you want to delete?</p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="onCancel()">Cancel</button>
-  <button mat-button mat-dialog-close cdkFocusInitial (click)="onConfirm()">
+  <button mat-stroked-button mat-dialog-close (click)="onCancel()" class="mat-mdc-button">Cancel</button>
+  <button mat-stroked-button mat-dialog-close cdkFocusInitial (click)="onConfirm()">
     Ok
   </button>
 </mat-dialog-actions>

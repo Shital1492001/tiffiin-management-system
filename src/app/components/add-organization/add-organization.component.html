@@ -1,7 +1,7 @@
-<mat-card appearance="outlined" class="card">
+<mat-card appearance="outlined">
   <mat-card-content>
     <form [formGroup]="organizationForm" (ngSubmit)="onSubmit()">
-      <h2 class="form-heading">Manage Organization</h2>
+      <h2 class="form-heading">{{ formTitle }}</h2>
       <mat-form-field appearance="outline">
         <mat-label>Organization Name</mat-label>
         <input formControlName="orgName" matInput [readonly]="viewMode" />
@@ -9,7 +9,19 @@
           {{ errorMessageOrgName }}
         </mat-error>
       </mat-form-field>
-
+      <!-- <div class="image-upload">
+        <label for="orgImage" class="upload-label">Upload Image</label><br>
+        <input
+          id="orgImage"
+          type="file"
+          formControlName="org_image"
+          [disabled]="viewMode"
+          (change)="onFileSelect($event)"
+        /> -->
+        <!-- <div *ngIf="orgImageControl.invalid && orgImageControl.touched" class="error">
+          {{ errorMessageOrgName }}
+        </div> -->
+      <!-- </div> -->
       <div formArrayName="orgLocation">
         <div
           *ngFor="let loc of locations.controls; let i = index"
@@ -31,7 +43,7 @@
                 loc.get("contactNumber")?.value
               }}</mat-panel-description>
               @if(locations.length > 1 && !viewMode){
-              <button mat-icon-button class="icon-button" type="delete" (click)="removeLocation(i)">
+              <button mat-icon-button type="button" class="icon-button" (click)="removeLocation(i)">
                 <mat-icon>delete</mat-icon>
               </button>
               }
@@ -84,18 +96,17 @@
           </mat-expansion-panel>
         </div>
       </div>
-
       @if(!viewMode){
       <mat-card-footer class="footer-buttons">
         <button
-          mat-raised-button
+          mat-stroked-button
           type="button"
           (click)="addLocation()"
-          class="add-location-button"
+          class="mat-mdc-button"
         >
           Add Location <mat-icon>add</mat-icon>
         </button>
-        <button mat-raised-button type="submit" class="submit-button">
+        <button mat-stroked-button type="submit" class="mat-mdc-button">
           Submit
         </button>
       </mat-card-footer>

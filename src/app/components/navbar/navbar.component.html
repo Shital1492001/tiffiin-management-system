@@ -8,9 +8,12 @@
   </span>
 
   <span class="space-between"></span>
-  <!-- <button class="mat-button" mat-raised-button routerLink="/logout">
-    <mat-icon routerLink="/logout">exit_to_app</mat-icon>
-  </button> -->
+  <img
+    *ngIf="userImageUrl"
+    [src]="userImageUrl"
+    alt="User Profile"
+    class="profile-picture"
+  />
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">

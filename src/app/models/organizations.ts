@@ -18,6 +18,7 @@ export interface Organization {
 
 export interface allOrganization {
   message: string,
+  image:string;
   statuscode: number,
   data: Organization[],
   pagination: {

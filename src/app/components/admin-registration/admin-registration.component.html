@@ -1,4 +1,4 @@
-<mat-card class="card">
+<mat-card class="admin-card">
   <mat-card-content class="card-content">
     <form [formGroup]="adminForm" (submit)="CollectData()" class="form">
       <h2 id="admin">Signup</h2>
@@ -56,8 +56,8 @@
             @for(organization of organizations; track organization){
             <mat-option [value]="organization._id">
               {{ organization.org_name }}
-            </mat-option>
-          }
+            </mat-option> 
+           }
           </mat-select>
           <mat-icon matPrefix>corporate_fare</mat-icon>
           <mat-error>
@@ -99,10 +99,10 @@
         </mat-form-field>
       </div>
       <div class="button-row">
-        <button mat-raised-button type="submit">REGISTER</button>
-        <button mat-raised-button type="reset">RESET</button>
+        <button mat-stroked-button type="submit" class="mat-mdc-button">REGISTER</button>
+        <button mat-stroked-button type="reset" class="mat-mdc-button">RESET</button>
       </div>
-      <p>Already have an account?<a routerLink="/">Login</a></p>
+      <p>Already have an account?  <a routerLink="/">Login</a></p>
     </form>
   </mat-card-content>
 </mat-card>

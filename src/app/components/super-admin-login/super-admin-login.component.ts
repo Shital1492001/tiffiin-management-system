@@ -164,6 +164,7 @@ export class SuperAdminLoginComponent {
       console.log('tokenObservable', tokenObservable);
       tokenObservable.subscribe({
         next: (data) => {
+          console.log("login data",data)
           sessionStorage.setItem('token', data.token);
           this.authService.setRole(data.role_id);
           if (this.authService.isSuperAdmin()) {

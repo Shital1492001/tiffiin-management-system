@@ -26,7 +26,7 @@ export class SuperadminComponent implements OnInit {
   notFoundMessage=""
   flag:boolean=false;
   paginatedOrganizations: Organization[] = [];
-  pageSize = 4; 
+  pageSize = 6; 
   currentPage = 0;
   totalItems = 0;
   totalPages = 0;

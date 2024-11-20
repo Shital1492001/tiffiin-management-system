@@ -66,5 +66,23 @@ export class AuthService {
     // console.log(admin)
     return this.http.post<AdminRegister>(this.baseUrlRegistration, formData);
   }
+  // this.http.get<{ user_image: string }>(`/api/user/${userId}`).subscribe({
+  //   next: (response) => {
+  //     this.userImageUrl = response.user_image;
+  //   },
+  //   error: (err) => {
+  //     console.error('Error fetching user profile image:', err);
+  //   },
+  // });
+  baseUrlUserImage=environment.apiEndpointauth + '/uploaduserimage';
+  uploadUserImage(userId: string, file: File): Observable<AdminRegister> {
+    const formData = new FormData();
+    formData.append('recfile', file);
+
+    return this.http.post<AdminRegister>(
+      `${this.baseUrlUserImage}/uploaduserimage/${userId}`,
+      formData
+    );
+  }
 
 }

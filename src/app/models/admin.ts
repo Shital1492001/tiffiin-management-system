@@ -65,7 +65,7 @@ export interface UserByToken {
 }
 
   export interface AdminRegister {
-    // data:Admin[];
+    data:Admin[];
     message: string;
     statuscode: number;
     _id: string;
