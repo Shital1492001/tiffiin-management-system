@@ -3,15 +3,15 @@ import { Injectable } from '@angular/core';
 import { Login, Token } from '../models/userlogin';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { UserByToken } from '../models/admin';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
-  baseUrlLogin = environment.apiEndpointauth + '/login';
+  baseUrlLogin = environment.apiEndpoint + '/auth/login';
   authenticateLogin(loginCredentials: Login): Observable<Token> {
-    console.log(environment.apiEndpointOrganization);
-    console.log(environment.apiEndpointauth + '/login');
+    console.log(environment.apiEndpoint + '/login');
     const data = this.http.post<Token>(this.baseUrlLogin, loginCredentials);
     return data;
   }
@@ -21,5 +21,11 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  getUserTypeByToken(): Observable<UserByToken> {
+    const baseUrlUserType = environment.apiEndpoint + '/auth/getuserbytoken';
+    const userData = this.http.get<UserByToken>(baseUrlUserType);
+    return userData;
   }
 }

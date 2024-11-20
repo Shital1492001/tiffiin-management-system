@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, OnInit, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Menus } from '../../models/menus';
 
 @Component({
@@ -27,12 +27,12 @@ export class NavbarComponent {
   menus: Menus[] = [
     {
       label: `Dashboard`,
-      redirectURL: '/',
-      icon: 'home',
+      redirectURL: '/home',
+      icon: 'dashboard',
     },
     {
       label: 'Status',
-      redirectURL: '/status',
+      redirectURL: '/statusDataTable',
       icon: 'check_circle',
     },
     {
@@ -49,12 +49,20 @@ export class NavbarComponent {
 
   collapsed: boolean = false;
 
+  constructor(private router: Router) {}
+
   collapsedState() {
     this.collapsed = !this.collapsed;
     console.log(this.collapsed);
   }
 
   sidenavWidth() {
-    return this.collapsed ? '50px' : '250px';
+    return this.collapsed ? '65px' : '250px';
+  }
+
+  logout() {
+    sessionStorage.removeItem('token');
+    window.alert('Logged out successfully...');
+    this.router.navigate(['/']);
   }
 }
