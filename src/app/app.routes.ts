@@ -38,7 +38,7 @@ export const routes: Routes = [
   {
     path: 'add-organization',
     loadComponent: () =>
-      import('./components/add-organization/add-organization.component').then(
+      import('./components/manage-organization/manage-organization.component').then(
         (m) => m.AddOrganizationComponent
       ),
     canActivate: [AuthGuard],
@@ -46,7 +46,7 @@ export const routes: Routes = [
   {
     path: 'update-organization/:id',
     loadComponent: () =>
-      import('./components/add-organization/add-organization.component').then(
+      import('./components/manage-organization/manage-organization.component').then(
         (m) => m.AddOrganizationComponent
       ),
     canActivate: [AuthGuard],
@@ -54,7 +54,7 @@ export const routes: Routes = [
   {
     path: 'view-organization/:id',
     loadComponent: () =>
-      import('./components/add-organization/add-organization.component').then(
+      import('./components/manage-organization/manage-organization.component').then(
         (m) => m.AddOrganizationComponent
       ),
     canActivate: [AuthGuard],

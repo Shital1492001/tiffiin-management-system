@@ -23,7 +23,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { markAllControlsAsDirtyAndTouched } from '../../utils';
 
 @Component({
-  selector: 'app-add-organization',
+  selector: 'app-manage-organization',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -39,8 +39,8 @@ import { markAllControlsAsDirtyAndTouched } from '../../utils';
     CommonModule,
     RouterModule,
   ],
-  templateUrl: './add-organization.component.html',
-  styleUrls: ['./add-organization.component.css'],
+  templateUrl: './manage-organization.component.html',
+  styleUrls: ['./manage-organization.component.css'],
 })
 export class AddOrganizationComponent {
   organizationForm: FormGroup;
