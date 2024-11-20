@@ -16,7 +16,7 @@ export class AuthService {
   }
   baseUrlLogin = environment.apiEndpoint + '/auth/login';
   authenticateLogin(loginCredentials: Login): Observable<Token> {
-    console.log(environment.apiEndpoint + '/login');
+    console.log(environment.apiEndpoint + '/auth/login');
     const data = this.http.post<Token>(this.baseUrlLogin, loginCredentials);
     return data;
   }

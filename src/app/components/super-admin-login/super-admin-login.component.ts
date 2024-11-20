@@ -144,6 +144,15 @@ export class SuperAdminLoginComponent {
         return '';
     }
   }
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      if (this.authService.isSuperAdmin()) {
+        this.route.navigate(['/navbar/home']);
+      } else {
+        this.route.navigate(['/navbar/admin']);
+      }
+    }
+  }
   loginAdmin() {
     const helper = new JwtHelperService();
 

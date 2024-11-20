@@ -105,7 +105,6 @@ export class NavbarComponent {
 
   logout() {
     sessionStorage.removeItem('token');
-    sessionStorage.removeItem('role_id');
     window.alert('Logged out successfully...');
     this.router.navigate(['/']);
   }
