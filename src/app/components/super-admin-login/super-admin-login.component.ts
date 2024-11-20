@@ -17,6 +17,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CustomPasswordValidators } from '../../customValidators/custom-password-validators';
 import { markAllControlsAsDirtyAndTouched } from '../../../utils';
 import { SnackbarService } from '../../services/snackbar.service';
+import { JwtHelperService } from '@auth0/angular-jwt'
 @Component({
   selector: 'app-super-admin-login',
   standalone: true,
@@ -38,11 +39,15 @@ export class SuperAdminLoginComponent {
   hide = true;
   // passwordValidity: string = '';
   strongPasswordRegx: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  jwtHelper = new JwtHelperService();
+  // Other functions
+  // const expirationDate = helper.getTokenExpirationDate(myRawToken);
+  // const isExpired = helper.isTokenExpired(myRawToken);
   constructor(
     private authService: AuthService,
     private route: Router,
     private snackbar: SnackbarService
-  ) {}
+  ) { }
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -166,7 +171,10 @@ export class SuperAdminLoginComponent {
         next: (data) => {
           console.log("login data",data)
           sessionStorage.setItem('token', data.token);
-          this.authService.setRole(data.role_id);
+          const decodedToken = this.jwtHelper.decodeToken(data.token);
+          console.log('decodedToken', decodedToken);
+          console.log('role-----------------------------------------', decodedToken.role);
+          this.authService.setRole(decodedToken.role);
           if (this.authService.isSuperAdmin()) {
             this.snackbar.showSuccess('Login successfully!');
             this.route.navigate(['/navbar/home']);

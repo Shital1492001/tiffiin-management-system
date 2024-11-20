@@ -37,7 +37,6 @@ export class AuthService {
 
   isSuperAdmin(): boolean {
     console.log('this.roleSubject.getValue()', this.roleSubject.getValue());
-
     return this.roleSubject.getValue() === Roles.SUPER_ADMIN;
   }
   isAdmin(): boolean {
