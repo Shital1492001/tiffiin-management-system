@@ -95,15 +95,16 @@ a {
   width: 100%;
 }
 
-.mat-icon-edit{
-  color:green
+.mat-icon-edit:hover{
+  color:#ffffff
 }
 .mat-icon-view{
-  color:blue
+  color:#AF1740
 }
-.mat-icon-delet{
-  color:red
+.mat-icon-delete{
+  color:#AF1740
 }
+
 mat-card.card {
   padding: 16px;
   margin-bottom: 16px;
@@ -114,3 +115,4 @@ mat-card.card:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   background-color: #f9f9f9;
 }
+

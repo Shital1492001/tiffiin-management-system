@@ -49,11 +49,13 @@
               </mat-form-field>
             </div>
             <div class="button">
-              <button mat-raised-button (click)="loginAdmin()">Login</button>
+              <button mat-stroked-button type="submit" (click)="loginAdmin()" class="mat-mdc-button">
+                Login
+              </button>
             </div>
             <mat-error>{{ invalidCredential }}</mat-error>
             <mat-card-footer
-              ><a routerLink="/admin-signup" class="link">Sign up</a> as Admin
+              ><a routerLink="/signup" class="link">Sign up</a> as Admin
             </mat-card-footer>
           </div>
         </form>
