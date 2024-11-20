@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SuperadminService } from '../../../services/superadmin.service';
+import { Admin } from '../../../models/admin';
 import { StatusTableComponent } from '../../status-table/status-table.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -10,9 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject } from "rxjs";
 import { SnackbarService } from '../../../services/snackbar.service';
-import { Admin } from '../../../models/admin';
 @Component({
   selector: 'app-admin-request',
   standalone: true,
@@ -52,11 +52,9 @@ export class AdminRequestComponent {
     private router: Router,
     private snackbar: SnackbarService
   ) {
-    this.searchSubject
-      .pipe(debounceTime(1500), distinctUntilChanged())
-      .subscribe((query) => {
-        this.searchAdminByMultipleEntity(query);
-      });
+    this.searchSubject.pipe(debounceTime(1500), distinctUntilChanged()).subscribe((query) => {
+      this.searchAdminByMultipleEntity(query);
+    });
   }
   ngOnInit(): void {
     this.getAdminRequestsByStatus('pending', this.currentPage, this.limit);
@@ -91,14 +89,11 @@ export class AdminRequestComponent {
       next: (obj) => {
         console.log(obj);
         window.alert(`Admin with id ${id} is approved successfully`);
-        this.getAdminRequestsByStatus(
-          this.status,
-          this.currentPage,
-          this.limit
-        );
+        this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
       },
       error: (err) => {
         console.log(err);
+
       },
     });
   }
@@ -109,11 +104,7 @@ export class AdminRequestComponent {
       next: (obj) => {
         console.log(obj);
         window.alert(`are you sure you want reject admin with ${id}`);
-        this.getAdminRequestsByStatus(
-          this.status,
-          this.currentPage,
-          this.limit
-        );
+        this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
       },
       error: (err) => {
         console.log(err);
@@ -154,9 +145,8 @@ export class AdminRequestComponent {
         },
         error: (err) => {
           console.log(err);
-          this.snackbar.showError(
-            `no admin with ${searchQueryOnKeyUp} found in ${this.status} admins`
-          );
+          this.snackbar.showError(`no admin with ${searchQueryOnKeyUp} found in ${this.status} admins`)
+
         },
       });
     } else {
@@ -164,3 +154,6 @@ export class AdminRequestComponent {
     }
   }
 }
+
+
+

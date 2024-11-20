@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class SuperadminService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getRequestsByStatus(
     adminStatus: string,
@@ -19,8 +19,8 @@ export class SuperadminService {
     const param = {
       status: adminStatus,
       page: pageNo,
-      limit: limitItems,
-    };
+      limit: limitItems
+    }
     const apiUrl = `${environment.apiEndpoint}/superadmin/getalladminrequest`;
     console.log('apiUrl', apiUrl);
     return this.http.get<AllAdminStatusResponses>(apiUrl, { params: param });
@@ -45,13 +45,12 @@ export class SuperadminService {
     querySearch: string,
     approvalStatus: string
   ): Observable<AllAdminStatusResponses> {
+
     const param = {
       query: querySearch,
-      approval_status: approvalStatus,
-    };
-    const rejectAdminUrl = `${environment.apiEndpoint}/superadmin/searchAdminApproval`;
-    return this.http.get<AllAdminStatusResponses>(rejectAdminUrl, {
-      params: param,
-    });
+      approval_status: approvalStatus
+    }
+    const rejectAdminUrl = `${environment.apiEndpoint}/superadmin/searchAdminApproval`
+    return this.http.get<AllAdminStatusResponses>(rejectAdminUrl, { params: param });
   }
 }

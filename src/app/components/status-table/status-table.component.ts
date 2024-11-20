@@ -7,18 +7,14 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { ViewChild } from '@angular/core';
-import {
-  MatPaginator,
-  MatPaginatorModule,
-  PageEvent,
-} from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { Admin } from '../../models/admin';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSort } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { Admin } from '../../models/admin';
 @Component({
   selector: 'app-status-table',
   standalone: true,
@@ -60,7 +56,7 @@ export class StatusTableComponent implements AfterViewInit {
   @Output() pageChange = new EventEmitter<{ page: number; limit: number }>();
   currentPage: number = 1;
   pageSize: number = 10;
-  noOrganization: string = '-';
+  noOrganization: string = "-"
   ngOnChanges(changes: SimpleChanges): void {
     if (this.paginator) {
       console.log('inside if paginator');
