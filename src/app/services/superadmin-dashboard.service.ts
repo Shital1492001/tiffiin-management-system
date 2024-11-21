@@ -8,7 +8,7 @@ import { AllAdminStatusResponses } from '../models/admin';
   providedIn: 'root',
 })
 export class SuperadminDashboardService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getPendingRequests(): Observable<AllAdminStatusResponses> {
     const response = this.http.get<AllAdminStatusResponses>(

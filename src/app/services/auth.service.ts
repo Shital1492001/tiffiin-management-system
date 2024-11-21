@@ -3,17 +3,13 @@ import { Injectable } from '@angular/core';
 import { Login, Roles, Token } from '../models/userlogin';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+
 import { UserByToken } from '../models/admin';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {
-    const role = sessionStorage.getItem('role');
-    if (role) {
-      this.roleSubject.next(role);
-    }
-  }
+  constructor(private http: HttpClient) { }
   baseUrlLogin = environment.apiEndpoint + '/auth/login';
   authenticateLogin(loginCredentials: Login): Observable<Token> {
     console.log(environment.apiEndpoint + '/auth/login');

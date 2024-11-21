@@ -171,7 +171,6 @@ export class SuperAdminLoginComponent {
           const decodedToken = helper.decodeToken(data.token)
           this.authService.setRole(decodedToken.role);
           console.log('decodedToken', decodedToken);
-          // this.route.navigate(['/navbar/super-admin']);
           if (this.authService.isSuperAdmin()) {
             this.route.navigate(['/navbar/home']);
           } else {
