@@ -1,5 +1,4 @@
 <div>
-  <div>{{ userStatus }}</div>
   <container-element [ngSwitch]="userStatus">
     <app-pending-admin-view *ngSwitchCase="'pending'"></app-pending-admin-view>
     <app-rejected-admin-view

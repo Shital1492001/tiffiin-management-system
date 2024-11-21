@@ -138,11 +138,14 @@ export class AdminRequestComponent {
       );
       searchedObservable.subscribe({
         next: (searchedAdmin) => {
+          console.log("searchedAdmin", searchedAdmin);
           if (searchedAdmin.data.length) {
             console.log(searchedAdmin);
             this.adminsArray = searchedAdmin.data;
           } else {
             console.log('Not Found');
+            this.adminsArray = []
+            this.searchedQueryNotFound = searchQueryOnKeyUp
           }
         },
         error: (err) => {

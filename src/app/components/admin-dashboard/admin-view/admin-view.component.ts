@@ -30,7 +30,7 @@ export class AdminViewComponent {
   constructor(
     private authService: AuthService,
     private adminRightsServices: AdminApprovalRightsService
-  ) {}
+  ) { }
 
   userStatus: string | null = null;
   getUserByToken() {
@@ -39,7 +39,7 @@ export class AdminViewComponent {
       next: (userData) => {
         this.userStatus = userData.data.role_specific_details.approval_status;
       },
-      error: () => {},
+      error: () => { },
     });
   }
 
@@ -52,14 +52,20 @@ export class AdminViewComponent {
   getAllPendingRetailers() {
     this.adminRightsServices.getPendingRequests().subscribe({
       next: (response) => {
+        console.log('pending', response.data);
+
         this.totalPendingRetailerCount = response.data.length;
       },
     });
   }
 
   getAllApprovedRetailers() {
+    console.log('approved',);
+
     this.adminRightsServices.getApprovedRequests().subscribe({
       next: (response) => {
+        console.log('approved', response.data);
+
         this.totalApprovedRetailerCount = response.data.length;
       },
     });
@@ -68,6 +74,8 @@ export class AdminViewComponent {
   getAllRejectedRetailers() {
     this.adminRightsServices.getRejectedRequests().subscribe({
       next: (response) => {
+        console.log('rejected', response.data);
+
         this.totalRejectedRetailerCount = response.data.length;
       },
     });
