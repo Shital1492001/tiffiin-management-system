@@ -91,42 +91,6 @@ export class StatusTableComponent implements AfterViewInit {
     console.log('emmitting');
     this.pageChange.emit({ page: pageIndex + 1, limit: pageSize });
   }
-  /*
-  onApprove(elementId: string): void {
-    const dialogRef = this.dialog.open(ActionDialogComponent, {
-      data: {
-        title: 'Approve Item',
-        message: 'Are you sure you want to approve this item?',
-        showInput: false,
-      },
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result?.action === 'yes') {
-        console.log(`Rejected item: ${elementId}`);
-        this.emitterApprove.emit(elementId);
-      } else if (result?.action === 'no') {
-        console.log('User chose not to reject.');
-      }
-    });
-  }
-  openRejectDialog(elementId: string): void {
-    const dialogRef = this.dialog.open(ActionDialogComponent, {
-      data: {
-        title: 'Reject Confirmation',
-        message: `Are you sure you want to reject the element with ID: ${elementId}?`
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result?.action === 'yes') {
-        console.log(`Rejected item: ${elementId}`);
-        this.emitterReject.emit(elementId);
-      } else if (result?.action === 'no') {
-        console.log('User chose not to reject.');
-      }
-    });
-  }
-    */
   openDialog(
     elementId: string,
     title: string,
