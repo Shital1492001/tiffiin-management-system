@@ -326,7 +326,7 @@ export class AddOrganizationComponent {
         .updateOrganization(this.organizationId, formData)
         .subscribe({
           next: (responseData) => {
-            if (responseData.statuscode === 200) {
+            if (responseData.statusCode === 200) {
               console.log('Organization updated successfully', responseData);
               this.snackbar.showSuccess('Organization updated successfully!');
               this.router.navigate(['/navbar/view-all-organizations']);
@@ -350,7 +350,8 @@ export class AddOrganizationComponent {
         console.log("add",formData)
         this.organizationService.addOrganizations(formData).subscribe({
           next: (responseData) => {
-            if (responseData.statuscode === 201) {
+            console.log("added org",responseData)
+            if (responseData.statusCode === 200) {
               console.log('Organization added successfully', responseData);
               this.snackbar.showSuccess('Organization added successfully!');
               this.router.navigate(['/navbar/view-all-organizations']);

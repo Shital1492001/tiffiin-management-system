@@ -19,7 +19,7 @@ export interface Organization {
 export interface allOrganization {
   message: string,
   image:string;
-  statuscode: number,
+  statusCode: number,
   data: Organization[],
   pagination: {
     currentPage: number,
@@ -29,6 +29,6 @@ export interface allOrganization {
 }
 export interface allOrganizations {
   message: string,
-  statuscode: number,
+  statusCode: number,
   data: Organization
 }
