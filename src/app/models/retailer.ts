@@ -1,10 +1,12 @@
+import { TableItem } from "./admin";
+
 interface RoleDetails {
   organization_id: string;
   organization_name: string;
   approval_status: string[];
 }
 
-export interface Retailer {
+export interface Retailer extends TableItem{
   username: string;
   password: string;
   email: string;

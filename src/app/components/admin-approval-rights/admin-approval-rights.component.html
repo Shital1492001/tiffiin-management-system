@@ -31,7 +31,8 @@
     </div>
   </div>
   <app-retailer-status-table
-    [retailers]="allRetailers"
+    [role]="role"
+    [retailersArray]="allRetailers"
     (emitterApprove)="updateStatusAprroved($event)"
     (emitterReject)="updateStatusRejected($event)"
     [totalItems]="totalItems"

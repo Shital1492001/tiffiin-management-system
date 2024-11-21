@@ -4,7 +4,7 @@ import { Retailer } from '../../models/retailer';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import { RetailerStatusTableComponent } from '../retailer-status-table/retailer-status-table.component';
+import { StatusTableComponent } from '../status-table/status-table.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     MatCardModule,
     MatDividerModule,
-    RetailerStatusTableComponent,
+    StatusTableComponent,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
@@ -42,7 +42,7 @@ export class AdminDashboardComponent implements OnInit {
   limit: number = 100;
   totalItems: number = 14;
   totalPages: number = 0;
-
+  role: string = 'admin';
   status: string = 'approved';
   searchQuery!: string;
   retailerStatus!: string;

@@ -31,9 +31,15 @@
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
       <td class="table-data" mat-cell *matCellDef="let element">
-        {{ element.role_specific_details?.approval?.[0]?.approval_status || 'N/A' }}
-      </td>
-    </ng-container>
+        <ng-container *ngIf="role === 'admin'">
+          {{ element.role_specific_details?.approval?.[0]?.approval_status || 'N/A' }}
+        </ng-container>
+
+        <ng-container *ngIf="role === 'superadmin'">
+          {{ element.role_specific_details?.approval_status || "N/A" }}
+        </ng-container>
+      </td></ng-container
+    >
 
     <ng-container matColumnDef="_id">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
@@ -41,14 +47,20 @@
         <mat-icon
           class="approved"
           (click)="emitterApprove.emit(element._id)"
-          *ngIf="isPendingOrRejected(element)"
+          *ngIf="
+            isRetailerPendingOrRejected(element) ||
+            isAdminPendingOrRejected(element)
+          "
         >
           check_circle
         </mat-icon>
         <mat-icon
           class="rejected"
           (click)="emitterReject.emit(element._id)"
-          *ngIf="isPendingOrApproved(element)"
+          *ngIf="
+            isRetailerPendingOrApproved(element) ||
+            isAdminPendingOrApproved(element)
+          "
         >
           cancel
         </mat-icon>
