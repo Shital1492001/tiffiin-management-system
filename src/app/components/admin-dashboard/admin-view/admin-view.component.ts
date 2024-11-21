@@ -50,11 +50,11 @@ export class AdminViewComponent {
     this.getAllRejectedRetailers();
   }
   getAllPendingRetailers() {
-    this.adminRightsServices.getPendingRequests().subscribe({
+    this.adminRightsServices.getRequestsByStatus('pending', 1, 1).subscribe({
       next: (response) => {
         console.log('pending', response.data);
 
-        this.totalPendingRetailerCount = response.data.length;
+        this.totalPendingRetailerCount = response.pagination.totalItems;
       },
     });
   }
@@ -62,21 +62,20 @@ export class AdminViewComponent {
   getAllApprovedRetailers() {
     console.log('approved',);
 
-    this.adminRightsServices.getApprovedRequests().subscribe({
+    this.adminRightsServices.getRequestsByStatus('approved', 1, 1).subscribe({
       next: (response) => {
         console.log('approved', response.data);
 
-        this.totalApprovedRetailerCount = response.data.length;
+        this.totalApprovedRetailerCount = response.pagination.totalItems;
       },
     });
   }
 
   getAllRejectedRetailers() {
-    this.adminRightsServices.getRejectedRequests().subscribe({
+    this.adminRightsServices.getRequestsByStatus('rejected', 1, 1).subscribe({
       next: (response) => {
         console.log('rejected', response.data);
-
-        this.totalRejectedRetailerCount = response.data.length;
+        this.totalRejectedRetailerCount = response.pagination.totalItems;
       },
     });
   }

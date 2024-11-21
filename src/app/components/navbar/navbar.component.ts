@@ -34,7 +34,7 @@ export class NavbarComponent {
     },
     {
       label: 'retailer Status',
-      redirectURL: '/navbar/statusDataTable',
+      redirectURL: '/navbar/status',
       icon: 'check_circle',
     },
     {
