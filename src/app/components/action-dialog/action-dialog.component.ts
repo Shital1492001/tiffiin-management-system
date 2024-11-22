@@ -13,3 +13,4 @@ export class ActionDialogComponent {
   @Input() title!: string;
   @Input() message!: string;
 }
+

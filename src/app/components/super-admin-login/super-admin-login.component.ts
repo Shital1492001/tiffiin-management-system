@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CustomPasswordValidators } from '../../customValidators/custom-password-validators';
+import { JwtHelperService } from '@auth0/angular-jwt'
 @Component({
   selector: 'app-super-admin-login',
   standalone: true,
@@ -143,8 +144,18 @@ export class SuperAdminLoginComponent {
         return '';
     }
   }
-
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      if (this.authService.isSuperAdmin()) {
+        this.route.navigate(['/navbar/home']);
+      } else {
+        this.route.navigate(['/navbar/admin']);
+      }
+    }
+  }
   loginAdmin() {
+    const helper = new JwtHelperService();
+
     const login = {
       email: this.loginForm.controls.email.value,
       password: this.loginForm.controls.password.value,
@@ -157,7 +168,14 @@ export class SuperAdminLoginComponent {
       tokenObservable.subscribe({
         next: (data) => {
           sessionStorage.setItem('token', data.token);
-          this.route.navigate(['/home']);
+          const decodedToken = helper.decodeToken(data.token)
+          this.authService.setRole(decodedToken.role);
+          console.log('decodedToken', decodedToken);
+          if (this.authService.isSuperAdmin()) {
+            this.route.navigate(['/navbar/home']);
+          } else {
+            this.route.navigate(['/navbar/admin']);
+          }
         },
         error: (error) => {
           console.log('error', error);

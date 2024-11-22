@@ -51,6 +51,36 @@ export class StatusTableComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  @Input()
+  searchedQueryNotFound!: string
+  currentPage: number = 1;
+  pageSize: number = 10;
+  noOrganization: string = "-"
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (this.paginator) {
+  //     console.log('inside if paginator');
+  //     this.dataSource = new MatTableDataSource<Admin>(this.adminsArray);
+  //     this.dataSource.paginator = this.paginator;
+  //     this.dataSource.sort = this.sort;
+  //   }
+  //   if (changes['totalItems'] && this.paginator) {
+  //     this.dataSource = new MatTableDataSource<Admin>(this.adminsArray);
+  //     this.dataSource.paginator = this.paginator;
+  //     console.log('totalItems', this.totalItems);
+  //   }
+  // }
+  ngAfterViewInit(): void {
+    if (this.dataSource) {
+      console.log('in dataSource ngAfterViewInit');
+
+      this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
+    }
+    if (this.paginator) {
+      this.paginator.length = this.totalItems;
+      console.log('AfterViewInit - Paginator length:', this.paginator.length);
+    }
+  }
   onPageChange(event: PageEvent): void {
     const { pageIndex, pageSize } = event;
     console.log('emmitting');

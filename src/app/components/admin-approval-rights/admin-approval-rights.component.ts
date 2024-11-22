@@ -111,7 +111,6 @@ export class AdminDashboardComponent implements OnInit {
     rejectedObservable.subscribe({
       next: (response) => {
         console.log('response for reject', response);
-
         this.openDialog(
           'Reject Successful',
           'The retailer has been rejected successfully!'
