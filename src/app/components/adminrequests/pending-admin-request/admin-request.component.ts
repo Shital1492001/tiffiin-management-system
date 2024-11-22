@@ -157,7 +157,6 @@ export class AdminRequestComponent {
         },
         error: (err) => {
           console.log(err);
-          // this.snackbar.showError(`no admin with ${searchQueryOnKeyUp} found in ${this.status} admins`)
           this.adminsArray = []
           this.searchedQueryNotFound = searchQueryOnKeyUp
         },
