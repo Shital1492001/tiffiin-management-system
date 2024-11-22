@@ -11,10 +11,6 @@ mat-sidenav-container {
   height: 100vh;
 }
 
-.space-between {
-  flex: 1 1 auto;
-}
-
 .mat-button {
   border-radius: 10px;
   background-color: white;
