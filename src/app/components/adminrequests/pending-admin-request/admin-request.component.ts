@@ -11,8 +11,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Subject } from "rxjs";
 import { SnackbarService } from '../../../services/snackbar.service';
+import { ActionDialogComponent } from '../../action-dialog/action-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SearchServiceService } from '../../../services/search-service.service';
 @Component({
   selector: 'app-admin-request',
   standalone: true,
@@ -28,6 +30,7 @@ import { SnackbarService } from '../../../services/snackbar.service';
   ],
   templateUrl: './admin-request.component.html',
   styleUrl: './admin-request.component.css',
+  providers: [SearchServiceService]
 })
 export class AdminRequestComponent {
   adminsArray: Admin[] = [];
@@ -45,14 +48,16 @@ export class AdminRequestComponent {
     query: this.searchQuery,
     approval_status: this.adminStatus,
   };
-  private searchSubject = new Subject<string>();
-
+  searchedQueryNotFound: string = "";
   constructor(
     private superAdminService: SuperadminService,
     private router: Router,
-    private snackbar: SnackbarService
+    private snackbar: SnackbarService,
+    private dialog: MatDialog,
+    private searchService: SearchServiceService
   ) {
-    this.searchSubject.pipe(debounceTime(1500), distinctUntilChanged()).subscribe((query) => {
+    this.searchService.getFilter().pipe(debounceTime(1500), distinctUntilChanged()).subscribe((query) => {
+      console.log('searchQuery', query);
       this.searchAdminByMultipleEntity(query);
     });
   }
@@ -83,12 +88,12 @@ export class AdminRequestComponent {
       });
   }
 
+
   updateStatusAprroved(id: string) {
     const approvedObservable = this.superAdminService.approveAdminById(id);
     approvedObservable.subscribe({
       next: (obj) => {
         console.log(obj);
-        window.alert(`Admin with id ${id} is approved successfully`);
         this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
       },
       error: (err) => {
@@ -103,7 +108,6 @@ export class AdminRequestComponent {
     approvedObservable.subscribe({
       next: (obj) => {
         console.log(obj);
-        window.alert(`are you sure you want reject admin with ${id}`);
         this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
       },
       error: (err) => {
@@ -120,7 +124,7 @@ export class AdminRequestComponent {
   }
   onSearchInput(event: any) {
     const query = event.target.value;
-    this.searchSubject.next(query);
+    this.searchService.setFilter(query);
   }
   searchAdminByMultipleEntity(searchQueryOnKeyUp: string) {
     console.log(
@@ -129,24 +133,30 @@ export class AdminRequestComponent {
       'adminStatus-',
       this.adminStatus
     );
+
+
     if (searchQueryOnKeyUp != '') {
+      console.log('searchQueryOnKeyUp', searchQueryOnKeyUp);
       const searchedObservable = this.superAdminService.searchAdmin(
         searchQueryOnKeyUp,
         this.status
       );
       searchedObservable.subscribe({
         next: (searchedAdmin) => {
+          console.log("searchedAdmin", searchedAdmin);
           if (searchedAdmin.data.length) {
             console.log(searchedAdmin);
             this.adminsArray = searchedAdmin.data;
           } else {
             console.log('Not Found');
+            this.adminsArray = []
+            this.searchedQueryNotFound = searchQueryOnKeyUp
           }
         },
         error: (err) => {
           console.log(err);
-          this.snackbar.showError(`no admin with ${searchQueryOnKeyUp} found in ${this.status} admins`)
-
+          this.adminsArray = []
+          this.searchedQueryNotFound = searchQueryOnKeyUp
         },
       });
     } else {

@@ -15,56 +15,53 @@ export const routes: Routes = [
     component: SuperAdminLoginComponent,
   },
   {
-    path: 'superAdminDashboard/:id',
+    path: 'navbar',
     loadComponent: () =>
-      import('./components/superadmin/superadmin.component').then(
-        (m) => m.SuperadminComponent
+      import('./components/navbar/navbar.component').then(
+        (m) => m.NavbarComponent
       ),
     canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'home',
+        loadComponent: () =>
+          import(
+            './components/superadmin-dashboard/superadmin-dashboard.component'
+          ).then((m) => m.SuperadminDashboardComponent),
+      },
+      {
+        path: 'statusDataTable',
+        loadComponent: () =>
+          import(
+            './components/adminrequests/pending-admin-request/admin-request.component'
+          ).then((m) => m.AdminRequestComponent),
+      },
+      {
+        path: 'view-all-organizations',
+        loadComponent: () =>
+          import('./components/superadmin/superadmin.component').then(
+            (m) => m.SuperadminComponent
+          ),
+      },
+      {
+        path: 'admin',
+        loadComponent: () =>
+          import(
+            './components/admin-dashboard/admin-view/admin-view.component'
+          ).then((m) => m.AdminViewComponent),
+      },
+      {
+        path: 'status',
+        loadComponent: () =>
+          import(
+            './components/admin-approval-rights/admin-approval-rights.component'
+          ).then((m) => m.AdminDashboardComponent),
+        canActivate: [AuthGuard],
+      },
+      {
+        path: '**',
+        component: PageNotFoundComponent,
+      },
+    ],
   },
-  {
-    path: 'home',
-    component: SuperadminDashboardComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'statusDataTable',
-    loadComponent: () =>
-      import(
-        './components/adminrequests/pending-admin-request/admin-request.component'
-      ).then((m) => m.AdminRequestComponent),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'add-organization',
-    loadComponent: () =>
-      import('./components/manage-organization/manage-organization.component').then(
-        (m) => m.AddOrganizationComponent
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'update-organization/:id',
-    loadComponent: () =>
-      import('./components/manage-organization/manage-organization.component').then(
-        (m) => m.AddOrganizationComponent
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'view-organization/:id',
-    loadComponent: () =>
-      import('./components/manage-organization/manage-organization.component').then(
-        (m) => m.AddOrganizationComponent
-      ),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'view-all-organizations',
-    loadComponent: () =>
-      import('./components/superadmin/superadmin.component').then(
-        (m) => m.SuperadminComponent
-      ),
-  },
-  
 ];
