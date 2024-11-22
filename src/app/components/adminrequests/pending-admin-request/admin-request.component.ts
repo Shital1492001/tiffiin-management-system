@@ -50,7 +50,6 @@ export class AdminRequestComponent {
     approval_status: this.adminStatus,
   };
   searchedQueryNotFound: string = "";
-  searchSubject = new Subject<string>();
   constructor(
     private superAdminService: SuperadminService,
     private router: Router,
