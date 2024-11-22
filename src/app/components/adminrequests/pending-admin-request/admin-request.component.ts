@@ -11,7 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Subject } from "rxjs";
 import { SnackbarService } from '../../../services/snackbar.service';
 import { ActionDialogComponent } from '../../action-dialog/action-dialog.component';
 import { MatDialog } from '@angular/material/dialog';

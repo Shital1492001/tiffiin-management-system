@@ -1,5 +1,5 @@
 <div>
-  <container-element [ngSwitch]="userStatus">
+  <div [ngSwitch]="userStatus">
     <app-pending-admin-view *ngSwitchCase="'pending'"></app-pending-admin-view>
     <app-rejected-admin-view
       *ngSwitchCase="'rejected'"
@@ -13,5 +13,5 @@
       ></app-info-charts>
     </div>
     <div *ngSwitchDefault>Unknown status</div>
-  </container-element>
+  </div>
 </div>
