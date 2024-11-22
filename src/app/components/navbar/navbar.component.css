@@ -20,10 +20,6 @@
   padding-top: 64px;
 }
 
-.spacing {
-  flex: 1 1 auto;
-}
-
 .mat-button {
   border-radius: 10px;
   background-color: white;

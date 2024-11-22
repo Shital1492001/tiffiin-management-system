@@ -4,7 +4,16 @@ interface RoleDetails {
   approval_status: string;
 }
 
-export interface Admin {
+
+export interface AllAdminStatusResponses {
+  statuscode: number;
+  data: Admin[];
+  pagination: Pagination;
+}
+
+
+
+export interface Admin extends TableItem{
   username: string;
   password: string;
   email: string;
@@ -20,19 +29,6 @@ export interface Pagination {
   totalPages: number;
   totalItems: number;
 }
-export interface AllAdminStatusResponses {
-  statuscode: number;
-  data: Admin[];
-  pagination: Pagination;
-}
-export interface AdminRegister {
-  // data:Admin[];
-  message: string;
-  statuscode: number;
-  _id: string;
-  token: string;
-}
-
 export interface AllResponses {
   statuscode: number;
   data: Admin[];
@@ -52,3 +48,9 @@ export interface AdminRegister {
   token: string;
 }
 
+export interface TableItem {
+  username: string;
+  email: string;
+  contact_number: string;
+  status: string;
+}

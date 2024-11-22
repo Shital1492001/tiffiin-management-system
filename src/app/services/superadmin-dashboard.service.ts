@@ -8,11 +8,11 @@ import { AllAdminStatusResponses } from '../models/admin';
   providedIn: 'root',
 })
 export class SuperadminDashboardService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getPendingRequests(): Observable<AllAdminStatusResponses> {
     const response = this.http.get<AllAdminStatusResponses>(
-      environment.apiEndpointauth + '/superadmin/pendingAdminApproval'
+      environment.apiEndpoint + '/superadmin/pendingAdminApproval'
     );
     console.log(response);
     return response;
@@ -20,14 +20,14 @@ export class SuperadminDashboardService {
 
   getRejectedRequests(): Observable<AllAdminStatusResponses> {
     const response = this.http.get<AllAdminStatusResponses>(
-      environment.apiEndpointauth + '/superadmin/rejectedAdminApproval'
+      environment.apiEndpoint + '/superadmin/rejectedAdminApproval'
     );
     console.log(response);
     return response;
   }
   getApprovedRequests(): Observable<AllAdminStatusResponses> {
     const response = this.http.get<AllAdminStatusResponses>(
-      environment.apiEndpointauth + '/superadmin/approvedAdminApproval'
+      environment.apiEndpoint + '/superadmin/approvedAdminApproval'
     );
     console.log(response);
     return response;
@@ -45,7 +45,7 @@ export class SuperadminDashboardService {
       limit: limitItems,
     };
 
-    const apiUrl = `${environment.apiEndpointauth}/superadmin/getalladminrequest`;
+    const apiUrl = `${environment.apiEndpoint}/superadmin/getalladminrequest`;
     console.log('apiUrl', apiUrl);
     return this.http.get<AllAdminStatusResponses>(apiUrl, { params: param });
   }
