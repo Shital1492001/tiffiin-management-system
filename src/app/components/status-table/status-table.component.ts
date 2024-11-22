@@ -19,7 +19,7 @@ import {
 import { TableItem } from '../../models/admin';
 
 @Component({
-  selector: 'app-retailer-status-table',
+  selector: 'app-status-table',
   standalone: true,
   imports: [
     MatCardModule,
@@ -83,37 +83,27 @@ export class StatusTableComponent {
     }
   }
 
-  get isRetailerPendingOrRejected() {
-    return (element: any) =>
-      element.role_specific_details.approval[0]?.approval_status ===
-        'pending' ||
-      element.role_specific_details.approval[0]?.approval_status === 'rejected';
-  }
+get isRetailerPendingOrRejected() {
+  return (element: any) =>
+    element.role_specific_details?.approval?.[0]?.approval_status === 'pending' ||
+    element.role_specific_details?.approval?.[0]?.approval_status === 'rejected';
+}
 
-  get isRetailerPendingOrApproved() {
-    return (element: any) =>
-      element.role_specific_details?.approval[0]?.approval_status ===
-        'pending' ||
-      element.role_specific_details?.approval[0]?.approval_status ===
-        'approved';
-  }
+get isRetailerPendingOrApproved() {
+  return (element: any) =>
+    element.role_specific_details?.approval?.[0]?.approval_status === 'pending' ||
+    element.role_specific_details?.approval?.[0]?.approval_status === 'approved';
+}
 
-  get isAdminPendingOrRejected() {
-    return (element: any) => {
-      console.log(
-        'Admin check:',
-        element.role_specific_details?.approval_status
-      );
-      return (
-        element.role_specific_details?.approval_status === 'pending' ||
-        element.role_specific_details?.approval_status === 'rejected'
-      );
-    };
-  }
+get isAdminPendingOrRejected() {
+  return (element: any) =>
+    element.role_specific_details?.approval_status === 'pending' ||
+    element.role_specific_details?.approval_status === 'rejected';
+}
 
-  get isAdminPendingOrApproved() {
-    return (element: any) =>
-      element.role_specific_details?.approval_status === 'pending' ||
-      element.role_specific_details?.approval_status === 'approved';
-  }
+get isAdminPendingOrApproved() {
+  return (element: any) =>
+    element.role_specific_details?.approval_status === 'pending' ||
+    element.role_specific_details?.approval_status === 'approved';
+}
 }

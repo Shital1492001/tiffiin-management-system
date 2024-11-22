@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { SuperAdminLoginComponent } from './components/super-admin-login/super-admin-login.component';
-import { authGuard } from './guards/authguard.guard';
-import { AdminDashboardComponent } from './components/admin-approval-rights/admin-approval-rights.component';
+import { AuthGuard } from './guards/authguard.guard';
+import { SuperadminDashboardComponent } from './components/superadmin-dashboard/superadmin-dashboard.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   {
@@ -14,16 +15,56 @@ export const routes: Routes = [
     component: SuperAdminLoginComponent,
   },
   {
-    path: 'status',
-    component: AdminDashboardComponent,
-  },
-
-  {
     path: 'superAdminDashboard/:id',
     loadComponent: () =>
       import('./components/superadmin/superadmin.component').then(
         (m) => m.SuperadminComponent
       ),
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
   },
+  {
+    path: 'home',
+    component: SuperadminDashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'statusDataTable',
+    loadComponent: () =>
+      import(
+        './components/adminrequests/pending-admin-request/admin-request.component'
+      ).then((m) => m.AdminRequestComponent),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'add-organization',
+    loadComponent: () =>
+      import('./components/manage-organization/manage-organization.component').then(
+        (m) => m.AddOrganizationComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'update-organization/:id',
+    loadComponent: () =>
+      import('./components/manage-organization/manage-organization.component').then(
+        (m) => m.AddOrganizationComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'view-organization/:id',
+    loadComponent: () =>
+      import('./components/manage-organization/manage-organization.component').then(
+        (m) => m.AddOrganizationComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'view-all-organizations',
+    loadComponent: () =>
+      import('./components/superadmin/superadmin.component').then(
+        (m) => m.SuperadminComponent
+      ),
+  },
+  
 ];
