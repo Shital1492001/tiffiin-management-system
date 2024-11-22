@@ -15,6 +15,7 @@ import { Subject } from "rxjs";
 import { SnackbarService } from '../../../services/snackbar.service';
 import { ActionDialogComponent } from '../../action-dialog/action-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { SearchServiceService } from '../../../services/search-service.service';
 @Component({
   selector: 'app-admin-request',
   standalone: true,
@@ -30,6 +31,7 @@ import { MatDialog } from '@angular/material/dialog';
   ],
   templateUrl: './admin-request.component.html',
   styleUrl: './admin-request.component.css',
+  providers: [SearchServiceService]
 })
 export class AdminRequestComponent {
   adminsArray: Admin[] = [];
@@ -53,9 +55,11 @@ export class AdminRequestComponent {
     private superAdminService: SuperadminService,
     private router: Router,
     private snackbar: SnackbarService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private searchService: SearchServiceService
   ) {
-    this.searchSubject.pipe(debounceTime(1500), distinctUntilChanged()).subscribe((query) => {
+    this.searchService.getFilter().pipe(debounceTime(1500), distinctUntilChanged()).subscribe((query) => {
+      console.log('searchQuery', query);
       this.searchAdminByMultipleEntity(query);
     });
   }
@@ -122,7 +126,7 @@ export class AdminRequestComponent {
   }
   onSearchInput(event: any) {
     const query = event.target.value;
-    this.searchSubject.next(query);
+    this.searchService.setFilter(query);
   }
   searchAdminByMultipleEntity(searchQueryOnKeyUp: string) {
     console.log(
@@ -131,7 +135,10 @@ export class AdminRequestComponent {
       'adminStatus-',
       this.adminStatus
     );
+
+
     if (searchQueryOnKeyUp != '') {
+      console.log('searchQueryOnKeyUp', searchQueryOnKeyUp);
       const searchedObservable = this.superAdminService.searchAdmin(
         searchQueryOnKeyUp,
         this.status
