@@ -296,7 +296,7 @@ export class AddOrganizationComponent {
             console.log("responseData",responseData.image);
             if (responseData.image) {
               this.file=responseData.image;
-              
+              console.log(this.file)
           // Update the form control with the URL from the backend
           // this.orgImageControl?.setValue(this.file);
           
@@ -322,6 +322,7 @@ export class AddOrganizationComponent {
         loc_contact: location.contactNumber,
         loc_email: location.email,
       }));
+      formData.org_image_url = this.file;
       this.organizationService
         .updateOrganization(this.organizationId, formData)
         .subscribe({

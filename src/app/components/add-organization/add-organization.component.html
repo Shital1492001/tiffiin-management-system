@@ -9,7 +9,7 @@
           {{ errorMessageOrgName }}
         </mat-error>
       </mat-form-field>
-      <!-- <div class="image-upload">
+      <div class="image-upload">
         <label for="orgImage" class="upload-label">Upload Image</label><br>
         <input
           id="orgImage"
@@ -17,11 +17,11 @@
           formControlName="org_image"
           [disabled]="viewMode"
           (change)="onFileSelect($event)"
-        /> -->
+        />
         <!-- <div *ngIf="orgImageControl.invalid && orgImageControl.touched" class="error">
           {{ errorMessageOrgName }}
         </div> -->
-      <!-- </div> -->
+      </div>
       <div formArrayName="orgLocation">
         <div
           *ngFor="let loc of locations.controls; let i = index"

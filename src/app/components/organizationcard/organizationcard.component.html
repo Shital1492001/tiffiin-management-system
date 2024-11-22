@@ -1,9 +1,15 @@
  <mat-card appearance="outlined" class="vertical-card">
     <mat-card-header>
-      <div mat-card-avatar class="image">
-        <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZMog9dB4vSQs1MwDKStNYo_lHZmKEwal1bg&s" alt=""> -->
-      </div>
+      <div class="card-header-container">
+        <img
+          mat-card-avatar
+          class="organization-image"
+          [src]="organization.org_image_url ? organization.org_image_url : 'https://i2.pngimg.me/thumb/f/350/4719167575949312.jpg'"
+          alt="Organization Logo"
+        />
+        <div class="organization-details">
       <mat-card-title>{{ organization.org_name }}</mat-card-title>
+      <!-- <img [src]="organization.org_image_url"> -->
       <mat-card-subtitle
         >{{
           organization.org_created_at | date
@@ -15,6 +21,8 @@
           organization.org_location.length
         }}</mat-card-subtitle
       >
+    </div>
+  </div>
     </mat-card-header>
     <mat-card-content>
       <p>

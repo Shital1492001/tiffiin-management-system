@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login, Roles, Token } from '../models/userlogin';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject,Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Admin, AdminRegister } from '../models/admin';
 
