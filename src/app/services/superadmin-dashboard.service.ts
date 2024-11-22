@@ -11,24 +11,21 @@ export class SuperadminDashboardService {
   constructor(private http: HttpClient) { }
 
   getPendingRequests(): Observable<AllAdminStatusResponses> {
-    const response = this.http.get<AllAdminStatusResponses>(
-      environment.apiEndpoint + '/superadmin/pendingAdminApproval'
-    );
+    const pendingUrl = environment.apiEndpoint + '/superadmin/pendingAdminApproval'
+    const response = this.http.get<AllAdminStatusResponses>(pendingUrl);
     console.log(response);
     return response;
   }
 
   getRejectedRequests(): Observable<AllAdminStatusResponses> {
-    const response = this.http.get<AllAdminStatusResponses>(
-      environment.apiEndpoint + '/superadmin/rejectedAdminApproval'
-    );
+    const rejectedUrl = environment.apiEndpoint + '/superadmin/rejectedAdminApproval';
+    const response = this.http.get<AllAdminStatusResponses>(rejectedUrl);
     console.log(response);
     return response;
   }
   getApprovedRequests(): Observable<AllAdminStatusResponses> {
-    const response = this.http.get<AllAdminStatusResponses>(
-      environment.apiEndpoint + '/superadmin/approvedAdminApproval'
-    );
+    const approvedUrl = environment.apiEndpoint + '/superadmin/approvedAdminApproval';
+    const response = this.http.get<AllAdminStatusResponses>(approvedUrl);
     console.log(response);
     return response;
   }
