@@ -14,6 +14,10 @@ export const routes: Routes = [
     path: 'login',
     component: SuperAdminLoginComponent,
   },
+  // {
+  //   path: 'admin-signup',
+  //   component: ,
+  // },
   {
     path: 'navbar',
     loadComponent: () =>

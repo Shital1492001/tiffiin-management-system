@@ -27,7 +27,7 @@ export interface AllOrganization {
   };
 }
 
-export interface allOrganizations {
+export interface AllOrganizations {
   message: string;
   statusCode: number;
   data: Organization;

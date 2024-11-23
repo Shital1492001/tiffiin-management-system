@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { allOrganization, allOrganizations } from '../models/organizations';
+import { AllOrganization, AllOrganizations } from '../models/organizations';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Organization } from '../models/organizations';
@@ -35,8 +35,8 @@ export class OrganizationService {
     return observableData;
   }
 
-  getOrganizationById(id: string): Observable<allOrganizations> {
-    const observableData = this.http.get<allOrganizations>(`${this.getOrgByIdUrl}/${id}`);
+  getOrganizationById(id: string): Observable<AllOrganizations> {
+    const observableData = this.http.get<AllOrganizations>(`${this.getOrgByIdUrl}/${id}`);
     return observableData;
   }
 
