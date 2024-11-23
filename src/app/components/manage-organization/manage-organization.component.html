@@ -9,6 +9,19 @@
           {{ errorMessageOrgName }}
         </mat-error>
       </mat-form-field>
+      @if(!viewMode){
+      <div class="image-upload">
+        <label for="orgImage">Upload Organization Image:</label><br>
+        <input
+          id="orgImage"
+          class="upload-label"
+          type="file"
+          formControlName="org_image"
+          [disabled]="viewMode"
+          (change)="onFileSelect($event)"
+        />
+      </div>
+    }
       <div formArrayName="orgLocation">
         <div
           *ngFor="let loc of locations.controls; let i = index"

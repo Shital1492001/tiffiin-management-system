@@ -4,9 +4,14 @@
 .full-width{
   margin-top: 10px;
 }
-
+.upload-label{
+  margin-top: 7px;
+}
 .mat-expansion-panel{
   margin-bottom: 16px;
+}
+.image-upload{
+  margin-bottom: 20px;
 }
 
 .footer-buttons {

@@ -15,6 +15,8 @@ export class OrganizationService {
   getOrgByIdUrl = environment.apiEndpointOrganization + '/getOrganization';
   updateOrgUrl = environment.apiEndpointOrganization + '/updateOrganization';
   searchOrgUrl = environment.apiEndpointOrganization + '/searchOrganizations';
+  baseUrlOrgImage=environment.apiEndpointOrganization + '/upload';
+
 
   constructor(private http: HttpClient) { }
   getAllOrganizationsApi(page: number, limit: number): Observable<AllOrganization> {
@@ -60,6 +62,15 @@ export class OrganizationService {
       `${this.searchOrgUrl}?query=${encodedQuery}`
     );
     console.log(observableData);
+    return observableData;
+  }
+  uploadOrgImage(file: File): Observable<AllOrganization> {
+    let formData=new FormData();
+    formData.append('recfile',file)
+    const observableData = this.http.post<AllOrganization>(
+      this.baseUrlOrgImage,
+      formData
+    );
     return observableData;
   }
 }

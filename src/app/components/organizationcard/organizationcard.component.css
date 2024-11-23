@@ -41,5 +41,23 @@
   margin: 16px;
 }
 
+.card-header-container {
+  display: flex;
+  align-items: center;
+  gap:20px;
+}
 
+.organization-image {
+  width: 100px; 
+  height: 100px; 
+  border-radius: 50px; 
+  background-size: cover; 
+}
+
+.organization-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
