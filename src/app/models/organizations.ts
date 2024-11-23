@@ -8,7 +8,9 @@ export interface Location {
 
 export interface Organization {
   _id: string;
+  _id: string;
   org_name: string;
+  org_image_url: string;
   org_image_url: string;
   org_location: Location[];
   org_created_at: Date;

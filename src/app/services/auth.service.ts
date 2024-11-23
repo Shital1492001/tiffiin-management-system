@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Login, Roles, Token } from '../models/userlogin';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { UserByToken } from '../models/admin';
+import { Admin, AdminRegister, UserByToken } from '../models/admin';
 @Injectable({
   providedIn: 'root',
 })
@@ -57,5 +57,18 @@ export class AuthService {
     return false;
   }
 
+  getUserTypeByToken(): Observable<UserByToken> {
+    const baseUrlUserType = environment.apiEndpoint + '/auth/getuserbytoken';
+    const userData = this.http.get<UserByToken>(baseUrlUserType);
+    return userData;
+  }
 
+  baseUrlRegistration = environment.apiEndpoint+ '/auth/register';
+  register(
+    formData: Admin
+  ): Observable<AdminRegister> {
+
+    // console.log(admin)
+    return this.http.post<AdminRegister>(this.baseUrlRegistration, formData);
+  }
 }

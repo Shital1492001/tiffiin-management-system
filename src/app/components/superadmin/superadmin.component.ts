@@ -1,9 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrganizationService } from '../../services/organization.service';
 import { Organization } from '../../models/organizations';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
+import { Organization } from '../../models/organizations';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
 import { OrganizationCardComponent } from '../organizationcard/organizationcard.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule,} from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { SnackbarService } from '../../services/snackbar.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,9 +29,13 @@ import { SnackbarService } from '../../services/snackbar.service';
   selector: 'app-superadmin',
   standalone: true,
   imports: [OrganizationCardComponent, CommonModule, MatPaginatorModule,MatCardModule,MatIconModule,MatFormFieldModule,FormsModule,MatInputModule],
+  imports: [OrganizationCardComponent, CommonModule, MatPaginatorModule,MatCardModule,MatIconModule,MatFormFieldModule,FormsModule,MatInputModule],
   templateUrl: './superadmin.component.html',
   styleUrls: ['./superadmin.component.css'],
+  styleUrls: ['./superadmin.component.css'],
 })
+
+export class SuperadminComponent implements OnInit {
 
 export class SuperadminComponent implements OnInit {
   organizationsArray: Organization[] = [];
@@ -35,10 +51,34 @@ export class SuperadminComponent implements OnInit {
   constructor(private organizationService: OrganizationService,private snackBar:SnackbarService) { 
   }
 
+  notFoundMessage=""
+  flag:boolean=false;
+  paginatedOrganizations: Organization[] = [];
+  pageSize = 6; 
+  currentPage = 0;
+  totalItems = 0;
+  totalPages = 0;
+  searchQuery: string = '';
+  private searchSubject = new Subject<string>();
+  constructor(private organizationService: OrganizationService,private snackBar:SnackbarService) { 
+  }
+
   ngOnInit(): void {
     this.getAllOrganizations(this.currentPage + 1, this.pageSize);
     this.setupSearch();
+    this.getAllOrganizations(this.currentPage + 1, this.pageSize);
+    this.setupSearch();
   }
+  setupSearch(): void {
+    this.searchSubject
+      .pipe(debounceTime(1500), distinctUntilChanged())
+      .subscribe((query) => {
+        this.searchOrganizations(query);
+      });
+  }
+
+  getAllOrganizations(page: number, limit: number): void {
+    this.organizationService.getAllOrganizationsApi(page, limit).subscribe({
   setupSearch(): void {
     this.searchSubject
       .pipe(debounceTime(1500), distinctUntilChanged())
