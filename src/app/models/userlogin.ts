@@ -10,7 +10,7 @@ export interface Token {
   _id: string;
   role_id: string;
 }
-export const Roles = {
-  SUPER_ADMIN: '67276c8186b969fac0d57362',
-  ADMIN: '672775e4f2a1e38ef52c63c6',
-};
+export enum Roles {
+  SUPER_ADMIN = '67276c8186b969fac0d57362',
+  ADMIN = '672775e4f2a1e38ef52c63c6',
+}
