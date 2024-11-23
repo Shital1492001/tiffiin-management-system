@@ -8,13 +8,13 @@ import { Admin, AdminRegister, UserByToken } from '../models/admin';
   providedIn: 'root',
 })
 export class AuthService {
+  baseUrlLogin = environment.apiEndpoint + '/auth/login';
   constructor(private http: HttpClient) {
     const role = sessionStorage.getItem('role');
     if (role) {
       this.roleSubject.next(role);
     }
   }
-  baseUrlLogin = environment.apiEndpoint + '/auth/login';
   authenticateLogin(loginCredentials: Login): Observable<Token> {
     console.log(environment.apiEndpoint + '/auth/login');
     const data = this.http.post<Token>(this.baseUrlLogin, loginCredentials);
@@ -41,13 +41,6 @@ export class AuthService {
     console.log('this.roleSubject.getValue()', this.roleSubject.getValue());
     return this.roleSubject.getValue() === Roles.ADMIN;
   }
-
-  getUserTypeByToken(): Observable<UserByToken> {
-    const baseUrlUserType = environment.apiEndpoint + '/auth/getuserbytoken';
-    const userData = this.http.get<UserByToken>(baseUrlUserType);
-    return userData;
-  }
-
 
   isAuthenticated(): boolean {
     const setToken = sessionStorage.getItem('token');

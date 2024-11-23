@@ -1,5 +1,4 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AllOrganization, AllOrganizations } from '../models/organizations';
 import { Observable } from 'rxjs';
@@ -23,6 +22,14 @@ export class OrganizationService {
       .set('page', page.toString())
       .set('limit', limit.toString());
     const observableData = this.http.get<AllOrganization>(this.baseUrlOrg, { params });
+    return observableData;
+  }
+  getAllOrganizationApi(flag: boolean): Observable<AllOrganization> {
+    const params = new HttpParams().set('status', flag.toString());
+    const observableData = this.http.get<AllOrganization>(this.baseUrlOrg, {
+      params,
+    });
+    // console.log('jhgj', observableData);
     return observableData;
   }
   addOrganizations(formData: Organization): Observable<AllOrganization> {

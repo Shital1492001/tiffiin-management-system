@@ -324,7 +324,7 @@ export class AdminRegistrationComponent {
           if (responseData.statuscode === 201) {
             console.log('Admin Registered Data', responseData);
             this.snackbar.showSuccess('Registration successfully!');
-            this.router.navigate(['/']);
+            this.router.navigate(['/login']);
           }
         },
         error: (error) => {
