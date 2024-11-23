@@ -87,8 +87,10 @@ a {
   margin-top: 10px;
 }
 .full-width {
+  width: 100%;
+}
+
 a {
   color: blue;
 }
 
-}
