@@ -10,7 +10,7 @@
   />
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
-  @if(notFoundMessage){
+  @if(organizationsArray.length === 0 && notFoundMessage){
  <mat-error>
   {{ notFoundMessage }}</mat-error>
   }

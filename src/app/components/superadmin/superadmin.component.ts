@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SnackbarService } from '../../services/snackbar.service';
+import { SearchServiceService } from '../../services/search-service.service';
 
 @Component({
   selector: 'app-superadmin',
@@ -19,6 +20,7 @@ import { SnackbarService } from '../../services/snackbar.service';
   imports: [OrganizationCardComponent, CommonModule, MatPaginatorModule,MatCardModule,MatIconModule,MatFormFieldModule,FormsModule,MatInputModule],
   templateUrl: './superadmin.component.html',
   styleUrls: ['./superadmin.component.css'],
+  providers: [SearchServiceService]
 })
 
 export class SuperadminComponent implements OnInit {
@@ -31,8 +33,7 @@ export class SuperadminComponent implements OnInit {
   totalItems = 0;
   totalPages = 0;
   searchQuery: string = '';
-  private searchSubject = new Subject<string>();
-  constructor(private organizationService: OrganizationService,private snackBar:SnackbarService) { 
+  constructor(private organizationService: OrganizationService,private snackBar:SnackbarService,private searchService:SearchServiceService) { 
   }
 
   ngOnInit(): void {
@@ -42,7 +43,7 @@ export class SuperadminComponent implements OnInit {
     this.setupSearch();
   }
   setupSearch(): void {
-    this.searchSubject
+    this.searchService.getFilter()
       .pipe(debounceTime(1500), distinctUntilChanged())
       .subscribe((query) => {
         this.searchOrganizations(query);
@@ -100,7 +101,7 @@ export class SuperadminComponent implements OnInit {
   onSearchInput(event:any): void {
     this.searchQuery=event.target.value;
     console.log(this.searchQuery)
-    this.searchSubject.next(this.searchQuery); 
+    this.searchService.setFilter(this.searchQuery); 
   }
 
   searchOrganizations(query: string): void {
