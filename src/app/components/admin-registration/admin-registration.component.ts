@@ -321,7 +321,7 @@ export class AdminRegistrationComponent {
     console.log("Mapped Payload for Backend:", formData);
       this.authService.register(formData).subscribe({
         next: (responseData) => {
-          if (responseData.statuscode === 201) {
+          if (responseData.statusCode === 201) {
             console.log('Admin Registered Data', responseData);
             this.snackbar.showSuccess('Registration successfully!');
             this.router.navigate(['/login']);

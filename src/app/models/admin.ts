@@ -6,7 +6,7 @@ interface RoleDetails {
 
 
 export interface AllAdminStatusResponses {
-  statuscode: number;
+  statusCode: number;
   data: Admin[];
   pagination: Pagination;
 }
@@ -30,20 +30,20 @@ export interface Pagination {
   totalItems: number;
 }
 export interface AllResponses {
-  statuscode: number;
+  statusCode: number;
   data: Admin[];
   pagination: Pagination;
 }
 
 export interface UserByToken {
-  statuscode: number;
+  statusCode: number;
   data: Admin;
 }
 
 export interface AdminRegister {
   // data:Admin[];
   message: string;
-  statuscode: number;
+  statusCode: number;
   _id: string;
   token: string;
 }
