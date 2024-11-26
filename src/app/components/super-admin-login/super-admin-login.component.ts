@@ -169,6 +169,7 @@ export class SuperAdminLoginComponent {
       console.log('tokenObservable', tokenObservable);
       tokenObservable.subscribe({
         next: (data) => {
+          console.log("login data",data)
           sessionStorage.setItem('token', data.token);
           const decodedToken = this.jwtHelper.decodeToken(data.token);
           console.log('decodedToken', decodedToken);

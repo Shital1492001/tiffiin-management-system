@@ -48,6 +48,9 @@ export class AddOrganizationComponent {
   isUpdateMode: boolean = false;
   viewMode: boolean = false;
   organizationId: string = '';
+  formTitle: string = '';
+  file:string=''
+  
 
   constructor(
     private fb: FormBuilder,
@@ -59,6 +62,7 @@ export class AddOrganizationComponent {
     this.organizationForm = this.fb.group({
       orgName: ['', Validators.required],
       orgLocation: this.fb.array([this.createLocationFormGroup()]),
+      org_image:'',
     });
   }
 
@@ -67,6 +71,14 @@ export class AddOrganizationComponent {
     const routePath = this.route.snapshot.routeConfig?.path || '';
     this.viewMode = routePath.startsWith('view-organization') && !!this.organizationId;
     this.isUpdateMode = !this.viewMode && !!this.organizationId;
+    
+    if (this.viewMode) {
+      this.formTitle = 'View Organization Details';
+    } else if (this.isUpdateMode) {
+      this.formTitle = 'Update Organization';
+    } else {
+      this.formTitle = 'Add New Organization';
+    }
     if (this.viewMode || this.isUpdateMode) {
       this.loadOrganizationData(this.organizationId);
     } else {
@@ -268,6 +280,37 @@ export class AddOrganizationComponent {
     };
   }
 
+  get orgImageControl() {
+    return this.organizationForm.get('org_image');
+  }
+  onFileSelect(event: Event): void {
+    const orgImageControls = (event.target as HTMLInputElement).files?.[0];
+    console.log(orgImageControls);
+    if (orgImageControls) {
+      console.log('Selected File:', orgImageControls);
+      // this.organizationService.uploadOrgImage(file)
+      this.organizationService
+        .uploadOrgImage(orgImageControls)
+        .subscribe({
+          next: (responseData) => {
+            console.log("responseData",responseData.image);
+            if (responseData.image) {
+              this.file=responseData.image;
+              console.log(this.file)
+          // Update the form control with the URL from the backend
+          // this.orgImageControl?.setValue(this.file);
+          
+          
+          console.log('Image URL set to form control:', this.file);
+        }
+          },
+          error: (error) => {
+            this.snackbar.showError('Error updated organization!');
+            console.log('Error updated organization...', error);
+          },
+        });
+    }
+  }
 
   onSubmit(): void {
     if (this.isUpdateMode) {
@@ -279,11 +322,12 @@ export class AddOrganizationComponent {
         loc_contact: location.contactNumber,
         loc_email: location.email,
       }));
+      formData.org_image_url = this.file;
       this.organizationService
         .updateOrganization(this.organizationId, formData)
         .subscribe({
           next: (responseData) => {
-            if (responseData.statuscode === 200) {
+            if (responseData.statusCode === 200) {
               console.log('Organization updated successfully', responseData);
               this.snackbar.showSuccess('Organization updated successfully!');
               this.router.navigate(['/navbar/view-all-organizations']);
@@ -307,7 +351,8 @@ export class AddOrganizationComponent {
         console.log("add",formData)
         this.organizationService.addOrganizations(formData).subscribe({
           next: (responseData) => {
-            if (responseData.statuscode === 201) {
+            console.log("added org",responseData)
+            if (responseData.statusCode === 200) {
               console.log('Organization added successfully', responseData);
               this.snackbar.showSuccess('Organization added successfully!');
               this.router.navigate(['/navbar/view-all-organizations']);

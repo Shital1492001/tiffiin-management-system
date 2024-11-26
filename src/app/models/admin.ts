@@ -28,7 +28,7 @@ export interface AllAdminStatusResponses {
 export interface AdminRegister {
   // data:Admin[];
   message: string;
-  statuscode: number;
+  statusCode: number;
   _id: string;
   token: string;
 }
@@ -65,7 +65,7 @@ export interface UserByToken {
 }
 
   export interface AdminRegister {
-    // data:Admin[];
+    data:Admin[];
     message: string;
     statuscode: number;
     _id: string;

@@ -26,6 +26,7 @@ import { SnackbarService } from '../../services/snackbar.service';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
+  userImageUrl: string = '';
   adminMenus: Menus[] = [
     {
       label: `Dashboard`,
@@ -89,6 +90,7 @@ export class NavbarComponent {
         this.setMenusByRole();
       }
     });
+    this.fetchUserProfileImage();
   }
   collapsed: boolean = false;
 
@@ -97,6 +99,11 @@ export class NavbarComponent {
     private authService: AuthService,
     private snackBar: SnackbarService
   ) {}
+
+  fetchUserProfileImage(): void {
+    const userId = 'USER_ID'; // Replace with actual user ID
+    
+  }
 
   collapsedState() {
     this.collapsed = !this.collapsed;
