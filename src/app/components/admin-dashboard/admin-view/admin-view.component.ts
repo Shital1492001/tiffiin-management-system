@@ -54,7 +54,7 @@ export class AdminViewComponent {
   getPendingCount() {
     this.adminApprovalRightsService.getRequestsByStatus('pending').subscribe({
       next: (response) => {
-        this.totalPendingRetailerCount = response.data.length;
+        this.totalPendingRetailerCount = response.pagination.totalItems;
         console.log('totalPendingRetailerCount', this.totalPendingRetailerCount);
 
       },
@@ -64,7 +64,7 @@ export class AdminViewComponent {
   getApprovedCount() {
     this.adminApprovalRightsService.getRequestsByStatus("approved").subscribe({
       next: (response) => {
-        this.totalApprovedRetailerCount = response.data.length;
+        this.totalApprovedRetailerCount = response.pagination.totalItems;
         console.log('totalPendingRetailerCount', this.totalPendingRetailerCount);
 
       },
@@ -73,7 +73,7 @@ export class AdminViewComponent {
   getRejectCount() {
     this.adminApprovalRightsService.getRequestsByStatus("rejected").subscribe({
       next: (response) => {
-        this.totalRejectedRetailerCount = response.data.length;
+        this.totalRejectedRetailerCount = response.pagination.totalItems;
         console.log('totalPendingRetailerCount', this.totalPendingRetailerCount);
       },
     });

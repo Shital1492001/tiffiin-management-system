@@ -30,7 +30,7 @@ export class SuperadminDashboardComponent implements OnInit {
   totalApprovedAdminsCount = 0;
   totalRejectedAdminsCount = 0;
 
-  constructor(private superadminService: SuperadminDashboardService) {}
+  constructor(private superadminService: SuperadminDashboardService) { }
 
   ngOnInit(): void {
     this.getAllPendingadmins();
@@ -39,29 +39,26 @@ export class SuperadminDashboardComponent implements OnInit {
   }
 
   getAllPendingadmins() {
-    this.superadminService.getPendingRequests().subscribe({
+    this.superadminService.getRequestsByStatus('pending', 1, 1).subscribe({
       next: (response) => {
-        this.pendingAdmins = response.data;
-        console.log('length', this.pendingAdmins);
-        this.totalPendingAdminsCount = this.pendingAdmins.length;
+        this.totalPendingAdminsCount = response.pagination.totalItems;
+
       },
     });
   }
 
   getAllApprovedAdmins() {
-    this.superadminService.getApprovedRequests().subscribe({
+    this.superadminService.getRequestsByStatus('approved', 1, 1).subscribe({
       next: (response) => {
-        this.approvedAdmins = response.data;
-        this.totalApprovedAdminsCount = this.approvedAdmins.length;
+        this.totalApprovedAdminsCount = response.pagination.totalItems;
       },
     });
   }
 
   getAllRejectedAdmins() {
-    this.superadminService.getRejectedRequests().subscribe({
+    this.superadminService.getRequestsByStatus('rejected', 1, 1).subscribe({
       next: (response) => {
-        this.rejectedAdmins = response.data;
-        this.totalRejectedAdminsCount = this.rejectedAdmins.length;
+        this.totalRejectedAdminsCount = response.pagination.totalItems;
       },
     });
   }
