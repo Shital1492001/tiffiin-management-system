@@ -39,8 +39,11 @@ export class AdminDashboardComponent implements OnInit {
   rejectedRetailers: Retailer[] = [];
   allRetailers: Retailer[] = [];
   retailers: Retailer[] = [];
-
-  status: string = 'approved';
+  currentPage: number = 1;
+  limit: number = 100;
+  status: string = 'pending';
+  totalItems: number = 14;
+  totalPages: number = 0;
   searchQuery!: string;
   retailerStatus!: string;
 
@@ -71,7 +74,7 @@ export class AdminDashboardComponent implements OnInit {
     // this.getAllApprovedRetailers();
     // this.loadPendingRequests();
     // this.getAllRejectedRetailers();
-    this.getAllRetailers('approved');
+    this.getAllRetailers('pending', this.currentPage, this.limit);
   }
 
   loadPendingRequests(): void {
@@ -152,9 +155,11 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
-  getAllRetailers(status: string) {
+  getAllRetailers(status: string,
+    currentPage: number,
+    limit: number) {
     console.log('Fetching admin requests for status:', status);
-    this.adminService.getRequestsByStatus(status).subscribe({
+    this.adminService.getRequestsByStatus(status, currentPage, limit).subscribe({
       next: (adminData) => {
         this.allRetailers = adminData.data;
         this.retailers = adminData.data;
@@ -201,8 +206,9 @@ export class AdminDashboardComponent implements OnInit {
 
   onStatusChange(event: any): void {
     this.status = event.value;
-    this.getAllRetailers(this.status);
+    this.getAllRetailers(this.status, this.currentPage, this.limit);
   }
+
 
   openDialog(title: string, message: string) {
     const dialogRef = this.dialog.open(ActionDialogComponent);
@@ -212,7 +218,7 @@ export class AdminDashboardComponent implements OnInit {
 
   onSearchInput(event: any) {
     const query = event.target.value;
-    this.searchSubject.next(query); // Emit search query with debounce
+    this.searchSubject.next(query); 
   }
   searchAdminByMultipleEntity(searchQueryOnKeyUp: string) {
     console.log(

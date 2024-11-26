@@ -32,11 +32,18 @@ export class AdminApprovalRightsService {
     return response;
   }
 
-  getRequestsByStatus(status: string): Observable<AllStatusResponses> {
-    console.log('inside getRequestsByStatus', status);
-    const apiUrl = `${environment.apiEndpointAdmin}/getallRetailers?status=${status}`;
+  getRequestsByStatus( retailerStatus: string,
+    pageNo: number,
+    limitItems: number): Observable<AllStatusResponses> {
+    console.log('inside getRequestsByStatus', retailerStatus);
+    const param = {
+      status: retailerStatus,
+      page: pageNo,
+      limit: limitItems
+    }
+    const apiUrl = `${environment.apiEndpointAdmin}/getallRetailers`;
     console.log('apiUrl', apiUrl);
-    return this.http.get<AllStatusResponses>(apiUrl);
+    return this.http.get<AllStatusResponses>(apiUrl, { params: param });
   }
 
   approveRetailer(id: string): Observable<Object> {
