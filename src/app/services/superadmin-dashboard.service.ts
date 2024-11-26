@@ -8,7 +8,7 @@ import { AllAdminStatusResponses } from '../models/admin';
   providedIn: 'root',
 })
 export class SuperadminDashboardService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getPendingRequests(): Observable<AllAdminStatusResponses> {
     const response = this.http.get<AllAdminStatusResponses>(
@@ -32,4 +32,23 @@ export class SuperadminDashboardService {
     console.log(response);
     return response;
   }
+  getRequestsByStatus(
+    adminStatus: string,
+    pageNo: number,
+    limitItems: number
+  ): Observable<AllAdminStatusResponses> {
+    console.log('inside getRequestsByStatus');
+    // http://localhost:5000/api/superadmin/getalladminrequest?status=rejected
+    const param = {
+      status: adminStatus,
+      page: pageNo,
+      limit: limitItems
+    }
+    // const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest?status=${status}&page=${page}&limit=${limit}`;
+
+    const apiUrl = `${environment.apiEndpointSuperAdmin}/getalladminrequest`;
+    console.log('apiUrl', apiUrl);
+    return this.http.get<AllAdminStatusResponses>(apiUrl, { params: param });
+  }
+
 }
