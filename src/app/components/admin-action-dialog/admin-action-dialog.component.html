@@ -1,9 +1,12 @@
-<div class="dialog-body">
-  <h3 class="heading" mat-dialog-title>
-    {{ data.title }}
-    <button mat-icon-button class="close-button" (click)="onCloseClick()">
+<div class="custom-dialog-container">
+  <div class="close-button">
+    <button mat-icon-button (click)="onCloseClick()">
       <mat-icon>close</mat-icon>
     </button>
+  </div>
+
+  <h3 class="heading" mat-dialog-title>
+    {{ data.title }}
   </h3>
   <div mat-dialog-content>
     <p>{{ data.message }}</p>

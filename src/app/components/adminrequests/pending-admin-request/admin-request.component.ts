@@ -108,10 +108,11 @@ export class AdminRequestComponent {
       next: (obj) => {
         console.log(obj);
         this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
+        this.snackbar.showError('admin approved successfully');
       },
       error: (err) => {
         console.log(err);
-
+        this.snackbar.showError('Error in approving admin');
       },
     });
   }
@@ -122,6 +123,7 @@ export class AdminRequestComponent {
       next: (obj) => {
         console.log(obj);
         this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
+        this.snackbar.showError('admin rejected successfully');
       },
       error: (err) => {
         console.log(err);

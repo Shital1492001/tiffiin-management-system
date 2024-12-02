@@ -101,8 +101,8 @@ export class StatusTableComponent implements OnInit {
         includeMessage,
       },
       width: '366px',
-      height: '300px',
-      // panelClass: 'custom-dialog-container'
+      // height: 'fit-content',
+      panelClass: 'custom-dialog-container'
     });
 
     dialogRef.afterClosed().subscribe((result) => {

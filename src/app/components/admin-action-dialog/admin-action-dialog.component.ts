@@ -13,6 +13,7 @@ import { MatIcon } from '@angular/material/icon';
     useValue: {
       maxWidth: 'fit-content',
       maxHeight: 'fit-content',
+      panelClass: 'custom-dialog-container',
       autoFocus: true,
     } as MatDialogConfig,
   },],
