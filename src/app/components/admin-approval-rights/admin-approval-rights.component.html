@@ -15,8 +15,8 @@
     <div class="toggle-buttons">
       <mat-button-toggle-group
         class="custom-toggle-group"
-        name="adminStatus"
-        aria-label="Admin Status"
+        name="status"
+        aria-label="Retailer Status"
         (change)="onStatusChange($event)"
       >
         <mat-button-toggle value="pending">Pending Retailers</mat-button-toggle>
@@ -33,5 +33,8 @@
     [retailers]="allRetailers"
     (emitterApprove)="updateStatusAprroved($event)"
     (emitterReject)="updateStatusRejected($event)"
+    [totalItems]="totalItems"
+    [searchedQueryNotFound]="searchedQueryNotFound"
+
   ></app-retailer-status-table>
 </div>

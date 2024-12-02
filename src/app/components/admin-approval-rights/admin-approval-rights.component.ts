@@ -39,10 +39,15 @@ export class AdminDashboardComponent implements OnInit {
   rejectedRetailers: Retailer[] = [];
   allRetailers: Retailer[] = [];
   retailers: Retailer[] = [];
-
-  status: string = 'approved';
+  currentPage: number = 1;
+  limit: number = 100;
+  status: string = 'pending';
+  totalItems: number = 14;
+  totalPages: number = 0;
   searchQuery!: string;
   retailerStatus!: string;
+  searchedQueryNotFound: string = "";
+
 
   searchParam = {
     query: this.searchQuery,
@@ -71,7 +76,7 @@ export class AdminDashboardComponent implements OnInit {
     // this.getAllApprovedRetailers();
     // this.loadPendingRequests();
     // this.getAllRejectedRetailers();
-    this.getAllRetailers('approved');
+    this.getAllRetailers('pending', this.currentPage, this.limit);
   }
 
   loadPendingRequests(): void {
@@ -152,9 +157,11 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
-  getAllRetailers(status: string) {
+  getAllRetailers(status: string,
+    currentPage: number,
+    limit: number) {
     console.log('Fetching admin requests for status:', status);
-    this.adminService.getRequestsByStatus(status).subscribe({
+    this.adminService.getRequestsByStatus(status, currentPage, limit).subscribe({
       next: (adminData) => {
         this.allRetailers = adminData.data;
         this.retailers = adminData.data;
@@ -167,15 +174,12 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  updateStatusAprroved(id: string) {
+  updateStatusAprroved(id: any) {
     const approvedObservable = this.adminService.approveRetailer(id);
     approvedObservable.subscribe({
       next: (obj) => {
         console.log('obj.....', obj);
-        this.openDialog(
-          'Approval Successful',
-          'The retailer has been approved successfully!'
-        );
+       
         this.router.navigate(['status']);
       },
       error: (err) => {
@@ -184,16 +188,13 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  updateStatusRejected(id: string) {
-    const rejectedObservable = this.adminService.rejectRetailer(id);
+  updateStatusRejected(event:any) {
+    const rejectedObservable = this.adminService.rejectRetailer(event.id,event.reason);
     rejectedObservable.subscribe({
       next: (response) => {
         console.log('response for reject', response);
 
-        this.openDialog(
-          'Reject Successful',
-          'The retailer has been rejected successfully!'
-        );
+       
         this.router.navigate(['status']);
       },
     });
@@ -201,18 +202,19 @@ export class AdminDashboardComponent implements OnInit {
 
   onStatusChange(event: any): void {
     this.status = event.value;
-    this.getAllRetailers(this.status);
+    this.getAllRetailers(this.status, this.currentPage, this.limit);
   }
 
-  openDialog(title: string, message: string) {
-    const dialogRef = this.dialog.open(ActionDialogComponent);
-    dialogRef.componentInstance.title = title;
-    dialogRef.componentInstance.message = message;
-  }
+
+  // openDialog(title: string, message: string) {
+  //   const dialogRef = this.dialog.open(ActionDialogComponent);
+  //   dialogRef.componentInstance.title = title;
+  //   dialogRef.componentInstance.message = message;
+  // }
 
   onSearchInput(event: any) {
     const query = event.target.value;
-    this.searchSubject.next(query); // Emit search query with debounce
+    this.searchSubject.next(query); 
   }
   searchAdminByMultipleEntity(searchQueryOnKeyUp: string) {
     console.log(
@@ -233,13 +235,13 @@ export class AdminDashboardComponent implements OnInit {
             this.allRetailers = searchRetailer.data;
           } else {
             console.log('Not Found');
-          }
+            this.allRetailers = []
+            this.searchedQueryNotFound = searchQueryOnKeyUp          }
         },
         error: (err) => {
           console.log(err);
-          this.snackbar.showError(
-            `no admin with ${searchQueryOnKeyUp} found in ${this.status} admins`
-          );
+          this.allRetailers = []
+          this.searchedQueryNotFound = searchQueryOnKeyUp
         },
       });
     } else {

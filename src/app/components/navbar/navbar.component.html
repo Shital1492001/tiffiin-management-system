@@ -8,12 +8,22 @@
   </span>
 
   <span class="space-between"></span>
-  <img
-    *ngIf="userImageUrl"
-    [src]="userImageUrl"
-    alt="User Profile"
-    class="profile-picture"
-  />
+  <span *ngIf="role">
+    <mat-icon (click)="updateProfile()" class="image-icon">
+      <img
+      *ngIf="image; else defaultImage"
+      [src]="image"
+        class="profile-picture"
+      />
+      <ng-template #defaultImage>
+        <img
+          src="assets/default-user.png"
+          alt="Default User"
+          class="profile-picture"
+        />
+      </ng-template>
+    </mat-icon>
+  </span>
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">
