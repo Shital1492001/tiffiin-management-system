@@ -4,11 +4,12 @@
       <h2 class="form-heading">{{ formTitle }}</h2>
       <mat-form-field appearance="outline">
         <mat-label>Organization Name</mat-label>
-        <input formControlName="orgName" matInput [readonly]="viewMode" />
+        <input formControlName="orgName" matInput/>
         <mat-error>
           {{ errorMessageOrgName }}
         </mat-error>
       </mat-form-field>
+      @if(!viewMode){
       <div class="image-upload">
         <label for="orgImage" class="upload-label">Upload Image</label><br>
         <input
@@ -18,10 +19,8 @@
           [disabled]="viewMode"
           (change)="onFileSelect($event)"
         />
-        <!-- <div *ngIf="orgImageControl.invalid && orgImageControl.touched" class="error">
-          {{ errorMessageOrgName }}
-        </div> -->
       </div>
+    }
       <div formArrayName="orgLocation">
         <div
           *ngFor="let loc of locations.controls; let i = index"
@@ -54,7 +53,6 @@
                 <input
                   matInput
                   formControlName="branchName"
-                  [readonly]="viewMode"
                 />
                 <mat-error>
                   {{ errorMessageLoc(i) }}
@@ -65,7 +63,6 @@
                 <input
                   matInput
                   formControlName="contactNumber"
-                  [readonly]="viewMode"
                   type="number"
                 />
                 <mat-error>
@@ -79,7 +76,6 @@
                   matInput
                   formControlName="email"
                   type="email"
-                  [readonly]="viewMode"
                 />
                 <mat-error>
                   {{ errorMessageEmail(i) }}
@@ -88,7 +84,7 @@
             </div>
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Address</mat-label>
-              <input matInput formControlName="address" [readonly]="viewMode" />
+              <input matInput formControlName="address" />
               <mat-error>
                 {{ errorMessageAddress(i) }}
               </mat-error>

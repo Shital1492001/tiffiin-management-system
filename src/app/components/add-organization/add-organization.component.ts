@@ -15,7 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrganizationService } from '../../services/organization.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -37,7 +37,6 @@ import { markAllControlsAsDirtyAndTouched } from '../../utils';
     MatCardModule,
     MatExpansionModule,
     CommonModule,
-    RouterModule,
   ],
   templateUrl: './add-organization.component.html',
   styleUrls: ['./add-organization.component.css'],
@@ -122,9 +121,8 @@ export class AddOrganizationComponent {
             )
           ),
         });
-
         if (this.viewMode) {
-          this.organizationForm.value();
+          this.organizationForm.disable();
         }
       },
       error: (err) => {
