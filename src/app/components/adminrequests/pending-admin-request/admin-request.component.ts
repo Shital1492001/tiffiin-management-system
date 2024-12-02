@@ -9,12 +9,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SnackbarService } from '../../../services/snackbar.service';
 import { ActionDialogComponent } from '../../action-dialog/action-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SearchServiceService } from '../../../services/search-service.service';
+import { AuthService } from '../../../services/auth.service';
 @Component({
   selector: 'app-admin-request',
   standalone: true,
@@ -37,24 +38,25 @@ export class AdminRequestComponent {
   allAdminsArray: Admin[] = [];
   rejectedAdminsArray: Admin[] = [];
   approvedAdminsArray: Admin[] = [];
-  currentPage: number = 1;
+
   limit: number = 100;
   status: string = 'pending';
-  totalItems: number = 14;
-  totalPages: number = 0;
+
+  pageSize!: number
+  totalItems!: number;
+  currentPage: number = 1;
+  totalPages!: number;
+
   searchQuery!: string;
   adminStatus!: string;
-  searchParam = {
-    query: this.searchQuery,
-    approval_status: this.adminStatus,
-  };
+
   searchedQueryNotFound: string = "";
   constructor(
     private superAdminService: SuperadminService,
     private router: Router,
     private snackbar: SnackbarService,
     private dialog: MatDialog,
-    private searchService: SearchServiceService
+    private searchService: SearchServiceService,
   ) {
     this.searchService.getFilter().pipe(debounceTime(1500), distinctUntilChanged()).subscribe((query) => {
       console.log('searchQuery', query);
@@ -62,7 +64,16 @@ export class AdminRequestComponent {
     });
   }
   ngOnInit(): void {
-    this.getAdminRequestsByStatus('pending', this.currentPage, this.limit);
+    this.getAdminRequestsByStatus('pending', this.currentPage, this.pageSize);
+
+  }
+  onPageChange(event: PageEvent): void {
+    console.log('Page Event:', event);
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex + 1
+    if (this.currentPage <= this.totalPages) {
+      this.getAdminRequestsByStatus(this.status, this.currentPage, this.pageSize);
+    }
   }
 
   getAdminRequestsByStatus(
@@ -72,22 +83,24 @@ export class AdminRequestComponent {
   ): void {
     console.log('Fetching admin requests for status:', status);
     this.superAdminService
-      .getRequestsByStatus(status, currentPage, limit)
+      .getRequestsByStatus(status, currentPage, this.pageSize)
       .subscribe({
         next: (adminData) => {
+          console.log('Admin Data:', adminData);
+
           this.adminsArray = adminData.data;
           this.allAdminsArray = adminData.data;
           this.totalItems = adminData.pagination.totalItems;
-          this.totalPages = Math.ceil(this.totalItems / this.limit);
+          this.totalPages = adminData.pagination.totalPages;
+          // this.totalPages = Math.ceil(this.totalItems / this.limit);
           console.log('Fetched Admin Requests:', this.adminsArray);
-          console.log('Total Pages:', this.totalPages);
+          // console.log('Total Pages:', this.totalPages);
         },
         error: (err) => {
           console.error('Error fetching admin requests:', err);
         },
       });
   }
-
 
   updateStatusAprroved(id: string) {
     const approvedObservable = this.superAdminService.approveAdminById(id);
@@ -112,7 +125,7 @@ export class AdminRequestComponent {
       },
       error: (err) => {
         console.log(err);
-        window.alert('something went wrong while updating status...');
+        this.snackbar.showError('Error in rejecting admin');
       },
     });
   }
@@ -133,7 +146,6 @@ export class AdminRequestComponent {
       'adminStatus-',
       this.adminStatus
     );
-
 
     if (searchQueryOnKeyUp != '') {
       console.log('searchQueryOnKeyUp', searchQueryOnKeyUp);

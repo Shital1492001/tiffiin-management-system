@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login, Roles, Token } from '../models/userlogin';
-import { BehaviorSubject,Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Admin, AdminRegister } from '../models/admin';
 
@@ -25,14 +25,14 @@ export class AuthService {
   }
 
   private roleSubject = new BehaviorSubject<string | null>(null);
-  public role_id$ = this.roleSubject.asObservable();
+  public role$ = this.roleSubject.asObservable();
 
-  setRole(role_id: string): void {
-    sessionStorage.setItem('role_id', role_id);
-    this.roleSubject.next(role_id);
+  setRole(role: string): void {
+    sessionStorage.setItem('role', role);
+    this.roleSubject.next(role);
   }
   getRole(): string | null {
-    return sessionStorage.getItem('role_id');
+    return sessionStorage.getItem('role');
   }
 
   isSuperAdmin(): boolean {
@@ -73,7 +73,7 @@ export class AuthService {
   //     console.error('Error fetching user profile image:', err);
   //   },
   // });
-  baseUrlUserImage=environment.apiEndpointauth + '/uploaduserimage';
+  baseUrlUserImage = environment.apiEndpointauth + '/uploaduserimage';
   uploadUserImage(userId: string, file: File): Observable<AdminRegister> {
     const formData = new FormData();
     formData.append('recfile', file);

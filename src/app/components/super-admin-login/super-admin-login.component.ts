@@ -48,6 +48,17 @@ export class SuperAdminLoginComponent {
     private route: Router,
     private snackbar: SnackbarService
   ) { }
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      if (this.authService.isAdmin()) {
+        this.route.navigate(['/navbar/admin'])
+      } else {
+        this.route.navigate(['/navbar/home'])
+
+      }
+
+    }
+  }
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -169,12 +180,13 @@ export class SuperAdminLoginComponent {
       console.log('tokenObservable', tokenObservable);
       tokenObservable.subscribe({
         next: (data) => {
-          console.log("login data",data)
+          console.log("login data", data)
           sessionStorage.setItem('token', data.token);
           const decodedToken = this.jwtHelper.decodeToken(data.token);
           console.log('decodedToken', decodedToken);
           console.log('role-----------------------------------------', decodedToken.role);
           this.authService.setRole(decodedToken.role);
+          sessionStorage.setItem('id', decodedToken.id);
           if (this.authService.isSuperAdmin()) {
             this.snackbar.showSuccess('Login successfully!');
             this.route.navigate(['/navbar/home']);

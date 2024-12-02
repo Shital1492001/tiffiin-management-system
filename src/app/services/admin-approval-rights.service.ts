@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class AdminApprovalRightsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   getPendingRequests(): Observable<AllStatusResponses> {
     const response = this.http.get<AllStatusResponses>(
       environment.apiEndpointAdmin + '/pendingRetailers'
@@ -57,5 +57,10 @@ export class AdminApprovalRightsService {
   ): Observable<AllStatusResponses> {
     const rejectRetailerUrl = `${environment.apiEndpointAdmin}/searchRetailer?query=${querySearch}&approval_status=${approvalStatus}`;
     return this.http.get<AllStatusResponses>(rejectRetailerUrl);
+  }
+
+  reApply(id: string): Observable<Object> {
+    const reApplyUrl = `${environment.apiEndpointAdmin}/reapply/${id}`;
+    return this.http.put<Object>(reApplyUrl, {});
   }
 }

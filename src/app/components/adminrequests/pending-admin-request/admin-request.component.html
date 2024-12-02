@@ -18,7 +18,9 @@
       aria-label="Admin Status"
       (change)="onStatusChange($event)"
     >
-      <mat-button-toggle value="pending">Pending Admins</mat-button-toggle>
+      <mat-button-toggle value="pending" [checked]="true"
+        >Pending Admins</mat-button-toggle
+      >
       <mat-button-toggle value="approved">Approved Admins</mat-button-toggle>
       <mat-button-toggle value="rejected">Rejected Admins</mat-button-toggle>
     </mat-button-toggle-group>
@@ -30,5 +32,6 @@
   (emitterApprove)="updateStatusAprroved($event)"
   (emitterReject)="updateStatusRejected($event)"
   [totalItems]="totalItems"
+  (pageChange)="onPageChange($event)"
   [searchedQueryNotFound]="searchedQueryNotFound"
 ></app-status-table>

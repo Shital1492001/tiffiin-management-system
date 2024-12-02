@@ -1,14 +1,21 @@
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
-
 @Component({
   selector: 'app-admin-action-dialog',
   standalone: true,
-  imports: [MatFormField, MatLabel, FormsModule, MatButtonModule],
+  imports: [MatFormField, MatLabel, FormsModule, MatButtonModule, MatIcon],
+  providers: [{
+    provide: MAT_DIALOG_DEFAULT_OPTIONS,
+    useValue: {
+      maxWidth: 'fit-content',
+      maxHeight: 'fit-content',
+      autoFocus: true,
+    } as MatDialogConfig,
+  },],
   templateUrl: './admin-action-dialog.component.html',
   styleUrl: './admin-action-dialog.component.css'
 })
@@ -31,7 +38,9 @@ export class AdminActionDialogComponent {
     this.reason = this.userMessage
     console.log('reason', this.reason);
     this.emitReason();
-
+  }
+  onCloseClick(): void {
+    this.dialogRef.close();
   }
   emitReason(): void {
     this.reasonEmitter.emit(this.reason);

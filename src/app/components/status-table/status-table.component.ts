@@ -1,8 +1,8 @@
 import {
-  AfterViewInit,
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
@@ -32,9 +32,13 @@ import { AdminActionDialogComponent } from '../admin-action-dialog/admin-action-
   templateUrl: './status-table.component.html',
   styleUrl: './status-table.component.css',
 })
-export class StatusTableComponent implements AfterViewInit {
+export class StatusTableComponent implements OnInit {
 
   constructor(private dialog: MatDialog) { }
+  ngOnInit(): void {
+    this.dataSource = new MatTableDataSource<Admin>(this.adminsArray);
+    this.dataSource.paginator = this.paginator;
+  }
   displayedColumns: string[] = [
     'username',
     'email',
@@ -46,7 +50,6 @@ export class StatusTableComponent implements AfterViewInit {
   dataSource: MatTableDataSource<Admin> = new MatTableDataSource<Admin>([]);
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
   @Input()
   adminsArray: Admin[] = [];
   @Input() totalItems: number = 0;
@@ -55,43 +58,33 @@ export class StatusTableComponent implements AfterViewInit {
   emitterApprove = new EventEmitter<string>();
   @Output()
   emitterReject = new EventEmitter<{ id: string, message: string }>();
-  @Output() pageChange = new EventEmitter<{ page: number; limit: number }>();
+  @Output() pageChange = new EventEmitter<PageEvent>();
   @Input()
   searchedQueryNotFound!: string
   @Input()
   reason!: string
+  @Input()
   currentPage: number = 1;
+  @Input()
   pageSize: number = 10;
   noOrganization: string = "-"
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.paginator) {
-      console.log('inside if paginator');
-      this.dataSource = new MatTableDataSource<Admin>(this.adminsArray);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }
-    if (changes['totalItems'] && this.paginator) {
-      this.dataSource = new MatTableDataSource<Admin>(this.adminsArray);
-      this.dataSource.paginator = this.paginator;
-      console.log('totalItems', this.totalItems);
-    }
-  }
-  ngAfterViewInit(): void {
-    if (this.dataSource) {
-      console.log('in dataSource ngAfterViewInit');
-
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }
-    if (this.paginator) {
-      this.paginator.length = this.totalItems;
-      console.log('AfterViewInit - Paginator length:', this.paginator.length);
+    // if (this.paginator) {
+    //   console.log('inside if paginator');
+    //   this.dataSource = new MatTableDataSource<Admin>(this.adminsArray);
+    //   this.dataSource.paginator = this.paginator;
+    // }
+    // if (changes['totalItems'] && this.paginator) {
+    //   this.dataSource = new MatTableDataSource<Admin>(this.adminsArray);
+    //   this.dataSource.paginator = this.paginator;
+    //   console.log('totalItems', this.totalItems);
+    // }
+    if (changes['adminsArray']) {
+      this.dataSource.data = this.adminsArray;
     }
   }
   onPageChange(event: PageEvent): void {
-    const { pageIndex, pageSize } = event;
-    console.log('emmitting');
-    this.pageChange.emit({ page: pageIndex + 1, limit: pageSize });
+    this.pageChange.emit(event);
   }
   openDialog(
     elementId: string,
@@ -107,8 +100,9 @@ export class StatusTableComponent implements AfterViewInit {
         message,
         includeMessage,
       },
-      width: '352px',
-      height: '144px'
+      width: '366px',
+      height: '300px',
+      // panelClass: 'custom-dialog-container'
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -131,7 +125,7 @@ export class StatusTableComponent implements AfterViewInit {
     this.openDialog(
       elementId,
       'Reject Admin',
-      'Are you sure you want to reject this Admin?',
+      'Are you sure you want to reject this Admin? if yes, please provide a reason',
       true,
       this.emitterReject
     );

@@ -85,8 +85,8 @@ export class NavbarComponent {
     console.log('menus', this.menus);
   }
   ngOnInit(): void {
-    this.authService.role_id$.subscribe((role_id) => {
-      if (role_id) {
+    this.authService.role$.subscribe((role) => {
+      if (role) {
         this.setMenusByRole();
       }
     });
@@ -98,11 +98,11 @@ export class NavbarComponent {
     private router: Router,
     private authService: AuthService,
     private snackBar: SnackbarService
-  ) {}
+  ) { }
 
   fetchUserProfileImage(): void {
     const userId = 'USER_ID'; // Replace with actual user ID
-    
+
   }
 
   collapsedState() {
