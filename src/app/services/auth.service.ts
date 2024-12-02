@@ -11,9 +11,9 @@ import { UserByToken } from '../models/admin';
 })
 export class AuthService {
   constructor(private http: HttpClient) {
-    const role_id = sessionStorage.getItem('role_id');
-    if (role_id) {
-      this.roleSubject.next(role_id);
+    const role = sessionStorage.getItem('role');
+    if (role) {
+      this.roleSubject.next(role);
     }
   }
   baseUrlLogin = environment.apiEndpointauth + '/login';
@@ -84,11 +84,11 @@ export class AuthService {
     );
   }
 
-  updateProfile(id:string, formadata:Admin){
-    const obs=this.http.put(`${environment.apiEndpointauth}/updateprofile/${id}`,formadata)
+  updateProfile(id: string, formadata: Admin) {
+    const obs = this.http.put(`${environment.apiEndpointauth}/updateprofile/${id}`, formadata)
     console.log("in update profile service");
     return obs;
-    
+
   }
 
   uploadImage(file: File): Observable<CloudinaryResponse> {

@@ -82,14 +82,16 @@ export class NavbarComponent {
       console.log('insidetrueIsSuperAdmn', this.authService.isSuperAdmin());
     } else if (this.authService.isAdmin()) {
       console.log('insidetrueIsAdmin', this.authService.isAdmin());
-
       this.menus = this.adminMenus;
     }
-    console.log('menus', this.menus);
+    console.log('menus-setMenusByRole', this.menus);
   }
   ngOnInit(): void {
     this.authService.role$.subscribe((role) => {
       if (role) {
+        console.log('role', role);
+        console.log("menus", this.menus);
+
         this.setMenusByRole();
       }
     });
@@ -104,42 +106,42 @@ export class NavbarComponent {
     private authService: AuthService,
     private snackBar: SnackbarService
   ) { }
-  ) { }
 
 
 
-fetchUserProfileImage(): void {
-  const userId = 'USER_ID'; // Replace with actual user ID
 
-  const adminDetails = this.authService.getUserTypeByToken()
+  fetchUserProfileImage(): void {
+    const userId = 'USER_ID'; // Replace with actual user ID
+
+    const adminDetails = this.authService.getUserTypeByToken()
     adminDetails.subscribe({
-    next: (formData) => {
-      console.log("profile details", formData.data);
-      this.image = formData.data.user_image
+      next: (formData) => {
+        console.log("profile details", formData.data);
+        this.image = formData.data.user_image
 
-    }
-  })
-}
+      }
+    })
+  }
 
-collapsedState() {
-  this.collapsed = !this.collapsed;
-  console.log(this.collapsed);
-}
+  collapsedState() {
+    this.collapsed = !this.collapsed;
+    console.log(this.collapsed);
+  }
 
-sidenavWidth() {
-  return this.collapsed ? '65px' : '250px';
-}
+  sidenavWidth() {
+    return this.collapsed ? '65px' : '250px';
+  }
 
-logout() {
-  sessionStorage.removeItem('token');
-  sessionStorage.removeItem('role_id');
-  this.snackBar.showError('Logged out successfully...');
-  this.router.navigate(['/']);
-}
+  logout() {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('role_id');
+    this.snackBar.showError('Logged out successfully...');
+    this.router.navigate(['/']);
+  }
 
-updateProfile() {
+  updateProfile() {
 
-  this.router.navigate(['/navbar/profile-update'])
+    this.router.navigate(['/navbar/profile-update'])
 
-}
+  }
 }
