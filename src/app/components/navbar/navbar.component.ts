@@ -27,6 +27,8 @@ import { SnackbarService } from '../../services/snackbar.service';
 })
 export class NavbarComponent {
   userImageUrl: string = '';
+
+  image!:string;
   adminMenus: Menus[] = [
     {
       label: `Dashboard`,
@@ -72,6 +74,7 @@ export class NavbarComponent {
     },
   ];
   menus: Menus[] = [];
+role!:boolean;
 
   setMenusByRole() {
     if (this.authService.isSuperAdmin()) {
@@ -91,6 +94,8 @@ export class NavbarComponent {
       }
     });
     this.fetchUserProfileImage();
+    this.role= this.authService.isAdmin()
+
   }
   collapsed: boolean = false;
 
@@ -100,9 +105,17 @@ export class NavbarComponent {
     private snackBar: SnackbarService
   ) {}
 
+
+
   fetchUserProfileImage(): void {
-    const userId = 'USER_ID'; // Replace with actual user ID
-    
+    const adminDetails= this.authService.getUserTypeByToken()
+    adminDetails.subscribe({
+      next:(formData)=>{
+        console.log("profile details",formData.data);
+         this.image=formData.data.user_image
+        
+      }
+    })    
   }
 
   collapsedState() {
@@ -118,7 +131,12 @@ export class NavbarComponent {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('role_id');
     this.snackBar.showError('Logged out successfully...');
-    // window.alert('Logged out successfully...');
     this.router.navigate(['/']);
+  }
+
+  updateProfile(){
+   
+    this.router.navigate(['/navbar/profile-update'])
+  
   }
 }

@@ -52,10 +52,13 @@ export class AdminApprovalRightsService {
     return this.http.put<Object>(approveRetailerUrl, {});
   }
 
-  rejectRetailer(id: string): Observable<Object> {
+  rejectRetailer(id: string, reason:string): Observable<Object> {
+    const param={
+      rejection_reason:reason
+    }
     const approveRetailerUrl =
       environment.apiEndpointAdmin + '/rejectRetailer/' + id;
-    return this.http.put<Object>(approveRetailerUrl, {});
+    return this.http.put<Object>(approveRetailerUrl, {params:param});
   }
 
   searchRetailer(

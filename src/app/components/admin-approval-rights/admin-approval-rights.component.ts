@@ -46,6 +46,8 @@ export class AdminDashboardComponent implements OnInit {
   totalPages: number = 0;
   searchQuery!: string;
   retailerStatus!: string;
+  searchedQueryNotFound: string = "";
+
 
   searchParam = {
     query: this.searchQuery,
@@ -172,15 +174,12 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  updateStatusAprroved(id: string) {
+  updateStatusAprroved(id: any) {
     const approvedObservable = this.adminService.approveRetailer(id);
     approvedObservable.subscribe({
       next: (obj) => {
         console.log('obj.....', obj);
-        this.openDialog(
-          'Approval Successful',
-          'The retailer has been approved successfully!'
-        );
+       
         this.router.navigate(['status']);
       },
       error: (err) => {
@@ -189,16 +188,13 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  updateStatusRejected(id: string) {
-    const rejectedObservable = this.adminService.rejectRetailer(id);
+  updateStatusRejected(event:any) {
+    const rejectedObservable = this.adminService.rejectRetailer(event.id,event.reason);
     rejectedObservable.subscribe({
       next: (response) => {
         console.log('response for reject', response);
 
-        this.openDialog(
-          'Reject Successful',
-          'The retailer has been rejected successfully!'
-        );
+       
         this.router.navigate(['status']);
       },
     });
@@ -210,11 +206,11 @@ export class AdminDashboardComponent implements OnInit {
   }
 
 
-  openDialog(title: string, message: string) {
-    const dialogRef = this.dialog.open(ActionDialogComponent);
-    dialogRef.componentInstance.title = title;
-    dialogRef.componentInstance.message = message;
-  }
+  // openDialog(title: string, message: string) {
+  //   const dialogRef = this.dialog.open(ActionDialogComponent);
+  //   dialogRef.componentInstance.title = title;
+  //   dialogRef.componentInstance.message = message;
+  // }
 
   onSearchInput(event: any) {
     const query = event.target.value;
@@ -239,13 +235,13 @@ export class AdminDashboardComponent implements OnInit {
             this.allRetailers = searchRetailer.data;
           } else {
             console.log('Not Found');
-          }
+            this.allRetailers = []
+            this.searchedQueryNotFound = searchQueryOnKeyUp          }
         },
         error: (err) => {
           console.log(err);
-          this.snackbar.showError(
-            `no admin with ${searchQueryOnKeyUp} found in ${this.status} admins`
-          );
+          this.allRetailers = []
+          this.searchedQueryNotFound = searchQueryOnKeyUp
         },
       });
     } else {

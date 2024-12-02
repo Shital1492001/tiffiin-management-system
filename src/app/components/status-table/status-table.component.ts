@@ -107,8 +107,8 @@ export class StatusTableComponent implements AfterViewInit {
         message,
         includeMessage,
       },
-      width: '352px',
-      height: '144px'
+      width: '450px',
+      height: '450px'
     });
 
     dialogRef.afterClosed().subscribe((result) => {

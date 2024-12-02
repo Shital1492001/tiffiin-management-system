@@ -40,7 +40,7 @@
       <td mat-cell *matCellDef="let element">
         <mat-icon
           class="approved"
-          (click)="emitterApprove.emit(element._id)"
+          (click)="onApprove(element._id)"
           *ngIf="
             element.role_specific_details.approval[0]?.approval_status ===
               'pending' ||
@@ -52,7 +52,8 @@
         </mat-icon>
         <mat-icon
           class="rejected"
-          (click)="emitterReject.emit(element._id)"
+          (click)="onReject(element._id)"
+          (reasonEmitter)="onReason($event)"
           *ngIf="
             element.role_specific_details.approval[0]?.approval_status ===
               'pending' ||
@@ -65,39 +66,26 @@
       </td>
     </ng-container>
 
-    <!-- <ng-container matColumnDef="_id">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let element">
-        <mat-icon
-          class="approved"
-          (click)="emitterApprove.emit(element._id)"
-          *ngIf="element.role_specific_details.approval_status != 'approved'"
-          >check_circle</mat-icon
-        >
-        <mat-icon
-          class="rejected"
-          (click)="emitterReject.emit(element._id)"
-          *ngIf="element.role_specific_details.approval_status != 'rejected'"
-          >cancel</mat-icon
-        >
-      </td>
-    </ng-container> -->
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr
       mat-row
       *matRowDef="let row; columns: displayedColumns"
       class="hover-row"
     ></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data "{{ searchedQueryNotFound }}"
+      </td>
+    </tr>
   </table>
 
   <mat-paginator
-  [pageSizeOptions]="[5, 10, 20]"
-  [length]="totalItems"
-  (page)="onPageChange($event)"
-  [pageSize]="5"
-  showFirstLastButtons
-  aria-label="Select page of periodic elements"
->
-</mat-paginator>
+    [pageSizeOptions]="[5, 10, 20]"
+    [length]="totalItems"
+    (page)="onPageChange($event)"
+    [pageSize]="5"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
 </div>

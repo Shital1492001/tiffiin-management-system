@@ -7,12 +7,16 @@ interface RoleDetails {
 export interface Admin {
   username: string;
   password: string;
+  user_image:string;
   email: string;
   contact_number: string;
   address: string;
   role_id: string;
   role_specific_details: RoleDetails;
   _id: string;
+}
+export interface CloudinaryResponse{
+  image:string
 }
 
 export interface Pagination {

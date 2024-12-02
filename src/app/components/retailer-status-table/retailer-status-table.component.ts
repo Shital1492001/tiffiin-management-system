@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Retailer } from '../../models/retailer';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { AdminActionDialogComponent } from '../admin-action-dialog/admin-action-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-retailer-status-table',
@@ -33,10 +35,14 @@ export class RetailerStatusTableComponent {
   @Output()
   emitterApprove = new EventEmitter<string>();
   @Input() totalItems: number = 0;
-
+  @Input()
+  searchedQueryNotFound!: string
   @Output()
   emitterReject = new EventEmitter<string>();
   @Output() pageChange = new EventEmitter<{ page: number; limit: number }>();
+
+  @Input()
+  reason!: string
 
   displayedColumns: string[] = [
     'username',
@@ -50,7 +56,7 @@ export class RetailerStatusTableComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   dataSource = new MatTableDataSource<Retailer>();
-  constructor() {}
+  constructor(private dialog: MatDialog) { }
 
   // ngOnChanges(changes: SimpleChanges): void {
   //   console.log('retailers.....', this.retailers);
@@ -93,5 +99,62 @@ export class RetailerStatusTableComponent {
     const { pageIndex, pageSize } = event;
     console.log('emmitting');
     this.pageChange.emit({ page: pageIndex + 1, limit: pageSize });
+  }
+
+  openDialog(
+    elementId: string,
+    title: string,
+    message: string,
+    includeMessage: boolean,
+    eventEmitter: EventEmitter<any>
+  ): void {
+    console.log("includeMessage", includeMessage);
+    const dialogRef = this.dialog.open(AdminActionDialogComponent, {
+      data: {
+        title,
+        message,
+        includeMessage,
+      },
+      width: '452px',
+      height: '356px'
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result?.action === 'yes') {
+        if (includeMessage) {
+          console.log(
+            `Action: ${title}, Item: ${elementId}, Message: ${result.message}`
+          );
+          eventEmitter.emit({ id: elementId, message: result.message });
+        } else {
+          console.log(`Action: ${title}, Item: ${elementId}`);
+          eventEmitter.emit(elementId);
+        }
+      } else if (result?.action === 'no') {
+        console.log(`User chose not to proceed with ${title}.`);
+      }
+    });
+  }
+  onReject(elementId: string): void {
+    this.openDialog(
+      elementId,
+      'Reject Admin',
+      'Are you sure you want to reject this Admin?',
+      true,
+      this.emitterReject
+    );
+  }
+  onReason(event: any): void {
+    console.log('reason', event);
+    this.reason = event;
+  }
+  onApprove(elementId: string): void {
+    this.openDialog(
+      elementId,
+      'Approve Admin',
+      'Are you sure you want to approve this Admin?',
+      false,
+      this.emitterApprove
+    );
   }
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Login, Roles, Token } from '../models/userlogin';
 import { BehaviorSubject,Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Admin, AdminRegister } from '../models/admin';
+import { Admin, AdminRegister, CloudinaryResponse } from '../models/admin';
 
 import { UserByToken } from '../models/admin';
 @Injectable({
@@ -82,6 +82,24 @@ export class AuthService {
       `${this.baseUrlUserImage}/uploaduserimage/${userId}`,
       formData
     );
+  }
+
+  updateProfile(id:string, formadata:Admin){
+    const obs=this.http.put(`${environment.apiEndpointauth}/updateprofile/${id}`,formadata)
+    console.log("in update profile service");
+    return obs;
+    
+  }
+
+  uploadImage(file: File): Observable<CloudinaryResponse> {
+    const baseUrlOrgImage = environment.apiEndpointauth + '/uploaduserimage'
+    let formData = new FormData();
+    formData.append('recfile', file)
+    const observableData = this.http.post<CloudinaryResponse>(
+      baseUrlOrgImage,
+      formData
+    );
+    return observableData;
   }
 
 }

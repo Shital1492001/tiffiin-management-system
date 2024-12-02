@@ -14,7 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Organization, Location } from '../../models/organizations';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { OrganizationService } from '../../services/organization.service';
 import { MatIconModule } from '@angular/material/icon';
 import { CustomPasswordValidators } from '../../customValidators/custom-password-validators';
@@ -48,49 +48,62 @@ export class AdminRegistrationComponent {
   locations: Location[] = [];
   totalItems = 0;
   strongPassword: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-  flag:boolean=false
+  flag: boolean = false;
+  isUpdateMode: boolean = true;
+  id: string = '';
+  userStatus = 'pending';
+  imageUrl!: string;
 
   constructor(
     private authService: AuthService,
     private organizationService: OrganizationService,
     private router: Router,
-    private snackbar: SnackbarService
+    private snackbar: SnackbarService,
+    private route: ActivatedRoute
   ) {
-    this.adminForm = new FormGroup(
-      {
-        userName: new FormControl('', [
-          Validators.required,
-          Validators.pattern(/^[a-zA-Z0-9.\-_$@*!]+$/),
-          Validators.minLength(3),
-          Validators.maxLength(20)
-        ]),
-        email: new FormControl('', [Validators.required, Validators.email]),
-        contactNumber: new FormControl('', [
-          Validators.required,
-          Validators.pattern(/^[0-9]{10}$/),
-        ]),
-        address: new FormControl('', [Validators.required,Validators.minLength(5),Validators.maxLength(50)]),
-        password: new FormControl('', [
-          Validators.required,
-          // Validators.pattern(this.strongPassword),
-          Validators.minLength(8),
-          CustomPasswordValidators.logPatternError(),
-        ]),
-        confirmPassword: new FormControl('', [Validators.required]),
-        roleId: new FormControl(ADMIN_ROLE_ID),
-        roleSpecificDetails: new FormGroup({
-          organizationId: new FormControl('', Validators.required),
-          orgLocation: new FormControl('', Validators.required),
-          approvalStatus: new FormControl('pending'),
-        }),
-      });
+    this.adminForm = new FormGroup({
+      userName: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9.\-_$@*!]+$/),
+        Validators.minLength(3),
+        Validators.maxLength(20),
+      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      contactNumber: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[0-9]{10}$/),
+      ]),
+      address: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(50),
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        // Validators.pattern(this.strongPassword),
+        Validators.minLength(8),
+        CustomPasswordValidators.logPatternError(),
+      ]),
+      confirmPassword: new FormControl('', [Validators.required]),
+      roleId: new FormControl(ADMIN_ROLE_ID),
+      roleSpecificDetails: new FormGroup({
+        organizationId: new FormControl('', Validators.required),
+        orgLocation: new FormControl('', [Validators.required]),
+        approvalStatus: new FormControl('pending'),
+      }),
+      userImage: new FormControl(''),
+    });
   }
 
   ngOnInit(): void {
+    this.fetchAminById();
     this.fetchAllOrganizations();
     this.confirmPassword?.valueChanges.subscribe(() => {
       this.checkPasswordsMatch();
     });
+    this.isUpdateMode =
+      this.route.snapshot.routeConfig?.path === 'profile-update';
+    console.log('update mode....', this.isUpdateMode);
   }
   checkPasswordsMatch() {
     const password = this.password?.value;
@@ -189,7 +202,7 @@ export class AdminRegistrationComponent {
   get errorMessagePassword(): string {
     const control = this.password;
     if (!control) return '';
-    if (control.dirty && control.touched) { 
+    if (control.dirty && control.touched) {
       switch (true) {
         case control.hasError('required'):
           return 'Password is required!';
@@ -210,15 +223,15 @@ export class AdminRegistrationComponent {
       return '';
     }
   }
-  
+
   get confirmPassword() {
     return this.adminForm.get('confirmPassword');
   }
-  
+
   get errorMessageConfirmPassword(): string {
     const control = this.adminForm.get('confirmPassword');
     if (!control) return '';
-  
+
     if (control.touched && control.dirty) {
       if (control.hasError('match')) {
         return 'Passwords do not match!';
@@ -229,11 +242,13 @@ export class AdminRegistrationComponent {
     }
     return '';
   }
-  
 
   get organizationId() {
     return this.adminForm.get('roleSpecificDetails.organizationId');
   }
+  // get approvalStatus() {
+  //   return this.adminForm.get('roleSpecificDetails.approvalStatus');
+  // }
   get errorMessageOrganization(): string {
     const control = this.organizationId;
     if (!control) return '';
@@ -278,7 +293,7 @@ export class AdminRegistrationComponent {
   }
 
   onOrganizationChange(organizationId: string): void {
-    console.log("orgid",organizationId);
+    console.log('orgid', organizationId);
     this.adminForm
       .get('roleSpecificDetails.organizationId')
       ?.setValue(organizationId);
@@ -304,38 +319,114 @@ export class AdminRegistrationComponent {
   }
 
   CollectData() {
-    console.log(this.adminForm.value);
+    console.log('llllllllll', this.adminForm.value);
     if (this.adminForm.valid) {
       const { confirmPassword, ...formData } = this.adminForm.value;
-      formData.username= formData.userName,
-      formData.password= formData.password,
-      formData.email=formData.email,
-      formData.contact_number= formData.contactNumber,
-      formData.address= formData.address,
-      formData.role_id= formData.roleId,
-      formData.role_specific_details= {
-        organization_id: formData.roleSpecificDetails.organizationId,
-        org_location: formData.roleSpecificDetails.orgLocation,
-        approval_status:formData.roleSpecificDetails.approvalStatus
+      (formData.username = formData.userName),
+        (formData.password = formData.password),
+        (formData.email = formData.email),
+        (formData.contact_number = formData.contactNumber),
+        (formData.address = formData.address),
+        (formData.role_id = formData.roleId),
+        (formData.user_image=this.imageUrl);
+        (formData.role_specific_details = {
+          organization_id: formData.roleSpecificDetails.organizationId,
+          org_location: formData.roleSpecificDetails.orgLocation,
+          approval_status: this.userStatus,
+        });
+      console.log('Mapped Payload for Backend:', formData);
+
+      if (this.isUpdateMode) {
+        const updateProfileObservable = this.authService.updateProfile(
+          this.id,
+          formData
+        );
+        console.log('iddddddd', this.id);
+        updateProfileObservable.subscribe({
+          next: (response) => {
+            // console.log("rrrrrrrrrrr",response);
+            this.snackbar.showSuccess('Profile updated successfully...');
+          },
+        });
+        console.log('yuyuyuyu', this.userStatus);
+
+        console.log('formdata', formData);
+      } else {
+        this.authService.register(formData).subscribe({
+          next: (responseData) => {
+            console.log('Register', responseData);
+            if (responseData.statusCode === 201) {
+              console.log('Admin Registered Data', responseData);
+              this.snackbar.showSuccess('Registration successfully!');
+              this.router.navigate(['/']);
+            }
+          },
+          error: (error) => {
+            this.snackbar.showError('Registration failed:');
+            console.log('Registration failed:...', error);
+          },
+        });
       }
-    console.log("Mapped Payload for Backend:", formData);
-      this.authService.register(formData).subscribe({
-        next: (responseData) => {
-          console.log("Register",responseData);
-          if (responseData.statusCode === 201) {
-            console.log('Admin Registered Data', responseData);
-            this.snackbar.showSuccess('Registration successfully!');
-            this.router.navigate(['/']);
-          }
-        },
-        error: (error) => {
-          this.snackbar.showError('Registration failed:');
-          console.log('Registration failed:...', error);
-        },
-      });
     } else {
       markAllControlsAsDirtyAndTouched(this.adminForm);
       this.snackbar.showError('Please Fill in all required information');
     }
+  }
+
+  fetchAminById() {
+    const adminDetails = this.authService.getUserTypeByToken();
+    adminDetails.subscribe({
+      next: (formData) => {
+        this.id = formData.data._id;
+        this.userStatus = formData.data.role_specific_details.approval_status;
+        console.log('uderedfrdd', this.userStatus);
+
+        console.log(
+          'Role Specific Details:',
+          formData.data.role_specific_details
+        );
+        console.log(
+          'Org Location:',
+          formData.data.role_specific_details.org_location
+        );
+        console.log('profile details', formData.data);
+        this.patchFormData(formData.data);
+      },
+    });
+  }
+
+  patchFormData(data: any) {
+    // Patch the form fields with the fetched data
+    if (data.role_specific_details && data.role_specific_details.org_location) {
+      this.adminForm.patchValue({
+        userName: data.username,
+        email: data.email,
+        contactNumber: data.contact_number,
+        address: data.address,
+        roleId: data.role_id,
+        password: data.password,
+        confirmPassword: data.password,
+        roleSpecificDetails: {
+          organizationId: data.role_specific_details.organization_id,
+          orgLocation: data.role_specific_details.org_location,
+          approvalStatus: data.role_specific_details.approval_status,
+        },
+      });
+
+      this.adminForm.markAllAsTouched();
+    }
+  }
+
+  onFileSelected(event: Event){
+   const imageControl=(event.target as HTMLInputElement).files?.[0];
+   if(imageControl){
+    this.authService.uploadImage(imageControl).subscribe({
+      next:(response)=>{
+        console.log("image",response.image);
+        this.imageUrl=response.image;
+      }
+    })
+
+   }
   }
 }

@@ -110,6 +110,10 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path:'profile-update',
+        component:AdminRegistrationComponent
+      },
+      {
         path: '**',
         component: PageNotFoundComponent,
       },
