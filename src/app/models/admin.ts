@@ -7,7 +7,7 @@ interface RoleDetails {
 export interface Admin {
   username: string;
   password: string;
-  user_image:string;
+  user_image: string;
   email: string;
   contact_number: string;
   address: string;
@@ -15,8 +15,8 @@ export interface Admin {
   role_specific_details: RoleDetails;
   _id: string;
 }
-export interface CloudinaryResponse{
-  image:string
+export interface CloudinaryResponse {
+  image: string
 }
 
 export interface Pagination {
@@ -68,10 +68,11 @@ export interface UserByToken {
   data: Admin;
 }
 
-  export interface AdminRegister {
-    data:Admin[];
-    message: string;
-    statuscode: number;
-    _id: string;
-    token: string;
-  }
+export interface AdminRegister {
+  data: Admin[];
+  message: string;
+  statuscode: number;
+  _id: string;
+  token: string;
+}
+

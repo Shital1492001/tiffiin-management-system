@@ -39,10 +39,10 @@ export class AdminRequestComponent {
   rejectedAdminsArray: Admin[] = [];
   approvedAdminsArray: Admin[] = [];
 
-  limit: number = 100;
+
   status: string = 'pending';
 
-  pageSize!: number
+  pageSize: number = 10;
   totalItems!: number;
   currentPage: number = 1;
   totalPages!: number;
@@ -72,7 +72,7 @@ export class AdminRequestComponent {
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex + 1
     if (this.currentPage <= this.totalPages) {
-      this.getAdminRequestsByStatus(this.status, this.currentPage, this.pageSize);
+      this.getAdminRequestsByStatus(this.status, event.pageIndex + 1, this.pageSize);
     }
   }
 
@@ -83,7 +83,7 @@ export class AdminRequestComponent {
   ): void {
     console.log('Fetching admin requests for status:', status);
     this.superAdminService
-      .getRequestsByStatus(status, currentPage, this.pageSize)
+      .getRequestsByStatus(status, currentPage, limit)
       .subscribe({
         next: (adminData) => {
           console.log('Admin Data:', adminData);
@@ -107,7 +107,7 @@ export class AdminRequestComponent {
     approvedObservable.subscribe({
       next: (obj) => {
         console.log(obj);
-        this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
+        this.getAdminRequestsByStatus(this.status, this.currentPage, this.pageSize);
         this.snackbar.showError('admin approved successfully');
       },
       error: (err) => {
@@ -122,7 +122,7 @@ export class AdminRequestComponent {
     approvedObservable.subscribe({
       next: (obj) => {
         console.log(obj);
-        this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
+        this.getAdminRequestsByStatus(this.status, this.currentPage, this.pageSize);
         this.snackbar.showError('admin rejected successfully');
       },
       error: (err) => {
@@ -135,7 +135,7 @@ export class AdminRequestComponent {
     this.status = event.value;
     this.adminStatus = event.value;
     this.currentPage = 1;
-    this.getAdminRequestsByStatus(this.status, this.currentPage, this.limit);
+    this.getAdminRequestsByStatus(this.status, this.currentPage, this.pageSize);
   }
   onSearchInput(event: any) {
     const query = event.target.value;

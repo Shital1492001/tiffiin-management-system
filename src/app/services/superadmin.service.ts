@@ -37,6 +37,8 @@ export class SuperadminService {
     limitItems: number
   ): Observable<AllAdminStatusResponses> {
     console.log('inside getRequestsByStatus');
+    console.log("pageNo received in the service", pageNo);
+
     // http://localhost:5000/api/superadmin/getalladminrequest?status=rejected
     const param = {
       status: adminStatus,

@@ -1,26 +1,30 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Login, Roles, Token } from '../models/userlogin';
+import { Login, Roles, TokenResponse } from '../models/userlogin';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Admin, AdminRegister, CloudinaryResponse } from '../models/admin';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 import { UserByToken } from '../models/admin';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     const role = sessionStorage.getItem('role');
     if (role) {
       this.roleSubject.next(role);
     }
   }
+  private jwtHelper = new JwtHelperService();
+
   baseUrlLogin = environment.apiEndpointauth + '/login';
-  authenticateLogin(loginCredentials: Login): Observable<Token> {
+  authenticateLogin(loginCredentials: Login): Observable<TokenResponse> {
     console.log(environment.apiEndpointOrganization);
     console.log(environment.apiEndpointauth + '/login');
-    const data = this.http.post<Token>(this.baseUrlLogin, loginCredentials);
+    const data = this.http.post<TokenResponse>(this.baseUrlLogin, loginCredentials);
     return data;
   }
 
@@ -56,6 +60,47 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+  saveTokens(accessToken: string, refreshToken: string): void {
+    sessionStorage.setItem('token', accessToken);
+    sessionStorage.setItem('refreshToken', refreshToken);
+  }
+  clearTokens(): void {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('refreshToken');
+  }
+  isAccessTokenExpired(): boolean {
+    const token = sessionStorage.getItem('token');
+    if (!token) return true;
+    console.log('all response of reffresh token', this.jwtHelper.decodeToken(token));
+
+    const isTokenExpired = this.jwtHelper.isTokenExpired(token);
+    return isTokenExpired;
+  }
+  refreshTokens(): Observable<TokenResponse> {
+    const refreshTokenOld = sessionStorage.getItem('refreshToken')
+    const refreshTokenUrl = environment.apiEndpointauth + '/refreshtoken';
+    return this.http.post<TokenResponse>(refreshTokenUrl, { refreshToken: refreshTokenOld });
+  }
+
+  forgotPassword(userEmail: string): Observable<TokenResponse> {
+    const refreshTokenUrl = environment.apiEndpointauth + '/forgotpassword';
+    return this.http.post<TokenResponse>(refreshTokenUrl, { email: userEmail });
+  }
+
+  resetPassword(resetPasswordToken: string, resetPassword: string) {
+
+    const resetPasswordUrl = `${environment.apiEndpointauth}/resetpassword?token=${resetPasswordToken}`
+    const body = {
+      password: resetPassword
+    }
+    const params = new HttpParams().set('token', resetPasswordToken)
+    return this.http.post<TokenResponse>(resetPasswordUrl, body);
+  }
+  logout() {
+    this.clearTokens();
+    // this.snackbar.showError('Logged out successfully');
+    this.router.navigate(['/']);
   }
   baseUrlRegistration = environment.apiEndpointauth + '/register';
   register(

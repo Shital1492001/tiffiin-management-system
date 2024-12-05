@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Login, Token } from '../../models/userlogin';
+
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -181,7 +181,7 @@ export class SuperAdminLoginComponent {
       tokenObservable.subscribe({
         next: (data) => {
           console.log("login data", data)
-          sessionStorage.setItem('token', data.token);
+          this.authService.saveTokens(data.token, data.refreshToken);
           const decodedToken = this.jwtHelper.decodeToken(data.token);
           console.log('decodedToken', decodedToken);
           console.log('role-----------------------------------------', decodedToken.role);

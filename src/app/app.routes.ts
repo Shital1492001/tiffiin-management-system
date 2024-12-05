@@ -18,14 +18,18 @@ export const routes: Routes = [
     path: 'login',
     component: SuperAdminLoginComponent,
   },
-  
+
   {
     path: 'admin-signup',
     component: AdminRegistrationComponent,
   },
   {
-    path: 'admin-signup',
-    component: AdminRegistrationComponent,
+    path: 'forgot-password',
+    loadComponent: () => import('./components/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+  },
+  {
+    path: 'api/auth/resetpassword',
+    loadComponent: () => import('./components/reset-password/reset-password.component').then(m => m.ResetPasswordComponent)
   },
   {
     path: 'navbar',
@@ -110,14 +114,15 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path:'profile-update',
-        component:AdminRegistrationComponent
+        path: 'profile-update',
+        component: AdminRegistrationComponent
       },
+
       {
         path: '**',
         component: PageNotFoundComponent,
       },
     ],
   },
-  
+
 ];

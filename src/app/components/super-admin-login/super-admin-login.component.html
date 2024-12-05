@@ -49,13 +49,25 @@
               </mat-form-field>
             </div>
             <div class="button">
-              <button mat-stroked-button type="submit" (click)="loginAdmin()" class="mat-mdc-button">
+              <button
+                mat-stroked-button
+                type="submit"
+                (click)="loginAdmin()"
+                class="mat-mdc-button"
+              >
                 Login
               </button>
             </div>
             <mat-error>{{ invalidCredential }}</mat-error>
-            <mat-card-footer
-              ><a routerLink="/admin-signup" class="link">Sign up</a> as Admin
+            <mat-card-footer class="footer"
+              ><p>
+                <a routerLink="/admin-signup" class="link">Sign up</a> as Admin
+              </p>
+              <p>
+                forgot password?
+                <a routerLink="/forgot-password" class="link"> click here </a>
+                to reset
+              </p>
             </mat-card-footer>
           </div>
         </form>

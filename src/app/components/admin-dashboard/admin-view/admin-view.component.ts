@@ -27,7 +27,7 @@ export class AdminViewComponent {
   totalPendingRetailerCount = 0;
   totalApprovedRetailerCount = 0;
   totalRejectedRetailerCount = 0;
-  role = 'admin';
+  role = '';
   constructor(
     private authService: AuthService,
     private adminApprovalRightsService: AdminApprovalRightsService,
@@ -40,6 +40,11 @@ export class AdminViewComponent {
       next: (userData) => {
         console.log("userdata", userData)
         this.userStatus = userData.data.role_specific_details.approval_status;
+        if (this.userStatus === 'approved') {
+          this.getPendingCount();
+          this.getApprovedCount();
+          this.getRejectCount();
+        }
       },
       error: () => { },
     });
@@ -47,12 +52,12 @@ export class AdminViewComponent {
 
   ngOnInit(): void {
     this.getUserByToken();
-    this.getPendingCount();
-    this.getApprovedCount();
-    this.getRejectCount();
+    if (this.authService.isAdmin()) {
+      this.role = 'admin'
+    }
   }
   getPendingCount() {
-    this.adminApprovalRightsService.getRequestsByStatus('pending',10,10).subscribe({
+    this.adminApprovalRightsService.getRequestsByStatus('pending', 10, 10).subscribe({
       next: (response) => {
         this.totalPendingRetailerCount = response.pagination.totalItems;
         console.log('totalPendingRetailerCount', this.totalPendingRetailerCount);
@@ -62,7 +67,7 @@ export class AdminViewComponent {
   }
 
   getApprovedCount() {
-    this.adminApprovalRightsService.getRequestsByStatus("approved",10,10).subscribe({
+    this.adminApprovalRightsService.getRequestsByStatus("approved", 10, 10).subscribe({
       next: (response) => {
         this.totalApprovedRetailerCount = response.pagination.totalItems;
         console.log('totalPendingRetailerCount', this.totalPendingRetailerCount);
@@ -71,7 +76,7 @@ export class AdminViewComponent {
     });
   }
   getRejectCount() {
-    this.adminApprovalRightsService.getRequestsByStatus("rejected",10,10).subscribe({
+    this.adminApprovalRightsService.getRequestsByStatus("rejected", 10, 10).subscribe({
       next: (response) => {
         this.totalRejectedRetailerCount = response.pagination.totalItems;
         console.log('totalPendingRetailerCount', this.totalPendingRetailerCount);

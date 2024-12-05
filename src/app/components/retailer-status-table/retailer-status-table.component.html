@@ -22,7 +22,7 @@
     </ng-container>
 
     <ng-container matColumnDef="address">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Organization</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>address</th>
       <td class="mat-row" mat-cell *matCellDef="let element">
         {{ element.address }}
       </td>
@@ -78,9 +78,8 @@
       </td>
     </tr>
   </table>
-
   <mat-paginator
-    [pageSizeOptions]="[5, 10, 20]"
+    [pageSizeOptions]="[2, 4, 20]"
     [length]="totalItems"
     (page)="onPageChange($event)"
     [pageSize]="5"
