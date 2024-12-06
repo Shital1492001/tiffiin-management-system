@@ -5,17 +5,19 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [MatCardModule, MatFormFieldModule, ReactiveFormsModule, MatButtonModule, MatInputModule],
+  imports: [MatCardModule, MatFormFieldModule, ReactiveFormsModule, MatButtonModule, MatInputModule, CommonModule],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css'
 })
 export class ForgotPasswordComponent {
   constructor(private authService: AuthService) { }
   errorMessage: string = ""
+  isPasswordResetLinkSent: boolean = false
   forgotPasswordForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
   })
@@ -35,10 +37,11 @@ export class ForgotPasswordComponent {
         forgotPasswordData.subscribe({
           next: (response) => {
             console.log('response', response);
-
+            this.isPasswordResetLinkSent = true
           },
           error: (err) => {
             console.log('error', err.error.error);
+            this.isPasswordResetLinkSent = false
             this.errorMessage = err.error.error
           }
         })
